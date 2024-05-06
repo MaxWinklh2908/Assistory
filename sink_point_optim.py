@@ -13,112 +13,115 @@ Value concept of items:
 
 from ortools.linear_solver import pywraplp
 
-
-# Create the linear solver with the GLOP backend.
-solver = pywraplp.Solver.CreateSolver("GLOP")
-if not solver:
-    exit(1)
+from game import ITEMS, RECIPES
 
 
-def solve(item_names: list, recipes: list, resources_available: dict, sink_points):
+def define_game_constraints(solver):
     # Create the variables containers
-    var_items_produced = { item_name: [] for item_name in item_names}
-    var_items_consumed = { item_name: [] for item_name in item_names}
+    var_items_consumed = { item_name: dict() for item_name in ITEMS.keys()}
+    var_items_produced = { item_name: dict() for item_name in ITEMS.keys()}
     var_items_sold = dict()
 
-    # ressources available
-    for item_name, amount in resources_available.items():
-        var_name = f'{item_name}_out'
-        var_item = solver.NumVar(0, solver.infinity(), var_name)
-        var_items_produced[item_name].append(var_item)
-        solver.Add(var_item == amount)
-
-    # sold items
-    for item_name in item_names:
-        var_name = f'{item_name}_sold'
-        var_item = solver.NumVar(0, solver.infinity(), var_name)
-        var_items_sold[item_name] = var_item
-
     # recipes
-    for i, recipe in enumerate(recipes):
+    for i, recipe in enumerate(RECIPES):
         var_recipe_in = dict()
         var_recipe_out = dict()
-        items_in, items_out = recipe
+        _, items_in, items_out = recipe
 
         # create variables for recipe
         for item_name in items_in:
             var_name = f'{item_name}_in_{i}'
             var_item = solver.NumVar(0, solver.infinity(), var_name)
             var_recipe_in[item_name] = var_item
-            var_items_consumed[item_name].append(var_item)
+            var_items_consumed[item_name][i] = var_item
         
         for item_name in items_out:
             var_name = f'{item_name}_out_{i}'
             var_item = solver.NumVar(0, solver.infinity(), var_name)
             var_recipe_out[item_name] = var_item
-            var_items_produced[item_name].append(var_item)
+            var_items_produced[item_name][i] = var_item
 
         # define recipe
-        sum_in = sum(var_recipe_in[item_name] / number
+        consumed_in_all_recipes = sum(var_recipe_in[item_name] / number
                      for item_name, number in items_in.items())
-        sum_out = sum(var_recipe_out[item_name] / number
+        produced_in_all_recipes = sum(var_recipe_out[item_name] / number
                       for item_name, number in items_out.items())
-        solver.Add(sum_out == sum_in)
+        solver.Add(produced_in_all_recipes == consumed_in_all_recipes)
 
+    # sold items
+    var_items_sold = {
+        item_name: solver.NumVar(0, solver.infinity(), f'{item_name}_sold')
+        for item_name in ITEMS.keys()
+    }
+    return var_items_produced, var_items_consumed, var_items_sold
+
+
+def set_flow_constraints(solver, var_items_produced, var_items_consumed, var_items_sold, resources_available):
     # flow contraints
-    for item_name in item_names:
-        sum_out = sum(var_out for var_out in var_items_produced[item_name])
-        sum_in = sum(var_in for var_in in var_items_consumed[item_name])
-        solver.Add(sum_out - sum_in == var_items_sold[item_name])
+    for item_name in ITEMS.keys():
+        produced_in_all_recipes = sum(var_out for var_out in var_items_produced[item_name].values())
+        consumed_in_all_recipes = sum(var_in for var_in in var_items_consumed[item_name].values())
+        available = resources_available.get(item_name, 0)
+        solver.Add(available + produced_in_all_recipes 
+                   == var_items_sold[item_name] + consumed_in_all_recipes)
+
+
+def report(solver, status, var_items_produced, var_items_consumed, var_items_sold):
+    if status != pywraplp.Solver.OPTIMAL:
+        print("The problem does not have an optimal solution.")
+        return
+
+    print("Solution:")
+
+    print("\nSold items:")
+    for item_name, var_item in var_items_sold.items():
+        print(item_name, "=", var_item.solution_value())
+
+    print("\nProduced items:")
+    for item_name, var_item in var_items_sold.items():
+        items_produced = sum(var_out.solution_value() for var_out in var_items_produced[item_name].values())
+        print(item_name, "=", items_produced)
+
+    print("\nRecipes used:")
+    for i, recipe in enumerate(RECIPES):
+        item_name, number = list(recipe[2].items())[0]
+        amount = var_items_produced[item_name][i].solution_value()
+        print(recipe[0], "=", amount / number)
+
+    print("\nObjective value =", solver.Objective().Value())
+
+    print("\nAdvanced usage:")
+    print(f"Problem solved in {solver.wall_time():d} milliseconds")
+    print(f"Problem solved in {solver.iterations():d} iterations")
+
+
+def main(resources_available: dict):
+    # Create the linear solver with the GLOP backend.
+    solver = pywraplp.Solver.CreateSolver("GLOP")
+    if not solver:
+        raise RuntimeError("Could not create GLOB solver")
+
+    # Define constraints
+    var_items_produced, var_items_consumed, var_items_sold = define_game_constraints(solver)
+    set_flow_constraints(solver, var_items_produced, var_items_consumed, var_items_sold, resources_available)
+
+    # Objective: Maximize points
+    sum_points = sum(var_items_sold[item_name] * sink_value
+                     for item_name, sink_value in ITEMS.items())
+    solver.Maximize(sum_points)
 
     print("Number of variables =", solver.NumVariables())
     print("Number of constraints =", solver.NumConstraints())
-
-    # Objective: Maximize points
-    sum_points = sum(var_items_sold[item_name] * sink_points[item_name]
-                     for item_name in item_names)
-    solver.Maximize(sum_points)
-
     print(f"Solving with {solver.SolverVersion()}")
     status = solver.Solve()
 
-    if status == pywraplp.Solver.OPTIMAL:
-        print("Solution:")
-        print("Objective value =", solver.Objective().Value())
-        for item_name, var_item in var_items_sold.items():
-            print(item_name, "=", var_item.solution_value())
-    else:
-        print("The problem does not have an optimal solution.")
+    report(solver, status, var_items_produced, var_items_consumed, var_items_sold)
 
 
-item_names = [
-    'iron_rod',
-    'iron_plate',
-    'iron_ingot',
-    'iron_ore',
-    'screw',
-    'reinforced_iron_plate',
-]
+if __name__ == '__main__':
+    resources_available = {
+        'iron_ore': 120,
+        'copper_ore': 120
+    }
 
-recipes = [
-    ({'iron_ore': 1}, {'iron_ingot': 1}),
-    ({'iron_ingot': 3}, {'iron_plate': 2}),
-    ({'iron_ingot': 1}, {'iron_rod': 1}),
-    ({'iron_rod': 1}, {'screw': 4}),
-    ({'iron_plate': 6, 'screw': 12}, {'reinforced_iron_plate': 1})
-]
-
-resources_available = {
-    'iron_ore': 120,
-}
-
-sink_points = {
-    'iron_ore': 1,
-    'iron_ingot': 2,
-    'iron_rod': 4,
-    'iron_plate': 6,
-    'screw': 2,
-    'reinforced_iron_plate': 120,
-}
-
-solve(item_names, recipes, resources_available, sink_points)
+    main(resources_available)

@@ -138,7 +138,7 @@ ITEMS = {
     item_name:v for item_name,v in data['items'].items()
     if (
         'Desc_' in item_name and
-        type(v['sinkPoints']) == int and v['sinkPoints'] > 0 and
+        type(v['sinkPoints']) == int and # allow products with 0 sink points to not discard intermediate products
         not 'Packaged' in item_name and
         item_name in item_names
     )    
@@ -160,17 +160,24 @@ ITEMS = {
 #     ('Alternate: Copper Rotor', {'Desc_CopperSheet_C': 6, 'Desc_IronScrew_C': 52}, {'Desc_IronScrew_C': 3}),
 # ]
 
-def transform_to_dict(item_list):
+def transform_to_dict(items: list):
     return {
         d['item']: d['amount']
-        for d in item_list
+        for d in items
     }
+
+# Make water available unlimited
+def remove_water(items: dict):
+    if 'Desc_Water_C' in items:
+        items.pop('Desc_Water_C')
+    return items
+
 
 RECIPES = [
     (
         k,
-        transform_to_dict(v['ingredients']),
-        transform_to_dict(v['products'])
+        remove_water(transform_to_dict(v['ingredients'])),
+        remove_water(transform_to_dict(v['products'])),
     )
     for k, v in data['recipes'].items()
     if (
@@ -179,9 +186,11 @@ RECIPES = [
     )
 ]
 
-items_produced = set()
-items_ingredients = set()
-for recipe, ingredients, products in RECIPES:
-    items_produced = items_produced.union(products.keys())
-    items_ingredients = items_ingredients.union(ingredients.keys())
-RESOURCES = set(ITEMS.keys()) - items_produced
+def get_resources():
+    items_produced = set()
+    items_ingredients = set()
+    for _, ingredients, products in RECIPES:
+        items_produced = items_produced.union(products.keys())
+        items_ingredients = items_ingredients.union(ingredients.keys())
+    return set(ITEMS.keys()) - items_produced
+RESOURCES = get_resources()

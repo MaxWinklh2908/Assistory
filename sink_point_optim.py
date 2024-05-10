@@ -162,6 +162,8 @@ if __name__ == '__main__':
     # resources_available['Desc_OreIron_C'] = 120
     # resources_available['Desc_OreCopper_C'] = 120
     
+    # # current overhead
+    # resources_available = parse_items_from_csv.parse_items('../Autonation4.0.csv')
 
     # full ressource occupancy
     resources_available['Desc_Stone_C'] = 480*27 + 240*47 + 120*12

@@ -17,126 +17,109 @@ import game
 import parse_items_from_csv
 
 
-def define_game_constraints(solver: pywraplp.Solver, recipes: dict, resources_available: dict):
-    var_recipes_used = {
-        recipe_name: solver.NumVar(0, solver.infinity(), recipe_name)
-        for recipe_name in game.RECIPES
-    }
+class SatisfactoryLP:
 
-    # define helper terms
-    consumed_in_all_recipes = dict()
-    produced_in_all_recipes = dict()
-    for item_name in game.ITEMS:
-        consumed_in_all_recipes[item_name] = sum(
-            game.RECIPES[recipe_name][0][item_name] * var_recipes_used[recipe_name]
-            for recipe_name in recipes
-            if recipe_name in game.consumed_by[item_name]
-        )
-        produced_in_all_recipes[item_name] = sum(
-            game.RECIPES[recipe_name][1][item_name] * var_recipes_used[recipe_name]
-            for recipe_name in recipes
-            if recipe_name in game.produced_by[item_name]
-        )
-    
-    # disable other recipes
-    for recipe_name in game.RECIPES:
-        if not recipe_name in recipes:
-            solver.Add(var_recipes_used[recipe_name] == 0,
-                       f'Disable_{recipe_name}')
-    
-    # flow contraints
-    for item_name in game.ITEMS:
-        available = resources_available.get(item_name, 0)
-        solver.Add(
-            available + produced_in_all_recipes[item_name] >= consumed_in_all_recipes[item_name],
-            f'Flow_{item_name}'
-        )
+    def __init__(self, recipes: dict, resources_available: dict):
+        if not self.check_parameters(resources_available):
+            exit(1)
 
-    return var_recipes_used, consumed_in_all_recipes, produced_in_all_recipes
+        self.solver = pywraplp.Solver.CreateSolver("GLOP")
+        if not self.solver:
+            raise RuntimeError("Could not create GLOB solver")
 
+        # variable to optimize are the utilization of each recipe
+        self.var_recipes_used = {
+            recipe_name: self.solver.NumVar(0, self.solver.infinity(), recipe_name)
+            for recipe_name in game.RECIPES
+        }
 
-def define_objective(solver: pywraplp.Solver, var_recipes_used: dict,
-                     consumed_in_all_recipes: dict, produced_in_all_recipes: dict):
-    sum_points = 0
-    for item_name, item_data in game.ITEMS.items():
-        amount_consumed = consumed_in_all_recipes[item_name]
-        amount_produced = produced_in_all_recipes[item_name]
-        amount_available = resources_available.get(item_name, 0)
-        amount_sold = amount_available + amount_produced - amount_consumed
-        sum_points += amount_sold * item_data["sinkPoints"]
-
-    solver.Maximize(sum_points)
-
-    return var_recipes_used
-
-
-def report(solver, status, var_recipes_used, 
-           consumed_in_all_recipes, produced_in_all_recipes):
-    if status != pywraplp.Solver.OPTIMAL:
-        print("The problem does not have an optimal solution.")
-        # return
-
-    print("Solution:")
-
-    print("\nRecipes used:")
-    for recipe_name in game.RECIPES:
-        recipes_used = var_recipes_used[recipe_name].solution_value()
-        if round(recipes_used, 3) != 0:
-            print(recipe_name, "=", round(recipes_used, 3))
-
-    print("\nSold items:")
-    for item_name in game.ITEMS:
-        amount_consumed = consumed_in_all_recipes[item_name]
-        amount_produced = produced_in_all_recipes[item_name]
-        amount_available = resources_available.get(item_name, 0)
-        amount_sold = amount_available + amount_produced - amount_consumed
+        # define helper terms
+        self.consumed_in_all_recipes = dict()
+        self.produced_in_all_recipes = dict()
+        for item_name in game.ITEMS:
+            self.consumed_in_all_recipes[item_name] = sum(
+                game.RECIPES[recipe_name][0][item_name] * self.var_recipes_used[recipe_name]
+                for recipe_name in recipes
+                if recipe_name in game.consumed_by[item_name]
+            )
+            self.produced_in_all_recipes[item_name] = sum(
+                game.RECIPES[recipe_name][1][item_name] * self.var_recipes_used[recipe_name]
+                for recipe_name in recipes
+                if recipe_name in game.produced_by[item_name]
+            )
         
-        # is the case for all except from empty lists in consumed/produced in all recipes
-        # because sum([]) = 0
-        if not type(amount_sold) == int:
-            amount_sold = amount_sold.solution_value()
-        if round(amount_sold, 3) != 0:
-            print(item_name, "=", round(amount_sold, 3))
+        # disable other recipes
+        for recipe_name in game.RECIPES:
+            if not recipe_name in recipes:
+                self.solver.Add(self.var_recipes_used[recipe_name] == 0,
+                        f'Disable_{recipe_name}')
 
-    print("\nObjective value =", solver.Objective().Value())
+        self._define_flow_constraints(resources_available)
+        self._define_objective(resources_available)
 
-    print("\nAdvanced usage:")
-    print(f"Problem solved in {solver.wall_time():d} milliseconds")
+    def _define_flow_constraints(self, resources_available):
+        for item_name in game.ITEMS:
+            available = resources_available.get(item_name, 0)
+            self.solver.Add(
+                available + self.produced_in_all_recipes[item_name]
+                >= self.consumed_in_all_recipes[item_name],
+                f'Flow_{item_name}'
+            )
 
+    def _define_objective(self, resources_available):
+        sum_points = 0
+        for item_name, item_data in game.ITEMS.items():
+            amount_consumed = self.consumed_in_all_recipes[item_name]
+            amount_produced = self.produced_in_all_recipes[item_name]
+            amount_available = resources_available.get(item_name, 0)
+            amount_sold = amount_available + amount_produced - amount_consumed
+            sum_points += amount_sold * item_data["sinkPoints"]
+        self.solver.Maximize(sum_points)
 
-def check_parameters(resources_available: dict) -> bool:
-    result = True
-    if 'Desc_Water_C' in resources_available:
-        print('Water is available unlimited and therefore not in any recipe')
-        result = False
-    for item_name in resources_available:
-        if not item_name in game.ITEMS:
-            print('Unknown item:', item_name)
+    def report(self):
+        print("Solution:")
+
+        print("\nRecipes used:")
+        for recipe_name in game.RECIPES:
+            recipes_used = self.var_recipes_used[recipe_name].solution_value()
+            if round(recipes_used, 3) != 0:
+                print(recipe_name, "=", round(recipes_used, 3))
+
+        print("\nSold items:")
+        for item_name in game.ITEMS:
+            amount_consumed = self.consumed_in_all_recipes[item_name]
+            amount_produced = self.produced_in_all_recipes[item_name]
+            amount_available = resources_available.get(item_name, 0)
+            amount_sold = amount_available + amount_produced - amount_consumed
+            
+            # is the case for all except from empty lists in consumed/produced in all recipes
+            # because sum([]) = 0
+            if not type(amount_sold) == int:
+                amount_sold = amount_sold.solution_value()
+            if round(amount_sold, 3) != 0:
+                print(item_name, "=", round(amount_sold, 3))
+
+        print("\nObjective value =", self.solver.Objective().Value())
+
+        print("\nAdvanced usage:")
+        print(f"Problem solved in {self.solver.wall_time():d} milliseconds")
+
+    def check_parameters(self, resources_available: dict) -> bool:
+        result = True
+        if 'Desc_Water_C' in resources_available:
+            print('Water is available unlimited and therefore not in any recipe')
             result = False
-    return result
-
-
-def main(resources_available: dict, recipes: dict=game.RECIPES):
-    if not check_parameters(resources_available):
-        exit(1)
-
-    # Create the linear solver with the GLOP backend.
-    solver = pywraplp.Solver.CreateSolver("GLOP")
-    if not solver:
-        raise RuntimeError("Could not create GLOB solver")
-
-    var_recipes_used, consumed_in_all_recipes, produced_in_all_recipes = define_game_constraints(
-        solver, recipes, resources_available)
-    define_objective(solver, var_recipes_used, consumed_in_all_recipes, produced_in_all_recipes)
-
-    print("Number of variables =", solver.NumVariables())
-    print("Number of constraints =", solver.NumConstraints())
-    print(f"Solving with {solver.SolverVersion()}")
-    status = solver.Solve()
-
-    report(solver, status, var_recipes_used, consumed_in_all_recipes, produced_in_all_recipes)
-
-    return solver
+        for item_name in resources_available:
+            if not item_name in game.ITEMS:
+                print('Unknown item:', item_name)
+                result = False
+        return result
+    
+    def optimize(self):
+        status = self.solver.Solve()
+        if status != pywraplp.Solver.OPTIMAL:
+            raise RuntimeError("The problem does not have an optimal solution")
+        return status
 
 
 if __name__ == '__main__':
@@ -163,4 +146,9 @@ if __name__ == '__main__':
 
     # recipes=dict()
     recipes=game.RECIPES
-    main(resources_available, recipes)
+    problem = SatisfactoryLP(recipes, resources_available)
+    print("Number of variables =", problem.solver.NumVariables())
+    print("Number of constraints =", problem.solver.NumConstraints())
+    status = problem.optimize()
+    problem.report()
+    

@@ -193,3 +193,12 @@ def get_resources():
         items_ingredients = items_ingredients.union(ingredients.keys())
     return set(ITEMS.keys()) - items_produced
 RESOURCES = get_resources()
+
+consumed_by = { item_name: [] for item_name in ITEMS}
+produced_by = { item_name: [] for item_name in ITEMS}
+for recipe_name, data in RECIPES.items():
+    items_in, items_out = data
+    for item_name in items_in:
+        consumed_by[item_name].append(recipe_name)
+    for item_name in items_out:
+        produced_by[item_name].append(recipe_name)

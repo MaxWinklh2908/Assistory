@@ -173,23 +173,22 @@ def remove_water(items: dict):
     return items
 
 
-RECIPES = [
-    (
-        k,
+RECIPES = {
+    recipe_name: (
         remove_water(transform_to_dict(v['ingredients'])),
         remove_water(transform_to_dict(v['products'])),
     )
-    for k, v in data['recipes'].items()
+    for recipe_name, v in data['recipes'].items()
     if (
         all(d['item'] in ITEMS for d in v['ingredients']) and
         all(d['item'] in ITEMS for d in v['products'])
     )
-]
+}
 
 def get_resources():
     items_produced = set()
     items_ingredients = set()
-    for _, ingredients, products in RECIPES:
+    for ingredients, products in RECIPES.values():
         items_produced = items_produced.union(products.keys())
         items_ingredients = items_ingredients.union(ingredients.keys())
     return set(ITEMS.keys()) - items_produced

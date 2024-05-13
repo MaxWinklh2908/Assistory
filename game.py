@@ -194,11 +194,25 @@ def get_resources():
     return set(ITEMS.keys()) - items_produced
 RESOURCES = get_resources()
 
-consumed_by = { item_name: [] for item_name in ITEMS}
-produced_by = { item_name: [] for item_name in ITEMS}
-for recipe_name, data in RECIPES.items():
-    items_in, items_out = data
-    for item_name in items_in:
-        consumed_by[item_name].append(recipe_name)
-    for item_name in items_out:
-        produced_by[item_name].append(recipe_name)
+# resources_available['Desc_Stone_C'] = 480*27 + 240*47 + 120*12
+# resources_available['Desc_OreIron_C'] = 480*46 + 240*41 + 120*33
+# resources_available['Desc_OreCopper_C'] = 480*12 + 240*28 + 120*9
+# resources_available['Desc_OreGold_C'] = 480*8 + 240*8
+# resources_available['Desc_Coal_C'] = 480*14 + 240*29 + 120*6
+# resources_available['Desc_LiquidOil_C'] = 240*8 + 120*12 + 60*10
+# resources_available['Desc_Sulfur_C'] = 480*3 + 240*7 + 120*1
+# resources_available['Desc_OreBauxite_C'] = 480*6 + 240*6 + 120*5
+# resources_available['Desc_RawQuartz_C'] = 480*5 + 240*11
+# resources_available['Desc_OreUranium_C'] = 240*3 + 120*1
+
+def define_item_to_recipe_mappings():
+    global consumed_by, produced_by
+    consumed_by = { item_name: [] for item_name in ITEMS}
+    produced_by = { item_name: [] for item_name in ITEMS}
+    for recipe_name, data in RECIPES.items():
+        items_in, items_out = data
+        for item_name in items_in:
+            consumed_by[item_name].append(recipe_name)
+        for item_name in items_out:
+            produced_by[item_name].append(recipe_name)
+define_item_to_recipe_mappings()

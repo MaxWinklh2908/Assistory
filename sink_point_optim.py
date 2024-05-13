@@ -41,13 +41,15 @@ def define_game_constraints(solver: pywraplp.Solver, recipes: dict, resources_av
     # disable other recipes
     for recipe_name in game.RECIPES:
         if not recipe_name in recipes:
-            solver.Add(var_recipes_used[recipe_name] == 0)
+            solver.Add(var_recipes_used[recipe_name] == 0,
+                       f'Disable_{recipe_name}')
     
     # flow contraints
     for item_name in game.ITEMS:
         available = resources_available.get(item_name, 0)
         solver.Add(
-            available + produced_in_all_recipes[item_name] >= consumed_in_all_recipes[item_name]
+            available + produced_in_all_recipes[item_name] >= consumed_in_all_recipes[item_name],
+            f'Flow_{item_name}'
         )
 
     return var_recipes_used, consumed_in_all_recipes, produced_in_all_recipes

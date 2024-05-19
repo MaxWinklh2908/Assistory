@@ -20,9 +20,10 @@ import parse_items_from_csv
 class SatisfactoryLP:
 
     def __init__(self, recipes: dict,
-                 items_available: dict=game.RESOURCES_AVAILABLE,
+                 items_available: dict=dict(),
+                 resource_nodes_available: dict=game.NODES_AVAILABLE,
                  free_power: float=game.FREE_POWER):
-        if not self.check_parameters(items_available):
+        if not self.check_parameters(items_available, resource_nodes_available):
             exit(1)
 
         self._objective_specific_report = lambda: None
@@ -68,6 +69,7 @@ class SatisfactoryLP:
         self._define_flow_constraints()
         self._define_power_contraints(free_power)
         self._define_non_sellable_items()
+        self._define_resource_node_constraints(resource_nodes_available)
 
     ################################ constraints ##############################
 
@@ -91,8 +93,14 @@ class SatisfactoryLP:
         Achieve a certain minimum production rate of items
 
         Args:
-            production_rates (dict): Set constraints to achieve at least these production rates of items
+            production_rates (dict): Set constraints to achieve at least these
+            production rates of items
         """
+        if any(item_name in game.NON_SELLABLE_ITEMS
+               for item_name, rate in production_rate.items()
+               if rate > 0):
+            raise ValueError('Can not require production of non sellable item: ' + item_name)
+
         for item_name in game.ITEMS:
             available = self.items_available.get(item_name, 0)
             goal_rate = production_rate.get(item_name, 0)
@@ -122,6 +130,10 @@ class SatisfactoryLP:
             'Power balance'
         )
 
+    def _define_resource_node_constraints(self, resource_nodes_available: dict):
+        for resource_node_name, amount in resource_nodes_available.items():
+            self.solver.Add(self.var_recipes_used[resource_node_name] <= amount)
+
     ################################ objective ##############################
 
     def set_objective_max_sink_points(self):
@@ -129,20 +141,21 @@ class SatisfactoryLP:
         for item_name, item_data in game.ITEMS.items():
             sum_points += self.var_item_sold[item_name] * item_data["sinkPoints"]
         self.solver.Maximize(sum_points)
-        self._objective_specific_report = self._report_sold_items
 
     def set_objective_min_resources_spent(self):
-        """Minimize the (mining) resources needed to achieve the given production rates
+        """Minimize the required resource nodes (and wells) needed to achieve
+        the given production rates
         """
         if not any('Goal_' in c.name() for c in self.solver.constraints()):
             print('WARNING: No goal production rate has been set.'
                   'Recipes will be all 0')
-        
-        sum_resources_spent = 0
-        for item_name in game.RESOURCES_AVAILABLE:
-            sum_resources_spent += self.consumed_in_all_recipes[item_name]
-        self.solver.Minimize(sum_resources_spent)
-        self._objective_specific_report = self._report_items_required
+            
+        sum_resource_nodes = sum(
+            self.var_recipes_used[resource_node_name] 
+            for resource_node_name in game.NODES_AVAILABLE
+        )
+        self.solver.Minimize(sum_resource_nodes)
+        self._objective_specific_report = self._report_resource_nodes_required
 
     ################################### report ###############################
 
@@ -152,19 +165,18 @@ class SatisfactoryLP:
         for item_name in game.ITEMS:
             amount_sold = self.var_item_sold[item_name].solution_value()
             if round(amount_sold, 3) != 0:
-                print(item_name, "=", round(amount_sold, 3))
+                print(game.get_bare_item_name(item_name), "=",
+                      round(amount_sold, 3))
             sum_sink_points += amount_sold * game.ITEMS[item_name]["sinkPoints"]
         print('Total sink points:', round(sum_sink_points,1))
 
-    def _report_items_required(self):
-        print("\nRequired items (without goal rates):")
-        for item_name in game.RESOURCES_AVAILABLE:
-            amount_consumed = self.consumed_in_all_recipes[item_name]
-            
-            if not type(amount_consumed) == int: # because only sum([]) = 0
-                amount_consumed = amount_consumed.solution_value()
-            if round(amount_consumed, 3) != 0:
-                print(item_name, "=", round(amount_consumed, 3))
+    def _report_resource_nodes_required(self):
+        print("\nRequired resource nodes:")
+        for resource_node_name in game.NODES_AVAILABLE:
+            amount_required = self.var_recipes_used[resource_node_name].solution_value()
+            if round(amount_required, 3) != 0:
+                print(game.get_bare_item_name(resource_node_name),
+                      "=", round(amount_required, 3))
 
     def _report_power(self):
         print("\nPower consumption")
@@ -177,39 +189,59 @@ class SatisfactoryLP:
             for facility_name in game.PRODUCTION_FACILITIES
         }
         
-        power_sum = game.FREE_POWER
-        print(f'Free power: {power_sum} MW')
+        sum_consumption = 0
+        print(f'Free power: {game.FREE_POWER} MW')
         for facility_name, power_consumption in game.PRODUCTION_FACILITIES.items():
             sum_power_of_type = amount_facility[facility_name] * power_consumption
             if round(sum_power_of_type, 3) != 0:
-                print(f'{facility_name}({round(amount_facility[facility_name], 1)}):'
+                print(f'{game.get_bare_item_name(facility_name)}'
+                      f'({round(amount_facility[facility_name], 1)}) = '
                       f' {round(sum_power_of_type, 3)} MW')
-            power_sum += sum_power_of_type
-        print(f'Total: {round(power_sum, 3)} MW')
+            if sum_power_of_type < 0:
+                sum_consumption += abs(sum_power_of_type)
+        print(f'Total: {round(sum_consumption, 3)} MW')
 
     def _report_debug(self):
         for variable in self.solver.variables():
             print(variable.name(), variable.solution_value())
 
-    def report(self):
-        print("\nObjective value =", self.solver.Objective().Value())
-        print(f"\nProblem solved in {self.solver.wall_time():d} milliseconds")
-
+    def _report_recipes_used(self):
         print("\nRecipes used:")
         for recipe_name in game.RECIPES:
             recipes_used = self.var_recipes_used[recipe_name].solution_value()
             if round(recipes_used, 3) != 0:
-                print(recipe_name, "=", round(recipes_used, 3))
+                print(game.get_bare_item_name(recipe_name), "=", round(recipes_used, 3))
+
+    def report(self, debug=False):
+        print("\nObjective value =", self.solver.Objective().Value())
+        print(f"\nProblem solved in {self.solver.wall_time():d} milliseconds")
+
+        self._report_recipes_used()
+        self._report_sold_items()
+        self._report_power()
+        
+        if debug:
+            self._report_debug()
 
         self._objective_specific_report()
 
-
-    def check_parameters(self, resources_available: dict) -> bool:
+    def check_parameters(self, resources_available: dict,
+                         resource_nodes_available: dict) -> bool:
         result = True
         for item_name in resources_available:
+            if item_name in game.NON_PRODUCABLE_ITEMS:
+                print('WARNING resource nodes already limited: ', item_name)
             if not item_name in game.ITEMS:
-                print('Unknown item:', item_name)
+                print('ERROR Unknown item:', item_name)
                 result = False
+            if resources_available[item_name] < 0:
+                raise ValueError('Resource node availability can not be negative')
+        for node_name in resource_nodes_available:
+            if node_name not in game.NODES_AVAILABLE:
+                print('ERROR Unknown resource node:', node_name)
+                result = False
+            if resource_nodes_available[node_name] < 0:
+                raise ValueError('Resource node availability can not be negative')
         return result
     
     def optimize(self):
@@ -223,33 +255,38 @@ if __name__ == '__main__':
     resources_available = dict()
 
     # custom
-    # resources_available['Desc_OreIron_C'] = 4*480
-    # resources_available['Desc_OreCopper_C'] = 2*480
+    # resources_available['Desc_OreIron_C'] = 480
+    # resources_available['Desc_OreCopper_C'] = 480
     # resources_available['Desc_Coal_C'] = 4*240
     # resources_available['Desc_Stone_C'] = 2*480
     
-    # # current overhead
-    # resources_available = {
-    #     item_name: amount
-    #     for item_name, amount in 
-    #     parse_items_from_csv.parse_items('Autonation4.0.csv').items()
-    #     if not 'Packaged' in item_name and not 'Water' in item_name
-    # }
+    # current overhead
+    resources_available = {
+        item_name: amount
+        for item_name, amount in 
+        parse_items_from_csv.parse_items('Autonation4.0.csv').items()
+        if not 'Packaged' in item_name and not 'Water' in item_name
+    }
 
-
-    # full ressource occupancy
-    resources_available = game.RESOURCES_AVAILABLE
-
-    # recipes=dict()
     recipes=game.RECIPES
+    recipes=dict()
+
     problem = SatisfactoryLP(recipes, resources_available)
-    problem.define_production_rates({'Desc_PlutoniumFuelRod_C': 6})
-    # problem.set_objective_max_sink_points()
-    problem.set_objective_min_resources_spent()
+
+    # problem.define_production_rates({'Desc_OreIron_C': 1})
+    # problem.define_production_rates({
+    #     item_name: 1 for item_name in game.ITEMS
+    #     if not item_name in game.NON_PRODUCABLE_ITEMS
+    #     and not item_name in game.NON_SELLABLE_ITEMS
+    # })
+
+    problem.set_objective_max_sink_points()
+    # problem.set_objective_min_resources_spent()
+
     print("Number of variables =", problem.solver.NumVariables())
     print("Number of constraints =", problem.solver.NumConstraints())
+
     status = problem.optimize()
+
     problem.report()
-    problem._report_power()
-    # problem._report_debug()
     

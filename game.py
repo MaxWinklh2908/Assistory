@@ -3,6 +3,9 @@ import json
 with open('data.json', 'r') as fp:
     data = json.load(fp)
 
+def get_bare_item_name(name: str) -> str:
+    return name[5:-2]
+
 def define_items():
     item_names = {
     "Desc_AluminaSolution_C",
@@ -168,23 +171,50 @@ def define_items():
     }
 ITEMS = define_items()
 
-
-def transform_to_dict(items: list):
+def define_non_sellable_items():
     return {
-        d['item']: d['amount']
-        for d in items
+        item_name: item_data
+        for item_name, item_data in ITEMS.items()
+        if item_data['sinkPoints'] == 0
     }
+NON_SELLABLE_ITEMS = define_non_sellable_items()
 
-# Make water available unlimited
-def remove_ignored_items(items: dict):
-    return {
-        item_name: amount
-        for item_name, amount in items.items()
-        if item_name in ITEMS
-    }
+# resources that are available by building extractors
+RESOURCES_AVAILABLE = dict()
+RESOURCES_AVAILABLE['Desc_LiquidOil_C'] =      (240, 8, 120, 12, 60, 10 )
+RESOURCES_AVAILABLE['Desc_Stone_C'] =          (480, 27, 240, 47, 120,12)
+RESOURCES_AVAILABLE['Desc_OreIron_C'] =        (480, 46, 240, 41, 120, 33)
+RESOURCES_AVAILABLE['Desc_OreCopper_C'] =      (480, 12, 240, 28, 120, 9)
+RESOURCES_AVAILABLE['Desc_OreGold_C'] =        (480, 8, 240, 8, 120, 0)
+RESOURCES_AVAILABLE['Desc_Coal_C'] =           (480, 14, 240, 29, 120, 6)
+RESOURCES_AVAILABLE['Desc_Sulfur_C'] =         (480, 3, 240, 7, 120, 1)
+RESOURCES_AVAILABLE['Desc_OreBauxite_C'] =     (480, 6, 240, 6, 120, 5)
+RESOURCES_AVAILABLE['Desc_RawQuartz_C'] =      (480, 5, 240, 11, 120, 0)
+RESOURCES_AVAILABLE['Desc_OreUranium_C'] =     (480, 0, 240, 3, 120,1)
+RESOURCES_AVAILABLE['Desc_NitrogenGas_C'] =    (30, 2, 60, 7, 120, 36)
+RESOURCES_AVAILABLE['Desc_LiquidOil_C'] =      (60, 6, 120, 3, 240, 3)
+
+NODES_AVAILABLE = dict()
+NODES_AVAILABLE['Desc_MinerMk3Stone_C'] =                       (2 * 27 + 47 + 0.5 * 12)
+NODES_AVAILABLE['Desc_MinerMk3OreIron_C'] =                     (2 * 46 + 41 + 0.5 * 33)
+NODES_AVAILABLE['Desc_MinerMk3OreCopper_C'] =                   (2 * 12 + 28 + 0.5 * 9)
+NODES_AVAILABLE['Desc_MinerMk3OreGold_C'] =                     (2 * 8 + 8 + 0.5 * 0)
+NODES_AVAILABLE['Desc_MinerMk3Coal_C'] =                        (2 * 14 + 29 + 0.5 * 6)
+NODES_AVAILABLE['Desc_MinerMk3Sulfur_C'] =                      (2 * 3 + 7 + 0.5 * 1)
+NODES_AVAILABLE['Desc_MinerMk3OreBauxite_C'] =                  (2 * 6 + 6 + 0.5 * 5)
+NODES_AVAILABLE['Desc_MinerMk3RawQuartz_C'] =                   (2 * 5 + 11 + 0.5 * 0)
+NODES_AVAILABLE['Desc_MinerMk3OreUranium_C'] =                  (2 * 0 + 3 + 0.5 * 1)
+NODES_AVAILABLE['Desc_OilExtractorLiquidOil_C'] =               (2 * 8 + 12 + 0.5 * 10)
+NODES_AVAILABLE['Desc_ResourceWellPressurizerNitrogenGas_C'] =  (2 * 36 + 7 + 0.5 * 2)
+NODES_AVAILABLE['Desc_ResourceWellPressurizerLiquidOil_C'] =    (2 * 63 + 3 + 0.5 * 6)
 
 # recipes are limited to available items
 def define_recipes():
+    def transform_to_dict(items: list):
+        return {
+            d['item']: d['amount']
+            for d in items
+        }
     recipes = dict()
     for recipe_name, v in data['recipes'].items():
         if len(v['producedIn']) != 1:
@@ -238,17 +268,61 @@ def define_recipes():
         'products': {},
         'producedIn': 'Desc_GeneratorCoal_C',
     }
-    # include water cycle
+    # enable power from fuel
+    recipes[f'Desc_GeneratorFuelLiquidFuel_C'] = {
+        'ingredients': {'Desc_LiquidFuel_C': 12},
+        'products': {},
+        'producedIn': 'Desc_GeneratorFuel_C',
+    }
+    recipes[f'Desc_GeneratorFuelLiquidTurboFuel_C'] = {
+        'ingredients': {'Desc_LiquidTurboFuel_C': 4.5},
+        'products': {},
+        'producedIn': 'Desc_GeneratorFuel_C',
+    }
+    # Water Extractor
     recipes['Desc_WaterExtractorWater_C'] = {
         
         'ingredients': {},
         'products': {'Desc_Water_C': 120},
         'producedIn': 'Desc_WaterExtractor_C',
     }
+    # Oil extractor
+    recipes[f'Desc_OilExtractorLiquidOil_C'] = {
+        'ingredients': {},
+        'products': {'Desc_LiquidOil_C': 120},
+        'producedIn': 'Desc_OilExtractor_C',
+    }
+    # Add miners
+    for item_name in [
+        'Desc_Stone_C',
+        'Desc_OreIron_C',
+        'Desc_OreCopper_C',
+        'Desc_OreGold_C',
+        'Desc_Coal_C',
+        'Desc_Sulfur_C',
+        'Desc_OreBauxite_C',
+        'Desc_RawQuartz_C',
+        'Desc_OreUranium_C',
+    ]:
+        recipes[f'Desc_MinerMk3{get_bare_item_name(item_name)}_C'] = {
+            'ingredients': {},
+            'products': {item_name: 240},
+            'producedIn': 'Desc_MinerMk3_C',
+        }
+    # Resource wells
+    for item_name in [
+        'Desc_NitrogenGas_C',
+        'Desc_LiquidOil_C',
+    ]:
+        recipes[f'Desc_ResourceWellPressurizer{get_bare_item_name(item_name)}_C'] = {
+            'ingredients': {},
+            'products': {item_name: 60},
+            'producedIn': 'Desc_ResourceWellPressurizer_C',
+        }
     return recipes
 RECIPES = define_recipes()
-
 # TODO: Flip-Flop remove items and recipes that can't be automatically produced
+
 
 # resources are items that can not be produced by recipes
 def get_non_producable():
@@ -258,21 +332,6 @@ def get_non_producable():
     return set(ITEMS.keys()) - items_produced
 NON_PRODUCABLE_ITEMS = get_non_producable()
 
-# resources that are available by building extractors
-RESOURCES_AVAILABLE = dict()
-RESOURCES_AVAILABLE['Desc_Stone_C'] = 480*27 + 240*47 + 120*12
-RESOURCES_AVAILABLE['Desc_OreIron_C'] = 480*46 + 240*41 + 120*33
-RESOURCES_AVAILABLE['Desc_OreCopper_C'] = 480*12 + 240*28 + 120*9
-RESOURCES_AVAILABLE['Desc_OreGold_C'] = 480*8 + 240*8
-RESOURCES_AVAILABLE['Desc_Coal_C'] = 480*14 + 240*29 + 120*6
-RESOURCES_AVAILABLE['Desc_LiquidOil_C'] = 240*8 + 120*12 + 60*10
-RESOURCES_AVAILABLE['Desc_Sulfur_C'] = 480*3 + 240*7 + 120*1
-RESOURCES_AVAILABLE['Desc_OreBauxite_C'] = 480*6 + 240*6 + 120*5
-RESOURCES_AVAILABLE['Desc_RawQuartz_C'] = 480*5 + 240*11
-RESOURCES_AVAILABLE['Desc_OreUranium_C'] = 240*3 + 120*1
-RESOURCES_AVAILABLE['Desc_NitrogenGas_C'] = 2*30 + 7*60 + 36*120
-RESOURCES_AVAILABLE['Desc_LiquidOil_C'] = 6*60 + 3*120 + 3*240
-# RESOURCES_AVAILABLE['Desc_Water_C'] = 10000
 
 # helper structure to find recipes
 def define_item_to_recipe_mappings():
@@ -293,9 +352,21 @@ def define_production_facilities():
         if 'SC_Smelters_C' in values['categories'] or
         'SC_Manufacturers_C' in values['categories']
     }
-    facilities['Desc_GeneratorNuclear_C'] = 2500
+
+    # Biomass burner is not automatable
     facilities['Desc_GeneratorCoal_C'] = 75
+    facilities['Desc_GeneratorFuel_C'] = 150
+    # Geisirs are implemented as free energy
+    facilities['Desc_GeneratorNuclear_C'] = 2500
+
+    facilities['Desc_MinerMk1_C'] = -5
+    facilities['Desc_MinerMk2_C'] = -12
+    facilities['Desc_MinerMk3_C'] = -30
     facilities['Desc_WaterExtractor_C'] = -20
+    facilities['Desc_OilExtractor_C'] = -40
+    # TODO: correctly estimate pressurizer power
+    facilities['Desc_ResourceWellPressurizer_C'] = -10
+    
     return facilities
 PRODUCTION_FACILITIES = define_production_facilities()
 

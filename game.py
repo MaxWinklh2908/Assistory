@@ -184,19 +184,26 @@ def define_recipes():
         recipe_name: (
             remove_water(transform_to_dict(v['ingredients'])),
             remove_water(transform_to_dict(v['products'])),
+            v['producedIn'][0]
         )
         for recipe_name, v in data['recipes'].items()
         if (
             all(d['item'] in ITEMS for d in v['ingredients']) and
-            all(d['item'] in ITEMS for d in v['products'])
+            all(d['item'] in ITEMS for d in v['products']) and
+            len(v['producedIn']) == 1
         )
     }
     # hard coded fix to enable nuclear production chain
     recipes['Desc_GeneratorNuclearUranium_C'] = (
-        {'Desc_NuclearFuelRod_C': 1}, {'Desc_NuclearWaste_C': 250}
+        {'Desc_NuclearFuelRod_C': 1},
+        {'Desc_NuclearWaste_C': 250},
+        'Desc_GeneratorNuclear_C',
+
     )
     recipes['Desc_GeneratorNuclearPlutonium_C'] = (
-        {'Desc_PlutoniumFuelRod_C': 1}, {'Desc_PlutoniumWaste_C': 100}
+        {'Desc_PlutoniumFuelRod_C': 1},
+        {'Desc_PlutoniumWaste_C': 100},
+        'Desc_GeneratorNuclear_C',
     )
     return recipes
 RECIPES = define_recipes()
@@ -205,9 +212,9 @@ RECIPES = define_recipes()
 def get_resources():
     items_produced = set()
     items_ingredients = set()
-    for ingredients, products in RECIPES.values():
-        items_produced = items_produced.union(products.keys())
-        items_ingredients = items_ingredients.union(ingredients.keys())
+    for data in RECIPES.values():
+        items_produced = items_produced.union(data[1].keys())
+        items_ingredients = items_ingredients.union(data[0].keys())
     return set(ITEMS.keys()) - items_produced
 NON_PRODUCABLE_ITEMS = get_resources()
 
@@ -231,10 +238,21 @@ def define_item_to_recipe_mappings():
     consumed_by = { item_name: [] for item_name in ITEMS}
     produced_by = { item_name: [] for item_name in ITEMS}
     for recipe_name, data in RECIPES.items():
-        items_in, items_out = data
-        for item_name in items_in:
+        for item_name in data[0]:
             consumed_by[item_name].append(recipe_name)
-        for item_name in items_out:
+        for item_name in data[1]:
             produced_by[item_name].append(recipe_name)
     return consumed_by, produced_by
 consumed_by, produced_by = define_item_to_recipe_mappings()
+
+def define_production_facilities():
+    facilities = {
+        building_name: values['metadata']['powerConsumption']
+        for building_name, values in data['buildings'].items()
+        if 'SC_Smelters_C' in values['categories'] or
+        'SC_Manufacturers_C' in values['categories']
+    }
+    facilities['Desc_GeneratorNuclear_C'] = -2500
+    return facilities
+
+PRODUCTION_FACILITIES = define_production_facilities()

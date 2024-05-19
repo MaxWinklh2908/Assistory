@@ -136,6 +136,25 @@ class SatisfactoryLP:
             if round(amount_consumed, 3) != 0:
                 print(item_name, "=", round(amount_consumed, 3))
 
+    def _report_power(self):
+        print("\nPower consumption")
+        amount_facility = {
+            facility_name: 0 for facility_name in game.PRODUCTION_FACILITIES
+        }
+        for recipe_name, var_recipe in self.var_recipes_used.items():
+            facility_name = game.RECIPES[recipe_name][2]
+                # raise ValueError(set(facility_name) + ' should be exactly one item')
+            amount_facility[facility_name] += var_recipe.solution_value()
+        
+        power_sum = 0
+        for facility_name, power_consumption in game.PRODUCTION_FACILITIES.items():
+            sum_power_of_type = amount_facility[facility_name] * power_consumption
+            if round(sum_power_of_type, 3) != 0:
+                print(f'{facility_name}: {round(sum_power_of_type, 3)} MW')
+            power_sum += sum_power_of_type
+        print(f'Total: {round(power_sum, 3)} MW')
+
+
     def _report_debug(self):
         for variable in self.solver.variables():
             print(variable.name(), variable.solution_value())
@@ -198,12 +217,13 @@ if __name__ == '__main__':
     # recipes=dict()
     recipes=game.RECIPES
     problem = SatisfactoryLP(recipes, resources_available)
-    problem.define_production_rates({'Desc_PlutoniumFuelRod_C': 10})
-    problem.set_objective_max_sink_points()
-    # problem.set_objective_min_resources_spent({'Desc_ModularFrameHeavy_C': 1})
+    problem.define_production_rates({'Desc_PlutoniumFuelRod_C': 6})
+    # problem.set_objective_max_sink_points()
+    problem.set_objective_min_resources_spent()
     print("Number of variables =", problem.solver.NumVariables())
     print("Number of constraints =", problem.solver.NumConstraints())
     status = problem.optimize()
     problem.report()
+    problem._report_power()
     # problem._report_debug()
     

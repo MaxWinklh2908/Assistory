@@ -181,11 +181,11 @@ def remove_water(items: dict):
 # note that water is removed from recipe as unlimited availability
 def define_recipes():
     recipes = {
-        recipe_name: (
-            remove_water(transform_to_dict(v['ingredients'])),
-            remove_water(transform_to_dict(v['products'])),
-            v['producedIn'][0]
-        )
+        recipe_name: {
+            'ingredients': remove_water(transform_to_dict(v['ingredients'])),
+            'products': remove_water(transform_to_dict(v['products'])),
+            'producedIn': v['producedIn'][0]
+        }
         for recipe_name, v in data['recipes'].items()
         if (
             all(d['item'] in ITEMS for d in v['ingredients']) and
@@ -194,17 +194,16 @@ def define_recipes():
         )
     }
     # hard coded fix to enable nuclear production chain
-    recipes['Desc_GeneratorNuclearUranium_C'] = (
-        {'Desc_NuclearFuelRod_C': 1},
-        {'Desc_NuclearWaste_C': 250},
-        'Desc_GeneratorNuclear_C',
-
-    )
-    recipes['Desc_GeneratorNuclearPlutonium_C'] = (
-        {'Desc_PlutoniumFuelRod_C': 1},
-        {'Desc_PlutoniumWaste_C': 100},
-        'Desc_GeneratorNuclear_C',
-    )
+    recipes['Desc_GeneratorNuclearUranium_C'] = {
+        'ingredients': {'Desc_NuclearFuelRod_C': 1},
+        'products': {'Desc_NuclearWaste_C': 250},
+        'producedIn': 'Desc_GeneratorNuclear_C',
+    }
+    recipes['Desc_GeneratorNuclearPlutonium_C'] = {
+        'ingredients': {'Desc_PlutoniumFuelRod_C': 1},
+        'products': {'Desc_PlutoniumWaste_C': 100},
+        'producedIn': 'Desc_GeneratorNuclear_C',
+    }
     return recipes
 RECIPES = define_recipes()
 
@@ -213,8 +212,8 @@ def get_resources():
     items_produced = set()
     items_ingredients = set()
     for data in RECIPES.values():
-        items_produced = items_produced.union(data[1].keys())
-        items_ingredients = items_ingredients.union(data[0].keys())
+        items_produced = items_produced.union(data['ingredients'].keys())
+        items_ingredients = items_ingredients.union(data['products'].keys())
     return set(ITEMS.keys()) - items_produced
 NON_PRODUCABLE_ITEMS = get_resources()
 
@@ -238,9 +237,9 @@ def define_item_to_recipe_mappings():
     consumed_by = { item_name: [] for item_name in ITEMS}
     produced_by = { item_name: [] for item_name in ITEMS}
     for recipe_name, data in RECIPES.items():
-        for item_name in data[0]:
+        for item_name in data['ingredients']:
             consumed_by[item_name].append(recipe_name)
-        for item_name in data[1]:
+        for item_name in data['products']:
             produced_by[item_name].append(recipe_name)
     return consumed_by, produced_by
 consumed_by, produced_by = define_item_to_recipe_mappings()

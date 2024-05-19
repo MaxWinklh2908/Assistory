@@ -45,14 +45,14 @@ class SatisfactoryLP:
         self.consumed_in_all_recipes = dict()
         for item_name in game.ITEMS:
             self.consumed_in_all_recipes[item_name] = sum(
-                game.RECIPES[recipe_name][0][item_name] * self.var_recipes_used[recipe_name]
+                game.RECIPES[recipe_name]['ingredients'][item_name] * self.var_recipes_used[recipe_name]
                 for recipe_name in recipes
                 if recipe_name in game.consumed_by[item_name]
             )
         self.produced_in_all_recipes = dict()
         for item_name in game.ITEMS:
             self.produced_in_all_recipes[item_name] = sum(
-                game.RECIPES[recipe_name][1][item_name] * self.var_recipes_used[recipe_name]
+                game.RECIPES[recipe_name]['products'][item_name] * self.var_recipes_used[recipe_name]
                 for recipe_name in recipes
                 if recipe_name in game.produced_by[item_name]
             )
@@ -142,7 +142,7 @@ class SatisfactoryLP:
             facility_name: 0 for facility_name in game.PRODUCTION_FACILITIES
         }
         for recipe_name, var_recipe in self.var_recipes_used.items():
-            facility_name = game.RECIPES[recipe_name][2]
+            facility_name = game.RECIPES[recipe_name]['producedIn']
                 # raise ValueError(set(facility_name) + ' should be exactly one item')
             amount_facility[facility_name] += var_recipe.solution_value()
         

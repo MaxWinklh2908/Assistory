@@ -150,16 +150,20 @@ def define_items():
     'Desc_ResourceSinkCoupon_C',
     'Desc_Shroom_C',
     'Desc_SpitterParts_C',
-    'Desc_Wood_C'
+    'Desc_Wood_C',
+    'Desc_Chainsaw_C',
+    'Desc_Water_C', # removed as unlimited availability
+    'Desc_Medkit_C',
+    'Desc_Biofuel_C',
+    'Desc_GolfCartGold_C',
+    'Desc_GolfCart_C',
+    'Desc_LiquidBiofuel_C',
     }
     return {
         item_name:v for item_name,v in data['items'].items()
         if (
-            'Desc_' in item_name and
-            type(v['sinkPoints']) == int and # allow products with 0 sink points to not discard intermediate products
-            not 'Packaged' in item_name and
-            item_name in item_names and
-            not item_name in manual_items
+            item_name in item_names and not item_name in manual_items and
+            type(v['sinkPoints']) == int # allow products with 0 sink points to not discard intermediate products
         )    
     }
 ITEMS = define_items()
@@ -172,50 +176,71 @@ def transform_to_dict(items: list):
     }
 
 # Make water available unlimited
-def remove_water(items: dict):
-    if 'Desc_Water_C' in items:
-        items.pop('Desc_Water_C')
-    return items
+def remove_ignored_items(items: dict):
+    return {
+        item_name: amount
+        for item_name, amount in items.items()
+        if item_name in ITEMS
+    }
 
 # recipes are limited to available items
-# note that water is removed from recipe as unlimited availability
 def define_recipes():
     recipes = {
         recipe_name: {
-            'ingredients': remove_water(transform_to_dict(v['ingredients'])),
-            'products': remove_water(transform_to_dict(v['products'])),
+            'ingredients': remove_ignored_items(transform_to_dict(v['ingredients'])),
+            'products': remove_ignored_items(transform_to_dict(v['products'])),
             'producedIn': v['producedIn'][0]
         }
         for recipe_name, v in data['recipes'].items()
         if (
-            all(d['item'] in ITEMS for d in v['ingredients']) and
-            all(d['item'] in ITEMS for d in v['products']) and
+            any(d['item'] in ITEMS for d in v['ingredients']) and
+            any(d['item'] in ITEMS for d in v['products']) and
             len(v['producedIn']) == 1
         )
     }
     # hard coded fix to enable nuclear production chain
     recipes['Desc_GeneratorNuclearUranium_C'] = {
-        'ingredients': {'Desc_NuclearFuelRod_C': 1},
-        'products': {'Desc_NuclearWaste_C': 250},
+        'ingredients': {'Desc_NuclearFuelRod_C': 0.2},
+        'products': {'Desc_NuclearWaste_C': 50},
         'producedIn': 'Desc_GeneratorNuclear_C',
     }
     recipes['Desc_GeneratorNuclearPlutonium_C'] = {
-        'ingredients': {'Desc_PlutoniumFuelRod_C': 1},
-        'products': {'Desc_PlutoniumWaste_C': 100},
+        'ingredients': {'Desc_PlutoniumFuelRod_C': 0.1},
+        'products': {'Desc_PlutoniumWaste_C': 10},
         'producedIn': 'Desc_GeneratorNuclear_C',
+    }
+    "Desc_Coal_C",
+    "Desc_CompactedCoal_C",
+    "Desc_PetroleumCoke_C"
+    recipes['Desc_GeneratorCoalCoal_C'] = {
+        
+        'ingredients': {'Desc_Coal_C': 15},
+        'products': {},
+        'producedIn': 'Desc_GeneratorCoal_C',
+    }
+    recipes['Desc_GeneratorCoalCompactedCoal_C'] = {
+        
+        'ingredients': {'Desc_CompactedCoal_C': 7.142857},
+        'products': {},
+        'producedIn': 'Desc_GeneratorCoal_C',
+    }
+    recipes['Desc_GeneratorCoalPetroleumCoke_C'] = {
+        
+        'ingredients': {'Desc_PetroleumCoke_C': 25},
+        'products': {},
+        'producedIn': 'Desc_GeneratorCoal_C',
     }
     return recipes
 RECIPES = define_recipes()
+# TODO: Flip-Flop remove items and recipes that can't be automatically produced
 
 # resources are items that can not be produced by recipes
-def get_resources():
+def get_non_producable():
     items_produced = set()
-    items_ingredients = set()
     for data in RECIPES.values():
-        items_produced = items_produced.union(data['ingredients'].keys())
-        items_ingredients = items_ingredients.union(data['products'].keys())
+        items_produced = items_produced.union(data['products'].keys())
     return set(ITEMS.keys()) - items_produced
-NON_PRODUCABLE_ITEMS = get_resources()
+NON_PRODUCABLE_ITEMS = get_non_producable()
 
 # resources that are available by building extractors
 RESOURCES_AVAILABLE = dict()
@@ -246,12 +271,14 @@ consumed_by, produced_by = define_item_to_recipe_mappings()
 
 def define_production_facilities():
     facilities = {
-        building_name: values['metadata']['powerConsumption']
+        building_name: -values['metadata']['powerConsumption']
         for building_name, values in data['buildings'].items()
         if 'SC_Smelters_C' in values['categories'] or
         'SC_Manufacturers_C' in values['categories']
     }
-    facilities['Desc_GeneratorNuclear_C'] = -2500
+    facilities['Desc_GeneratorNuclear_C'] = 2500
+    facilities['Desc_GeneratorCoal_C'] = 75
     return facilities
-
 PRODUCTION_FACILITIES = define_production_facilities()
+
+FREE_POWER = 3*100 + 9*200 + 6*400

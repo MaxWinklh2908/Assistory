@@ -19,7 +19,9 @@ import parse_items_from_csv
 
 class SatisfactoryLP:
 
-    def __init__(self, recipes: dict, items_available: dict=game.RESOURCES_AVAILABLE):
+    def __init__(self, recipes: dict,
+                 items_available: dict=game.RESOURCES_AVAILABLE,
+                 free_power: float=game.FREE_POWER):
         if not self.check_parameters(items_available):
             exit(1)
 
@@ -64,6 +66,7 @@ class SatisfactoryLP:
                         f'Disable_{recipe_name}')
                 
         self._define_flow_constraints()
+        self._define_power_contraints(free_power)
 
     ################################ constraints ##############################
 
@@ -75,10 +78,9 @@ class SatisfactoryLP:
                  - self.produced_in_all_recipes[item_name]
             )
             available = self.items_available.get(item_name, 0)
-            self.solver.Add(required_items <= available, f'Flow_{item_name}')
+            self.solver.Add(required_items == available, f'Flow_{item_name}')
 
-    def define_production_rates(self,
-                                production_rate: dict):
+    def define_production_rates(self, production_rate: dict):
         """
         Achieve a certain minimum production rate of items
 
@@ -94,6 +96,25 @@ class SatisfactoryLP:
                 >= goal_rate,
                 f'Goal_{item_name}'
             )
+
+    def _define_power_contraints(self, free_power: float):
+        amount_facility = {
+            facility_name: sum(
+                var_recipe
+                for recipe_name, var_recipe in self.var_recipes_used.items()
+                if game.RECIPES[recipe_name]['producedIn'] == facility_name
+            )
+            for facility_name in game.PRODUCTION_FACILITIES
+        }
+        
+        power_balance = sum(
+            amount_facility[facility_name] * power_consumption
+            for facility_name, power_consumption in game.PRODUCTION_FACILITIES.items()
+        )
+        self.solver.Add(
+            power_balance + free_power >= 0,
+            'Power balance'
+        )
 
     ################################ objective ##############################
 
@@ -121,10 +142,13 @@ class SatisfactoryLP:
 
     def _report_sold_items(self):
         print("\nSold items:")
+        sum_sink_points = 0
         for item_name in game.ITEMS:
             amount_sold = self.var_item_sold[item_name].solution_value()
             if round(amount_sold, 3) != 0:
                 print(item_name, "=", round(amount_sold, 3))
+            sum_sink_points += amount_sold * game.ITEMS[item_name]["sinkPoints"]
+        print('Total sink points:', round(sum_sink_points,1))
 
     def _report_items_required(self):
         print("\nRequired items (without goal rates):")
@@ -139,28 +163,31 @@ class SatisfactoryLP:
     def _report_power(self):
         print("\nPower consumption")
         amount_facility = {
-            facility_name: 0 for facility_name in game.PRODUCTION_FACILITIES
+            facility_name: sum(
+                var_recipe.solution_value()
+                for recipe_name, var_recipe in self.var_recipes_used.items()
+                if game.RECIPES[recipe_name]['producedIn'] == facility_name
+            )
+            for facility_name in game.PRODUCTION_FACILITIES
         }
-        for recipe_name, var_recipe in self.var_recipes_used.items():
-            facility_name = game.RECIPES[recipe_name]['producedIn']
-                # raise ValueError(set(facility_name) + ' should be exactly one item')
-            amount_facility[facility_name] += var_recipe.solution_value()
         
-        power_sum = 0
+        power_sum = game.FREE_POWER
+        print(f'Free power: {power_sum} MW')
         for facility_name, power_consumption in game.PRODUCTION_FACILITIES.items():
             sum_power_of_type = amount_facility[facility_name] * power_consumption
             if round(sum_power_of_type, 3) != 0:
-                print(f'{facility_name}: {round(sum_power_of_type, 3)} MW')
+                print(f'{facility_name}({round(amount_facility[facility_name], 1)}):'
+                      f' {round(sum_power_of_type, 3)} MW')
             power_sum += sum_power_of_type
         print(f'Total: {round(power_sum, 3)} MW')
-
 
     def _report_debug(self):
         for variable in self.solver.variables():
             print(variable.name(), variable.solution_value())
 
     def report(self):
-        print("Solution:")
+        print("\nObjective value =", self.solver.Objective().Value())
+        print(f"\nProblem solved in {self.solver.wall_time():d} milliseconds")
 
         print("\nRecipes used:")
         for recipe_name in game.RECIPES:
@@ -170,10 +197,6 @@ class SatisfactoryLP:
 
         self._objective_specific_report()
 
-        print("\nObjective value =", self.solver.Objective().Value())
-
-        print("\nAdvanced usage:")
-        print(f"Problem solved in {self.solver.wall_time():d} milliseconds")
 
     def check_parameters(self, resources_available: dict) -> bool:
         result = True

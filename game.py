@@ -162,7 +162,7 @@ def remove_water(items: dict):
 # recipes are limited to available items
 # note that water is removed from recipe as unlimited availability
 def define_recipes():
-    return {
+    recipes = {
         recipe_name: (
             remove_water(transform_to_dict(v['ingredients'])),
             remove_water(transform_to_dict(v['products'])),
@@ -173,6 +173,14 @@ def define_recipes():
             all(d['item'] in ITEMS for d in v['products'])
         )
     }
+    # hard coded fix to enable nuclear production chain
+    recipes['Desc_GeneratorNuclearUranium_C'] = (
+        {'Desc_NuclearFuelRod_C': 1}, {'Desc_NuclearWaste_C': 250}
+    )
+    recipes['Desc_GeneratorNuclearPlutonium_C'] = (
+        {'Desc_PlutoniumFuelRod_C': 1}, {'Desc_PlutoniumWaste_C': 100}
+    )
+    return recipes
 RECIPES = define_recipes()
 
 # resources are items that can not be produced by recipes
@@ -197,6 +205,8 @@ RESOURCES_AVAILABLE['Desc_Sulfur_C'] = 480*3 + 240*7 + 120*1
 RESOURCES_AVAILABLE['Desc_OreBauxite_C'] = 480*6 + 240*6 + 120*5
 RESOURCES_AVAILABLE['Desc_RawQuartz_C'] = 480*5 + 240*11
 RESOURCES_AVAILABLE['Desc_OreUranium_C'] = 240*3 + 120*1
+RESOURCES_AVAILABLE['Desc_NitrogenGas_C'] = 2*30 + 7*60 + 36*120
+RESOURCES_AVAILABLE['Desc_LiquidOil_C'] = 6*60 + 3*120 + 3*240
 
 # helper structure to find recipes
 def define_item_to_recipe_mappings():

@@ -62,23 +62,31 @@ class SatisfactoryLP:
             if not recipe_name in recipes:
                 self.solver.Add(self.var_recipes_used[recipe_name] == 0,
                         f'Disable_{recipe_name}')
+                
+        self._define_flow_constraints()
 
     ################################ constraints ##############################
 
-    def _define_flow_constraints(self, resources_available: dict):
+    def _define_flow_constraints(self):
         for item_name in game.ITEMS:
             required_items = (
                 self.consumed_in_all_recipes[item_name]
                  + self.var_item_sold[item_name]
                  - self.produced_in_all_recipes[item_name]
             )
-            available = resources_available.get(item_name, 0)
+            available = self.items_available.get(item_name, 0)
             self.solver.Add(required_items <= available, f'Flow_{item_name}')
 
-    def _define_production_rates(self, resources_available: dict,
-                                 production_rate: dict):
+    def define_production_rates(self,
+                                production_rate: dict):
+        """
+        Achieve a certain minimum production rate of items
+
+        Args:
+            production_rates (dict): Set constraints to achieve at least these production rates of items
+        """
         for item_name in game.ITEMS:
-            available = resources_available.get(item_name, 0)
+            available = self.items_available.get(item_name, 0)
             goal_rate = production_rate.get(item_name, 0)
             self.solver.Add(
                 available + self.produced_in_all_recipes[item_name]
@@ -90,21 +98,18 @@ class SatisfactoryLP:
     ################################ objective ##############################
 
     def set_objective_max_sink_points(self):
-        self._define_flow_constraints(self.items_available)
         sum_points = 0
         for item_name, item_data in game.ITEMS.items():
             sum_points += self.var_item_sold[item_name] * item_data["sinkPoints"]
         self.solver.Maximize(sum_points)
         self._objective_specific_report = self._report_sold_items
 
-    def set_objective_min_resources_spent(self, production_rates: dict):
+    def set_objective_min_resources_spent(self):
         """Minimize the (mining) resources needed to achieve the given production rates
-
-        Args:
-            production_rates (dict): Set constraints to achieve at least these production rates of items
         """
-        self._define_flow_constraints(self.items_available)
-        self._define_production_rates(self.items_available, production_rates)
+        if not any('Goal_' in c.name() for c in self.solver.constraints()):
+            print('WARNING: No goal production rate has been set.'
+                  'Recipes will be all 0')
         
         sum_resources_spent = 0
         for item_name in game.RESOURCES_AVAILABLE:
@@ -173,22 +178,29 @@ if __name__ == '__main__':
     resources_available = dict()
 
     # custom
-    resources_available['Desc_OreIron_C'] = 4*480
-    resources_available['Desc_OreCopper_C'] = 2*480
-    resources_available['Desc_Coal_C'] = 4*240
-    resources_available['Desc_Stone_C'] = 2*480
+    # resources_available['Desc_OreIron_C'] = 4*480
+    # resources_available['Desc_OreCopper_C'] = 2*480
+    # resources_available['Desc_Coal_C'] = 4*240
+    # resources_available['Desc_Stone_C'] = 2*480
     
     # # current overhead
-    # resources_available = parse_items_from_csv.parse_items('../Autonation4.0.csv')
+    # resources_available = {
+    #     item_name: amount
+    #     for item_name, amount in 
+    #     parse_items_from_csv.parse_items('Autonation4.0.csv').items()
+    #     if not 'Packaged' in item_name and not 'Water' in item_name
+    # }
+
 
     # full ressource occupancy
-    # resources_available = game.RESOURCES_AVAILABLE
+    resources_available = game.RESOURCES_AVAILABLE
 
     # recipes=dict()
     recipes=game.RECIPES
     problem = SatisfactoryLP(recipes, resources_available)
-    # problem.set_objective_max_sink_points()
-    problem.set_objective_min_resources_spent({'Desc_ModularFrameHeavy_C': 1})
+    problem.define_production_rates({'Desc_PlutoniumFuelRod_C': 10})
+    problem.set_objective_max_sink_points()
+    # problem.set_objective_min_resources_spent({'Desc_ModularFrameHeavy_C': 1})
     print("Number of variables =", problem.solver.NumVariables())
     print("Number of constraints =", problem.solver.NumConstraints())
     status = problem.optimize()

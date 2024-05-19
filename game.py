@@ -135,13 +135,31 @@ def define_items():
     "Desc_Wire_C",
     "Desc_Wood_C",
     }
+    manual_items = {
+    'Desc_Berry_C',
+    'Desc_CartridgeStandard_C',
+    'Desc_Crystal_C',
+    'Desc_Crystal_mk2_C',
+    'Desc_Crystal_mk3_C',
+    'Desc_FlowerPetals_C',
+    'Desc_HUBParts_C',
+    'Desc_HogParts_C',
+    'Desc_Leaves_C',
+    'Desc_Mycelia_C',
+    'Desc_Nut_C',
+    'Desc_ResourceSinkCoupon_C',
+    'Desc_Shroom_C',
+    'Desc_SpitterParts_C',
+    'Desc_Wood_C'
+    }
     return {
         item_name:v for item_name,v in data['items'].items()
         if (
             'Desc_' in item_name and
             type(v['sinkPoints']) == int and # allow products with 0 sink points to not discard intermediate products
             not 'Packaged' in item_name and
-            item_name in item_names
+            item_name in item_names and
+            not item_name in manual_items
         )    
     }
 ITEMS = define_items()

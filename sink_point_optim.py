@@ -67,6 +67,7 @@ class SatisfactoryLP:
                 
         self._define_flow_constraints()
         self._define_power_contraints(free_power)
+        self._define_non_sellable_items()
 
     ################################ constraints ##############################
 
@@ -79,6 +80,11 @@ class SatisfactoryLP:
             )
             available = self.items_available.get(item_name, 0)
             self.solver.Add(required_items == available, f'Flow_{item_name}')
+
+    def _define_non_sellable_items(self):
+        for item_name, item_data in game.ITEMS.items():
+            if item_data['sinkPoints'] == 0:
+                self.solver.Add(self.var_item_sold[item_name] == 0)
 
     def define_production_rates(self, production_rate: dict):
         """
@@ -200,9 +206,6 @@ class SatisfactoryLP:
 
     def check_parameters(self, resources_available: dict) -> bool:
         result = True
-        if 'Desc_Water_C' in resources_available:
-            print('Water is available unlimited and therefore not in any recipe')
-            result = False
         for item_name in resources_available:
             if not item_name in game.ITEMS:
                 print('Unknown item:', item_name)

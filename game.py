@@ -152,7 +152,7 @@ def define_items():
     'Desc_SpitterParts_C',
     'Desc_Wood_C',
     'Desc_Chainsaw_C',
-    'Desc_Water_C', # removed as unlimited availability
+    # 'Desc_Water_C', # removed as unlimited availability
     'Desc_Medkit_C',
     'Desc_Biofuel_C',
     'Desc_GolfCartGold_C',
@@ -185,19 +185,29 @@ def remove_ignored_items(items: dict):
 
 # recipes are limited to available items
 def define_recipes():
-    recipes = {
-        recipe_name: {
-            'ingredients': remove_ignored_items(transform_to_dict(v['ingredients'])),
-            'products': remove_ignored_items(transform_to_dict(v['products'])),
+    recipes = dict()
+    for recipe_name, v in data['recipes'].items():
+        if len(v['producedIn']) != 1:
+            # print('WARNING Skip handcrafted:', recipe_name)
+            continue
+        ingredients = {
+            item_name: amount
+            for item_name, amount in transform_to_dict(v['ingredients']).items()
+            if item_name in ITEMS
+        }
+        products = {
+            item_name: amount
+            for item_name, amount in transform_to_dict(v['products']).items()
+            if item_name in ITEMS
+        }
+        if not ingredients or not products:
+            print('WARNING Skip unavailable:', recipe_name)
+            continue
+        recipes[recipe_name] = {
+            'ingredients': ingredients,
+            'products': products,
             'producedIn': v['producedIn'][0]
         }
-        for recipe_name, v in data['recipes'].items()
-        if (
-            any(d['item'] in ITEMS for d in v['ingredients']) and
-            any(d['item'] in ITEMS for d in v['products']) and
-            len(v['producedIn']) == 1
-        )
-    }
     # hard coded fix to enable nuclear production chain
     recipes['Desc_GeneratorNuclearUranium_C'] = {
         'ingredients': {'Desc_NuclearFuelRod_C': 0.2},
@@ -209,9 +219,7 @@ def define_recipes():
         'products': {'Desc_PlutoniumWaste_C': 10},
         'producedIn': 'Desc_GeneratorNuclear_C',
     }
-    "Desc_Coal_C",
-    "Desc_CompactedCoal_C",
-    "Desc_PetroleumCoke_C"
+    # enable power from coal
     recipes['Desc_GeneratorCoalCoal_C'] = {
         
         'ingredients': {'Desc_Coal_C': 15},
@@ -230,8 +238,16 @@ def define_recipes():
         'products': {},
         'producedIn': 'Desc_GeneratorCoal_C',
     }
+    # include water cycle
+    recipes['Desc_WaterExtractorWater_C'] = {
+        
+        'ingredients': {},
+        'products': {'Desc_Water_C': 120},
+        'producedIn': 'Desc_WaterExtractor_C',
+    }
     return recipes
 RECIPES = define_recipes()
+
 # TODO: Flip-Flop remove items and recipes that can't be automatically produced
 
 # resources are items that can not be produced by recipes
@@ -256,6 +272,7 @@ RESOURCES_AVAILABLE['Desc_RawQuartz_C'] = 480*5 + 240*11
 RESOURCES_AVAILABLE['Desc_OreUranium_C'] = 240*3 + 120*1
 RESOURCES_AVAILABLE['Desc_NitrogenGas_C'] = 2*30 + 7*60 + 36*120
 RESOURCES_AVAILABLE['Desc_LiquidOil_C'] = 6*60 + 3*120 + 3*240
+# RESOURCES_AVAILABLE['Desc_Water_C'] = 10000
 
 # helper structure to find recipes
 def define_item_to_recipe_mappings():
@@ -278,6 +295,7 @@ def define_production_facilities():
     }
     facilities['Desc_GeneratorNuclear_C'] = 2500
     facilities['Desc_GeneratorCoal_C'] = 75
+    facilities['Desc_WaterExtractor_C'] = -20
     return facilities
 PRODUCTION_FACILITIES = define_production_facilities()
 

@@ -19,9 +19,13 @@ import parse_items_from_csv
 
 class SatisfactoryLP:
 
-    def __init__(self, recipes: dict, resources_available: dict):
-        if not self.check_parameters(resources_available):
+    def __init__(self, recipes: dict, items_available: dict=game.RESOURCES_AVAILABLE):
+        if not self.check_parameters(items_available):
             exit(1)
+
+        self._objective_specific_report = lambda: None
+
+        self.items_available = items_available
 
         self.solver = pywraplp.Solver.CreateSolver("GLOP")
         if not self.solver:
@@ -32,16 +36,21 @@ class SatisfactoryLP:
             recipe_name: self.solver.NumVar(0, self.solver.infinity(), recipe_name)
             for recipe_name in game.RECIPES
         }
+        self.var_item_sold = {
+            item_name: self.solver.NumVar(0, self.solver.infinity(), item_name)
+            for item_name in game.ITEMS
+        }
 
         # define helper terms
         self.consumed_in_all_recipes = dict()
-        self.produced_in_all_recipes = dict()
         for item_name in game.ITEMS:
             self.consumed_in_all_recipes[item_name] = sum(
                 game.RECIPES[recipe_name][0][item_name] * self.var_recipes_used[recipe_name]
                 for recipe_name in recipes
                 if recipe_name in game.consumed_by[item_name]
             )
+        self.produced_in_all_recipes = dict()
+        for item_name in game.ITEMS:
             self.produced_in_all_recipes[item_name] = sum(
                 game.RECIPES[recipe_name][1][item_name] * self.var_recipes_used[recipe_name]
                 for recipe_name in recipes
@@ -54,27 +63,77 @@ class SatisfactoryLP:
                 self.solver.Add(self.var_recipes_used[recipe_name] == 0,
                         f'Disable_{recipe_name}')
 
-        self._define_flow_constraints(resources_available)
-        self._define_objective(resources_available)
+    ################################ constraints ##############################
 
-    def _define_flow_constraints(self, resources_available):
+    def _define_flow_constraints(self, resources_available: dict):
+        for item_name in game.ITEMS:
+            required_items = (
+                self.consumed_in_all_recipes[item_name]
+                 + self.var_item_sold[item_name]
+                 - self.produced_in_all_recipes[item_name]
+            )
+            available = resources_available.get(item_name, 0)
+            self.solver.Add(required_items <= available, f'Flow_{item_name}')
+
+    def _define_production_rates(self, resources_available: dict,
+                                 production_rate: dict):
         for item_name in game.ITEMS:
             available = resources_available.get(item_name, 0)
+            goal_rate = production_rate.get(item_name, 0)
             self.solver.Add(
                 available + self.produced_in_all_recipes[item_name]
-                >= self.consumed_in_all_recipes[item_name],
-                f'Flow_{item_name}'
+                - self.consumed_in_all_recipes[item_name]
+                >= goal_rate,
+                f'Goal_{item_name}'
             )
 
-    def _define_objective(self, resources_available):
+    ################################ objective ##############################
+
+    def set_objective_max_sink_points(self):
+        self._define_flow_constraints(self.items_available)
         sum_points = 0
         for item_name, item_data in game.ITEMS.items():
-            amount_consumed = self.consumed_in_all_recipes[item_name]
-            amount_produced = self.produced_in_all_recipes[item_name]
-            amount_available = resources_available.get(item_name, 0)
-            amount_sold = amount_available + amount_produced - amount_consumed
-            sum_points += amount_sold * item_data["sinkPoints"]
+            sum_points += self.var_item_sold[item_name] * item_data["sinkPoints"]
         self.solver.Maximize(sum_points)
+        self._objective_specific_report = self._report_sold_items
+
+    def set_objective_min_resources_spent(self, production_rates: dict):
+        """Minimize the (mining) resources needed to achieve the given production rates
+
+        Args:
+            production_rates (dict): Set constraints to achieve at least these production rates of items
+        """
+        self._define_flow_constraints(self.items_available)
+        self._define_production_rates(self.items_available, production_rates)
+        
+        sum_resources_spent = 0
+        for item_name in game.RESOURCES_AVAILABLE:
+            sum_resources_spent += self.consumed_in_all_recipes[item_name]
+        self.solver.Minimize(sum_resources_spent)
+        self._objective_specific_report = self._report_items_required
+
+    ################################### report ###############################
+
+    def _report_sold_items(self):
+        print("\nSold items:")
+        for item_name in game.ITEMS:
+            amount_sold = self.var_item_sold[item_name].solution_value()
+            if round(amount_sold, 3) != 0:
+                print(item_name, "=", round(amount_sold, 3))
+
+    def _report_items_required(self):
+        print("\nRequired items (without goal rates):")
+        for item_name in game.RESOURCES_AVAILABLE:
+            amount_consumed = self.consumed_in_all_recipes[item_name]
+            
+            if not type(amount_consumed) == int: # because only sum([]) = 0
+                amount_consumed = amount_consumed.solution_value()
+            if round(amount_consumed, 3) != 0:
+                print(item_name, "=", round(amount_consumed, 3))
+
+    def _report_debug(self):
+        for variable in self.solver.variables():
+            print(variable.name(), variable.solution_value())
 
     def report(self):
         print("Solution:")
@@ -85,19 +144,7 @@ class SatisfactoryLP:
             if round(recipes_used, 3) != 0:
                 print(recipe_name, "=", round(recipes_used, 3))
 
-        print("\nSold items:")
-        for item_name in game.ITEMS:
-            amount_consumed = self.consumed_in_all_recipes[item_name]
-            amount_produced = self.produced_in_all_recipes[item_name]
-            amount_available = resources_available.get(item_name, 0)
-            amount_sold = amount_available + amount_produced - amount_consumed
-            
-            # is the case for all except from empty lists in consumed/produced in all recipes
-            # because sum([]) = 0
-            if not type(amount_sold) == int:
-                amount_sold = amount_sold.solution_value()
-            if round(amount_sold, 3) != 0:
-                print(item_name, "=", round(amount_sold, 3))
+        self._objective_specific_report()
 
         print("\nObjective value =", self.solver.Objective().Value())
 
@@ -126,29 +173,25 @@ if __name__ == '__main__':
     resources_available = dict()
 
     # custom
-    # resources_available['Desc_OreIron_C'] = 120
-    # resources_available['Desc_OreCopper_C'] = 120
+    resources_available['Desc_OreIron_C'] = 4*480
+    resources_available['Desc_OreCopper_C'] = 2*480
+    resources_available['Desc_Coal_C'] = 4*240
+    resources_available['Desc_Stone_C'] = 2*480
     
     # # current overhead
     # resources_available = parse_items_from_csv.parse_items('../Autonation4.0.csv')
 
     # full ressource occupancy
-    resources_available['Desc_Stone_C'] = 480*27 + 240*47 + 120*12
-    resources_available['Desc_OreIron_C'] = 480*46 + 240*41 + 120*33
-    resources_available['Desc_OreCopper_C'] = 480*12 + 240*28 + 120*9
-    resources_available['Desc_OreGold_C'] = 480*8 + 240*8
-    resources_available['Desc_Coal_C'] = 480*14 + 240*29 + 120*6
-    resources_available['Desc_LiquidOil_C'] = 240*8 + 120*12 + 60*10
-    resources_available['Desc_Sulfur_C'] = 480*3 + 240*7 + 120*1
-    resources_available['Desc_OreBauxite_C'] = 480*6 + 240*6 + 120*5
-    resources_available['Desc_RawQuartz_C'] = 480*5 + 240*11
-    resources_available['Desc_OreUranium_C'] = 240*3 + 120*1
+    # resources_available = game.RESOURCES_AVAILABLE
 
     # recipes=dict()
     recipes=game.RECIPES
     problem = SatisfactoryLP(recipes, resources_available)
+    # problem.set_objective_max_sink_points()
+    problem.set_objective_min_resources_spent({'Desc_ModularFrameHeavy_C': 1})
     print("Number of variables =", problem.solver.NumVariables())
     print("Number of constraints =", problem.solver.NumConstraints())
     status = problem.optimize()
     problem.report()
+    # problem._report_debug()
     

@@ -4,7 +4,11 @@ with open('data.json', 'r') as fp:
     data = json.load(fp)
 
 def get_bare_item_name(name: str) -> str:
-    return name[5:-2]
+    # remove _C
+    name = name[:-2]
+    # remove prefix
+    name = '_'.join(name.split('_')[1:])
+    return name
 
 def define_items():
     item_names = {

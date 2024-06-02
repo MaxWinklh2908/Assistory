@@ -252,26 +252,46 @@ class SatisfactoryLP:
 
 
 if __name__ == '__main__':
-    resources_available = dict()
+    ################# items available ######################
+    items_available = dict()
 
     # custom
-    # resources_available['Desc_OreIron_C'] = 480
-    # resources_available['Desc_OreCopper_C'] = 480
-    # resources_available['Desc_Coal_C'] = 4*240
-    # resources_available['Desc_Stone_C'] = 2*480
+    # items_available['Desc_OreIron_C'] = 480
+    # items_available['Desc_OreCopper_C'] = 480
+    # items_available['Desc_Coal_C'] = 240
+    # items_available['Desc_Stone_C'] = 480
     
-    # current overhead
-    resources_available = {
+    # current production
+    items_available = {
         item_name: amount
         for item_name, amount in 
         parse_items_from_csv.parse_items('Autonation4.0.csv').items()
         if not 'Packaged' in item_name and not 'Water' in item_name
     }
 
+    ################# recipes ######################
     recipes=game.RECIPES
-    recipes=dict()
 
-    problem = SatisfactoryLP(recipes, resources_available)
+    # recipes=dict()
+    # recipes['Recipe_IngotIron_C'] = game.RECIPES['Recipe_IngotIron_C']
+    # recipes['Recipe_IngotCopper_C'] = game.RECIPES['Recipe_IngotCopper_C']
+    # recipes['Desc_WaterExtractorWater_C'] = game.RECIPES['Desc_WaterExtractorWater_C']
+    # recipes['Recipe_Alternate_SteamedCopperSheet_C'] = game.RECIPES['Recipe_Alternate_SteamedCopperSheet_C']
+
+    ################# resource nodes available ######################
+    resource_nodes_available = game.NODES_AVAILABLE
+    
+    # Current coverage
+    # resource_nodes_available=dict()
+    # resource_nodes_available['Desc_MinerMk3Stone_C'] = 1
+    # resource_nodes_available['Desc_MinerMk3OreIron_C'] = 1
+    # resource_nodes_available['Desc_MinerMk3OreCopper_C'] = 1
+    # resource_nodes_available['Desc_MinerMk3Coal_C'] = 1
+
+
+    problem = SatisfactoryLP(recipes=recipes,
+                             items_available=items_available,
+                             resource_nodes_available=resource_nodes_available)
 
     # problem.define_production_rates({'Desc_OreIron_C': 1})
     # problem.define_production_rates({

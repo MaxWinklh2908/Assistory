@@ -214,6 +214,24 @@ class SatisfactoryLP:
             if round(recipes_used, 3) != 0:
                 print(game.get_bare_item_name(recipe_name), "=", round(recipes_used, 3))
 
+    def report_shadow_prices(self):
+        print('Shadow prices of items available')
+        activities = self.solver.ComputeConstraintActivities()
+        o = [
+            {
+                'Name': c.name(),
+                'shadow price': c.dual_value(),
+                'slack': c.ub() - activities[i]
+            } 
+            for i, c in enumerate(self.solver.constraints())
+            if (
+                ('Flow_' in c.name() and c.name()[5:] in self.items_available)
+                or ('Nodes_' in c.name())
+            )
+        ]
+        import pandas as pd
+        print(pd.DataFrame(o).to_string())
+
     def report(self, debug=False):
         print("\nObjective value =", self.solver.Objective().Value())
         print(f"\nProblem solved in {self.solver.wall_time():d} milliseconds")
@@ -311,4 +329,5 @@ if __name__ == '__main__':
     status = problem.optimize()
 
     problem.report()
+    problem.report_shadow_prices()
     

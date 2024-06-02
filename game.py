@@ -198,6 +198,7 @@ NON_SELLABLE_ITEMS = define_non_sellable_items()
 # RESOURCES_AVAILABLE['Desc_NitrogenGas_C'] =    (30, 2, 60, 7, 120, 36)
 # RESOURCES_AVAILABLE['Desc_LiquidOil_C'] =      (60, 6, 120, 3, 240, 3)
 
+# pure nodes have double rate, impure nodes have half rate
 NODES_AVAILABLE = dict()
 NODES_AVAILABLE['Desc_MinerMk3Stone_C'] =                       (2 * 27 + 47 + 0.5 * 12)
 NODES_AVAILABLE['Desc_MinerMk3OreIron_C'] =                     (2 * 46 + 41 + 0.5 * 33)
@@ -210,7 +211,7 @@ NODES_AVAILABLE['Desc_MinerMk3RawQuartz_C'] =                   (2 * 5 + 11 + 0.
 NODES_AVAILABLE['Desc_MinerMk3OreUranium_C'] =                  (2 * 0 + 3 + 0.5 * 1)
 NODES_AVAILABLE['Desc_OilExtractorLiquidOil_C'] =               (2 * 8 + 12 + 0.5 * 10)
 NODES_AVAILABLE['Desc_ResourceWellPressurizerNitrogenGas_C'] =  (2 * 36 + 7 + 0.5 * 2)
-NODES_AVAILABLE['Desc_ResourceWellPressurizerLiquidOil_C'] =    (2 * 63 + 3 + 0.5 * 6)
+NODES_AVAILABLE['Desc_ResourceWellPressurizerLiquidOil_C'] =    (2 * 3 + 3 + 0.5 * 6)
 
 # recipes are limited to available items
 def define_recipes():

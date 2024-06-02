@@ -131,8 +131,10 @@ class SatisfactoryLP:
         )
 
     def _define_resource_node_constraints(self, resource_nodes_available: dict):
-        for resource_node_name, amount in resource_nodes_available.items():
-            self.solver.Add(self.var_recipes_used[resource_node_name] <= amount)
+        for resource_node_name in game.NODES_AVAILABLE:
+            amount = resource_nodes_available.get(resource_node_name, 0)
+            self.solver.Add(self.var_recipes_used[resource_node_name] <= amount,
+                            'Nodes_' + resource_node_name)
 
     ################################ objective ##############################
 

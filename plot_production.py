@@ -25,17 +25,20 @@ def main(plan: dict):
     for recipe_name, rate in plan.items():
         if plan[recipe_name] == 0:
             continue
-        
-        recipe_node_name = f'{recipe_name}\n{round(rate, 2)}/s'
-
-        G.add_edges_from([
-            (game.get_bare_item_name(item_name), recipe_node_name)
-            for item_name in game.RECIPES[recipe_name]['ingredients']
-        ])
-        G.add_edges_from([
-            (recipe_node_name, game.get_bare_item_name(item_name))
-            for item_name in game.RECIPES[recipe_name]['products']
-        ])
+        recipe = game.RECIPES[recipe_name]
+        recipe_node_name = f'{recipe_name}\n{round(rate, 2)}'
+        for item_name, amount in recipe['ingredients'].items():
+            G.add_edge(
+                game.get_bare_item_name(item_name),
+                recipe_node_name,
+                flow=round(rate * amount * 60/recipe['time'], 4)
+            )
+        for item_name, amount in recipe['products'].items():
+            G.add_edge(
+                recipe_node_name,
+                game.get_bare_item_name(item_name),
+                flow=round(rate * amount * 60/recipe['time'], 4)
+            )
 
         if game.RECIPES[recipe_name]['producedIn'] in game.MINING_FACILITIES:
             resource_node_names.append(recipe_node_name)
@@ -53,8 +56,13 @@ def main(plan: dict):
     item_nodes = nx.subgraph(G,
         [node_name for node_name in G.nodes()
          if not node_name in recipe_node_names])
+    labels = {
+        (u, v): str(data['flow'])
+        for (u, v, data) in G.edges.data()
+    }
 
     pos = nx.kamada_kawai_layout(G)
+    pos = nx.spring_layout(G, pos=pos, iterations=10)
     nx.draw_networkx_nodes(G, nodelist=manufacturing_nodes, pos=pos, 
                            node_color='tab:blue')
     nx.draw_networkx_nodes(G, nodelist=mining_nodes, pos=pos, 
@@ -63,6 +71,7 @@ def main(plan: dict):
                            node_color='tab:orange')
     nx.draw_networkx_labels(G, pos, font_size=8)
     nx.draw_networkx_edges(G, pos)
+    nx.draw_networkx_edge_labels(G, pos, labels, font_size=6)
     plt.show()
 
 

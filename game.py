@@ -38,6 +38,15 @@ def define_production_facilities():
 PRODUCTION_FACILITIES = define_production_facilities()
 # Note: over/underclocking would make the problem non-linear
 
+MINING_FACILITIES = [
+    'Desc_MinerMk1_C',
+    'Desc_MinerMk2_C',
+    'Desc_MinerMk3_C',
+    'Desc_WaterExtractor_C',
+    'Desc_OilExtractor_C',
+    'Desc_ResourceWellPressurizer_C'
+]
+
 # Geothermal power production is not consuming resources, therefore free
 FREE_POWER = 3*100 + 9*200 + 6*400
 
@@ -89,7 +98,6 @@ ITEMS_FROM_MINING = [
     'Desc_RawQuartz_C',
     'Desc_OreUranium_C',
     'Desc_NitrogenGas_C',
-    'Desc_LiquidOil_C',
 ]
 
 # # resources that are available by building extractors

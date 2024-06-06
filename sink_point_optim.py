@@ -104,10 +104,9 @@ class SatisfactoryLP:
                             f'Flow_{item_name}')
 
     def _define_non_sellable_items(self):
-        for item_name, item_data in game.ITEMS.items():
-            if item_data['sinkPoints'] == 0:
-                self.solver.Add(self.var_item_sold[item_name] == 0,
-                                f'Non-sellable_{item_name}')
+        for item_name in game.NON_SELLABLE_ITEMS:
+            self.solver.Add(self.var_item_sold[item_name] == 0,
+                            f'Non-sellable_{item_name}')
 
     def define_sell_rates(self, production_rate: dict):
         """
@@ -395,7 +394,6 @@ if __name__ == '__main__':
         if not item_name in game.NON_PRODUCABLE_ITEMS
         and not item_name in game.NON_SELLABLE_ITEMS
         and not item_name in game.RADIOACTIVE_ITEMS
-        and not item_name in game.LIQUID_ITEMS
         and not item_name in game.ITEMS_FROM_MINING
         and not 'Ingot' in item_name
     })

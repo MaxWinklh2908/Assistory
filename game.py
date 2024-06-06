@@ -66,6 +66,7 @@ def define_non_sellable_items() -> list:
         item_name
         for item_name, item_data in ITEMS.items()
         if item_data['sinkPoints'] == 0
+        or item_data['liquid']
     ]
 NON_SELLABLE_ITEMS = define_non_sellable_items()
 

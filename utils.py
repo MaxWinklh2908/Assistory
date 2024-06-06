@@ -1,4 +1,6 @@
 import csv
+import json
+
 import game
 
 
@@ -29,7 +31,8 @@ def parse_items(file_path: str):
         resources_available[item_name2class_name[item_name]] = balance
 
     return resources_available
-        
 
-if __name__ == '__main__':
-    print(parse_items('../Autonation4.0.csv'))
+
+def write_recipes(recipes: dict, file_path: str):
+    with open(file_path, 'w') as fp:
+        json.dump(recipes, fp)

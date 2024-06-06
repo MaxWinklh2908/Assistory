@@ -14,7 +14,7 @@ Value concept of items:
 from ortools.linear_solver import pywraplp
 
 import game
-import parse_items_from_csv
+import utils
 
 
 class SatisfactoryLP:
@@ -307,6 +307,12 @@ class SatisfactoryLP:
 
         self._objective_specific_report()
 
+    def get_recipes_used(self) -> dict:
+        return {
+            recipe_name: self.var_recipes_used[recipe_name].solution_value()
+            for recipe_name in game.RECIPES
+        }
+
     def check_parameters(self, resources_available: dict,
                          resource_nodes_available: dict) -> bool:
         result = True
@@ -344,8 +350,8 @@ if __name__ == '__main__':
     # current production (state: state: CO2-Neutral)
     items_available = {
         item_name: amount
-        for item_name, amount in 
-        parse_items_from_csv.parse_items('Autonation4.0.csv').items()
+        for item_name, amount
+        in utils.parse_items('Autonation4.0.csv').items()
         if not 'Packaged' in item_name and not 'Water' in item_name
     }
 
@@ -384,7 +390,7 @@ if __name__ == '__main__':
 
     ################# minimal production rates ######################
 
-    # problem.define_sell_rates({'Desc_OreIron_C': 1})
+    # Goal: Produce at least 1 item of every kind (except impractical items)
     problem.define_sell_rates({
         item_name: 1 for item_name in game.ITEMS
         if not item_name in game.NON_PRODUCABLE_ITEMS
@@ -406,4 +412,6 @@ if __name__ == '__main__':
 
     problem.report()
     # problem.report_shadow_prices()
+
+    utils.write_recipes(problem.get_recipes_used(), 'construction_plan.json')
     

@@ -23,6 +23,20 @@ class SatisfactoryLP:
                  items_available: dict=dict(),
                  resource_nodes_available: dict=game.NODES_AVAILABLE,
                  free_power: float=game.FREE_POWER):
+        """Create a Satisfactory Linear Program
+
+        Args:
+            recipes (dict): Available recipes
+            items_available (dict, optional): Available existing item
+                production (in items/minute). Defaults to dict().
+            resource_nodes_available (dict, optional): Available resource nodes
+                where mining recipes can be applied. Defaults to game.NODES_AVAILABLE.
+            free_power (float, optional): Existing power capacity. Defaults to game.FREE_POWER.
+
+        Raises:
+            RuntimeError: Invalid parameters given
+        """
+
         if not self.check_parameters(items_available, resource_nodes_available):
             exit(1)
 
@@ -49,14 +63,18 @@ class SatisfactoryLP:
         self.consumed_in_all_recipes = dict()
         for item_name in game.ITEMS:
             self.consumed_in_all_recipes[item_name] = sum(
-                game.RECIPES[recipe_name]['ingredients'][item_name] * self.var_recipes_used[recipe_name]
+                game.RECIPES[recipe_name]['ingredients'][item_name]
+                * self.var_recipes_used[recipe_name]
+                / (game.RECIPES[recipe_name]['time'] / 60)
                 for recipe_name in recipes
                 if recipe_name in game.consumed_by[item_name]
             )
         self.produced_in_all_recipes = dict()
         for item_name in game.ITEMS:
             self.produced_in_all_recipes[item_name] = sum(
-                game.RECIPES[recipe_name]['products'][item_name] * self.var_recipes_used[recipe_name]
+                game.RECIPES[recipe_name]['products'][item_name]
+                * self.var_recipes_used[recipe_name]
+                / (game.RECIPES[recipe_name]['time'] / 60)
                 for recipe_name in recipes
                 if recipe_name in game.produced_by[item_name]
             )
@@ -65,7 +83,7 @@ class SatisfactoryLP:
         for recipe_name in game.RECIPES:
             if not recipe_name in recipes:
                 self.solver.Add(self.var_recipes_used[recipe_name] == 0,
-                        f'Disable_{recipe_name}')
+                                f'Disable_{recipe_name}')
                 
         self._define_flow_constraints()
         self._define_power_contraints()
@@ -82,16 +100,19 @@ class SatisfactoryLP:
                  - self.produced_in_all_recipes[item_name]
             )
             available = self.items_available.get(item_name, 0)
-            self.solver.Add(required_items == available, f'Flow_{item_name}')
+            self.solver.Add(required_items == available,
+                            f'Flow_{item_name}')
 
     def _define_non_sellable_items(self):
         for item_name, item_data in game.ITEMS.items():
             if item_data['sinkPoints'] == 0:
-                self.solver.Add(self.var_item_sold[item_name] == 0)
+                self.solver.Add(self.var_item_sold[item_name] == 0,
+                                f'Non-sellable_{item_name}')
 
     def define_sell_rates(self, production_rate: dict):
         """
-        Achieve a certain minimum production rate of items
+        Achieve a certain minimum production rate of items. The rates are
+        defined in items/minute.
 
         Args:
             production_rates (dict): Set constraints to achieve at least these
@@ -128,7 +149,7 @@ class SatisfactoryLP:
         )
         self.solver.Add(
             power_balance + self.free_power >= 0,
-            'Power balance'
+            'Power_balance'
         )
 
     def _define_resource_node_constraints(self, resource_nodes_available: dict):

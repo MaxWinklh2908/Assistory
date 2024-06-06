@@ -245,7 +245,6 @@ NODES_AVAILABLE['Recipe_OilExtractorLiquidOil_C'] =               (2 * 8 + 12 + 
 NODES_AVAILABLE['Recipe_ResourceWellPressurizerNitrogenGas_C'] =  (2 * 36 + 7 + 0.5 * 2)
 NODES_AVAILABLE['Recipe_ResourceWellPressurizerLiquidOil_C'] =    (2 * 3 + 3 + 0.5 * 6)
 
-# recipes are limited to available items
 def define_recipes():
     def transform_to_dict(items: list):
         return {
@@ -273,48 +272,62 @@ def define_recipes():
         recipes[recipe_name] = {
             'ingredients': ingredients,
             'products': products,
-            'producedIn': v['producedIn'][0]
+            'producedIn': v['producedIn'][0],
+            'time': v['time'],
         }
-    # hard coded fix to enable nuclear production chain
+    # Nuclear production chain
     recipes['Recipe_GeneratorNuclearUranium_C'] = {
-        'ingredients': {'Desc_NuclearFuelRod_C': 0.2},
+        'ingredients': {'Desc_NuclearFuelRod_C': 1},
         'products': {'Desc_NuclearWaste_C': 50},
         'producedIn': 'Desc_GeneratorNuclear_C',
+        'time': 300,
     }
     recipes['Recipe_GeneratorNuclearPlutonium_C'] = {
         'ingredients': {'Desc_PlutoniumFuelRod_C': 0.1},
         'products': {'Desc_PlutoniumWaste_C': 10},
         'producedIn': 'Desc_GeneratorNuclear_C',
+        'time': 600,
     }
-    # enable power from coal
+    # Power from coal
     recipes['Recipe_GeneratorCoalCoal_C'] = {
         
         'ingredients': {'Desc_Coal_C': 15},
         'products': {},
         'producedIn': 'Desc_GeneratorCoal_C',
+        'time': 60,
     }
     recipes['Recipe_GeneratorCoalCompactedCoal_C'] = {
         
         'ingredients': {'Desc_CompactedCoal_C': 7.142857},
         'products': {},
         'producedIn': 'Desc_GeneratorCoal_C',
+        'time': 60,
     }
     recipes['Recipe_GeneratorCoalPetroleumCoke_C'] = {
         
         'ingredients': {'Desc_PetroleumCoke_C': 25},
         'products': {},
         'producedIn': 'Desc_GeneratorCoal_C',
+        'time': 60,
     }
-    # enable power from fuel
+    # Power from fuel
     recipes[f'Recipe_GeneratorFuelLiquidFuel_C'] = {
         'ingredients': {'Desc_LiquidFuel_C': 12},
         'products': {},
         'producedIn': 'Desc_GeneratorFuel_C',
+        'time': 60,
     }
+    # recipes[f'Recipe_GeneratorFuelLiquidBiofuelFuel_C'] = {
+    #     'ingredients': {'Desc_LiquidBiofuel_C': 12},
+    #     'products': {},
+    #     'producedIn': 'Desc_GeneratorFuel_C',
+    #     'time': 60,
+    # }
     recipes[f'Recipe_GeneratorFuelLiquidTurboFuel_C'] = {
         'ingredients': {'Desc_LiquidTurboFuel_C': 4.5},
         'products': {},
         'producedIn': 'Desc_GeneratorFuel_C',
+        'time': 60,
     }
     # Water Extractor
     recipes['Recipe_WaterExtractorWater_C'] = {
@@ -322,12 +335,14 @@ def define_recipes():
         'ingredients': {},
         'products': {'Desc_Water_C': 120},
         'producedIn': 'Desc_WaterExtractor_C',
+        'time': 60,
     }
     # Oil extractor
     recipes['Recipe_OilExtractorLiquidOil_C'] = {
         'ingredients': {},
         'products': {'Desc_LiquidOil_C': 120},
         'producedIn': 'Desc_OilExtractor_C',
+        'time': 60,
     }
     # Add miners
     for item_name in [
@@ -345,6 +360,7 @@ def define_recipes():
             'ingredients': {},
             'products': {item_name: 240},
             'producedIn': 'Desc_MinerMk3_C',
+            'time': 60,
         }
     # Resource wells
     for item_name in [
@@ -355,8 +371,10 @@ def define_recipes():
             'ingredients': {},
             'products': {item_name: 60},
             'producedIn': 'Desc_ResourceWellPressurizer_C',
+            'time': 60,
         }
     return recipes
+# recipies define ingredients, products, production facility and production time
 RECIPES = define_recipes()
 # TODO: Flip-Flop remove items and recipes that can't be automatically produced
 
@@ -405,6 +423,9 @@ def define_production_facilities():
     facilities['Desc_ResourceWellPressurizer_C'] = -10
     
     return facilities
+# Mapping of production facility to power production/consumption
 PRODUCTION_FACILITIES = define_production_facilities()
+# Note: over/underclocking would make the problem non-linear
 
+# Geothermal power production is not consuming resources, therefore free
 FREE_POWER = 3*100 + 9*200 + 6*400

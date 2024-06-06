@@ -29,6 +29,7 @@ class SatisfactoryLP:
         self._objective_specific_report = lambda: None
 
         self.items_available = items_available
+        self.free_power = free_power
 
         self.solver = pywraplp.Solver.CreateSolver("GLOP")
         if not self.solver:
@@ -67,7 +68,7 @@ class SatisfactoryLP:
                         f'Disable_{recipe_name}')
                 
         self._define_flow_constraints()
-        self._define_power_contraints(free_power)
+        self._define_power_contraints()
         self._define_non_sellable_items()
         self._define_resource_node_constraints(resource_nodes_available)
 
@@ -111,7 +112,7 @@ class SatisfactoryLP:
                 f'Goal_{item_name}'
             )
 
-    def _define_power_contraints(self, free_power: float):
+    def _define_power_contraints(self):
         amount_facility = {
             facility_name: sum(
                 var_recipe
@@ -126,7 +127,7 @@ class SatisfactoryLP:
             for facility_name, power_consumption in game.PRODUCTION_FACILITIES.items()
         )
         self.solver.Add(
-            power_balance + free_power >= 0,
+            power_balance + self.free_power >= 0,
             'Power balance'
         )
 
@@ -192,7 +193,7 @@ class SatisfactoryLP:
         }
         
         sum_consumption = 0
-        print(f'Free power: {game.FREE_POWER} MW')
+        print(f'Free power: {self.free_power} MW')
         for facility_name, power_consumption in game.PRODUCTION_FACILITIES.items():
             sum_power_of_type = amount_facility[facility_name] * power_consumption
             if round(sum_power_of_type, 3) != 0:
@@ -201,7 +202,7 @@ class SatisfactoryLP:
                       f' {round(sum_power_of_type, 3)} MW')
             if sum_power_of_type < 0:
                 sum_consumption += abs(sum_power_of_type)
-        print(f'Total: {round(sum_consumption, 3)} MW')
+        print(f'Total consumption: {round(sum_consumption, 3)} MW')
 
     def _report_debug(self):
         for variable in self.solver.variables():
@@ -311,7 +312,8 @@ if __name__ == '__main__':
 
     problem = SatisfactoryLP(recipes=recipes,
                              items_available=items_available,
-                             resource_nodes_available=resource_nodes_available)
+                             resource_nodes_available=resource_nodes_available,
+                             free_power=10000)
 
     # problem.define_production_rates({'Desc_OreIron_C': 1})
     # problem.define_production_rates({

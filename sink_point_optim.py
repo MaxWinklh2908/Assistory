@@ -145,20 +145,46 @@ class SatisfactoryLP:
             sum_points += self.var_item_sold[item_name] * item_data["sinkPoints"]
         self.solver.Maximize(sum_points)
 
-    def set_objective_min_resources_spent(self):
+        self._objective_specific_report = self._report_sold_items
+
+    def set_objective_min_resources_spent(self, weighted=False):
         """Minimize the required resource nodes (and wells) needed to achieve
         the given production rates
+
+        Args:
+            weighted (bool, optional): Whether rare resources should be spent
+            less than common ones. Defaults to False.
         """
         if not any('Goal_' in c.name() for c in self.solver.constraints()):
             print('WARNING: No goal production rate has been set.'
                   'Recipes will be all 0')
             
-        sum_resource_nodes = sum(
-            self.var_recipes_used[resource_node_name] 
-            for resource_node_name in game.NODES_AVAILABLE
-        )
+        sum_resource_nodes = 0
+        
+        for node_name in game.NODES_AVAILABLE:
+            weight = 1
+            if weighted:
+                weight = 1/game.NODES_AVAILABLE[node_name]
+            sum_resource_nodes += weight * self.var_recipes_used[node_name] 
+
         self.solver.Minimize(sum_resource_nodes)
         self._objective_specific_report = self._report_resource_nodes_required
+
+    def set_objective_min_recipes(self):
+        """Minimize the required recipes to achieve
+        the given production rates.
+        """
+        if not any('Goal_' in c.name() for c in self.solver.constraints()):
+            print('WARNING: No goal production rate has been set.'
+                  'Recipes will be all 0')
+            
+        cnt_recipes = 0
+        for recipe_name in game.RECIPES:
+            weight = 1
+            cnt_recipes += weight * self.var_recipes_used[recipe_name] 
+
+        self.solver.Minimize(cnt_recipes)
+        self._objective_specific_report = self.report_items_produced_to_sell
 
     ################################### report ###############################
 
@@ -233,12 +259,21 @@ class SatisfactoryLP:
         import pandas as pd
         print(pd.DataFrame(o).to_string())
 
+    def report_items_produced_to_sell(self):
+        print("\nSold items (excluding items available):")
+        for item_name in game.ITEMS:
+            amount_sold = self.var_item_sold[item_name].solution_value()
+            amount_available = self.items_available.get(item_name, 0)
+            produced_to_sell = round(max(0, amount_sold - amount_available), 3)
+            if produced_to_sell == 0:
+                continue
+            print(game.get_bare_item_name(item_name), "=", produced_to_sell)
+
     def report(self, debug=False):
         print("\nObjective value =", self.solver.Objective().Value())
         print(f"\nProblem solved in {self.solver.wall_time():d} milliseconds")
 
         self._report_recipes_used()
-        self._report_sold_items()
         self._report_power()
         
         if debug:
@@ -329,7 +364,8 @@ if __name__ == '__main__':
     })
 
     problem.set_objective_max_sink_points()
-    # problem.set_objective_min_resources_spent()
+    # problem.set_objective_min_resources_spent(weighted=True)
+    # problem.set_objective_min_recipes()
 
     print("Number of variables =", problem.solver.NumVariables())
     print("Number of constraints =", problem.solver.NumConstraints())

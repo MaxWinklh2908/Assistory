@@ -334,21 +334,6 @@ class SatisfactoryLP:
         return self.solver.Solve()
 
 def main(recipe_export_path: str):
-    ################# items available ######################
-    items_available = dict()
-
-    # # custom
-    # items_available['Desc_OreIron_C'] = 480
-    # items_available['Desc_OreCopper_C'] = 480
-    # items_available['Desc_Coal_C'] = 240
-    # items_available['Desc_Stone_C'] = 480
-    
-    # # current production (state: state: CO2-Neutral)
-    # items_available = {
-    #     item_name: amount
-    #     for item_name, amount
-    #     in utils.parse_items('data/Autonation4.0.csv').items()
-    # }
 
     ################# recipes ######################
     recipes=game.RECIPES
@@ -359,14 +344,32 @@ def main(recipe_export_path: str):
     # recipes['Recipe_WaterExtractorWater_C'] = game.RECIPES['Recipe_WaterExtractorWater_C']
     # recipes['Recipe_Alternate_SteamedCopperSheet_C'] = game.RECIPES['Recipe_Alternate_SteamedCopperSheet_C']
 
+    ################# items available ######################
+    items_available = dict()
+
+    # # custom
+    # items_available['Desc_OreIron_C'] = 480
+    # items_available['Desc_OreCopper_C'] = 480
+    # items_available['Desc_Coal_C'] = 240
+    # items_available['Desc_Stone_C'] = 480
+    
+    # current production (state: state: CO2-Neutral)
+    # items_available = {
+    #     item_name: amount
+    #     for item_name, amount
+    #     in utils.parse_items('data/Autonation4.0.csv').items()
+    # }
+
     ################# resource nodes available ######################
     # resource_nodes_available = game.NODES_AVAILABLE
     
     # Current coverage (state: CO2-Neutral)
     resource_nodes_available=dict()
-    # utils.read_resource_nodes('data/available_nodes_autonation.json')
-    utils.read_resource_nodes('data/available_nodes_black_lake_oil.json')
+    # resource_nodes_available = utils.read_resource_nodes('data/available_nodes_autonation.json')
+    resource_nodes_available = utils.read_resource_nodes(
+        'data/available_nodes_black_lake_oil.json')
 
+    ################# define problem ######################
 
     problem = SatisfactoryLP(recipes=recipes,
                              items_available=items_available,
@@ -374,16 +377,30 @@ def main(recipe_export_path: str):
                              free_power=10000)
 
     ################# minimal production rates ######################
+    sell_rates = dict()
 
     # Goal: Produce at least 1 item of every kind (except impractical items)
-    problem.define_sell_rates({
-        item_name: 1 for item_name in game.ITEMS
-        if not item_name in game.NON_PRODUCABLE_ITEMS
-        and not item_name in game.NON_SELLABLE_ITEMS
-        and not item_name in game.RADIOACTIVE_ITEMS
-        and not item_name in game.ITEMS_FROM_MINING
-        and not 'Ingot' in item_name
-    })
+    # sell_rates = {
+    #     item_name: 1 for item_name in game.ITEMS
+    #     if not item_name in game.NON_PRODUCABLE_ITEMS
+    #     and not item_name in game.NON_SELLABLE_ITEMS
+    #     and not item_name in game.RADIOACTIVE_ITEMS
+    #     and not item_name in game.ITEMS_FROM_MINING
+    #     and not 'Ingot' in item_name
+    # }
+
+    # Goal: Make black lake oil more efficient
+    sell_rates['Desc_CircuitBoard_C'] = 68 # 50 + 4 + 5 + 3.4643
+    sell_rates['Desc_Fabric_C'] = 1.85 + 3.15
+    sell_rates['Desc_Fuel_C'] = 1
+    sell_rates['Desc_Plastic_C'] = 210 - 18 + 4 + 25.46
+    sell_rates['Desc_PolymerResin_C'] = 2.5 + 48.9
+    sell_rates['Desc_Rubber_C'] = 160 + 50 # 48.17
+    
+    problem.define_sell_rates(sell_rates)
+
+    ################# objective ######################
+
 
     # problem.set_objective_max_sink_points()
     # problem.set_objective_min_resources_spent(weighted=True)
@@ -400,7 +417,7 @@ def main(recipe_export_path: str):
     problem.report()
     # problem.report_shadow_prices()
 
-    utils.write_recipes(problem.get_recipes_used(), 'construction_plan.json')
+    utils.write_recipes(problem.get_recipes_used(), recipe_export_path)
     
 
 if __name__ == '__main__':

@@ -317,7 +317,7 @@ if __name__ == '__main__':
     # items_available['Desc_Coal_C'] = 240
     # items_available['Desc_Stone_C'] = 480
     
-    # current production
+    # current production (state: state: CO2-Neutral)
     items_available = {
         item_name: amount
         for item_name, amount in 
@@ -331,18 +331,26 @@ if __name__ == '__main__':
     # recipes=dict()
     # recipes['Recipe_IngotIron_C'] = game.RECIPES['Recipe_IngotIron_C']
     # recipes['Recipe_IngotCopper_C'] = game.RECIPES['Recipe_IngotCopper_C']
-    # recipes['Desc_WaterExtractorWater_C'] = game.RECIPES['Desc_WaterExtractorWater_C']
+    # recipes['Recipe_WaterExtractorWater_C'] = game.RECIPES['Recipe_WaterExtractorWater_C']
     # recipes['Recipe_Alternate_SteamedCopperSheet_C'] = game.RECIPES['Recipe_Alternate_SteamedCopperSheet_C']
 
     ################# resource nodes available ######################
-    resource_nodes_available = game.NODES_AVAILABLE
+    # resource_nodes_available = game.NODES_AVAILABLE
     
-    # Current coverage
-    # resource_nodes_available=dict()
-    # resource_nodes_available['Desc_MinerMk3Stone_C'] = 1
-    # resource_nodes_available['Desc_MinerMk3OreIron_C'] = 1
-    # resource_nodes_available['Desc_MinerMk3OreCopper_C'] = 1
-    # resource_nodes_available['Desc_MinerMk3Coal_C'] = 1
+    # Current coverage (state: CO2-Neutral)
+    resource_nodes_available=dict()
+    resource_nodes_available['Recipe_MinerMk3Stone_C'] =                       game.NODES_AVAILABLE['Recipe_MinerMk3Stone_C'] - (0 * 0.5   + 4   + 1 * 2)
+    resource_nodes_available['Recipe_MinerMk3OreIron_C'] =                     game.NODES_AVAILABLE['Recipe_MinerMk3OreIron_C'] - (5 * 0.5   + 7   + 8 * 2)
+    resource_nodes_available['Recipe_MinerMk3OreCopper_C'] =                   game.NODES_AVAILABLE['Recipe_MinerMk3OreCopper_C'] - (2 * 0.5   + 5  + 2 * 2)
+    resource_nodes_available['Recipe_MinerMk3OreGold_C'] =                     game.NODES_AVAILABLE['Recipe_MinerMk3OreGold_C'] - (0 * 0.5   + 2   + 1 * 2)
+    resource_nodes_available['Recipe_MinerMk3Coal_C'] =                        game.NODES_AVAILABLE['Recipe_MinerMk3Coal_C'] - (0 * 0.5   + 4  + 3 * 2)
+    resource_nodes_available['Recipe_MinerMk3Sulfur_C'] =                      game.NODES_AVAILABLE['Recipe_MinerMk3Sulfur_C'] - (0 * 0.5   + 3   + 1 * 2)
+    resource_nodes_available['Recipe_MinerMk3OreBauxite_C'] =                  game.NODES_AVAILABLE['Recipe_MinerMk3OreBauxite_C'] - (5 * 0.5   + 2   + 2 * 2)
+    resource_nodes_available['Recipe_MinerMk3RawQuartz_C'] =                   game.NODES_AVAILABLE['Recipe_MinerMk3RawQuartz_C'] - (0 * 0.5   + 3  + 0 * 2)
+    resource_nodes_available['Recipe_MinerMk3OreUranium_C'] =                  game.NODES_AVAILABLE['Recipe_MinerMk3OreUranium_C'] - (0 * 0.5   + 2   + 0 * 2)
+    resource_nodes_available['Recipe_OilExtractorLiquidOil_C'] =               game.NODES_AVAILABLE['Recipe_OilExtractorLiquidOil_C'] - (1 * 0.5  + 4  + 4 * 2)
+    resource_nodes_available['Recipe_ResourceWellPressurizerNitrogenGas_C'] =  game.NODES_AVAILABLE['Recipe_ResourceWellPressurizerNitrogenGas_C'] - (1 * 0.5   + 0   + 9 * 2)
+    resource_nodes_available['Recipe_ResourceWellPressurizerLiquidOil_C'] =    game.NODES_AVAILABLE['Recipe_ResourceWellPressurizerLiquidOil_C'] - (0 * 0.5   + 0   + 0 * 2)
 
 
     problem = SatisfactoryLP(recipes=recipes,
@@ -363,9 +371,9 @@ if __name__ == '__main__':
         and not 'Ingot' in item_name
     })
 
-    problem.set_objective_max_sink_points()
+    # problem.set_objective_max_sink_points()
     # problem.set_objective_min_resources_spent(weighted=True)
-    # problem.set_objective_min_recipes()
+    problem.set_objective_min_recipes()
 
     print("Number of variables =", problem.solver.NumVariables())
     print("Number of constraints =", problem.solver.NumConstraints())
@@ -373,5 +381,5 @@ if __name__ == '__main__':
     status = problem.optimize()
 
     problem.report()
-    problem.report_shadow_prices()
+    # problem.report_shadow_prices()
     

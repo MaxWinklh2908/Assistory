@@ -10,7 +10,7 @@ def get_bare_item_name(name: str) -> str:
     name = '_'.join(name.split('_')[1:])
     return name
 
-def define_items():
+def define_items() -> dict:
     item_names = {
     "Desc_AluminaSolution_C",
     "Desc_AluminumCasing_C",
@@ -232,18 +232,18 @@ ITEMS_FROM_MINING = [
 
 # pure nodes have double rate, impure nodes have half rate
 NODES_AVAILABLE = dict()
-NODES_AVAILABLE['Desc_MinerMk3Stone_C'] =                       (2 * 27 + 47 + 0.5 * 12)
-NODES_AVAILABLE['Desc_MinerMk3OreIron_C'] =                     (2 * 46 + 41 + 0.5 * 33)
-NODES_AVAILABLE['Desc_MinerMk3OreCopper_C'] =                   (2 * 12 + 28 + 0.5 * 9)
-NODES_AVAILABLE['Desc_MinerMk3OreGold_C'] =                     (2 * 8 + 8 + 0.5 * 0)
-NODES_AVAILABLE['Desc_MinerMk3Coal_C'] =                        (2 * 14 + 29 + 0.5 * 6)
-NODES_AVAILABLE['Desc_MinerMk3Sulfur_C'] =                      (2 * 3 + 7 + 0.5 * 1)
-NODES_AVAILABLE['Desc_MinerMk3OreBauxite_C'] =                  (2 * 6 + 6 + 0.5 * 5)
-NODES_AVAILABLE['Desc_MinerMk3RawQuartz_C'] =                   (2 * 5 + 11 + 0.5 * 0)
-NODES_AVAILABLE['Desc_MinerMk3OreUranium_C'] =                  (2 * 0 + 3 + 0.5 * 1)
-NODES_AVAILABLE['Desc_OilExtractorLiquidOil_C'] =               (2 * 8 + 12 + 0.5 * 10)
-NODES_AVAILABLE['Desc_ResourceWellPressurizerNitrogenGas_C'] =  (2 * 36 + 7 + 0.5 * 2)
-NODES_AVAILABLE['Desc_ResourceWellPressurizerLiquidOil_C'] =    (2 * 3 + 3 + 0.5 * 6)
+NODES_AVAILABLE['Recipe_MinerMk3Stone_C'] =                       (2 * 27 + 47 + 0.5 * 12)
+NODES_AVAILABLE['Recipe_MinerMk3OreIron_C'] =                     (2 * 46 + 41 + 0.5 * 33)
+NODES_AVAILABLE['Recipe_MinerMk3OreCopper_C'] =                   (2 * 12 + 28 + 0.5 * 9)
+NODES_AVAILABLE['Recipe_MinerMk3OreGold_C'] =                     (2 * 8 + 8 + 0.5 * 0)
+NODES_AVAILABLE['Recipe_MinerMk3Coal_C'] =                        (2 * 14 + 29 + 0.5 * 6)
+NODES_AVAILABLE['Recipe_MinerMk3Sulfur_C'] =                      (2 * 3 + 7 + 0.5 * 1)
+NODES_AVAILABLE['Recipe_MinerMk3OreBauxite_C'] =                  (2 * 6 + 6 + 0.5 * 5)
+NODES_AVAILABLE['Recipe_MinerMk3RawQuartz_C'] =                   (2 * 5 + 11 + 0.5 * 0)
+NODES_AVAILABLE['Recipe_MinerMk3OreUranium_C'] =                  (2 * 0 + 3 + 0.5 * 1)
+NODES_AVAILABLE['Recipe_OilExtractorLiquidOil_C'] =               (2 * 8 + 12 + 0.5 * 10)
+NODES_AVAILABLE['Recipe_ResourceWellPressurizerNitrogenGas_C'] =  (2 * 36 + 7 + 0.5 * 2)
+NODES_AVAILABLE['Recipe_ResourceWellPressurizerLiquidOil_C'] =    (2 * 3 + 3 + 0.5 * 6)
 
 # recipes are limited to available items
 def define_recipes():
@@ -276,55 +276,55 @@ def define_recipes():
             'producedIn': v['producedIn'][0]
         }
     # hard coded fix to enable nuclear production chain
-    recipes['Desc_GeneratorNuclearUranium_C'] = {
+    recipes['Recipe_GeneratorNuclearUranium_C'] = {
         'ingredients': {'Desc_NuclearFuelRod_C': 0.2},
         'products': {'Desc_NuclearWaste_C': 50},
         'producedIn': 'Desc_GeneratorNuclear_C',
     }
-    recipes['Desc_GeneratorNuclearPlutonium_C'] = {
+    recipes['Recipe_GeneratorNuclearPlutonium_C'] = {
         'ingredients': {'Desc_PlutoniumFuelRod_C': 0.1},
         'products': {'Desc_PlutoniumWaste_C': 10},
         'producedIn': 'Desc_GeneratorNuclear_C',
     }
     # enable power from coal
-    recipes['Desc_GeneratorCoalCoal_C'] = {
+    recipes['Recipe_GeneratorCoalCoal_C'] = {
         
         'ingredients': {'Desc_Coal_C': 15},
         'products': {},
         'producedIn': 'Desc_GeneratorCoal_C',
     }
-    recipes['Desc_GeneratorCoalCompactedCoal_C'] = {
+    recipes['Recipe_GeneratorCoalCompactedCoal_C'] = {
         
         'ingredients': {'Desc_CompactedCoal_C': 7.142857},
         'products': {},
         'producedIn': 'Desc_GeneratorCoal_C',
     }
-    recipes['Desc_GeneratorCoalPetroleumCoke_C'] = {
+    recipes['Recipe_GeneratorCoalPetroleumCoke_C'] = {
         
         'ingredients': {'Desc_PetroleumCoke_C': 25},
         'products': {},
         'producedIn': 'Desc_GeneratorCoal_C',
     }
     # enable power from fuel
-    recipes[f'Desc_GeneratorFuelLiquidFuel_C'] = {
+    recipes[f'Recipe_GeneratorFuelLiquidFuel_C'] = {
         'ingredients': {'Desc_LiquidFuel_C': 12},
         'products': {},
         'producedIn': 'Desc_GeneratorFuel_C',
     }
-    recipes[f'Desc_GeneratorFuelLiquidTurboFuel_C'] = {
+    recipes[f'Recipe_GeneratorFuelLiquidTurboFuel_C'] = {
         'ingredients': {'Desc_LiquidTurboFuel_C': 4.5},
         'products': {},
         'producedIn': 'Desc_GeneratorFuel_C',
     }
     # Water Extractor
-    recipes['Desc_WaterExtractorWater_C'] = {
+    recipes['Recipe_WaterExtractorWater_C'] = {
         
         'ingredients': {},
         'products': {'Desc_Water_C': 120},
         'producedIn': 'Desc_WaterExtractor_C',
     }
     # Oil extractor
-    recipes[f'Desc_OilExtractorLiquidOil_C'] = {
+    recipes['Recipe_OilExtractorLiquidOil_C'] = {
         'ingredients': {},
         'products': {'Desc_LiquidOil_C': 120},
         'producedIn': 'Desc_OilExtractor_C',
@@ -341,7 +341,7 @@ def define_recipes():
         'Desc_RawQuartz_C',
         'Desc_OreUranium_C',
     ]:
-        recipes[f'Desc_MinerMk3{get_bare_item_name(item_name)}_C'] = {
+        recipes[f'Recipe_MinerMk3{get_bare_item_name(item_name)}_C'] = {
             'ingredients': {},
             'products': {item_name: 240},
             'producedIn': 'Desc_MinerMk3_C',
@@ -351,7 +351,7 @@ def define_recipes():
         'Desc_NitrogenGas_C',
         'Desc_LiquidOil_C',
     ]:
-        recipes[f'Desc_ResourceWellPressurizer{get_bare_item_name(item_name)}_C'] = {
+        recipes[f'Recipe_ResourceWellPressurizer{get_bare_item_name(item_name)}_C'] = {
             'ingredients': {},
             'products': {item_name: 60},
             'producedIn': 'Desc_ResourceWellPressurizer_C',

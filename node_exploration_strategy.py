@@ -58,7 +58,7 @@ if __name__ == '__main__':
     # resources_available['Desc_OreCopper_C'] = 120
     
     # # current overhead
-    resources_available = parse_items_from_csv.parse_items('Autonation4.0.csv')
+    resources_available = parse_items_from_csv.parse_items('data/Autonation4.0.csv')
     resources_available = {
         item_name: amount
         for item_name, amount in resources_available.items()

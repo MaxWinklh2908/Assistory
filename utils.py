@@ -36,3 +36,16 @@ def parse_items(file_path: str):
 def write_recipes(recipes: dict, file_path: str):
     with open(file_path, 'w') as fp:
         json.dump(recipes, fp)
+
+
+def read_resource_nodes(file_path: str) -> dict:
+    with open(file_path, 'r') as fp:
+        data = json.load(fp)
+
+    for node_name in data:
+        if node_name not in game.NODES_AVAILABLE:
+            print('ERROR Unknown resource node:', node_name)
+            result = False
+        if data[node_name] < 0:
+            raise ValueError('Resource node availability can not be negative')
+    return data

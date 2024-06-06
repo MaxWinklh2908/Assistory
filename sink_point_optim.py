@@ -10,6 +10,7 @@ Value concept of items:
 - Alternative recipes: Not clear
 
 """
+from argparse import ArgumentParser
 
 from ortools.linear_solver import pywraplp
 
@@ -335,23 +336,22 @@ class SatisfactoryLP:
             raise RuntimeError("The problem does not have an optimal solution")
         return status
 
-
-if __name__ == '__main__':
+def main(recipe_export_path: str):
     ################# items available ######################
     items_available = dict()
 
-    # custom
+    # # custom
     # items_available['Desc_OreIron_C'] = 480
     # items_available['Desc_OreCopper_C'] = 480
     # items_available['Desc_Coal_C'] = 240
     # items_available['Desc_Stone_C'] = 480
     
-    # current production (state: state: CO2-Neutral)
-    items_available = {
-        item_name: amount
-        for item_name, amount
-        in utils.parse_items('Autonation4.0.csv').items()
-    }
+    # # current production (state: state: CO2-Neutral)
+    # items_available = {
+    #     item_name: amount
+    #     for item_name, amount
+    #     in utils.parse_items('data/Autonation4.0.csv').items()
+    # }
 
     ################# recipes ######################
     recipes=game.RECIPES
@@ -367,18 +367,8 @@ if __name__ == '__main__':
     
     # Current coverage (state: CO2-Neutral)
     resource_nodes_available=dict()
-    resource_nodes_available['Recipe_MinerMk3Stone_C'] =                       game.NODES_AVAILABLE['Recipe_MinerMk3Stone_C'] - (0 * 0.5   + 4   + 1 * 2)
-    resource_nodes_available['Recipe_MinerMk3OreIron_C'] =                     game.NODES_AVAILABLE['Recipe_MinerMk3OreIron_C'] - (5 * 0.5   + 7   + 8 * 2)
-    resource_nodes_available['Recipe_MinerMk3OreCopper_C'] =                   game.NODES_AVAILABLE['Recipe_MinerMk3OreCopper_C'] - (2 * 0.5   + 5  + 2 * 2)
-    resource_nodes_available['Recipe_MinerMk3OreGold_C'] =                     game.NODES_AVAILABLE['Recipe_MinerMk3OreGold_C'] - (0 * 0.5   + 2   + 1 * 2)
-    resource_nodes_available['Recipe_MinerMk3Coal_C'] =                        game.NODES_AVAILABLE['Recipe_MinerMk3Coal_C'] - (0 * 0.5   + 4  + 3 * 2)
-    resource_nodes_available['Recipe_MinerMk3Sulfur_C'] =                      game.NODES_AVAILABLE['Recipe_MinerMk3Sulfur_C'] - (0 * 0.5   + 3   + 1 * 2)
-    resource_nodes_available['Recipe_MinerMk3OreBauxite_C'] =                  game.NODES_AVAILABLE['Recipe_MinerMk3OreBauxite_C'] - (5 * 0.5   + 2   + 2 * 2)
-    resource_nodes_available['Recipe_MinerMk3RawQuartz_C'] =                   game.NODES_AVAILABLE['Recipe_MinerMk3RawQuartz_C'] - (0 * 0.5   + 3  + 0 * 2)
-    resource_nodes_available['Recipe_MinerMk3OreUranium_C'] =                  game.NODES_AVAILABLE['Recipe_MinerMk3OreUranium_C'] - (0 * 0.5   + 2   + 0 * 2)
-    resource_nodes_available['Recipe_OilExtractorLiquidOil_C'] =               game.NODES_AVAILABLE['Recipe_OilExtractorLiquidOil_C'] - (1 * 0.5  + 4  + 4 * 2)
-    resource_nodes_available['Recipe_ResourceWellPressurizerNitrogenGas_C'] =  game.NODES_AVAILABLE['Recipe_ResourceWellPressurizerNitrogenGas_C'] - (1 * 0.5   + 0   + 9 * 2)
-    resource_nodes_available['Recipe_ResourceWellPressurizerLiquidOil_C'] =    game.NODES_AVAILABLE['Recipe_ResourceWellPressurizerLiquidOil_C'] - (0 * 0.5   + 0   + 0 * 2)
+    # utils.read_resource_nodes('data/available_nodes_autonation.json')
+    utils.read_resource_nodes('data/available_nodes_black_lake_oil.json')
 
 
     problem = SatisfactoryLP(recipes=recipes,
@@ -412,3 +402,10 @@ if __name__ == '__main__':
 
     utils.write_recipes(problem.get_recipes_used(), 'construction_plan.json')
     
+
+if __name__ == '__main__':
+    parser = ArgumentParser()
+    parser.add_argument('recipe_export_path', help='')
+    args = parser.parse_args()
+
+    main(args.recipe_export_path)

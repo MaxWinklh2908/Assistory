@@ -267,7 +267,13 @@ def get_non_producable():
     items_produced = set()
     for data in RECIPES.values():
         items_produced = items_produced.union(data['products'].keys())
-    return set(ITEMS.keys()) - items_produced
+    non_producable_items = set(ITEMS.keys()) - items_produced
+    non_producable_items.add('Desc_LiquidBiofuel_C')
+    non_producable_items.add('Desc_Biofuel_C')
+    non_producable_items.add('Desc_PackagedBiofuel_C')
+    non_producable_items.add('Desc_GenericBiomass_C')
+    non_producable_items.add('Desc_ColorCartridge_C')
+    return non_producable_items
 NON_PRODUCABLE_ITEMS = get_non_producable()
 
 

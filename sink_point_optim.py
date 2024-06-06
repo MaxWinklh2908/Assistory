@@ -331,10 +331,7 @@ class SatisfactoryLP:
         return result
     
     def optimize(self):
-        status = self.solver.Solve()
-        if status != pywraplp.Solver.OPTIMAL:
-            raise RuntimeError("The problem does not have an optimal solution")
-        return status
+        return self.solver.Solve()
 
 def main(recipe_export_path: str):
     ################# items available ######################
@@ -396,6 +393,9 @@ def main(recipe_export_path: str):
     print("Number of constraints =", problem.solver.NumConstraints())
 
     status = problem.optimize()
+    if status != pywraplp.Solver.OPTIMAL:
+        print("The problem does not have an optimal solution:", status)
+        exit(1)
 
     problem.report()
     # problem.report_shadow_prices()

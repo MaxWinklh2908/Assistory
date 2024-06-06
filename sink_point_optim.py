@@ -89,7 +89,7 @@ class SatisfactoryLP:
             if item_data['sinkPoints'] == 0:
                 self.solver.Add(self.var_item_sold[item_name] == 0)
 
-    def define_production_rates(self, production_rate: dict):
+    def define_sell_rates(self, production_rate: dict):
         """
         Achieve a certain minimum production rate of items
 
@@ -315,12 +315,18 @@ if __name__ == '__main__':
                              resource_nodes_available=resource_nodes_available,
                              free_power=10000)
 
-    # problem.define_production_rates({'Desc_OreIron_C': 1})
-    # problem.define_production_rates({
-    #     item_name: 1 for item_name in game.ITEMS
-    #     if not item_name in game.NON_PRODUCABLE_ITEMS
-    #     and not item_name in game.NON_SELLABLE_ITEMS
-    # })
+    ################# minimal production rates ######################
+
+    # problem.define_sell_rates({'Desc_OreIron_C': 1})
+    problem.define_sell_rates({
+        item_name: 1 for item_name in game.ITEMS
+        if not item_name in game.NON_PRODUCABLE_ITEMS
+        and not item_name in game.NON_SELLABLE_ITEMS
+        and not item_name in game.RADIOACTIVE_ITEMS
+        and not item_name in game.LIQUID_ITEMS
+        and not item_name in game.ITEMS_FROM_MINING
+        and not 'Ingot' in item_name
+    })
 
     problem.set_objective_max_sink_points()
     # problem.set_objective_min_resources_spent()

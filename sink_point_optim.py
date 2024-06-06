@@ -121,7 +121,12 @@ class SatisfactoryLP:
         if any(item_name in game.NON_SELLABLE_ITEMS
                for item_name, rate in production_rate.items()
                if rate > 0):
-            raise ValueError('Can not require production of non sellable item: ' + item_name)
+            raise ValueError('Can not require selling of: ' + item_name)
+
+        if any(item_name in game.NON_PRODUCABLE_ITEMS
+               for item_name, rate in production_rate.items()
+               if rate - self.items_available.get(item_name, 0) > 0):
+            raise ValueError('Can not require production of: ' + item_name)
 
         for item_name in game.ITEMS:
             available = self.items_available.get(item_name, 0)
@@ -306,8 +311,6 @@ class SatisfactoryLP:
                          resource_nodes_available: dict) -> bool:
         result = True
         for item_name in resources_available:
-            if item_name in game.NON_PRODUCABLE_ITEMS:
-                print('WARNING resource nodes already limited: ', item_name)
             if not item_name in game.ITEMS:
                 print('ERROR Unknown item:', item_name)
                 result = False

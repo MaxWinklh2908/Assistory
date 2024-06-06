@@ -10,6 +10,38 @@ def get_bare_item_name(name: str) -> str:
     name = '_'.join(name.split('_')[1:])
     return name
 
+
+def define_production_facilities():
+    facilities = {
+        building_name: -values['metadata']['powerConsumption']
+        for building_name, values in data['buildings'].items()
+        if 'SC_Smelters_C' in values['categories'] or
+        'SC_Manufacturers_C' in values['categories']
+    }
+
+    # Biomass burner is not automatable
+    facilities['Desc_GeneratorCoal_C'] = 75
+    facilities['Desc_GeneratorFuel_C'] = 150
+    # Geisirs are implemented as free energy
+    facilities['Desc_GeneratorNuclear_C'] = 2500
+
+    facilities['Desc_MinerMk1_C'] = -5
+    facilities['Desc_MinerMk2_C'] = -12
+    facilities['Desc_MinerMk3_C'] = -30
+    facilities['Desc_WaterExtractor_C'] = -20
+    facilities['Desc_OilExtractor_C'] = -40
+    # TODO: correctly estimate pressurizer power
+    facilities['Desc_ResourceWellPressurizer_C'] = -10
+    
+    return facilities
+# Mapping of production facility to power production/consumption
+PRODUCTION_FACILITIES = define_production_facilities()
+# Note: over/underclocking would make the problem non-linear
+
+# Geothermal power production is not consuming resources, therefore free
+FREE_POWER = 3*100 + 9*200 + 6*400
+
+
 def define_items() -> dict:
     item_names = {
     "Desc_AluminaSolution_C",
@@ -253,8 +285,10 @@ def define_recipes():
         }
     recipes = dict()
     for recipe_name, v in data['recipes'].items():
-        if len(v['producedIn']) != 1:
-            # print('WARNING Skip handcrafted:', recipe_name)
+        
+        if not set(v['producedIn']).intersection(set(PRODUCTION_FACILITIES)):
+            if v['inWorkshop'] or v['inHand']:
+                print('WARNING Skip handcrafted:', recipe_name)
             continue
         ingredients = {
             item_name: amount
@@ -277,13 +311,13 @@ def define_recipes():
         }
     # Nuclear production chain
     recipes['Recipe_GeneratorNuclearUranium_C'] = {
-        'ingredients': {'Desc_NuclearFuelRod_C': 1},
+        'ingredients': {'Desc_NuclearFuelRod_C': 1, 'Desc_Water_C': 240*5},
         'products': {'Desc_NuclearWaste_C': 50},
         'producedIn': 'Desc_GeneratorNuclear_C',
         'time': 300,
     }
     recipes['Recipe_GeneratorNuclearPlutonium_C'] = {
-        'ingredients': {'Desc_PlutoniumFuelRod_C': 0.1},
+        'ingredients': {'Desc_PlutoniumFuelRod_C': 1, 'Desc_Water_C': 240*10},
         'products': {'Desc_PlutoniumWaste_C': 10},
         'producedIn': 'Desc_GeneratorNuclear_C',
         'time': 600,
@@ -291,21 +325,21 @@ def define_recipes():
     # Power from coal
     recipes['Recipe_GeneratorCoalCoal_C'] = {
         
-        'ingredients': {'Desc_Coal_C': 15},
+        'ingredients': {'Desc_Coal_C': 15, 'Desc_Water_C': 45},
         'products': {},
         'producedIn': 'Desc_GeneratorCoal_C',
         'time': 60,
     }
     recipes['Recipe_GeneratorCoalCompactedCoal_C'] = {
         
-        'ingredients': {'Desc_CompactedCoal_C': 7.142857},
+        'ingredients': {'Desc_CompactedCoal_C': 7.142857, 'Desc_Water_C': 45},
         'products': {},
         'producedIn': 'Desc_GeneratorCoal_C',
         'time': 60,
     }
     recipes['Recipe_GeneratorCoalPetroleumCoke_C'] = {
         
-        'ingredients': {'Desc_PetroleumCoke_C': 25},
+        'ingredients': {'Desc_PetroleumCoke_C': 25, 'Desc_Water_C': 45},
         'products': {},
         'producedIn': 'Desc_GeneratorCoal_C',
         'time': 60,
@@ -399,33 +433,3 @@ def define_item_to_recipe_mappings():
             produced_by[item_name].append(recipe_name)
     return consumed_by, produced_by
 consumed_by, produced_by = define_item_to_recipe_mappings()
-
-def define_production_facilities():
-    facilities = {
-        building_name: -values['metadata']['powerConsumption']
-        for building_name, values in data['buildings'].items()
-        if 'SC_Smelters_C' in values['categories'] or
-        'SC_Manufacturers_C' in values['categories']
-    }
-
-    # Biomass burner is not automatable
-    facilities['Desc_GeneratorCoal_C'] = 75
-    facilities['Desc_GeneratorFuel_C'] = 150
-    # Geisirs are implemented as free energy
-    facilities['Desc_GeneratorNuclear_C'] = 2500
-
-    facilities['Desc_MinerMk1_C'] = -5
-    facilities['Desc_MinerMk2_C'] = -12
-    facilities['Desc_MinerMk3_C'] = -30
-    facilities['Desc_WaterExtractor_C'] = -20
-    facilities['Desc_OilExtractor_C'] = -40
-    # TODO: correctly estimate pressurizer power
-    facilities['Desc_ResourceWellPressurizer_C'] = -10
-    
-    return facilities
-# Mapping of production facility to power production/consumption
-PRODUCTION_FACILITIES = define_production_facilities()
-# Note: over/underclocking would make the problem non-linear
-
-# Geothermal power production is not consuming resources, therefore free
-FREE_POWER = 3*100 + 9*200 + 6*400

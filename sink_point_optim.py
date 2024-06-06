@@ -352,7 +352,6 @@ if __name__ == '__main__':
         item_name: amount
         for item_name, amount
         in utils.parse_items('Autonation4.0.csv').items()
-        if not 'Packaged' in item_name and not 'Water' in item_name
     }
 
     ################# recipes ######################

@@ -175,13 +175,45 @@ def define_items():
     }
 ITEMS = define_items()
 
-def define_non_sellable_items():
-    return {
-        item_name: item_data
+def define_non_sellable_items() -> list:
+    return [
+        item_name
         for item_name, item_data in ITEMS.items()
         if item_data['sinkPoints'] == 0
-    }
+    ]
 NON_SELLABLE_ITEMS = define_non_sellable_items()
+
+def define_radioactive_items() -> list:
+    return [
+        item_name
+        for item_name, item_data in ITEMS.items()
+        if item_data['radioactiveDecay'] > 0
+    ]
+RADIOACTIVE_ITEMS = define_radioactive_items()
+
+def define_liquid_items() -> list:
+    return [
+        item_name
+        for item_name, item_data in ITEMS.items()
+        if item_data['liquid']
+    ]
+LIQUID_ITEMS = define_liquid_items()
+
+# mining, resource wells and oil and water extractor
+ITEMS_FROM_MINING = [
+    'Desc_LiquidOil_C',
+    'Desc_Stone_C',
+    'Desc_OreIron_C',
+    'Desc_OreCopper_C',
+    'Desc_OreGold_C',
+    'Desc_Coal_C',
+    'Desc_Sulfur_C',
+    'Desc_OreBauxite_C',
+    'Desc_RawQuartz_C',
+    'Desc_OreUranium_C',
+    'Desc_NitrogenGas_C',
+    'Desc_LiquidOil_C',
+]
 
 # # resources that are available by building extractors
 # RESOURCES_AVAILABLE = dict()

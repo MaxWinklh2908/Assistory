@@ -38,13 +38,16 @@ class SatisfactoryLP:
             RuntimeError: Invalid parameters given
         """
 
-        if not self.check_parameters(items_available, resource_nodes_available):
+        if not self._check_parameters(items_available, resource_nodes_available):
             exit(1)
 
-        self._objective_specific_report = lambda: None
-
+        self._recipes = recipes
         self.items_available = items_available
+        self.resource_nodes_available = resource_nodes_available
         self.free_power = free_power
+
+        self._objective_specific_report = lambda: None
+        self.producable_items = None
 
         self.solver = pywraplp.Solver.CreateSolver("GLOP")
         if not self.solver:
@@ -88,8 +91,46 @@ class SatisfactoryLP:
                 
         self._define_flow_constraints()
         self._define_power_contraints()
-        self._define_non_sellable_items()
-        self._define_resource_node_constraints(resource_nodes_available)
+        # self._define_non_sellable_items() # why is that needed?
+        self._define_resource_node_constraints()
+
+    def _check_parameters(self, resources_available: dict,
+                         resource_nodes_available: dict) -> bool:
+        result = True
+        for item_name in resources_available:
+            if not item_name in game.ITEMS:
+                print('ERROR Unknown item:', item_name)
+                result = False
+            if resources_available[item_name] < 0:
+                raise ValueError('Resource node availability can not be negative')
+        for node_name in resource_nodes_available:
+            if node_name not in game.NODES_AVAILABLE:
+                print('ERROR Unknown resource node:', node_name)
+                result = False
+            if resource_nodes_available[node_name] < 0:
+                raise ValueError('Resource node availability can not be negative')
+        return result
+    
+    def get_recipes_used(self) -> dict:
+        return {
+            recipe_name: self.var_recipes_used[recipe_name].solution_value()
+            for recipe_name in game.RECIPES
+        }
+    
+    def get_producable_items(self) -> set:
+        if self.producable_items is None:
+            self.producable_items = get_producable_items(self._recipes,
+                                                        self.items_available,
+                                                        self.resource_nodes_available)
+        return self.producable_items.copy()
+
+    def optimize(self) -> int:
+        """Find the optimal solution for the problem.
+
+        Returns:
+            int: Solver return code
+        """
+        return self.solver.Solve()
 
     ################################ constraints ##############################
 
@@ -118,15 +159,14 @@ class SatisfactoryLP:
             production_rates (dict): Set constraints to achieve at least these
             production rates of items
         """
-        if any(item_name in game.NON_SELLABLE_ITEMS
-               for item_name, rate in production_rate.items()
-               if rate > 0):
-            raise ValueError('Can not require selling of: ' + item_name)
+        producable_items = self.get_producable_items()
+        for item_name, rate in production_rate.items():
+            if rate > 0 and item_name in game.NON_SELLABLE_ITEMS:
+                raise ValueError('Can not require selling of: ' + item_name)
 
-        if any(item_name in game.NON_PRODUCABLE_ITEMS
-               for item_name, rate in production_rate.items()
-               if rate - self.items_available.get(item_name, 0) > 0):
-            raise ValueError('Can not require production of: ' + item_name)
+            if (rate - self.items_available.get(item_name, 0) > 0
+                    and not item_name in producable_items):
+                raise ValueError('Can not require production of: ' + item_name)
 
         for item_name in game.ITEMS:
             available = self.items_available.get(item_name, 0)
@@ -157,9 +197,9 @@ class SatisfactoryLP:
             'Power_balance'
         )
 
-    def _define_resource_node_constraints(self, resource_nodes_available: dict):
+    def _define_resource_node_constraints(self):
         for resource_node_name in game.NODES_AVAILABLE:
-            amount = resource_nodes_available.get(resource_node_name, 0)
+            amount = self.resource_nodes_available.get(resource_node_name, 0)
             self.solver.Add(self.var_recipes_used[resource_node_name] <= amount,
                             'Nodes_' + resource_node_name)
 
@@ -210,6 +250,15 @@ class SatisfactoryLP:
             cnt_recipes += weight * self.var_recipes_used[recipe_name] 
 
         self.solver.Minimize(cnt_recipes)
+        self._objective_specific_report = self.report_items_produced_to_sell
+
+    def set_objective_max_item_rate(self, item_name: str):
+        """Maximize the sell rate of a single item
+
+        Args:
+            item_name (str): item to maximize production
+        """
+        self.solver.Maximize(self.var_item_sold[item_name])
         self._objective_specific_report = self.report_items_produced_to_sell
 
     ################################### report ###############################
@@ -307,31 +356,37 @@ class SatisfactoryLP:
 
         self._objective_specific_report()
 
-    def get_recipes_used(self) -> dict:
-        return {
-            recipe_name: self.var_recipes_used[recipe_name].solution_value()
-            for recipe_name in game.RECIPES
-        }
-
-    def check_parameters(self, resources_available: dict,
-                         resource_nodes_available: dict) -> bool:
-        result = True
-        for item_name in resources_available:
-            if not item_name in game.ITEMS:
-                print('ERROR Unknown item:', item_name)
-                result = False
-            if resources_available[item_name] < 0:
-                raise ValueError('Resource node availability can not be negative')
-        for node_name in resource_nodes_available:
-            if node_name not in game.NODES_AVAILABLE:
-                print('ERROR Unknown resource node:', node_name)
-                result = False
-            if resource_nodes_available[node_name] < 0:
-                raise ValueError('Resource node availability can not be negative')
-        return result
     
-    def optimize(self):
-        return self.solver.Solve()
+def get_producable_items(
+        recipes: dict=game.RECIPES,
+        items_available: dict=dict(),
+        resource_nodes_available: dict=game.NODES_AVAILABLE) -> set:
+    """Return a all items that can theoretically be produced with the given
+    recipes and available items and resource nodes.
+
+    Args:
+        recipes (dict): Available recipes
+            items_available (dict, optional): Available existing item
+                production (in items/minute). Defaults to game.RECIPES.
+            resource_nodes_available (dict, optional): Available resource nodes
+                where mining recipes can be applied. Defaults to game.NODES_AVAILABLE.NODES_AVAILABLE.
+
+    Returns:
+        set: set of item names
+    """
+    producable_item_names = set()
+    for item_name in game.ITEMS:
+        lp = SatisfactoryLP(recipes, items_available, resource_nodes_available)
+        # Note: calling lp.get_producable_items here would infinitely loop
+        lp.set_objective_max_item_rate(item_name)
+        status = lp.optimize()
+        if status != pywraplp.Solver.OPTIMAL:
+            raise RuntimeError
+        rate = lp.solver.Objective().Value()
+        if rate > 0:
+            producable_item_names.add(item_name)
+    return producable_item_names
+        
 
 def main(recipe_export_path: str):
 
@@ -364,7 +419,6 @@ def main(recipe_export_path: str):
     # resource_nodes_available = game.NODES_AVAILABLE
     
     # Current coverage (state: CO2-Neutral)
-    resource_nodes_available=dict()
     # resource_nodes_available = utils.read_resource_nodes('data/available_nodes_autonation.json')
     resource_nodes_available = utils.read_resource_nodes(
         'data/available_nodes_black_lake_oil.json')
@@ -376,14 +430,13 @@ def main(recipe_export_path: str):
                              resource_nodes_available=resource_nodes_available,
                              free_power=10000)
 
-    ################# minimal production rates ######################
+    ################# constraints ######################
     sell_rates = dict()
 
     # Goal: Produce at least 1 item of every kind (except impractical items)
     # sell_rates = {
-    #     item_name: 1 for item_name in game.ITEMS
-    #     if not item_name in game.NON_PRODUCABLE_ITEMS
-    #     and not item_name in game.NON_SELLABLE_ITEMS
+    #     item_name: 1 for item_name in problem.get_producable_items()
+    #     if not item_name in game.NON_SELLABLE_ITEMS
     #     and not item_name in game.RADIOACTIVE_ITEMS
     #     and not item_name in game.ITEMS_FROM_MINING
     #     and not 'Ingot' in item_name
@@ -399,12 +452,15 @@ def main(recipe_export_path: str):
     
     problem.define_sell_rates(sell_rates)
 
-    ################# objective ######################
+    problem._define_non_sellable_items()
 
+    ################# objective ######################
 
     # problem.set_objective_max_sink_points()
     # problem.set_objective_min_resources_spent(weighted=True)
     problem.set_objective_min_recipes()
+    
+    ################# Solve ######################
 
     print("Number of variables =", problem.solver.NumVariables())
     print("Number of constraints =", problem.solver.NumConstraints())

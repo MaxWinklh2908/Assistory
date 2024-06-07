@@ -101,21 +101,6 @@ ITEMS_FROM_MINING = [
     'Desc_NitrogenGas_C',
 ]
 
-# # resources that are available by building extractors
-# RESOURCES_AVAILABLE = dict()
-# RESOURCES_AVAILABLE['Desc_LiquidOil_C'] =      (240, 8, 120, 12, 60, 10 )
-# RESOURCES_AVAILABLE['Desc_Stone_C'] =          (480, 27, 240, 47, 120,12)
-# RESOURCES_AVAILABLE['Desc_OreIron_C'] =        (480, 46, 240, 41, 120, 33)
-# RESOURCES_AVAILABLE['Desc_OreCopper_C'] =      (480, 12, 240, 28, 120, 9)
-# RESOURCES_AVAILABLE['Desc_OreGold_C'] =        (480, 8, 240, 8, 120, 0)
-# RESOURCES_AVAILABLE['Desc_Coal_C'] =           (480, 14, 240, 29, 120, 6)
-# RESOURCES_AVAILABLE['Desc_Sulfur_C'] =         (480, 3, 240, 7, 120, 1)
-# RESOURCES_AVAILABLE['Desc_OreBauxite_C'] =     (480, 6, 240, 6, 120, 5)
-# RESOURCES_AVAILABLE['Desc_RawQuartz_C'] =      (480, 5, 240, 11, 120, 0)
-# RESOURCES_AVAILABLE['Desc_OreUranium_C'] =     (480, 0, 240, 3, 120,1)
-# RESOURCES_AVAILABLE['Desc_NitrogenGas_C'] =    (30, 2, 60, 7, 120, 36)
-# RESOURCES_AVAILABLE['Desc_LiquidOil_C'] =      (60, 6, 120, 3, 240, 3)
-
 # pure nodes have double rate, impure nodes have half rate
 NODES_AVAILABLE = dict()
 NODES_AVAILABLE['Recipe_MinerMk3Stone_C'] =                       (2 * 27 + 47 + 0.5 * 12)
@@ -209,12 +194,12 @@ def define_recipes():
         'producedIn': 'Desc_GeneratorFuel_C',
         'time': 60,
     }
-    # recipes[f'Recipe_GeneratorFuelLiquidBiofuelFuel_C'] = {
-    #     'ingredients': {'Desc_LiquidBiofuel_C': 12},
-    #     'products': {},
-    #     'producedIn': 'Desc_GeneratorFuel_C',
-    #     'time': 60,
-    # }
+    recipes[f'Recipe_GeneratorFuelLiquidBiofuelFuel_C'] = {
+        'ingredients': {'Desc_LiquidBiofuel_C': 12},
+        'products': {},
+        'producedIn': 'Desc_GeneratorFuel_C',
+        'time': 60,
+    }
     recipes[f'Recipe_GeneratorFuelLiquidTurboFuel_C'] = {
         'ingredients': {'Desc_LiquidTurboFuel_C': 4.5},
         'products': {},
@@ -268,23 +253,6 @@ def define_recipes():
     return recipes
 # recipies define ingredients, products, production facility and production time
 RECIPES = define_recipes()
-# TODO: Flip-Flop remove items and recipes that can't be automatically produced
-
-
-# items that can not be produced by recipes (in machine)
-def get_non_producable():
-    items_produced = set()
-    for data in RECIPES.values():
-        items_produced = items_produced.union(data['products'].keys())
-    non_producable_items = set(ITEMS.keys()) - items_produced
-    non_producable_items.add('Desc_LiquidBiofuel_C')
-    non_producable_items.add('Desc_Biofuel_C')
-    non_producable_items.add('Desc_PackagedBiofuel_C')
-    non_producable_items.add('Desc_GenericBiomass_C')
-    non_producable_items.add('Desc_ColorCartridge_C')
-    return non_producable_items
-NON_PRODUCABLE_ITEMS = get_non_producable()
-
 
 # helper structure to find recipes
 def define_item_to_recipe_mappings():

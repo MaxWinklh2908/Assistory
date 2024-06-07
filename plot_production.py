@@ -64,14 +64,16 @@ def main(plan: dict):
     pos = nx.kamada_kawai_layout(G)
     pos = nx.spring_layout(G, pos=pos, iterations=10)
     nx.draw_networkx_nodes(G, nodelist=manufacturing_nodes, pos=pos, 
-                           node_color='tab:blue')
+                           node_color='tab:blue', label='Manufacturing')
     nx.draw_networkx_nodes(G, nodelist=mining_nodes, pos=pos, 
-                           node_color='tab:purple')
+                           node_color='tab:purple', label='Mining')
     nx.draw_networkx_nodes(G, nodelist=item_nodes, pos=pos, 
-                           node_color='tab:orange')
+                           node_color='tab:orange', label='Item')
     nx.draw_networkx_labels(G, pos, font_size=8)
     nx.draw_networkx_edges(G, pos)
     nx.draw_networkx_edge_labels(G, pos, labels, font_size=6)
+    plt.legend()
+    plt.tight_layout()
     plt.show()
 
 

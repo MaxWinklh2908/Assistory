@@ -426,11 +426,11 @@ def main(recipe_export_path: str):
     # items_available['Desc_Coal_C'] = 240
     # items_available['Desc_Stone_C'] = 480
     
-    # current production (state: state: CO2-Neutral)
+    # current production (state: rework black lake oil)
     # items_available = {
     #     item_name: amount
     #     for item_name, amount
-    #     in utils.parse_items('data/Autonation4.0.csv').items()
+    #     in utils.parse_items('data/Autonation4.0_production_state.csv').items()
     # }
 
     ################# resource nodes available ######################
@@ -477,6 +477,7 @@ def main(recipe_export_path: str):
     # problem.set_objective_max_sink_points()
     # problem.set_objective_min_resources_spent(weighted=True)
     problem.set_objective_min_recipes()
+    # problem.set_objective_max_item_rate('Desc_CircuitBoard_C')
     
     ################# Solve ######################
 
@@ -491,7 +492,10 @@ def main(recipe_export_path: str):
     problem.report()
     # problem.report_shadow_prices()
 
-    utils.write_recipes(problem.get_recipes_used(), recipe_export_path)
+    utils.write_result(problem.get_recipes_used(),
+                       problem.get_items_sold(),
+                       items_available,
+                       recipe_export_path)
     
 
 if __name__ == '__main__':

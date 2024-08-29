@@ -33,9 +33,21 @@ def parse_items(file_path: str):
     return resources_available
 
 
-def write_recipes(recipes: dict, file_path: str):
+def write_result(recipes: dict, items_sold: dict, available_items: dict,
+                 file_path: str):
+    data = {
+        'recipes': recipes,
+        'items_sold': items_sold,
+        'items_available': {k:v for k,v in available_items.items() if v > 0 },
+    }
     with open(file_path, 'w') as fp:
-        json.dump(recipes, fp)
+        json.dump(data, fp)
+
+
+def read_result(file_path) -> tuple:
+    with open(file_path, 'r') as fp:
+        data = json.load(fp)
+    return data['recipes'], data['items_sold'], data['items_available']
 
 
 def read_resource_nodes(file_path: str) -> dict:

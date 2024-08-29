@@ -222,6 +222,7 @@ def define_recipes():
         'time': 60,
     }
     # Add miners
+    # TODO: How to handle Mk1 and Mk2?
     for item_name in [
         'Desc_Stone_C',
         'Desc_OreIron_C',

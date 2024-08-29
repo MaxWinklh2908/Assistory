@@ -115,6 +115,14 @@ class SatisfactoryLP:
         return {
             recipe_name: self.var_recipes_used[recipe_name].solution_value()
             for recipe_name in game.RECIPES
+            if self.var_recipes_used[recipe_name].solution_value() > 0
+        }
+    
+    def get_items_sold(self) -> dict:
+        return {
+            item_name: self.var_item_sold[item_name].solution_value()
+            for item_name in game.ITEMS
+            if self.var_item_sold[item_name].solution_value() > 0
         }
     
     def get_producable_items(self) -> set:
@@ -149,6 +157,16 @@ class SatisfactoryLP:
         for item_name in game.NON_SELLABLE_ITEMS:
             self.solver.Add(self.var_item_sold[item_name] == 0,
                             f'Non-sellable_{item_name}')
+            
+    def define_sell_rate_ratio(self, item_rate_ratio: dict):
+        """Specify the fraction of each item to the overall item rate.
+
+        Args:
+            item_rate_ratio (dict): Mapping of item names to a fraction
+            of 1. all values must sum up to 1.
+        """
+        # TODO: Together with maxi. item rate is alternative to iterative fastest production
+        raise NotImplementedError
 
     def define_sell_rates(self, production_rate: dict):
         """

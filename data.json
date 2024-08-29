@@ -1907,16 +1907,16 @@
 			"name": "Alternate: Polyester Fabric",
 			"className": "Recipe_Alternate_PolyesterFabric_C",
 			"alternate": true,
-			"time": 12,
+			"time": 2,
 			"manualTimeMultiplier": 1,
 			"ingredients": [
 				{
 					"item": "Desc_PolymerResin_C",
-					"amount": 16
+					"amount": 1
 				},
 				{
 					"item": "Desc_Water_C",
-					"amount": 10
+					"amount": 1
 				}
 			],
 			"forBuilding": false,

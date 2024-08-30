@@ -192,22 +192,22 @@ class UncompressedReader(save_reader.SaveReader):
         body_size_uncompressed = self.read_int(); print('body_size_uncompressed:', body_size_uncompressed)
         self.idx += 4 # padding?
 
-        print('Read level headers')
+        print('Read levels...')
         level_count = self.read_int(); print('sublevel_count:', level_count)
         if level_count != 6:
             raise ValueError('Unexpected number of levels')
-        non_level = self.read_sublevels(); print(len(non_level['sublevels']))
-        main_grid = self.read_sublevels(); print(len(main_grid['sublevels']))
-        landscape_grid = self.read_sublevels(); print(len(landscape_grid['sublevels']))
-        exploration_grid = self.read_sublevels(); print(len(exploration_grid['sublevels']))
-        foliage_grid = self.read_sublevels(); print(len(foliage_grid['sublevels']))
-        HLOD_grid = self.read_sublevels(); print(len(HLOD_grid['sublevels']))
+        non_level = self.read_sublevels()
+        main_grid = self.read_sublevels()
+        landscape_grid = self.read_sublevels()
+        exploration_grid = self.read_sublevels()
+        foliage_grid = self.read_sublevels()
+        HLOD_grid = self.read_sublevels()
 
         print('Read levels')
         self.read_levels()
         
-        print('Read object headers')
-        n_bytes_headers = self.read_int(); print('n_bytes:', n_bytes_headers)
+        print('Read object headers...')
+        n_bytes_headers = self.read_int()
         self.idx += 4 # padding?
         original_idx = self.idx
         object_headers = self.read_object_headers()
@@ -215,7 +215,7 @@ class UncompressedReader(save_reader.SaveReader):
         if original_idx + n_bytes_headers != self.idx:
             raise ValueError(f'{original_idx} + {n_bytes_headers} != {self.idx}')
 
-        print('Read objects')
+        print('Read objects...')
         n_bytes_objects = self.read_int() # after padding
         self.idx += 4 # padding?
         original_idx = self.idx

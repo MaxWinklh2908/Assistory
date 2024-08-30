@@ -6,6 +6,23 @@ class SaveReader:
     def __init__(self, data: bytes, idx: int=0):
         self.data = data
         self.idx = idx
+        self._property_parsers = {
+            'FloatProperty': self._read_float_property,
+            'IntProperty': self._read_int_property,
+            'ObjectProperty': self._read_object_property,
+            'BoolProperty': self._read_bool_property,
+            'StructProperty': self._read_struct_property,
+            'ArrayProperty': self._read_array_property,
+            'UInt32Property': self._read_uint32_property,
+            'MapProperty': self._read_map_property,
+            'ByteProperty': self._read_byte_property,
+            'StrProperty': self._read_str_property,
+            'NameProperty': self._read_str_property,
+            'EnumProperty': self._read_enum_property,
+            'Int64Property': self._read_int64_property,
+            'Int8Property': self._read_int8_property,
+            'TextProperty': self._read_text_property,
+    }
 
     def read_string(self) -> str:
         length = self.read_int() # Including terminating character
@@ -18,17 +35,17 @@ class SaveReader:
         self.idx = idx_string_term + 1
         return text
 
-    def read_int(self, size=4) -> int:
+    def read_int(self, size: int=4) -> int:
         val = int.from_bytes(self.data[self.idx: self.idx + size], 'little')
         self.idx += size
         return val
 
-    def read_byte(self) -> int:
-        val = self.data[self.idx]
-        self.idx += 1
+    def read_bytes(self, size: int) -> bytes:
+        val = self.data[self.idx: self.idx + size]
+        self.idx += size
         return val
 
-    def read_hex(self, size) -> str:
+    def read_hex(self, size: int) -> str:
         text = self.data[self.idx: self.idx + size].hex()
         self.idx += size
         return text
@@ -38,7 +55,6 @@ class SaveReader:
         self.idx += 4
         return val
 
-    
     def read_property(self) -> dict:
         val = dict()
         val['name'] = self.read_string()
@@ -47,38 +63,9 @@ class SaveReader:
         if val['name'] == 'None':
             return val
         val['property_type'] = self.read_string()
-        if val['property_type'] == 'FloatProperty':
-            val.update(self._read_float_property())
-        elif val['property_type'] == 'IntProperty':
-            val.update(self._read_int_property())
-        elif val['property_type'] == 'ObjectProperty':
-            val.update(self._read_object_property())
-        elif val['property_type'] == 'BoolProperty':
-            val.update(self._read_bool_property())
-        elif val['property_type'] == 'StructProperty':
-            val.update(self._read_struct_property())
-        elif val['property_type'] == 'ArrayProperty':
-            val.update(self._read_array_property())
-        elif val['property_type'] == 'UInt32Property':
-            val.update(self._read_uint32_property())
-        elif val['property_type'] == 'MapProperty':
-            val.update(self._read_map_property())
-        elif val['property_type'] == 'ByteProperty':
-            val.update(self._read_byte_property())
-        elif val['property_type'] == 'StrProperty':
-            val.update(self._read_str_property())
-        elif val['property_type'] == 'NameProperty':
-            val.update(self._read_str_property())
-        elif val['property_type'] == 'EnumProperty':
-            val.update(self._read_enum_property())
-        elif val['property_type'] == 'Int64Property':
-            val.update(self._read_int64_property())
-        elif val['property_type'] == 'Int8Property':
-            val.update(self._read_int8_property())
-        elif val['property_type'] == 'TextProperty':
-            val.update(self._read_text_property())
-        else:
+        if not val['property_type'] in self._property_parsers:
             raise ValueError('Unknown property type: ' + val['property_type'])
+        val.update(self._property_parsers[val['property_type']]())
         return val
 
     def _read_float_property(self) -> dict:
@@ -104,7 +91,7 @@ class SaveReader:
     def _read_bool_property(self) -> dict:
         padding = self.read_int()
         index = self.read_int()
-        val = bool(self.read_byte())
+        val = bool(self.read_bytes(size=1))
         self.idx += 1 # padding
         return {'value': val}
 
@@ -162,8 +149,7 @@ class SaveReader:
         index = self.read_int()
         val['value_type'] = self.read_string()
         self.idx += 1 # padding
-        val['value'] = self.data[self.idx: self.idx + n_bytes]
-        self.idx += n_bytes
+        val['value'] = self.read_bytes(size=n_bytes)
         return val
 
     def _read_str_property(self) -> dict:
@@ -214,7 +200,7 @@ class SaveReader:
         original_idx = self.idx
         val = dict()
         val['flags'] = self.read_int() # semantic unclear
-        val['history_type'] = self.read_byte() # semantic unclear
+        val['history_type'] = self.read_bytes(size=1) # semantic unclear
         val['culture_invariant'] = self.read_int() # semantic unclear
         val['value'] = self.read_string()
         if original_idx + n_bytes != self.idx:

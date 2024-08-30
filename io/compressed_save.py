@@ -34,7 +34,7 @@ class CompressedReader(save_reader.SaveReader):
                 raise RuntimeError('Unexpected UE package_signature')
             archive_header = self.read_hex(4); print('archive_header:', archive_header) # 0x00000000: v1, 0x22222222: v2
             max_chunk_size = self.read_int(8); print('max_chunk_size:', max_chunk_size)
-            compression_algorithm = self.read_byte(); print('compression_algorithm:', compression_algorithm) # 3: zlib
+            compression_algorithm = self.read_bytes(size=1); print('compression_algorithm:', compression_algorithm) # 3: zlib
 
             compressed_size = self.read_int(8); print('compressed_size:', compressed_size) # number of bytes
             uncompressed_size = self.read_int(8); print('uncompressed_size:', uncompressed_size) # number of bytes

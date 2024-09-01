@@ -191,8 +191,9 @@ class UncompressedReader(save_reader.SaveReader):
         return levels
 
     def read(self):
-        body_size_uncompressed = self.read_int(); print('body_size_uncompressed:', body_size_uncompressed)
+        n_bytes_body = self.read_int() # after padding
         self.idx += 4 # padding?
+        original_idx_body = self.idx
 
         print(f'[{self.idx}] Read levels...')
         level_count = self.read_int(); print('sublevel_count:', level_count)
@@ -228,7 +229,8 @@ class UncompressedReader(save_reader.SaveReader):
         if original_idx + n_bytes_objects != self.idx:
             raise ValueError(f'{original_idx} + {n_bytes_objects} != {self.idx}')
 
-        self.idx += 4 # padding?
+        self.idx = original_idx_body + n_bytes_body # apply final padding
+
         if len(self.data) != self.idx:
             raise ValueError('Did not reach the end successfully')
 

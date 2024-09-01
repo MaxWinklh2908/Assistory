@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from typing import List
 
 import save_reader
 
@@ -75,7 +76,7 @@ class UncompressedReader(save_reader.SaveReader):
         # object_name = self.read_string()
         return val
 
-    def read_object_headers(self) -> list:
+    def read_object_headers(self) -> List[dict]:
         n_headers = self.read_int()
         object_headers = []
         for _ in range(n_headers):
@@ -113,8 +114,9 @@ class UncompressedReader(save_reader.SaveReader):
         val = dict()
         original_idx = self.idx
         n_bytes = self.read_int() # including trailing bytes
-        val['components'] = self.read_object_reference()
-        val['add_components'] = self.read_object_references()
+        val['level_name'] = self.read_string()
+        val['path_name'] = self.read_string()
+        val['components'] = self.read_object_references()
         val['properties'] = self.read_properties()
         # apply trailing bytes
         if original_idx + n_bytes > self.idx:
@@ -180,7 +182,7 @@ class UncompressedReader(save_reader.SaveReader):
 
         return val
 
-    def read_levels(self) -> list:
+    def read_levels(self) -> List[dict]:
         n_levels = self.read_int()
         levels = []
         for i in range(n_levels):
@@ -210,7 +212,7 @@ class UncompressedReader(save_reader.SaveReader):
         n_bytes_headers = self.read_int()
         self.idx += 4 # padding?
         original_idx = self.idx
-        object_headers = self.read_object_headers()
+        objects = self.read_object_headers()
         self.idx += 4 # padding?
         if original_idx + n_bytes_headers != self.idx:
             raise ValueError(f'{original_idx} + {n_bytes_headers} != {self.idx}')
@@ -219,10 +221,9 @@ class UncompressedReader(save_reader.SaveReader):
         n_bytes_objects = self.read_int() # after padding
         self.idx += 4 # padding?
         original_idx = self.idx
-        objects = []
-        for obj_header in object_headers:
-            objects.append(self.read_object(obj_header['object_type']))
-        objects = objects
+        for obj_header in objects:
+            object_type = obj_header['object_type']
+            obj_header.update(self.read_object(object_type))
         self.idx += 4 # padding?
         if original_idx + n_bytes_objects != self.idx:
             raise ValueError(f'{original_idx} + {n_bytes_objects} != {self.idx}')
@@ -231,7 +232,7 @@ class UncompressedReader(save_reader.SaveReader):
         if len(self.data) != self.idx:
             raise ValueError('Did not reach the end successfully')
 
-        return object_headers, objects
+        return objects
 
 
 if __name__ == '__main__':

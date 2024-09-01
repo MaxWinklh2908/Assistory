@@ -102,7 +102,7 @@ class UncompressedReader(save_reader.SaveReader):
         d = self.read_int()
         e = self.read_int()
         val['components'] = self.read_object_references()
-        val['properties'] = self.read_property_list()
+        val['properties'] = self.read_properties()
         # apply trailing bytes
         if original_idx + n_bytes > self.idx:
             self.idx = original_idx + n_bytes
@@ -115,7 +115,7 @@ class UncompressedReader(save_reader.SaveReader):
         n_bytes = self.read_int() # including trailing bytes
         val['components'] = self.read_object_reference()
         val['add_components'] = self.read_object_references()
-        val['properties'] = self.read_property_list()
+        val['properties'] = self.read_properties()
         # apply trailing bytes
         if original_idx + n_bytes > self.idx:
             self.idx = original_idx + n_bytes
@@ -125,7 +125,7 @@ class UncompressedReader(save_reader.SaveReader):
         val = dict()
         original_idx = self.idx
         n_bytes = self.read_int()
-        val['properties'] = self.read_property_list()
+        val['properties'] = self.read_properties()
         # apply trailing bytes
         if original_idx + n_bytes > self.idx:
             self.idx = original_idx + n_bytes
@@ -192,7 +192,7 @@ class UncompressedReader(save_reader.SaveReader):
         body_size_uncompressed = self.read_int(); print('body_size_uncompressed:', body_size_uncompressed)
         self.idx += 4 # padding?
 
-        print('Read levels...')
+        print(f'[{self.idx}] Read levels...')
         level_count = self.read_int(); print('sublevel_count:', level_count)
         if level_count != 6:
             raise ValueError('Unexpected number of levels')
@@ -203,10 +203,10 @@ class UncompressedReader(save_reader.SaveReader):
         foliage_grid = self.read_sublevels()
         HLOD_grid = self.read_sublevels()
 
-        print('Read levels')
+        print(f'[{self.idx}] Read levels')
         self.read_levels()
         
-        print('Read object headers...')
+        print(f'[{self.idx}] Read object headers...')
         n_bytes_headers = self.read_int()
         self.idx += 4 # padding?
         original_idx = self.idx
@@ -215,7 +215,7 @@ class UncompressedReader(save_reader.SaveReader):
         if original_idx + n_bytes_headers != self.idx:
             raise ValueError(f'{original_idx} + {n_bytes_headers} != {self.idx}')
 
-        print('Read objects...')
+        print(f'[{self.idx}] Read objects...')
         n_bytes_objects = self.read_int() # after padding
         self.idx += 4 # padding?
         original_idx = self.idx

@@ -1,5 +1,5 @@
 import struct
-
+from typing import Tuple, Union
 
 class SaveReader:
 
@@ -55,18 +55,18 @@ class SaveReader:
         self.idx += 4
         return val
 
-    def read_property(self) -> dict:
+    def read_property(self) -> Tuple[str, Union[None, dict]]:
+        name = self.read_string()
+        if name == '':
+            raise ValueError('Invalid name: ' + name)
+        if name == 'None':
+            return name, None
         val = dict()
-        val['name'] = self.read_string()
-        if val['name'] == '':
-            raise ValueError('Invalid name: ' + val['name'])
-        if val['name'] == 'None':
-            return val
         val['property_type'] = self.read_string()
         if not val['property_type'] in self._property_parsers:
             raise ValueError('Unknown property type: ' + val['property_type'])
         val.update(self._property_parsers[val['property_type']]())
-        return val
+        return name, val
 
     def _read_float_property(self) -> dict:
         n_bytes = self.read_int()
@@ -207,13 +207,13 @@ class SaveReader:
             raise ValueError(f'{original_idx} + {n_bytes} != {self.idx}')
         return val
 
-    def read_property_list(self) -> list:
-        properties = []
+    def read_properties(self) -> dict:
+        properties = dict()
         while True:
-            next_prop = self.read_property()
-            if next_prop['name'] == 'None':
+            name, prop = self.read_property()
+            if prop is None:
                 break
-            properties.append(next_prop)
+            properties[name] = prop
         return properties
     
     def print_context(self, c=200):

@@ -10,36 +10,36 @@ class CompressedReader(save_reader.SaveReader):
         super().__init__(data, idx)
 
     def read_header(self):
-        save_header_version = self.read_int(); print('save_header_version:', save_header_version)
-        save_version = self.read_int(); print('save_version:', save_version)
-        build_version = self.read_int(); print('build_version:', build_version)
-        map_name = self.read_string(); print('map_name:', map_name)
-        map_options = self.read_string(); print('map_options:', map_options)
-        session_name = self.read_string(); print('session_name:', session_name)
-        played_seconds = self.read_int(); print('played_seconds:', played_seconds)
-        save_timestamp = self.read_int(8); print('save_timestamp:', save_timestamp) # ticks
+        save_header_version = self.read_int()
+        save_version = self.read_int()
+        build_version = self.read_int()
+        map_name = self.read_string()
+        map_options = self.read_string()
+        session_name = self.read_string()
+        played_seconds = self.read_int()
+        save_timestamp = self.read_int(8) # ticks
         self.idx += 1 # TODO
-        editor_object_version = self.read_int(); print('editor_object_version:', editor_object_version)
-        mod_meta_data = self.read_string(); print('mod_meta_data:', mod_meta_data)
-        mod_flag = self.read_int(); print('mod_flag:', mod_flag) # 0 if no mods
-        save_identifier = self.read_string(); print('save_identifier:', save_identifier)
+        editor_object_version = self.read_int()
+        mod_meta_data = self.read_string()
+        mod_flag = self.read_int() # 0 if no mods
+        save_identifier = self.read_string()
         self.idx += 28 # TODO
 
     def read_compressed_chunks(self):
         compressed_body_chunks = []
         while self.idx < len(self.data) - 1:
 
-            ue_package_signature = self.read_hex(4); print('ue_package_signature:', ue_package_signature) # always 9E2A83C1 TODO: but here not?
+            ue_package_signature = self.read_hex(4); # always 9E2A83C1 TODO: but here not?
             if ue_package_signature != 'c1832a9e':
                 raise RuntimeError('Unexpected UE package_signature')
-            archive_header = self.read_hex(4); print('archive_header:', archive_header) # 0x00000000: v1, 0x22222222: v2
-            max_chunk_size = self.read_int(8); print('max_chunk_size:', max_chunk_size)
-            compression_algorithm = self.read_bytes(size=1); print('compression_algorithm:', compression_algorithm) # 3: zlib
+            archive_header = self.read_hex(4) # 0x00000000: v1, 0x22222222: v2
+            max_chunk_size = self.read_int(8)
+            compression_algorithm = self.read_bytes(size=1) # 3: zlib
 
-            compressed_size = self.read_int(8); print('compressed_size:', compressed_size) # number of bytes
-            uncompressed_size = self.read_int(8); print('uncompressed_size:', uncompressed_size) # number of bytes
-            cp_compressed_size = self.read_int(8); print('cp_compressed_size:', cp_compressed_size) # number of bytes
-            cp_uncompressed_size = self.read_int(8); print('cp_uncompressed_size:', cp_uncompressed_size) # number of bytes
+            compressed_size = self.read_int(8) # number of bytes
+            uncompressed_size = self.read_int(8) # number of bytes
+            cp_compressed_size = self.read_int(8) # number of bytes
+            cp_uncompressed_size = self.read_int(8) # number of bytes
 
             compressed_body_chunks.append(self.data[self.idx: self.idx + compressed_size])
             self.idx += compressed_size
@@ -68,7 +68,6 @@ if __name__ == '__main__':
     if not args.save_file[-4:] == '.sav':
         raise RuntimeError('Wrong file format')
     
-    compressed_safe_file = args.save_file
-    uncompressed_save_file = compressed_safe_file[:-4] + '.bin'
-
-    uncompress_save_file(compressed_safe_file, uncompressed_save_file)
+    compressed_save_file = args.save_file
+    uncompressed_save_file = compressed_save_file[:-4] + '.bin'
+    uncompress_save_file(compressed_save_file, uncompressed_save_file)

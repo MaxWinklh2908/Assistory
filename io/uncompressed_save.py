@@ -65,7 +65,6 @@ class UncompressedReader(save_reader.SaveReader):
 
     def read_object_header(self) -> dict:
         val = dict()
-        val['start_idx'] = self.idx
         val['object_type'] = self.read_int()
         if val['object_type'] == 1:
             val.update(self.read_actor_header())
@@ -218,14 +217,17 @@ class UncompressedReader(save_reader.SaveReader):
         return objects
 
 
+def open_reader(file: str) -> UncompressedReader:
+    with open(file, 'rb') as fp:
+        data = fp.read()
+    return UncompressedReader(data)
+
+
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('uncompressed_save_file')
     args = parser.parse_args()
     save_file = args.save_file
 
-    with open(save_file, 'rb') as fp:
-        data = fp.read()
-
-    reader = UncompressedReader(data)
+    reader = open_reader(save_file)
     # TODO: Read file

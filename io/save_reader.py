@@ -231,12 +231,13 @@ class SaveReader:
         return {'value': val}
     
     def _read_map_property(self) -> dict:
+        val = dict()
         n_bytes = self.read_int() # after padding
         index = self.read_int()
         key_type = self.read_string()
         value_type = self.read_string()
         self.idx += 1 # padding
-        self.idx += n_bytes # TODO
+        val['payload'] = self.read_bytes(n_bytes) # TODO
         return dict()
     
     def _read_byte_property(self) -> dict:
@@ -318,3 +319,9 @@ class SaveReader:
         print('<----', self.idx)
         print(self.data[self.idx:self.idx+c])
         print('------------')
+
+
+def open_reader(file: str) -> SaveReader:
+    with open(file, 'rb') as fp:
+        data = fp.read()
+    return SaveReader(data)

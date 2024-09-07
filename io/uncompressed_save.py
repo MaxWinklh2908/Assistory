@@ -95,22 +95,8 @@ class UncompressedReader(save_reader.SaveReader):
         for _ in range(n_collectables):
             collectables.append(self.read_object_reference())
         return collectables
-
-    def read_actor_object(self) -> dict:
-        val = dict()
-        original_idx = self.idx
-        n_bytes = self.read_int() # including trailing bytes
-        d = self.read_int()
-        e = self.read_int()
-        val['components'] = self.read_object_references()
-        val['properties'] = self.read_properties()
-        # apply trailing bytes
-        if original_idx + n_bytes > self.idx:
-            self.idx = original_idx + n_bytes
-        return val
     
-    def read_actor_object2(self) -> dict:
-        # TODO: what is wrong with read_actor_object ?
+    def read_actor_object(self) -> dict:
         val = dict()
         original_idx = self.idx
         n_bytes = self.read_int() # including trailing bytes
@@ -140,12 +126,7 @@ class UncompressedReader(save_reader.SaveReader):
         b = self.read_int() # 42/36
         c = self.read_int() # 0/1
         if object_type == 1:
-            backupt_idx = self.idx
-            try:
-                val_actor_obj = self.read_actor_object()
-            except ValueError:
-                self.idx = backupt_idx
-                val_actor_obj = self.read_actor_object2()
+            val_actor_obj = self.read_actor_object()
             val.update(val_actor_obj)
         elif object_type == 0:
             val.update(self.read_component_object())

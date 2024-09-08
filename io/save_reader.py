@@ -177,7 +177,7 @@ class SaveReader:
                     'b': self.read_float(),
                     'a': self.read_float()
                 }
-            elif val['element_type'] == 'ScannableResourcePair':
+            elif val['element_type'] in {'ScannableResourcePair', 'ScannableObjectData'}:
                 elem = dict()
                 elem_name, elem_prop = self.read_property()
                 elem['prop'] = elem_prop
@@ -203,9 +203,12 @@ class SaveReader:
             raise ValueError(f' [{self.idx}] Unknown array type: {val["array_type"]}')
         self.idx += 1 # padding
         original_idx = self.idx
-        # second part?
-
-        val.update(self._array_property_parsers[val['array_type']]())
+        
+        try:
+            val.update(self._array_property_parsers[val['array_type']]())
+        except Exception as e:
+            print('WARNING Error reading ArrayProperty:', e.args)
+            self.idx = original_idx + n_bytes  # skipping this property
 
         if original_idx + n_bytes != self.idx:
             raise ValueError(f'{original_idx} + {n_bytes} != {self.idx}')

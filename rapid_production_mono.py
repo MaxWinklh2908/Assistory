@@ -150,16 +150,15 @@ def define_problem_min_steps(start_conf: StartConfiguration,
         solver.Add(y[t] <= y[t-1])
 
     # constraint: time step
-    solver.Add(x[0] == start_conf.S - v[0])
-    w_helper = np.zeros(len(optim_conf.T), dtype=object)
+    solver.Add(x[0] == start_conf.S)
     for t in optim_conf.T - {0}:
-        w = -v[t] + p[t]
-        w_helper[t] = solver.NumVar(-solver.infinity(), solver.infinity(), f'w_{t}')
-        solver.Add(w_helper[t] <= BIG_M * y[t]) # w == 0 if not y[t]
-        solver.Add(-BIG_M * y[t] <= w_helper[t]) # w == 0 if not y[t]
-        solver.Add(w_helper[t] <= w + BIG_M * (1 - y[t]) ) # w == 0 if not y[t]
-        solver.Add(w - BIG_M * (1 - y[t]) <= w_helper[t])
-        solver.Add(x[t] == x[t-1] + w_helper[t]) # 
+        w = -v[t-1] + p[t-1]
+        w_helper = solver.NumVar(-solver.infinity(), solver.infinity(), f'w_{t}')
+        solver.Add(w_helper <= BIG_M * y[t]) # w == 0 if not y[t]
+        solver.Add(-BIG_M * y[t] <= w_helper) # w == 0 if not y[t]
+        solver.Add(w_helper <= w + BIG_M * (1 - y[t]) ) # w == 0 if not y[t]
+        solver.Add(w - BIG_M * (1 - y[t]) <= w_helper)
+        solver.Add(x[t] == x[t-1] + w_helper) # 
    
 
     # constraint: target capital
@@ -186,23 +185,27 @@ def solve(start_conf: StartConfiguration):
 def extract_required_steps(y):
     for i, y_t in enumerate(y):
         if y_t.solution_value() == 0:
-            return i
+            return i-1
     raise RuntimeError('Did not find final step')
 
 
-def print_solution(x, z, y, v, p):
-    N = len(x)
-    if len(v) != N:
-        raise ValueError(f'Expect {N} investment values. Got {len(v)}')
-    if len(p) != N:
-        raise ValueError(f'Expect {N} revenue values. Got {len(p)}')
-    df = pd.DataFrame({
+def print_solution(N, x, z, y, v, p):
+    # N is number of steps + 1
+    if len(x) != N + 1:
+        raise ValueError(f'Expect {N+1} columns in state values. Got {len(x)}')
+    if len(z) != N + 1:
+        raise ValueError(f'Expect {N+1} columns in recipe values. Got {len(z)}')
+    if len(v) != N + 1:
+        raise ValueError(f'Expect {N+1} columns in investment values. Got {len(v)}')
+    if len(p) != N + 1:
+        raise ValueError(f'Expect {N+1} columns in revenue values. Got {len(p)}')
+    data = {
         'State': [round(val.solution_value(), 2) for val in x],
-        'Indicator': [val.solution_value() for val in y],
-        'Investment': [round(val.solution_value(), 2) for val in v],
+        'Recipes': [round(val.solution_value(), 2) for val in z],
+        'Investment Cost': [round(val.solution_value(), 2) for val in v],
         'Revenue': [round(val.solution_value(), 2) for val in p],
-    })
-    print(df)
+    }
+    print(pd.DataFrame(data))
 
 
 def main():
@@ -211,11 +214,11 @@ def main():
                                     E = 0)
     solver, values = solve(start_conf)
     minimal_steps = extract_required_steps(values[2])
-    # values = [vals[:minimal_steps] for vals in values]
+    values = [vals[:minimal_steps+1] for vals in values]
     print("Number of variables =", solver.NumVariables())
     print("Number of constraints =", solver.NumConstraints())
     print(f'Minimal number of steps: {minimal_steps}')
-    print_solution(*values)
+    print_solution(minimal_steps, *values)
 
 
 if __name__ == '__main__':

@@ -19,7 +19,7 @@ Idea: Discritize the time into N timesteps. Every step, add produced items to th
 - item i in stock at time t
 $$x_{i,t} \in \mathbb{R}^+ \space \forall i \in \mathbf{I}, \space \forall t \in \mathbf{T} $$
 
-- Add/Reduce recipe r at the t (no actions in at step N)
+- Add/Reduce recipe r at time t
 $$z_{r,t} \in \mathbb{Z} \space \forall r \in \mathbf{R},  \space \forall t \in \mathbf{T} $$
 
 Note: The N-th step can be used to dismantle recipes (negative invest) to get items back. However, this could lead to a plan that always includes dismantling the whole facility in the end. TODO
@@ -52,11 +52,11 @@ $$
 - Produce until stop. No restart
 $$ y_{t} > y_{t-1} \space \forall t \in \mathbf{T} \setminus \{0\} $$
 
-- Update items until not stopped (production rate before after investment)
+- Update items until not stopped (production rate after investment)
 $$
-x_{i,0} = S_i - v_{i,0} \space \forall i \in \mathbf{I}\\
+x_{i,0} = S_i \space \forall i \in \mathbf{I}\\
 \space\\
-x_{i,t} = x_{i,t-1} + y_{t} (-v_{i,t} + p_{i,t-1}) \space \forall i \in \mathbf{I}, \space \forall t \in \mathbf{T} \setminus \{0\}
+x_{i,t} = x_{i,t-1} + y_{t} (-v_{i,t-1} + p_{i,t-1}) \space \forall i \in \mathbf{I}, \space \forall t \in \mathbf{T} \setminus \{0\}
 $$
 
 - Goal items reached at end

@@ -1,5 +1,6 @@
 import csv
 import json
+from typing import Iterable, List
 
 import game
 
@@ -61,3 +62,30 @@ def read_resource_nodes(file_path: str) -> dict:
         if data[node_name] < 0:
             raise ValueError('Resource node availability can not be negative')
     return data
+
+
+def transform_to_dict(items: List[dict]) -> dict:
+    """Transform a list of item amount dicts to a dict mapping the item name
+    to the amount.
+
+    Args:
+        items (List[dict]): list of dicts with "item" and "amount" keys
+
+    Returns:
+        dict: mapping from item to amount
+    """
+    return {
+        d['item']: d['amount']
+        for d in items
+    }
+
+
+def vectorize(name2count: dict, base_names: Iterable) -> list:
+    return [name2count.get(name,0) for name in sorted(base_names)]
+
+def unvectorize(counts: Iterable, base_names: Iterable) -> dict:
+    return {
+        name: amount
+        for amount, name in zip(counts, sorted(base_names))
+        if amount != 0
+    }

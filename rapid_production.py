@@ -8,6 +8,9 @@ import numpy as np
 from ortools.linear_solver import pywraplp
 import pandas as pd
 
+import game
+import utils
+
 
 RETURN_CODES = {
  2: 'INFEASIBLE',
@@ -17,8 +20,63 @@ RETURN_CODES = {
  3: 'UNBOUNDED',
 }
 
+# TODO:
+# x 'Desc_ResourceWellPressurizer_C' Desc_FrackingSmasher_C
+# x Not available Desc_FrackingExtractor_C
+def define_facility_recipes():
+    facility_recipes = {
+        recipe['products'][0]['item']: recipe
+        for recipe in game.data['recipes'].values()
+        if len(recipe['products'])  == 1
+            and recipe['products'][0]['item'] in game.PRODUCTION_FACILITIES
+    }
+    facility_recipes['Desc_GeneratorCoal_C'] = {'ingredients': []}
+    facility_recipes['Desc_GeneratorFuel_C'] = {'ingredients': []}
+    facility_recipes['Desc_GeneratorNuclear_C'] = {'ingredients': []}
+    facility_recipes['Desc_MinerMk1_C'] = {'ingredients': []}
+    facility_recipes['Desc_MinerMk2_C'] = {'ingredients': []}
+    facility_recipes['Desc_MinerMk3_C'] = {'ingredients': []}
+    facility_recipes['Desc_WaterPump_C'] = {'ingredients': []}
+    facility_recipes['Desc_OilPump_C'] = {'ingredients': []}
+    facility_recipes['Desc_ResourceWellPressurizer_C'] = {'ingredients': []}
+    return facility_recipes
+FACILITY_NAME2RECIPE = define_facility_recipes()
+
+
 
 class DataConfiguration:
+    pass
+
+
+class GameDataConfiguration(DataConfiguration):
+
+    def __init__(self):
+        self.K = len(game.RECIPES) # number of recipes
+        self.R = list(range(self.K))
+        self.M = len(game.ITEMS) # number of items
+        self.I = list(range(self.M))
+
+        # production matrix A_i,r: production rate of item i by recipe r
+        self.A = np.zeros((self.M, self.K))
+        # cost matrix A_i,r: costs of item i for recipe j
+        self.B = np.zeros((self.M, self.K))
+
+        for r, recipe_name in enumerate(sorted(game.RECIPES)):
+            recipe = game.RECIPES[recipe_name]
+
+            ingredients = recipe['ingredients']
+            products = recipe['products']
+            self.A[:, r] = ((- np.array(utils.vectorize(ingredients, game.ITEMS))
+                            + np.array(utils.vectorize(products, game.ITEMS))) 
+                            / (recipe['time'] / 60))
+
+            facility_name = recipe['producedIn']
+            facility_recipe = FACILITY_NAME2RECIPE[facility_name]
+            build_costs = utils.transform_to_dict(facility_recipe['ingredients'])
+            self.B[:, r] = np.array(utils.vectorize(build_costs, game.ITEMS))
+
+
+class CustomDataConfiguration(DataConfiguration):
 
     def __init__(self) -> None:
         self.K = 3 # number of recipes
@@ -77,7 +135,7 @@ class OptimizationConfiguration:
         self.T = set(range(n + 1))
 
 
-N_MAX = 25 # steps
+N_MAX = 40 # steps
 
 def define_problem(data_conf: DataConfiguration,
                    start_conf: StartConfiguration,
@@ -139,12 +197,18 @@ def define_problem(data_conf: DataConfiguration,
 
 def solve(data_conf: DataConfiguration, start_conf: StartConfiguration):
     for N in range(1, N_MAX):
+        print('Iteration: ', N)
         optim_conf = OptimizationConfiguration(N)
         solver, values = define_problem(data_conf, start_conf, optim_conf)
+        print("Number of variables =", solver.NumVariables())
+        print("Number of constraints =", solver.NumConstraints())
         status = solver.Solve()
+        print(f"Problem processed in {solver.wall_time():d} milliseconds")
         if status == pywraplp.Solver.OPTIMAL:
             minimal_steps = N
             return solver, values, minimal_steps
+        if status != pywraplp.Solver.INFEASIBLE:
+            raise RuntimeError('Unexpected status: ' + RETURN_CODES[status])
     raise RuntimeError('Could not reach target in time. Status=' + RETURN_CODES[status])
 
 
@@ -170,19 +234,52 @@ def print_solution(N, x, z, y, v, p):
     print(pd.DataFrame(data))
 
 
+def print_solution_dict(N, x, z, y, v, p):
+    # N is number of steps + 1
+    if x.shape[1] != N + 1:
+        raise ValueError(f'Expect {N+1} columns in state values. Got {x.shape}')
+    if z.shape[1] != N + 1:
+        raise ValueError(f'Expect {N+1} columns in recipe values. Got {z.shape}')
+    if v.shape[1] != N + 1:
+        raise ValueError(f'Expect {N+1} columns in investment values. Got {v.shape}')
+    if p.shape[1] != N + 1:
+        raise ValueError(f'Expect {N+1} columns in revenue values. Got {p.shape}')
+    data = {
+        'State': [
+            str(utils.unvectorize([round(val.solution_value(), 2) for val in x[:,t]], game.ITEMS))
+            for t in range(N+1)],
+        'Recipes': [
+            str(utils.unvectorize([round(val.solution_value(), 2) for val in z[:,t]], game.RECIPES))
+            for t in range(N+1)],
+        'Investment Cost': [
+            str(utils.unvectorize([round(val.solution_value(), 2) for val in v[:,t]], game.ITEMS))
+            for t in range(N+1)],
+        'Revenue': [
+            str(utils.unvectorize([round(val.solution_value(), 2) for val in p[:,t]], game.ITEMS))
+            for t in range(N+1)],
+    }
+    print(pd.DataFrame(data))
+
+
 def main():
-    data_conf = DataConfiguration()
+    data_conf = GameDataConfiguration()
     start_conf = StartConfiguration(data_conf,
-                                    S = np.array([2000,0,20,20], np.float32),
-                                    G = np.array([0,0,500,500], np.float32),
-                                    E = np.array([0,0,0], np.float32))
+                                    S = np.array(utils.vectorize({
+                                        'Desc_OreIron_C': 1000,
+                                        'Desc_IronRod_C': 10,
+                                        'Desc_Wire_C': 16,
+                                        }, game.ITEMS)),
+                                    G = np.array(utils.vectorize({
+                                        'Desc_IronIngot_C': 100,
+                                        }, game.ITEMS)),
+                                    E = np.array(utils.vectorize({
+                                        # 'Recipe_IngotIron_C': 1,
+                                        }, game.RECIPES)))
     solver, values, minimal_steps = solve(data_conf, start_conf)
-    print("Number of variables =", solver.NumVariables())
-    print("Number of constraints =", solver.NumConstraints())
-    print(f"Problem processed in {solver.wall_time():d} milliseconds")
     print(f'Minimal number of steps: {minimal_steps}')
-    print_solution(minimal_steps, *values)
+    print_solution_dict(minimal_steps, *values)
 
 
 if __name__ == '__main__':
+    pd.set_option('display.max_colwidth', None)
     main()

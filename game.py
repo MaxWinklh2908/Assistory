@@ -28,8 +28,8 @@ def define_production_facilities():
     facilities['Desc_MinerMk1_C'] = -5
     facilities['Desc_MinerMk2_C'] = -12
     facilities['Desc_MinerMk3_C'] = -30
-    facilities['Desc_WaterExtractor_C'] = -20
-    facilities['Desc_OilExtractor_C'] = -40
+    facilities['Desc_WaterPump_C'] = -20
+    facilities['Desc_OilPump_C'] = -40
     # TODO: correctly estimate pressurizer power
     facilities['Desc_ResourceWellPressurizer_C'] = -10
     
@@ -42,8 +42,8 @@ MINING_FACILITIES = [
     'Desc_MinerMk1_C',
     'Desc_MinerMk2_C',
     'Desc_MinerMk3_C',
-    'Desc_WaterExtractor_C',
-    'Desc_OilExtractor_C',
+    'Desc_WaterPump_C',
+    'Desc_OilPump_C',
     'Desc_ResourceWellPressurizer_C'
 ]
 
@@ -211,14 +211,14 @@ def define_recipes():
         
         'ingredients': {},
         'products': {'Desc_Water_C': 120},
-        'producedIn': 'Desc_WaterExtractor_C',
+        'producedIn': 'Desc_WaterPump_C',
         'time': 60,
     }
     # Oil extractor
     recipes['Recipe_OilExtractorLiquidOil_C'] = {
         'ingredients': {},
         'products': {'Desc_LiquidOil_C': 120},
-        'producedIn': 'Desc_OilExtractor_C',
+        'producedIn': 'Desc_OilPump_C',
         'time': 60,
     }
     # Add miners

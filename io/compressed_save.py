@@ -4,14 +4,25 @@ import zlib
 import save_reader
 
 
+SUPPORTED_SAVE_HEADER_VERSIONS = [13]
+SUPPORTED_SAVE_VERSIONS = [42]
+
+
 class CompressedReader(save_reader.SaveReader):
+
 
     def __init__(self, data: bytes, idx: int=0):
         super().__init__(data, idx)
 
     def read_header(self):
         save_header_version = self.read_int()
+        if not save_header_version in SUPPORTED_SAVE_HEADER_VERSIONS:
+            raise NotImplementedError('Save header version not supported: '
+                                      + str(save_header_version))
         save_version = self.read_int()
+        if not save_version in SUPPORTED_SAVE_VERSIONS:
+            raise NotImplementedError('Save version not supported: '
+                                      + str(save_version))
         build_version = self.read_int()
         map_name = self.read_string()
         map_options = self.read_string()

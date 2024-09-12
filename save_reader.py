@@ -199,10 +199,13 @@ class SaveReader:
         n_bytes = self.read_int() # after padding
         index = self.read_int()
         val['array_type'] = self.read_string()
-        if not val['array_type'] in self._array_property_parsers:
-            raise ValueError(f' [{self.idx}] Unknown array type: {val["array_type"]}')
         self.idx += 1 # padding
         original_idx = self.idx
+        
+        if not val['array_type'] in self._array_property_parsers:
+            print(f'[{self.idx}] WARNING: Unknown array type: {val["array_type"]}')
+            self.idx = original_idx + n_bytes  # skipping this property
+            return val
         
         try:
             val.update(self._array_property_parsers[val['array_type']]())

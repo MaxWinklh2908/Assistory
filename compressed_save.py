@@ -17,11 +17,11 @@ class CompressedReader(save_reader.SaveReader):
     def read_header(self):
         save_header_version = self.read_int()
         if not save_header_version in SUPPORTED_SAVE_HEADER_VERSIONS:
-            raise NotImplementedError('Save header version not supported: '
+            print('WARNING: Save header version not supported: '
                                       + str(save_header_version))
         save_version = self.read_int()
         if not save_version in SUPPORTED_SAVE_VERSIONS:
-            raise NotImplementedError('Save version not supported: '
+            print('Save version not supported: '
                                       + str(save_version))
         build_version = self.read_int()
         map_name = self.read_string()

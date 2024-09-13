@@ -22,6 +22,7 @@ class SaveReader:
             'Int64Property': self._read_int64_property,
             'Int8Property': self._read_int8_property,
             'TextProperty': self._read_text_property,
+            'SetProperty': self._read_set_property,
         }
         
         self._array_property_parsers = {
@@ -30,7 +31,10 @@ class SaveReader:
             'StructProperty': self._read_array_struct_property,
             'ByteProperty': self._read_array_byte_property,
             'StrProperty': self._read_array_string_property,
+            'SoftObjectProperty': self._read_array_soft_object_property,
         }
+
+        self._set_property_parsers = {} # TODO: StructProperty
 
     def read_string(self) -> str:
         length = self.read_int() # Including terminating character
@@ -119,6 +123,30 @@ class SaveReader:
         self.idx += 17 # padding
         payload = self.read_bytes(n_bytes) # InventoryItem: int, string, int, int
         return {'struct_type': struct_type, 'payload': payload}
+
+    def _read_set_property(self) -> dict:
+        n_bytes = self.read_int() # after padding
+        index = self.read_int()
+        val = dict()
+        val['set_type'] = self.read_string()
+        self.idx += 1 # padding
+        original_idx = self.idx
+
+        if not val['set_type'] in self._set_property_parsers:
+            print(f'[{self.idx}] WARNING: Unknown set type: {val["set_type"]}')
+            val['payload'] = self.read_bytes(n_bytes)
+            return val
+
+        try:
+            val.update(self._set_property_parsers[val['array_type']]())
+        except Exception as e:
+            print('WARNING Error reading ArrayProperty:', e.args)
+            self.idx = original_idx + n_bytes  # skipping this property
+
+        if original_idx + n_bytes != self.idx:
+            raise ValueError(f'{original_idx} + {n_bytes} != {self.idx}')
+        
+        return val
     
     def _read_array_object_property(self) -> dict:
         val = dict()
@@ -157,7 +185,7 @@ class SaveReader:
         val = dict()
         length = self.read_int()
         name = self.read_string() # duplicate
-        array_property_type = self.read_string()
+        array_property_type = self.read_string() # duplicate
         # if not array_property_type == 'StructProperty':
         #     raise ValueError('Expected StructProperty. Got ' + array_property_type)
         n_bytes = self.read_int() # after the byte padding (after UUID)
@@ -193,6 +221,19 @@ class SaveReader:
         if original_idx + n_bytes != self.idx:
             raise ValueError(f'{original_idx} + {n_bytes} != {self.idx}')
         return val
+    
+    def _read_array_soft_object_property(self) -> dict:
+        val = dict()
+        length = self.read_int()
+        val['elements'] = []
+        for _ in range(length):
+            elem = dict()
+            elem['a'] = self.read_string()
+            elem['b'] = self.read_string()
+            elem['c'] = self.read_string()
+            val['elements'].append(elem)
+        return val
+
     
     def _read_array_property(self) -> dict:
         val = dict()

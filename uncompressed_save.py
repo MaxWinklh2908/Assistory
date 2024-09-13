@@ -122,7 +122,7 @@ class UncompressedReader(save_reader.SaveReader):
         val = dict()
         val['start_idx'] = self.idx
         a = self.read_int() # 15/6 /3158584 (25282136)
-        save_version = self.read_int() # 42/36 # TODO: correct?
+        val['save_version'] = self.read_int() # 42/36 # TODO: correct?
         c = self.read_int() # 0/1
         if object_type == 1:
             val_actor_obj = self.read_actor_object()
@@ -227,7 +227,7 @@ if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('uncompressed_save_file')
     args = parser.parse_args()
-    save_file = args.save_file
+    save_file = args.uncompressed_save_file
 
     reader = open_reader(save_file)
-    # TODO: Read file
+    reader.read()

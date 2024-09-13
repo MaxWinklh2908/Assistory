@@ -42,7 +42,7 @@ class CompressedReader(save_reader.SaveReader):
 
             ue_package_signature = self.read_hex(4); # always 9E2A83C1 TODO: but here not?
             if ue_package_signature != 'c1832a9e':
-                raise RuntimeError('Unexpected UE package_signature')
+                print('WARNING: Unexpected UE package_signature:', ue_package_signature)
             archive_header = self.read_hex(4) # 0x00000000: v1, 0x22222222: v2
             max_chunk_size = self.read_int(8)
             compression_algorithm = self.read_bytes(size=1) # 3: zlib

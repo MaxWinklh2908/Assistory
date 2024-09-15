@@ -2,3 +2,6 @@ ortools
 networkx
 matplotlib
 scipy
+
+# stats tool
+watchdog

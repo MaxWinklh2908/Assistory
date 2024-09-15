@@ -78,11 +78,28 @@ class Factory(Buildable):
         self._output_inventory_stacks = []
 
     def get_productivity(self) -> float:
+        """
+        If the productivity is monitored get the ratio of the actual
+        productivity over the target productivity.
+
+        Returns:
+            float: The actual productivity ratio between 0 and 1
+        """
         # TODO: When Current, when Last?
         if not self.is_productivity_monitor_enabled:
             return -1
         return (self.current_productivity_measurement_produce_duration
                 / self.current_productivity_measurementduration)
+    
+    def get_effective_rate(self) -> float:
+        """
+        Calculate the actual production rate. It is based on
+        productivity and overclocking.
+
+        Returns:
+            float: The actual production rate mulitplier
+        """
+        return max(0, self.get_productivity()) * self.pending_potential
 
     def get_problems(self) -> List[str]:
         problems = []

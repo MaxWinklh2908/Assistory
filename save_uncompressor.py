@@ -20,7 +20,7 @@ class CompressedReader(save_reader.SaveReader):
             print('WARNING: Save header version not supported: '
                                       + str(save_header_version))
         save_version = self.read_int()
-        if not save_version in save_reader.SUPPORTED_SAVE_VERSIONS:
+        if not save_version in SUPPORTED_SAVE_VERSIONS:
             print('WARNING: Save version not supported: '
                                       + str(save_version))
         build_version = self.read_int(); print('build_version:', build_version)

@@ -1,0 +1,36 @@
+[
+    {
+        "instance_name": "Persistent_Level:PersistentLevel.Build_SmelterMk1_C_2147450598.powerInfo",
+        "object_type": 0,
+        "parent_actor_name": "Persistent_Level:PersistentLevel.Build_SmelterMk1_C_2147450598",
+        "properties": {
+            "mTargetConsumption": {
+                "end_idx": 2129364,
+                "property_type": "FloatProperty",
+                "start_idx": 2129310,
+                "value": 4.0
+            }
+        },
+        "root_object": "Persistent_Level",
+        "save_version": 46,
+        "start_idx": 2129294,
+        "type_path": "/Script/FactoryGame.FGPowerInfoComponent"
+    },
+    {
+        "instance_name": "Persistent_Level:PersistentLevel.Build_GeneratorBiomass_Automated_C_2147186580.powerInfo",
+        "object_type": 0,
+        "parent_actor_name": "Persistent_Level:PersistentLevel.Build_GeneratorBiomass_Automated_C_2147186580",
+        "properties": {
+            "mDynamicProductionCapacity": {
+                "end_idx": 2236208,
+                "property_type": "FloatProperty",
+                "start_idx": 2236146,
+                "value": 30.0
+            }
+        },
+        "root_object": "Persistent_Level",
+        "save_version": 46,
+        "start_idx": 2236130,
+        "type_path": "/Script/FactoryGame.FGPowerInfoComponent"
+    }
+]

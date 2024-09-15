@@ -1,0 +1,107 @@
+[
+    {
+        "instance_name": "Persistent_Level:PersistentLevel.Build_SmelterMk1_C_2147450598.OutputInventory",
+        "object_type": 0,
+        "parent_actor_name": "Persistent_Level:PersistentLevel.Build_SmelterMk1_C_2147450598",
+        "properties": {
+            "mAllowedItemDescriptors": {
+                "array_type": "ObjectProperty",
+                "elements": [
+                    {
+                        "level_name": "",
+                        "path_name": "/Game/FactoryGame/Resource/Parts/IronIngot/Desc_IronIngot.Desc_IronIngot_C"
+                    },
+                    {
+                        "level_name": "",
+                        "path_name": "/Script/FactoryGame.FGItemDescriptor"
+                    }
+                ],
+                "end_idx": 2129281,
+                "property_type": "ArrayProperty",
+                "start_idx": 2129075
+            },
+            "mArbitrarySlotSizes": {
+                "array_type": "IntProperty",
+                "elements": [
+                    0,
+                    0
+                ],
+                "end_idx": 2129075,
+                "property_type": "ArrayProperty",
+                "start_idx": 2128996
+            },
+            "mInventoryStacks": {
+                "array_type": "StructProperty",
+                "element_type": "InventoryStack",
+                "elements": [
+                    {
+                        "name": "Item",
+                        "prop": {
+                            "end_idx": 2128811,
+                            "payload": "\\x00\\x00\\x00\\x00K\\x00\\x00\\x00/Game/FactoryGame/Resource/Parts/IronIngot/Desc_IronIngot.Desc_IronIngot_C\\x00\\x00\\x00\\x00\\x00",
+                            "property_type": "StructProperty",
+                            "start_idx": 2128653,
+                            "struct_type": "InventoryItem"
+                        },
+                        "properties": {
+                            "NumItems": {
+                                "end_idx": 2128853,
+                                "property_type": "IntProperty",
+                                "start_idx": 2128811,
+                                "value": 33
+                            }
+                        }
+                    },
+                    {
+                        "name": "Item",
+                        "prop": {
+                            "end_idx": 2128945,
+                            "payload": "\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00",
+                            "property_type": "StructProperty",
+                            "start_idx": 2128862,
+                            "struct_type": "InventoryItem"
+                        },
+                        "properties": {
+                            "NumItems": {
+                                "end_idx": 2128987,
+                                "property_type": "IntProperty",
+                                "start_idx": 2128945,
+                                "value": 0
+                            }
+                        }
+                    }
+                ],
+                "end_idx": 2128996,
+                "property_type": "ArrayProperty",
+                "start_idx": 2128498
+            }
+        },
+        "root_object": "Persistent_Level",
+        "save_version": 46,
+        "start_idx": 2128482,
+        "type_path": "/Script/FactoryGame.FGInventoryComponent"
+    },
+    {
+        "instance_name": "Persistent_Level:PersistentLevel.Build_MinerMk1_C_2147303323.OutputInventory",
+        "object_type": 0,
+        "parent_actor_name": "Persistent_Level:PersistentLevel.Build_MinerMk1_C_2147303323",
+        "properties": {
+            "mAllowedItemDescriptors": {
+                "array_type": "ObjectProperty",
+                "elements": [
+                    {
+                        "level_name": "",
+                        "path_name": "/Game/FactoryGame/Resource/RawResources/Stone/Desc_Stone.Desc_Stone_C"
+                    }
+                ],
+                "end_idx": 2191927,
+                "property_type": "ArrayProperty",
+                "start_idx": 2191771
+            }
+        },
+        "root_object": "Persistent_Level",
+        "save_version": 46,
+        "start_idx": 2191755,
+        "type_path": "/Script/FactoryGame.FGInventoryComponent"
+    }
+]

@@ -1,3 +1,8 @@
+"""
+Read Satisfactory save files.
+Reference: https://satisfactory.wiki.gg/wiki/Save_files
+"""
+
 import struct
 from typing import Tuple, Union
 
@@ -119,10 +124,16 @@ class SaveReader:
     def _read_struct_property(self) -> dict:
         n_bytes = self.read_int() # after padding
         index = self.read_int()
-        struct_type = self.read_string()
+        val = dict()
+        val['struct_type'] = self.read_string()
         self.idx += 17 # padding
-        payload = self.read_bytes(n_bytes) # InventoryItem: int, string, int, int
-        return {'struct_type': struct_type, 'payload': payload}
+        if val['struct_type'] ==  'InventoryItem':
+            val['a'] = self.read_int()
+            val['item_name'] = self.read_string()
+            val['c'] = self.read_int()
+        else: # TODO: other types
+            val['payload'] = self.read_bytes(n_bytes) # InventoryItem: int, string, int
+        return val
 
     def _read_set_property(self) -> dict:
         n_bytes = self.read_int() # after padding

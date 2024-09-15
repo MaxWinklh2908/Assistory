@@ -5,7 +5,7 @@ import save_reader
 
 
 SUPPORTED_SAVE_HEADER_VERSIONS = [13]
-SUPPORTED_SAVE_VERSIONS = [42]
+SUPPORTED_SAVE_VERSIONS = [42, 46]
 
 
 class CompressedReader(save_reader.SaveReader):
@@ -20,10 +20,10 @@ class CompressedReader(save_reader.SaveReader):
             print('WARNING: Save header version not supported: '
                                       + str(save_header_version))
         save_version = self.read_int()
-        if not save_version in SUPPORTED_SAVE_VERSIONS:
+        if not save_version in save_reader.SUPPORTED_SAVE_VERSIONS:
             print('WARNING: Save version not supported: '
                                       + str(save_version))
-        build_version = self.read_int()
+        build_version = self.read_int(); print('build_version:', build_version)
         map_name = self.read_string()
         map_options = self.read_string()
         session_name = self.read_string()

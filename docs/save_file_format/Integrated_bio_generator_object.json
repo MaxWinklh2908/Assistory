@@ -1,0 +1,138 @@
+{
+    "components": [
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorIntegratedBiomass_C_2147463709.PowerConnection"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorIntegratedBiomass_C_2147463709.InventoryPotential"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorIntegratedBiomass_C_2147463709.powerInfo"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorIntegratedBiomass_C_2147463709.FuelInventory"
+        }
+    ],
+    "instance_name": "Persistent_Level:PersistentLevel.Build_GeneratorIntegratedBiomass_C_2147463709",
+    "level_name": "Persistent_Level",
+    "needs_transform": 1,
+    "object_type": 1,
+    "path_name": "Persistent_Level:PersistentLevel.BuildableSubsystem",
+    "placed": 0,
+    "pos_x": -164118.375,
+    "pos_y": -32903.67578125,
+    "pos_z": -492.9549560546875,
+    "properties": {
+        "mBuiltWithRecipe": {
+            "end_idx": 1870383,
+            "level_name": "",
+            "path_name": "/Game/FactoryGame/Recipes/Buildings/Recipe_GeneratorIntegratedBiomass.Recipe_GeneratorIntegratedBiomass_C",
+            "property_type": "ObjectProperty",
+            "start_idx": 1870220
+        },
+        "mCurrentFuelAmount": {
+            "end_idx": 1869012,
+            "property_type": "FloatProperty",
+            "start_idx": 1868958,
+            "value": 149.77297973632812
+        },
+        "mCurrentFuelClass": {
+            "end_idx": 1869206,
+            "level_name": "",
+            "path_name": "/Game/FactoryGame/Resource/Parts/GenericBiomass/Desc_GenericBiomass.Desc_GenericBiomass_C",
+            "property_type": "ObjectProperty",
+            "start_idx": 1869058
+        },
+        "mCurrentProductivityMeasurementDuration": {
+            "end_idx": 1869910,
+            "property_type": "FloatProperty",
+            "start_idx": 1869835,
+            "value": 87.22638702392578
+        },
+        "mCurrentProductivityMeasurementProduceDuration": {
+            "end_idx": 1869835,
+            "property_type": "FloatProperty",
+            "start_idx": 1869753,
+            "value": 27.394554138183594
+        },
+        "mCustomizationData": {
+            "end_idx": 1870220,
+            "payload": "\\x0b\\x00\\x00\\x00SwatchDesc\\x00\\x0f\\x00\\x00\\x00ObjectProperty\\x00g\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00_\\x00\\x00\\x00/Game/FactoryGame/Buildable/-Shared/Customization/Swatches/SwatchDesc_Slot0.SwatchDesc_Slot0_C\\x00\\x05\\x00\\x00\\x00None\\x00",
+            "property_type": "StructProperty",
+            "start_idx": 1869969,
+            "struct_type": "FactoryCustomizationData"
+        },
+        "mFuelInventory": {
+            "end_idx": 1868958,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorIntegratedBiomass_C_2147463709.FuelInventory",
+            "property_type": "ObjectProperty",
+            "start_idx": 1868793
+        },
+        "mHasFuelCached": {
+            "end_idx": 1869058,
+            "property_type": "BoolProperty",
+            "start_idx": 1869012,
+            "value": true
+        },
+        "mHighlightEffectState": {
+            "end_idx": 1868793,
+            "property_type": "IntProperty",
+            "start_idx": 1868738,
+            "value": 2
+        },
+        "mInventoryPotential": {
+            "end_idx": 1869602,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorIntegratedBiomass_C_2147463709.InventoryPotential",
+            "property_type": "ObjectProperty",
+            "start_idx": 1869427
+        },
+        "mLastProductivityMeasurementDuration": {
+            "end_idx": 1869753,
+            "property_type": "FloatProperty",
+            "start_idx": 1869681,
+            "value": 300.0045166015625
+        },
+        "mLastProductivityMeasurementProduceDuration": {
+            "end_idx": 1869681,
+            "property_type": "FloatProperty",
+            "start_idx": 1869602,
+            "value": 300.0045166015625
+        },
+        "mPowerInfo": {
+            "end_idx": 1869363,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorIntegratedBiomass_C_2147463709.powerInfo",
+            "property_type": "ObjectProperty",
+            "start_idx": 1869206
+        },
+        "mProductivityMonitorEnabled": {
+            "end_idx": 1869969,
+            "property_type": "BoolProperty",
+            "start_idx": 1869910,
+            "value": true
+        },
+        "mTimeSinceStartStopProducing": {
+            "end_idx": 1869427,
+            "property_type": "FloatProperty",
+            "start_idx": 1869363,
+            "value": 59.81536865234375
+        }
+    },
+    "root_object": "Persistent_Level",
+    "rot_w": 0.3420201539993286,
+    "rot_x": 0.0,
+    "rot_y": -0.0,
+    "rot_z": 0.9396926164627075,
+    "save_version": 46,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "scale_z": 1.0,
+    "start_idx": 1868166,
+    "type_path": "/Game/FactoryGame/Buildable/Factory/GeneratorBiomass/Build_GeneratorIntegratedBiomass.Build_GeneratorIntegratedBiomass_C"
+}

@@ -1,0 +1,114 @@
+{
+    "components": [],
+    "instance_name": "Persistent_Level:PersistentLevel.schematicManager",
+    "level_name": "Persistent_Level",
+    "needs_transform": 0,
+    "object_type": 1,
+    "path_name": "Persistent_Level:PersistentLevel.BP_GameState_C_2147479081",
+    "placed": 0,
+    "pos_x": 0.0,
+    "pos_y": 0.0,
+    "pos_z": 0.0,
+    "properties": {
+        "mLastActiveSchematic": {
+            "end_idx": 788879,
+            "level_name": "",
+            "path_name": "/Game/FactoryGame/Schematics/Progression/Schematic_1-1.Schematic_1-1_C",
+            "property_type": "ObjectProperty",
+            "start_idx": 788747
+        },
+        "mPurchasedSchematics": {
+            "array_type": "ObjectProperty",
+            "elements": [
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Schematic_StartingRecipes.Schematic_StartingRecipes_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Tutorial/Schematic_Tutorial1.Schematic_Tutorial1_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Tutorial/Schematic_Tutorial1_5.Schematic_Tutorial1_5_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Tutorial/Schematic_Tutorial2.Schematic_Tutorial2_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Tutorial/Schematic_Tutorial3.Schematic_Tutorial3_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Tutorial/Schematic_Tutorial4.Schematic_Tutorial4_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Tutorial/Schematic_Tutorial5.Schematic_Tutorial5_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Progression/Schematic_1-2.Schematic_1-2_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Progression/Schematic_1-3.Schematic_1-3_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Research/PowerSlugs_RS/Research_PowerSlugs_1.Research_PowerSlugs_1_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Research/PowerSlugs_RS/Research_PowerSlugs_2.Research_PowerSlugs_2_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Research/AlienTech_RS/Research_Alien_MercerSphere.Research_Alien_MercerSphere_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Research/Nutrients_RS/Research_Nutrients_1.Research_Nutrients_1_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Research/Quartz_RS/Research_Quartz_0.Research_Quartz_0_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Progression/Schematic_1-1.Schematic_1-1_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Research/HardDrive_RS/Research_HardDrive_0.Research_HardDrive_0_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Schematics/Alternate/Parts/Schematic_Alternate_Wire1.Schematic_Alternate_Wire1_C"
+                }
+            ],
+            "end_idx": 788747,
+            "property_type": "ArrayProperty",
+            "start_idx": 787076
+        },
+        "mShipLandTimeStampSave": {
+            "end_idx": 788937,
+            "property_type": "FloatProperty",
+            "start_idx": 788879,
+            "value": -99.11417388916016
+        }
+    },
+    "root_object": "Persistent_Level",
+    "rot_w": 1.0,
+    "rot_x": 0.0,
+    "rot_y": 0.0,
+    "rot_z": 0.0,
+    "save_version": 46,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "scale_z": 1.0,
+    "start_idx": 786972,
+    "type_path": "/Game/FactoryGame/Schematics/Progression/BP_SchematicManager.BP_SchematicManager_C"
+}

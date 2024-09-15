@@ -4,6 +4,9 @@ from typing import List
 import save_reader
 
 
+SUPPORTED_SAVE_VERSIONS = [42, 46]
+
+
 class UncompressedReader(save_reader.SaveReader):
 
     def __init__(self, data: bytes, idx: int=0):
@@ -123,6 +126,9 @@ class UncompressedReader(save_reader.SaveReader):
         val['start_idx'] = self.idx
         a = self.read_int() # 15/6 /3158584 (25282136)
         val['save_version'] = self.read_int() # 42/36 # TODO: correct?
+        if not val['save_version'] in SUPPORTED_SAVE_VERSIONS:
+            print('WARNING: Save version not supported: '
+                                      + str(val['save_version']))
         c = self.read_int() # 0/1
         if object_type == 1:
             val_actor_obj = self.read_actor_object()

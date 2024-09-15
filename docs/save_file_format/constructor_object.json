@@ -1,0 +1,155 @@
+{
+    "components": [
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914.FGFactoryLegs"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914.InventoryPotential"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914.powerInfo"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914.InputInventory"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914.OutputInventory"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914.Output0"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914.Input0"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914.PowerInput"
+        }
+    ],
+    "instance_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914",
+    "level_name": "Persistent_Level",
+    "needs_transform": 1,
+    "object_type": 1,
+    "path_name": "Persistent_Level:PersistentLevel.BuildableSubsystem",
+    "placed": 0,
+    "pos_x": -167604.71875,
+    "pos_y": -29955.8984375,
+    "pos_z": -583.3696899414062,
+    "properties": {
+        "mBuiltWithRecipe": {
+            "end_idx": 1883274,
+            "level_name": "",
+            "path_name": "/Game/FactoryGame/Recipes/Buildings/Recipe_ConstructorMk1.Recipe_ConstructorMk1_C",
+            "property_type": "ObjectProperty",
+            "start_idx": 1883135
+        },
+        "mCurrentManufacturingProgress": {
+            "end_idx": 1881664,
+            "property_type": "FloatProperty",
+            "start_idx": 1881599,
+            "value": 0.3913295269012451
+        },
+        "mCurrentProductivityMeasurementDuration": {
+            "end_idx": 1882781,
+            "property_type": "FloatProperty",
+            "start_idx": 1882706,
+            "value": 292.8553161621094
+        },
+        "mCurrentProductivityMeasurementProduceDuration": {
+            "end_idx": 1882706,
+            "property_type": "FloatProperty",
+            "start_idx": 1882624,
+            "value": 292.8553161621094
+        },
+        "mCurrentRecipe": {
+            "end_idx": 1882101,
+            "level_name": "",
+            "path_name": "/Game/FactoryGame/Recipes/Constructor/Recipe_IronRod.Recipe_IronRod_C",
+            "property_type": "ObjectProperty",
+            "start_idx": 1881976
+        },
+        "mCustomizationData": {
+            "end_idx": 1883135,
+            "payload": "\\x0b\\x00\\x00\\x00SwatchDesc\\x00\\x0f\\x00\\x00\\x00ObjectProperty\\x00g\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00_\\x00\\x00\\x00/Game/FactoryGame/Buildable/-Shared/Customization/Swatches/SwatchDesc_Slot0.SwatchDesc_Slot0_C\\x00\\x05\\x00\\x00\\x00None\\x00",
+            "property_type": "StructProperty",
+            "start_idx": 1882884,
+            "struct_type": "FactoryCustomizationData"
+        },
+        "mInputInventory": {
+            "end_idx": 1881819,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914.InputInventory",
+            "property_type": "ObjectProperty",
+            "start_idx": 1881664
+        },
+        "mInventoryPotential": {
+            "end_idx": 1882473,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914.InventoryPotential",
+            "property_type": "ObjectProperty",
+            "start_idx": 1882310
+        },
+        "mIsProducing": {
+            "end_idx": 1882884,
+            "property_type": "BoolProperty",
+            "start_idx": 1882840,
+            "value": true
+        },
+        "mLastProductivityMeasurementDuration": {
+            "end_idx": 1882624,
+            "property_type": "FloatProperty",
+            "start_idx": 1882552,
+            "value": 300.0024719238281
+        },
+        "mLastProductivityMeasurementProduceDuration": {
+            "end_idx": 1882552,
+            "property_type": "FloatProperty",
+            "start_idx": 1882473,
+            "value": 128.19281005859375
+        },
+        "mOutputInventory": {
+            "end_idx": 1881976,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914.OutputInventory",
+            "property_type": "ObjectProperty",
+            "start_idx": 1881819
+        },
+        "mPowerInfo": {
+            "end_idx": 1882246,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_ConstructorMk1_C_2147449914.powerInfo",
+            "property_type": "ObjectProperty",
+            "start_idx": 1882101
+        },
+        "mProductivityMonitorEnabled": {
+            "end_idx": 1882840,
+            "property_type": "BoolProperty",
+            "start_idx": 1882781,
+            "value": true
+        },
+        "mTimeSinceStartStopProducing": {
+            "end_idx": 1882310,
+            "property_type": "FloatProperty",
+            "start_idx": 1882246,
+            "value": 421.0494384765625
+        }
+    },
+    "root_object": "Persistent_Level",
+    "rot_w": 0.3420201539993286,
+    "rot_x": 0.0,
+    "rot_y": -0.0,
+    "rot_z": 0.9396926164627075,
+    "save_version": 46,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "scale_z": 1.0,
+    "start_idx": 1880666,
+    "type_path": "/Game/FactoryGame/Buildable/Factory/ConstructorMk1/Build_ConstructorMk1.Build_ConstructorMk1_C"
+}

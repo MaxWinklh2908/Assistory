@@ -28,8 +28,8 @@ class Buildable:
 
     def get_map_position(self) -> Tuple[float]:
         return (
-            self.transform[0] / 1000.0,
-            self.transform[1] / 1000.0,
+            self.transform[0] / 100.0,
+            self.transform[1] / 100.0,
             self.transform[2] / 100.0
         )
     

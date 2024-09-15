@@ -1,27 +1,38 @@
-from typing import Iterable, List, Tuple, Union
+from typing import Dict, Iterable, List, Tuple, Union
 
 
 PROBLEMATIC_PRODUCTIVITY = 0.9
 
 
-class Buildable:
-    
-    def __init__(self, *, instance_name: str,
-                 type_path: str, transform: tuple,
-                 build_with_recipe: str,
-                 swatch_slot: Union[str, None]=None) -> None:
+class Actor:
+
+     def __init__(self, *, instance_name: str, type_path: str) -> None:
         """
-        Create a Buildable object
+        Create an Actor object
 
         Args:
             instance_name (str): Unique name of this object
             type_path (str): Type of this object
+        """
+        self.instance_name = instance_name
+        self.type_path = type_path
+
+
+class Buildable(Actor):
+    
+    def __init__(self, *, transform: tuple,
+                 build_with_recipe: str,
+                 swatch_slot: Union[str, None]=None,
+                 **kwargs) -> None:
+        """
+        Create a Buildable object
+
+        Args:
             transform (tuple): position (x,y,z) and orientation (x,y,z,w)
             build_with_recipe (str): Recipe name with which this object was created
             swatch_slot (Union[str, None], optional): Building customization. Defaults to None.
         """
-        self.instance_name = instance_name
-        self.type_path = type_path
+        super().__init__(**kwargs)
         self.transform = transform # xyzw, xyz
         self.build_with_recipe = build_with_recipe
         self.swatch_slot = swatch_slot
@@ -102,10 +113,11 @@ class Factory(Buildable):
         return max(0, self.get_productivity()) * self.pending_potential
 
     def get_problems(self) -> List[str]:
+        # TODO: check power connection
         problems = []
         productivity = self.get_productivity()
         if productivity >= 0 and productivity < PROBLEMATIC_PRODUCTIVITY:
-            problems.append(f'Productivity: {productivity}')
+            problems.append(f'Productivity: {productivity:.2f}')
         return problems
     
     def __str__(self) -> str:
@@ -213,14 +225,44 @@ class FrackingBuilding(Factory, OutputInventoryMixin):
         return super().__str__() + f': {self.resource_name}'
 
 
+class SchematicManager(Actor):
+
+    def __init__(self, *, purchased_schematics: List[str]=[],
+                 active_schematic: Union[str, None]=None,
+                 schematic_paid_off: Dict[str, Dict[str, int]]=dict(),
+                 **kwargs) -> None:
+        """
+        Create a SchematicManager object
+
+        Args:
+            purchased_schematics (List[str]): All purchased schematics. Defaults to [].
+            active_schematic (Union[str, None]): If specified this is the current goal. Defaults to None.
+            schematic_paid_off (Dict[str, Dict[str, int]]): Mapping from schematic name to 
+                payoff state as item amount dict. Defaults to dict().
+        """
+        super().__init__(**kwargs)
+        self.purchased_schematics = purchased_schematics
+        self.active_schematic = active_schematic
+        self.schematic_paid_off = schematic_paid_off
+
+    def has_active_schematic(self) -> bool:
+        return self.active_schematic is None
+
+
 # TODO: GeneratorBuilding (see bio_generator_object.json)
-# TODO: Hub Unlock Progress, Selected Milestone
+# TODO: Game Phase Progress
 # TODO: Character to get Inventory
 
 class World:
 
-    def __init__(self, buildables: List[Buildable]) -> None:
-        self.buildables = buildables
+    def __init__(self, actors: List[Actor]) -> None:
+        self.actors = actors
 
     def get_factories(self) -> List[Factory]:
-        return [buildable for buildable in self.buildables if isinstance(buildable, Factory)]
+        return [actor for actor in self.actors if isinstance(actor, Factory)]
+    
+    def get_schematic_manager(self) -> SchematicManager:
+        selection = [actor for actor in self.actors if isinstance(actor, SchematicManager)]
+        if len(selection) != 1:
+            raise ValueError('Expect one schematic manager instance')
+        return selection[0]

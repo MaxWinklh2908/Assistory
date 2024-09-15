@@ -4,18 +4,25 @@
     "level_name": "Persistent_Level",
     "needs_transform": 0,
     "object_type": 1,
-    "path_name": "Persistent_Level:PersistentLevel.BP_GameState_C_2147479081",
+    "path_name": "Persistent_Level:PersistentLevel.BP_GameState_C_2147461842",
     "placed": 0,
     "pos_x": 0.0,
     "pos_y": 0.0,
     "pos_z": 0.0,
     "properties": {
-        "mLastActiveSchematic": {
-            "end_idx": 788879,
+        "mActiveSchematic": {
+            "end_idx": 788545,
             "level_name": "",
-            "path_name": "/Game/FactoryGame/Schematics/Progression/Schematic_1-1.Schematic_1-1_C",
+            "path_name": "/Game/FactoryGame/Schematics/Progression/Schematic_2-1.Schematic_2-1_C",
             "property_type": "ObjectProperty",
-            "start_idx": 788747
+            "start_idx": 788417
+        },
+        "mLastActiveSchematic": {
+            "end_idx": 788677,
+            "level_name": "",
+            "path_name": "/Game/FactoryGame/Schematics/Progression/Schematic_2-1.Schematic_2-1_C",
+            "property_type": "ObjectProperty",
+            "start_idx": 788545
         },
         "mPurchasedSchematics": {
             "array_type": "ObjectProperty",
@@ -89,15 +96,15 @@
                     "path_name": "/Game/FactoryGame/Schematics/Alternate/Parts/Schematic_Alternate_Wire1.Schematic_Alternate_Wire1_C"
                 }
             ],
-            "end_idx": 788747,
+            "end_idx": 788417,
             "property_type": "ArrayProperty",
-            "start_idx": 787076
+            "start_idx": 786746
         },
         "mShipLandTimeStampSave": {
-            "end_idx": 788937,
+            "end_idx": 788735,
             "property_type": "FloatProperty",
-            "start_idx": 788879,
-            "value": -99.11417388916016
+            "start_idx": 788677,
+            "value": -224.32154846191406
         }
     },
     "root_object": "Persistent_Level",
@@ -109,6 +116,6 @@
     "scale_x": 1.0,
     "scale_y": 1.0,
     "scale_z": 1.0,
-    "start_idx": 786972,
+    "start_idx": 786642,
     "type_path": "/Game/FactoryGame/Schematics/Progression/BP_SchematicManager.BP_SchematicManager_C"
 }

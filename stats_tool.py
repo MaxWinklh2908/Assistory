@@ -9,24 +9,24 @@ import instantiator
 from data_types import *
 
 
-def print_actors(builds: Iterable[Buildable]):
-    print('--------------------Object properties--------------------------------')
-    for build in builds:
-        print(build)
+def print_actors(actors: Iterable[Actor]):
+    print('--------------------Actors--------------------------------')
+    for actor in actors:
+        print(actor)
 
 
-def extract_existing_recipes(builds: Iterable[Buildable]) -> dict:
+def extract_existing_recipes(factories: Iterable[Factory]) -> dict:
     recipes = dict()
-    for building in builds:
-        if isinstance(building, ManufacturingBuilding):
-            recipe_name = building.current_recipe_name
+    for factory in factories:
+        if isinstance(factory, ManufacturingBuilding):
+            recipe_name = factory.current_recipe_name
             if not recipe_name in game.RECIPES:
                 print('WARNING Skip unknown recipe:', recipe_name)
                 continue
-            if building.is_production_paused:
+            if factory.is_production_paused:
                 print('WARNING Production paused:', recipe_name)
                 continue
-            rate = building.get_effective_rate()
+            rate = factory.get_effective_rate()
             recipes[recipe_name] = recipes.get(recipe_name, 0) + rate
         # TODO:
         # elif isinstance(building, FrackingBuilding):
@@ -48,8 +48,8 @@ def calculate_item_production(recipes: dict) -> dict:
     return {item_name:rate for item_name,rate in item_rates.items() if rate != 0}
 
 
-def print_production_rates(builds: Iterable[Buildable]):
-    recipe_amount = extract_existing_recipes(builds)
+def print_production_rates(factories: Iterable[Factory]):
+    recipe_amount = extract_existing_recipes(factories)
     print('--------------------Recipe Rates --------------------------------')
     pprint({
         recipe_name: amount
@@ -65,12 +65,37 @@ def print_production_rates(builds: Iterable[Buildable]):
     })
 
 
-def print_factory_status(builds: Iterable[Buildable]):
+def print_factory_status(factories: Iterable[Factory]):
     print('--------------------Factory status (Problem!) --------------------------------')
-    for build in builds:
-        if build.get_problems():
-            print(build, build.get_problems())
+    for factory in factories:
+        if factory.get_problems():
+            print(factory, factory.get_problems())
 
+
+def print_milestone_progress(factories: Iterable[Factory],
+                                 schematic_manager: SchematicManager):
+    if not schematic_manager.active_schematic:
+        return
+    print('--------------------Milestone Progress --------------------------------')
+    milestone_name = schematic_manager.active_schematic
+    milestone_cost = game.data['schematics'][milestone_name]['cost']
+    payoff = schematic_manager.schematic_paid_off.get(milestone_name, {})
+    recipe_amount = extract_existing_recipes(factories)
+    item_rates = calculate_item_production(recipe_amount)
+    max_time = 0
+    for item_costs in milestone_cost:
+        item_name = item_costs["item"]
+        target_amount = item_costs["amount"]
+        payoff_amount = payoff.get(item_name, 0)
+        item_rate = item_rates.get(item_name, 0)
+        if item_rate > 0:
+            estimated_time = (target_amount - payoff_amount) / item_rate
+        else:
+            estimated_time = float('inf')
+        print(f'{item_name}: {payoff_amount}/{target_amount} +{item_rate:.2f}/min => {estimated_time:.2f} min')
+        max_time = max(max_time, estimated_time)
+    print(f'Time to finish: {max_time:.2f} min')
+    
 
 def main(compressed_save_file: str):
     # read file
@@ -83,12 +108,13 @@ def main(compressed_save_file: str):
     # parse file
     reader = save_parser.UncompressedReader(data)
     objects = reader.read()
-    actors = instantiator.instantiate_objects(objects)
+    world = instantiator.instantiate_world(objects)
 
     # print stats
     # print_actors(actors)
-    print_production_rates(actors)
-    print_factory_status(actors)
+    # print_production_rates(world.get_factories())
+    print_factory_status(world.get_factories())
+    print_milestone_progress(world.get_factories(), world.get_schematic_manager())
 
 
 if __name__ == '__main__':

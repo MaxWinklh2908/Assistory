@@ -11,8 +11,24 @@ ACTOR_TYPE = 1
 ############################### Buildable #####################################
 
 
-def get_args_for_buildable(obj: dict, components: Dict[str,dict]) -> dict:
+def get_args_for_actor(obj: dict, components: Dict[str,dict]) -> dict:
+    if obj['object_type'] != ACTOR_TYPE:
+        raise ValueError('Expect actor')
     kwargs = dict()
+    kwargs['instance_name'] = obj['instance_name']
+    kwargs['type_path'] = obj['type_path']
+    return kwargs
+
+
+def create_actor(obj: dict, components: Dict[str,dict]) -> Actor:
+    return Actor(**get_args_for_actor(obj, components))
+
+
+############################### Buildable #####################################
+
+
+def get_args_for_buildable(obj: dict, components: Dict[str,dict]) -> dict:
+    kwargs = get_args_for_actor(obj, components)
     transform = (
         obj["pos_x"],
         obj["pos_y"],
@@ -22,8 +38,6 @@ def get_args_for_buildable(obj: dict, components: Dict[str,dict]) -> dict:
         obj["rot_z"],
         obj["rot_w"],
     )
-    kwargs['instance_name'] = obj['instance_name']
-    kwargs['type_path'] = obj['type_path']
     kwargs['transform'] = transform
     if 'mBuiltWithRecipe' in obj['properties']:
         kwargs['build_with_recipe'] = obj['properties']['mBuiltWithRecipe']['path_name'],
@@ -32,9 +46,8 @@ def get_args_for_buildable(obj: dict, components: Dict[str,dict]) -> dict:
 
 
 def create_buildable(obj: dict, components: Dict[str,dict]) -> Buildable:
-    if obj['object_type'] != ACTOR_TYPE:
-        raise ValueError('Expect actor')
-    return Buildable(**get_args_for_buildable(obj, components))
+    kwargs = get_args_for_buildable(obj, components)
+    return Buildable(**kwargs)
 
 
 ############################### Factory #######################################
@@ -48,7 +61,12 @@ def get_args_for_factory(obj: dict, components: Dict[str,dict]) -> dict:
         if kwargs['is_productivity_monitor_enabled']:
         # TODO: only if enabled=True?
             kwargs['current_productivity_measurement_duration'] = prop['mCurrentProductivityMeasurementDuration']['value']
-            kwargs['current_productivity_measurement_produce_duration'] = prop['mCurrentProductivityMeasurementProduceDuration']['value']
+            if 'mCurrentProductivityMeasurementProduceDuration' in prop:
+                kwargs['current_productivity_measurement_produce_duration'] = prop['mCurrentProductivityMeasurementProduceDuration']['value']
+            else:
+                # in case the power is shutdown TODO: check otherwise
+                kwargs['current_productivity_measurement_produce_duration'] = 0
+
     if 'mPendingPotential' in prop:
         kwargs['pending_potential'] = prop['mPendingPotential']['value']
     if 'mIsProducing' in prop:
@@ -155,10 +173,50 @@ def create_fracking_building(obj: dict, components: Dict[str,dict]
     return FrackingBuilding(**kwargs)
 
 
+############################## Game Progression ###############################
+
+
+def extract_schematics_payoff(schematic_cost: dict) -> Tuple[str, dict]:
+    schematic_name = schematic_cost['prop']['path_name'].split('.')[-1]
+    item_amounts = dict()
+    for item in schematic_cost['properties']['ItemCost']['elements']:
+        item_name = item['prop']['path_name'].split('.')[-1]
+        amount = item['properties']['Amount']['value']
+        item_amounts[item_name] = amount
+    return schematic_name, item_amounts
+
+
+def get_args_for_schematic_manager(obj: dict, components: Dict[str,dict]
+                                   ) -> dict:
+    kwargs = get_args_for_actor(obj, components)
+    prop = obj['properties']
+    # print(prop.get('mPaidOffSchematic')) # DEBUG 
+    if 'mPurchasedSchematics' in prop:
+        kwargs['purchased_schematics'] = [
+            elem['path_name'].split('.')[-1]
+            for elem in prop['mPurchasedSchematics']['elements']
+        ]
+    if 'mPaidOffSchematic' in prop:
+        payoffs = dict()
+        for elem in prop['mPaidOffSchematic']['elements']:
+            schematic_name, item_amounts = extract_schematics_payoff(elem)
+            payoffs[schematic_name] = item_amounts
+        kwargs['schematic_paid_off'] = payoffs
+    if 'mActiveSchematic' in prop:
+        kwargs['active_schematic'] = prop['mActiveSchematic']['path_name'].split('.')[-1]
+    return kwargs
+
+
+def create_schematic_manager(obj: dict, components: Dict[str,dict]
+                             ) -> SchematicManager:
+    kwargs = get_args_for_schematic_manager(obj, components)
+    return SchematicManager(**kwargs)
+
+
 ############################### main ##########################################
 
 
-BUILDABLE_INSTANTIATION_FUNCTION = {
+INSTANTIATION_FUNCTION = {
     # Fracking
     '/Game/FactoryGame/Buildable/Factory/MinerMK1/Build_MinerMk1.Build_MinerMk1_C': 
         create_fracking_building,
@@ -192,6 +250,9 @@ BUILDABLE_INSTANTIATION_FUNCTION = {
     '/Game/FactoryGame/Buildable/Factory/HadronCollider/Build_HadronCollider.Build_HadronCollider_C':
         create_manufacturing_building,
     # TODO: Release update
+
+    '/Game/FactoryGame/Schematics/Progression/BP_SchematicManager.BP_SchematicManager_C':
+        create_schematic_manager,
 }
 
 
@@ -206,26 +267,25 @@ def instantiate_world(objects: List[dict]) -> World:
     actors = []
     missed_types = set()
     for o in objects:
-        if o['object_type'] == ACTOR_TYPE:
-            if not o['type_path'] in BUILDABLE_INSTANTIATION_FUNCTION:
-                missed_types.add(o['type_path'])
-                continue
-            actor_components = {
-                component_ref['path_name']: components[component_ref['path_name']]
-                for component_ref in o['components']
-            }
-            func = BUILDABLE_INSTANTIATION_FUNCTION[o['type_path']]
-            try:
-                actor = func(o, actor_components)
-            except Exception as e:
-                from pprint import pprint
-                pprint(o)
-                raise e
-            actors.append(actor)
+        if not o['type_path'] in INSTANTIATION_FUNCTION:
+            missed_types.add(o['type_path'])
+            continue
+        actor_components = {
+            component_ref['path_name']: components[component_ref['path_name']]
+            for component_ref in o['components']
+        }
+        func = INSTANTIATION_FUNCTION[o['type_path']]
+        try:
+            actor = func(o, actor_components)
+        except Exception as e:
+            from pprint import pprint
+            pprint(o)
+            raise e
+        actors.append(actor)
 
     # guide implementation
     missed_facilities = {t.split('.')[-1]: t for t in missed_types}
     for facility_name in set(missed_facilities).intersection(set(game.PRODUCTION_FACILITIES)):
         print('WARNING Missed types:', missed_facilities[facility_name])
 
-    return World(buildables=actors)
+    return World(actors=actors)

@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 import time
+import os
 
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, FileSystemEvent
@@ -23,10 +24,13 @@ class FileChangeHandler(FileSystemEventHandler):
             self.callback(event.src_path)
 
 
-def monitor_directory(path):
-    callback = stats_tool.main
+def stats_callback(save_file_path: str):
+    os.system('clear')
+    stats_tool.main(save_file_path)
 
-    event_handler = FileChangeHandler(callback)
+
+def monitor_directory(path):
+    event_handler = FileChangeHandler(stats_callback)
     observer = Observer()
     observer.schedule(event_handler, path, recursive=False)
     print('Monitoring', path)

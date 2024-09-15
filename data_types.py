@@ -28,13 +28,13 @@ class Buildable:
 
     def get_map_position(self) -> Tuple[float]:
         return (
-            self.transform[0] / 100.0,
-            self.transform[1] / 100.0,
+            self.transform[0] / 1000.0,
+            self.transform[1] / 1000.0,
             self.transform[2] / 100.0
         )
     
     def __str__(self) -> str:
-        building_name = self.type_path.split('.')[-1]
+        building_name = self.instance_name.split('.')[-1]
         x,y,z = self.get_map_position()
         return f'{building_name} ({x:.1f}, {y:.1f}, {z:.1f})'
 

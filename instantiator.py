@@ -96,9 +96,14 @@ def create_factory(obj: dict, components: Dict[str,dict]) -> Factory:
 
 
 def create_inventory_stack(item_desc: dict, stack: dict) -> ItemStack:
-    if item_desc['path_name'] == '': # when 
+    if stack['prop']['item_name'] != '':
+        item_name = stack['prop']['item_name'].split('.')[-1]
+        amount = stack['properties']['NumItems']['value']
+    elif item_desc['path_name'] != '':
+        item_name = item_desc['path_name'].split('.')[-1]
+        amount = 0
+    else: # must be empty is this case
         return ItemStack('', 0, 0)
-    item_name = item_desc['path_name'].split('.')[-1]
     if not item_name in game.ITEMS:
         print('WARNING Skip unknown item:',  item_name)
         return ItemStack('', 0, 0)
@@ -111,19 +116,22 @@ def create_inventory_stacks(component: dict) -> List[ItemStack]:
     if component['object_type'] != COMPONENT_TYPE:
         raise ValueError('Expect component')
     prop = component['properties']
-    item_descriptors = prop['mAllowedItemDescriptors']['elements']
+    allowed_items = prop['mAllowedItemDescriptors']['elements']
     if not 'mInventoryStacks' in component['properties']:
         # TODO: Why does Miner not have mInventoryStacks member?
-        stacks = [{'properties': {'NumItems': {'value': 0}}}] * len(item_descriptors)
+        stacks = [{
+            'prop': {'item_name': ''},
+            'properties': {'NumItems': {'value': 0}},
+            }] * len(allowed_items)
     else:
         stacks = component['properties']['mInventoryStacks']['elements']
-        if len(item_descriptors) != len(stacks):
+        if len(allowed_items) != len(stacks):
             raise ValueError
-    # TODO: Why does OutputInventory have extra FGItemDesciptor stack?
+    # TODO: Why does OutputInventory have extra FGItemDesciptor stack? It means no item allowed
     return [
-        create_inventory_stack(item_desc, stack)
-        for item_desc, stack in zip(item_descriptors, stacks)
-        if not 'FGItemDescriptor' in item_desc['path_name']
+        create_inventory_stack(allowed_item, stack)
+        for allowed_item, stack in zip(allowed_items, stacks)
+        if not 'FGItemDescriptor' in allowed_item['path_name']
     ]
 
 
@@ -254,6 +262,23 @@ def create_game_phase_manager(obj: dict, components: Dict[str,dict]
     return GamePhaseManager(**kwargs)
 
 
+############################## Characters #####################################
+
+
+def get_args_for_player(obj: dict, components: Dict[str,dict]
+                                    ) -> dict:
+    kwargs = get_args_for_actor(obj, components)
+    prop = obj['properties']
+    inventory_component = components[prop['mInventory']['path_name']]
+    kwargs['inventory_stacks'] = create_inventory_stacks(inventory_component)
+    return kwargs
+
+
+def create_player(obj: dict, components: Dict[str,dict]) -> Player:
+    kwargs = get_args_for_player(obj, components)
+    return Player(**kwargs)
+
+
 ############################### main ##########################################
 
 
@@ -296,6 +321,10 @@ INSTANTIATION_FUNCTION = {
         create_schematic_manager,
     '/Game/FactoryGame/Schematics/Progression/BP_GamePhaseManager.BP_GamePhaseManager_C':
         create_game_phase_manager,
+
+    # Characters
+    '/Game/FactoryGame/Character/Player/Char_Player.Char_Player_C':
+        create_player,
 }
 
 

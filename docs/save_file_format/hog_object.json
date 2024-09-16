@@ -1,0 +1,51 @@
+{
+    "components": [
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Char_Hog_C_2147082249.HealthComponent"
+        }
+    ],
+    "instance_name": "Persistent_Level:PersistentLevel.Char_Hog_C_2147082249",
+    "level_name": "",
+    "needs_transform": 1,
+    "object_type": 1,
+    "path_name": "",
+    "placed": 0,
+    "pos_x": -168779.84375,
+    "pos_y": -28399.509765625,
+    "pos_z": -525.6000366210938,
+    "properties": {
+        "mHealthComponent": {
+            "end_idx": 2636168,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Char_Hog_C_2147082249.HealthComponent",
+            "property_type": "ObjectProperty",
+            "start_idx": 2636023
+        },
+        "mOwningSpawner": {
+            "end_idx": 2636023,
+            "level_name": "2GKODSKLS4G0U1RMLERA97OA5",
+            "path_name": "Persistent_Level:PersistentLevel.BP_CreatureSpawner_C_UAID_04421A9713F0989B01_1208106600",
+            "property_type": "ObjectProperty",
+            "start_idx": 2635853
+        },
+        "mSpline": {
+            "end_idx": 2635853,
+            "level_name": "2GKODSKLS4G0U1RMLERA97OA5",
+            "path_name": "Persistent_Level:PersistentLevel.BP_Spline_C_UAID_04421A9713F0989B01_1219767601",
+            "property_type": "ObjectProperty",
+            "start_idx": 2635699
+        }
+    },
+    "root_object": "Persistent_Level",
+    "rot_w": 0.9091383218765259,
+    "rot_x": 0.0,
+    "rot_y": -0.0,
+    "rot_z": 0.41649430990219116,
+    "save_version": 46,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "scale_z": 1.0,
+    "start_idx": 2635575,
+    "type_path": "/Game/FactoryGame/Character/Creature/Enemy/Hog/Char_Hog.Char_Hog_C"
+}

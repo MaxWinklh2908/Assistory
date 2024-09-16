@@ -175,6 +175,20 @@ class OutputInventoryMixin:
         return item_amounts
 
 
+class InventoryMixin:
+
+    def __init__(self, inventory_stacks: Iterable[ItemStack]) -> None:
+        self.inventory_stacks = list(inventory_stacks)
+
+    def get_inventory_items(self) -> dict:
+        item_amounts = dict()
+        for stack in self.inventory_stacks:
+            if stack.is_empty():
+                continue
+            item_amounts[stack.item_name] = item_amounts.get(stack.item_name, 0) + stack.amount
+        return item_amounts
+
+
 class ManufacturingBuilding(Factory, InputInventoryMixin, OutputInventoryMixin):
 
     def __init__(self, *, input_inventory_stacks: List[ItemStack],
@@ -276,11 +290,24 @@ class GamePhaseManager(Actor):
 
     def has_active_phase(self) -> bool:
         return not self.active_phase is None
+    
+
+class Player(Actor, InventoryMixin):
+
+    def __init__(self, *, inventory_stacks: List[ItemStack], **kwargs) -> None:
+        """
+        Create a player.
+
+        Args:
+            inventory_stacks (List[ItemStack]): Items the player is possessing
+            in its inventory. This is not including the body slots.
+        """
+        super().__init__(**kwargs)
+        InventoryMixin.__init__(self, inventory_stacks)
 
 
 # TODO: GeneratorBuilding (see bio_generator_object.json)
-# TODO: Game Phase Progress
-# TODO: Character to get Inventory
+
 
 class World:
 
@@ -293,11 +320,20 @@ class World:
     def get_schematic_manager(self) -> SchematicManager:
         selection = [actor for actor in self.actors if isinstance(actor, SchematicManager)]
         if len(selection) != 1:
-            raise ValueError('Expect one schematic manager instance')
+            names = {actor.instance_name for actor in selection}
+            raise ValueError('Expect one schematic manager instance. Got ' + str(names))
         return selection[0]
     
     def get_game_phase_manager(self) -> GamePhaseManager:
         selection = [actor for actor in self.actors if isinstance(actor, GamePhaseManager)]
         if len(selection) != 1:
-            raise ValueError('Expect one schematic manager instance')
+            names = {actor.instance_name for actor in selection}
+            raise ValueError('Expect one game phase manager instance. Got ' + str(names))
+        return selection[0]
+    
+    def get_player(self) -> Player:
+        selection = [actor for actor in self.actors if isinstance(actor, Player)]
+        if len(selection) != 1:
+            names = {actor.instance_name for actor in selection}
+            raise ValueError('Expect one player instance. Got ' + str(names))
         return selection[0]

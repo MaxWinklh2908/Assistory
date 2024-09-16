@@ -208,10 +208,20 @@ class ManufacturingBuilding(Factory, InputInventoryMixin, OutputInventoryMixin):
 
 class FrackingBuilding(Factory, OutputInventoryMixin):
 
-    def __init__(self, *, resource_name: str,
+    def __init__(self, *, resource_name: str, current_recipe_name: str,
                  output_inventory_stacks: List[ItemStack], **kwargs) -> None:
+        """
+        Create a Fracking building
+
+        Args:
+            resource_name (str): Name of the resource that is extracted
+            current_recipe_name (str): Name of the recipe used. This is an
+            implementation detail not found in the original game.
+            output_inventory_stacks (List[ItemStack]): Stack of items to output
+        """
         super().__init__(**kwargs)
         self.resource_name = resource_name
+        self.current_recipe_name = current_recipe_name
         self._output_inventory_stacks = output_inventory_stacks
 
     def get_problems(self) -> List[str]:
@@ -220,6 +230,8 @@ class FrackingBuilding(Factory, OutputInventoryMixin):
             if stack.is_full():
                 probems.append(f'Output stack of {stack.item_name} is full: {stack.amount}/{stack.amount}')
         return probems
+    
+    # TODO: overwrite get_effective_rate based on purity of node
     
     def __str__(self) -> str:
         return super().__str__() + f': {self.resource_name}'

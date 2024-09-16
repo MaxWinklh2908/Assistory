@@ -18,7 +18,7 @@ def print_actors(actors: Iterable[Actor]):
 def extract_existing_recipes(factories: Iterable[Factory]) -> dict:
     recipes = dict()
     for factory in factories:
-        if isinstance(factory, ManufacturingBuilding):
+        if isinstance(factory, (ManufacturingBuilding, FrackingBuilding)):
             recipe_name = factory.current_recipe_name
             if not recipe_name in game.RECIPES:
                 print('WARNING Skip unknown recipe:', recipe_name)
@@ -28,9 +28,6 @@ def extract_existing_recipes(factories: Iterable[Factory]) -> dict:
                 continue
             rate = factory.get_effective_rate()
             recipes[recipe_name] = recipes.get(recipe_name, 0) + rate
-        # TODO:
-        # elif isinstance(building, FrackingBuilding):
-        #     rate = building.get_effective_rate()
     return recipes
 
 

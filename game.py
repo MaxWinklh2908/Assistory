@@ -112,9 +112,23 @@ NODES_AVAILABLE['Recipe_MinerMk3Sulfur_C'] =                      (2 * 3 + 7 + 0
 NODES_AVAILABLE['Recipe_MinerMk3OreBauxite_C'] =                  (2 * 6 + 6 + 0.5 * 5)
 NODES_AVAILABLE['Recipe_MinerMk3RawQuartz_C'] =                   (2 * 5 + 11 + 0.5 * 0)
 NODES_AVAILABLE['Recipe_MinerMk3OreUranium_C'] =                  (2 * 0 + 3 + 0.5 * 1)
-NODES_AVAILABLE['Recipe_OilExtractorLiquidOil_C'] =               (2 * 8 + 12 + 0.5 * 10)
+NODES_AVAILABLE['Recipe_OilPumpLiquidOil_C'] =                    (2 * 8 + 12 + 0.5 * 10)
 NODES_AVAILABLE['Recipe_ResourceWellPressurizerNitrogenGas_C'] =  (2 * 36 + 7 + 0.5 * 2)
 NODES_AVAILABLE['Recipe_ResourceWellPressurizerLiquidOil_C'] =    (2 * 3 + 3 + 0.5 * 6)
+# By default use only MinerMk3
+for level in (1, 2):
+    for item_name in [
+        'Desc_Stone_C',
+        'Desc_OreIron_C',
+        'Desc_OreCopper_C',
+        'Desc_OreGold_C',
+        'Desc_Coal_C',
+        'Desc_Sulfur_C',
+        'Desc_OreBauxite_C',
+        'Desc_RawQuartz_C',
+        'Desc_OreUranium_C',
+    ]:
+        NODES_AVAILABLE[f'Recipe_MinerMk{level}{get_bare_item_name(item_name)}_C'] = 0
 
 def define_recipes():
     def transform_to_dict(items: list):
@@ -207,7 +221,7 @@ def define_recipes():
         'time': 60,
     }
     # Water Extractor
-    recipes['Recipe_WaterExtractorWater_C'] = {
+    recipes['Recipe_WaterPumpWater_C'] = {
         
         'ingredients': {},
         'products': {'Desc_Water_C': 120},
@@ -215,31 +229,31 @@ def define_recipes():
         'time': 60,
     }
     # Oil extractor
-    recipes['Recipe_OilExtractorLiquidOil_C'] = {
+    recipes['Recipe_OilPumpLiquidOil_C'] = {
         'ingredients': {},
         'products': {'Desc_LiquidOil_C': 120},
         'producedIn': 'Desc_OilPump_C',
         'time': 60,
     }
     # Add miners
-    # TODO: How to handle Mk1 and Mk2?
-    for item_name in [
-        'Desc_Stone_C',
-        'Desc_OreIron_C',
-        'Desc_OreCopper_C',
-        'Desc_OreGold_C',
-        'Desc_Coal_C',
-        'Desc_Sulfur_C',
-        'Desc_OreBauxite_C',
-        'Desc_RawQuartz_C',
-        'Desc_OreUranium_C',
-    ]:
-        recipes[f'Recipe_MinerMk3{get_bare_item_name(item_name)}_C'] = {
-            'ingredients': {},
-            'products': {item_name: 240},
-            'producedIn': 'Desc_MinerMk3_C',
-            'time': 60,
-        }
+    for level in (1, 2, 3):
+        for item_name in [
+            'Desc_Stone_C',
+            'Desc_OreIron_C',
+            'Desc_OreCopper_C',
+            'Desc_OreGold_C',
+            'Desc_Coal_C',
+            'Desc_Sulfur_C',
+            'Desc_OreBauxite_C',
+            'Desc_RawQuartz_C',
+            'Desc_OreUranium_C',
+        ]:
+            recipes[f'Recipe_MinerMk{level}{get_bare_item_name(item_name)}_C'] = {
+                'ingredients': {},
+                'products': {item_name: 60 * 2**level},
+                'producedIn': f'Desc_MinerMk{level}_C',
+                'time': 60,
+            }
     # Resource wells
     for item_name in [
         'Desc_NitrogenGas_C',

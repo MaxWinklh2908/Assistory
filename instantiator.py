@@ -162,6 +162,19 @@ def get_args_for_fracking_building(obj: dict, components: Dict[str,dict]
         item_stack
         for item_stack in kwargs['output_inventory_stacks']
         if len(item_stack.item_name) > 0][0].item_name
+    factory_build_recipe = obj['properties']['mBuiltWithRecipe']['path_name'].split('.')[-1]
+    if 'Miner' in factory_build_recipe:
+        insert_idx = factory_build_recipe.find('Miner') + len('MinerMkX')
+        recipe_name = (factory_build_recipe[:insert_idx]
+                       + game.get_bare_item_name(kwargs['resource_name'])
+                       + factory_build_recipe[insert_idx:])
+    elif factory_build_recipe.endswith('Recipe_WaterPump_C'):
+        recipe_name = 'Recipe_WaterPumpWater_C'
+    elif factory_build_recipe.endswith('Recipe_OilPump_C'):
+        recipe_name = 'Recipe_OilPumpLiquidOil_C'
+    else:
+        raise NotImplementedError(str(factory_build_recipe))
+    kwargs['current_recipe_name'] = recipe_name
     return kwargs
 
 

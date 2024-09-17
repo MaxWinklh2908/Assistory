@@ -20,6 +20,8 @@ RETURN_CODES = {
  3: 'UNBOUNDED',
 }
 
+STEP_DURATION = 1.0 # minutes
+
 
 def define_facility_recipes():
     facility_recipes = {
@@ -179,7 +181,7 @@ def define_problem(data_conf: DataConfiguration,
     for i in data_conf.I:
         solver.Add(x[i,0] == start_conf.S[i])
         for t in optim_conf.T - {0}:
-            solver.Add(x[i,t] == x[i,t-1] + (-v[i,t-1] + p[i,t-1]))
+            solver.Add(x[i,t] == x[i,t-1] + (-v[i,t-1] + STEP_DURATION * p[i,t-1]))
             # solver.Add(x[i,t] == x[i,t-1] + y[t] * (-v[i,t] + p[i,t])) # TODO: reformulate
 
     # constraint: target capital

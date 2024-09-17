@@ -81,7 +81,11 @@ def transform_to_dict(items: List[dict]) -> dict:
 
 
 def vectorize(name2count: dict, base_names: Iterable) -> list:
+    for item_name in name2count:
+        if item_name not in base_names:
+            raise ValueError('Unknown item: ', item_name)
     return [name2count.get(name,0) for name in sorted(base_names)]
+
 
 def unvectorize(counts: Iterable, base_names: Iterable) -> dict:
     return {

@@ -76,7 +76,7 @@ class SaveReader:
         original_idx = self.idx
         name = self.read_string()
         if name == '':
-            raise ValueError('Invalid name: ' + name)
+            raise ValueError(f'[{original_idx}] Invalid name: ' + name)
         if name == 'None':
             return name, None
         val = dict()
@@ -127,10 +127,14 @@ class SaveReader:
         val = dict()
         val['struct_type'] = self.read_string()
         self.idx += 17 # padding
+        original_idx = self.idx
         if val['struct_type'] ==  'InventoryItem':
             val['a'] = self.read_int()
             val['item_name'] = self.read_string()
-            val['c'] = self.read_int()
+            val['has_additional_data'] = self.read_int()
+            if val['has_additional_data'] != 0: # TODO: correct?
+                bytes_read = self.idx - original_idx
+                val['additional_data'] = self.read_bytes(n_bytes - bytes_read)
         else: # TODO: other types
             val['payload'] = self.read_bytes(n_bytes) # InventoryItem: int, string, int
         return val
@@ -151,7 +155,7 @@ class SaveReader:
         try:
             val.update(self._set_property_parsers[val['array_type']]())
         except Exception as e:
-            print('WARNING Error reading ArrayProperty:', e.args)
+            print(f'[{original_idx}] WARNING Error reading SetProperty:', e.args)
             self.idx = original_idx + n_bytes  # skipping this property
 
         if original_idx + n_bytes != self.idx:
@@ -262,7 +266,7 @@ class SaveReader:
         try:
             val.update(self._array_property_parsers[val['array_type']]())
         except Exception as e:
-            print('WARNING Error reading ArrayProperty:', e.args)
+            print(f'[{original_idx}] WARNING Error reading ArrayProperty:', e.args)
             self.idx = original_idx + n_bytes  # skipping this property
 
         if original_idx + n_bytes != self.idx:

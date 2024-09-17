@@ -28,10 +28,10 @@ class FileChangeHandler(FileSystemEventHandler):
         except Exception as e:
             print(f"Failed to copy {src_path} to {dest_path}: {e}")
         
-    def on_modified(self, event: FileSystemEvent):
-        if not event.is_directory and event.src_path.endswith('.sav') and not 'BACK000' in event.src_path:
-            print(f"Modified file: {event.src_path}")
-            self._copy_file(event)
+    # def on_modified(self, event: FileSystemEvent):
+    #     if not event.is_directory and event.src_path.endswith('.sav') and not 'BACK000' in event.src_path:
+    #         print(f"Modified file: {event.src_path}")
+    #         self._copy_file(event)
 
     def on_created(self, event: FileSystemEvent):
         if not event.is_directory and event.src_path.endswith('.sav') and not 'BACK000' in event.src_path:

@@ -15,17 +15,18 @@ class FileChangeHandler(FileSystemEventHandler):
 
     def on_modified(self, event: FileSystemEvent):
         if not event.is_directory:
+            time.sleep(1) # to avoid Zlib error 5
+            os.system('clear')
             print(f"Modified file: {event.src_path}")
             self.callback(event.src_path)
 
-    def on_created(self, event: FileSystemEvent):
-        if not event.is_directory:
-            print(f"New file created: {event.src_path}")
-            self.callback(event.src_path)
+    # def on_created(self, event: FileSystemEvent):
+    #     if not event.is_directory:
+    #         print(f"New file created: {event.src_path}")
+    #         self.callback(event.src_path)
 
 
 def stats_callback(save_file_path: str):
-    os.system('clear')
     stats_tool.main(save_file_path)
 
 

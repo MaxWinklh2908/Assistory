@@ -41,7 +41,7 @@ def create_buildable(obj: dict, components: Dict[str,dict]) -> Buildable:
 
 
 def get_args_for_factory(obj: dict, components: Dict[str,dict]) -> dict:
-    kwargs = dict()
+    kwargs = get_args_for_buildable(obj, components)
     prop = obj['properties']
     if 'mProductivityMonitorEnabled' in prop:
         kwargs['is_productivity_monitor_enabled'] = prop['mProductivityMonitorEnabled']['value']
@@ -70,9 +70,7 @@ def get_args_for_factory(obj: dict, components: Dict[str,dict]) -> dict:
 def create_factory(obj: dict, components: Dict[str,dict]) -> Factory:
     if obj['object_type'] != ACTOR_TYPE:
         raise ValueError('Expect actor')
-    kwargs = dict()
-    kwargs.update(get_args_for_buildable(obj, components))
-    kwargs.update(get_args_for_factory(obj, components))
+    kwargs = get_args_for_factory(obj, components)
     return Factory(**kwargs)
 
 
@@ -110,7 +108,7 @@ def create_inventory_stacks(component: dict) -> List[ItemStack]:
 
 def get_args_for_manufacturing_building(obj: dict, components: Dict[str,dict]
                                         ) -> dict:
-    kwargs = dict()
+    kwargs = get_args_for_factory(obj, components)
     prop = obj['properties']
     if 'mCurrentRecipe' in prop:
         kwargs['current_recipe_name'] = prop['mCurrentRecipe']['path_name'].split('.')[-1]
@@ -125,10 +123,7 @@ def create_manufacturing_building(obj: dict, components: Dict[str,dict]
                                   ) -> ManufacturingBuilding:
     if obj['object_type'] != ACTOR_TYPE:
         raise ValueError('Expect actor')
-    kwargs = dict()
-    kwargs.update(get_args_for_buildable(obj, components))
-    kwargs.update(get_args_for_factory(obj, components))
-    kwargs.update(get_args_for_manufacturing_building(obj, components))
+    kwargs = get_args_for_manufacturing_building(obj, components)
     return ManufacturingBuilding(**kwargs)
 
 
@@ -137,7 +132,7 @@ def create_manufacturing_building(obj: dict, components: Dict[str,dict]
 
 def get_args_for_fracking_building(obj: dict, components: Dict[str,dict]
                                    ) -> dict:
-    kwargs = dict()
+    kwargs = get_args_for_factory(obj, components)
     prop = obj['properties']
     output_inventory_component = components[prop['mOutputInventory']['path_name']]
     kwargs['output_inventory_stacks'] = create_inventory_stacks(output_inventory_component)
@@ -156,10 +151,7 @@ def create_fracking_building(obj: dict, components: Dict[str,dict]
                              ) -> FrackingBuilding:
     if obj['object_type'] != ACTOR_TYPE:
         raise ValueError('Expect actor')
-    kwargs = dict()
-    kwargs.update(get_args_for_buildable(obj, components))
-    kwargs.update(get_args_for_factory(obj, components))
-    kwargs.update(get_args_for_fracking_building(obj, components))
+    kwargs = get_args_for_fracking_building(obj, components)
     return FrackingBuilding(**kwargs)
 
 
@@ -203,7 +195,7 @@ BUILDABLE_INSTANTIATION_FUNCTION = {
 }
 
 
-def instantiate_objects(objects: List[dict]) -> List[Buildable]:
+def instantiate_world(objects: List[dict]) -> World:
     # assign components
     components = dict()
     for o in objects:
@@ -236,4 +228,4 @@ def instantiate_objects(objects: List[dict]) -> List[Buildable]:
     for facility_name in set(missed_facilities).intersection(set(game.PRODUCTION_FACILITIES)):
         print('WARNING Missed types:', missed_facilities[facility_name])
 
-    return actors
+    return World(buildables=actors)

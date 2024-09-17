@@ -199,3 +199,11 @@ class FrackingBuilding(Factory, OutputInventoryMixin):
 # TODO: GeneratorBuilding (see bio_generator_object.json)
 # TODO: Hub Unlock Progress, Selected Milestone
 # TODO: Character to get Inventory
+
+class World:
+
+    def __init__(self, buildables: List[Buildable]) -> None:
+        self.buildables = buildables
+
+    def get_factories(self) -> List[Factory]:
+        return [buildable for buildable in self.buildables if isinstance(buildable, Factory)]

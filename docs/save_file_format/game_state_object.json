@@ -1,0 +1,311 @@
+{
+    "components": [],
+    "instance_name": "Persistent_Level:PersistentLevel.BP_GameState_C_2147479243",
+    "level_name": "",
+    "needs_transform": 0,
+    "object_type": 1,
+    "path_name": "",
+    "placed": 0,
+    "pos_x": 0.0,
+    "pos_y": 0.0,
+    "pos_z": 0.0,
+    "properties": {
+        "mActorRepresentationManager": {
+            "end_idx": 849897,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.ActorRepresentationManager",
+            "property_type": "ObjectProperty",
+            "start_idx": 849752
+        },
+        "mBlueprintSubsystem": {
+            "end_idx": 850786,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.BlueprintSubsystem",
+            "property_type": "ObjectProperty",
+            "start_idx": 850657
+        },
+        "mBuildableLightColorSlots": {
+            "array_type": "StructProperty",
+            "element_type": "LinearColor",
+            "elements": [
+                {
+                    "a": 1.0,
+                    "b": 1.0,
+                    "g": 1.0,
+                    "r": 1.0
+                },
+                {
+                    "a": 1.0,
+                    "b": 0.0,
+                    "g": 0.0,
+                    "r": 1.0
+                },
+                {
+                    "a": 1.0,
+                    "b": 0.0,
+                    "g": 1.0,
+                    "r": 1.0
+                },
+                {
+                    "a": 1.0,
+                    "b": 0.0,
+                    "g": 1.0,
+                    "r": 0.0
+                },
+                {
+                    "a": 1.0,
+                    "b": 1.0,
+                    "g": 1.0,
+                    "r": 0.0
+                },
+                {
+                    "a": 1.0,
+                    "b": 1.0,
+                    "g": 0.0,
+                    "r": 0.0
+                },
+                {
+                    "a": 1.0,
+                    "b": 1.0,
+                    "g": 0.0,
+                    "r": 1.0
+                }
+            ],
+            "end_idx": 852939,
+            "property_type": "ArrayProperty",
+            "start_idx": 852657
+        },
+        "mCentralStorageSubsystem": {
+            "end_idx": 850149,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.CentralStorageSubsystem",
+            "property_type": "ObjectProperty",
+            "start_idx": 850010
+        },
+        "mCircuitSubsystem": {
+            "end_idx": 849127,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.CircuitSubsystem",
+            "property_type": "ObjectProperty",
+            "start_idx": 849002
+        },
+        "mGamePhaseManager": {
+            "end_idx": 849496,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.GamePhaseManager",
+            "property_type": "ObjectProperty",
+            "start_idx": 849371
+        },
+        "mGameRulesSubsystem": {
+            "end_idx": 850915,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.GameRulesSubsystem",
+            "property_type": "ObjectProperty",
+            "start_idx": 850786
+        },
+        "mHasGivenStartingRecipes": {
+            "end_idx": 853113,
+            "property_type": "BoolProperty",
+            "start_idx": 853057,
+            "value": true
+        },
+        "mHasInitalTradingPostLandAnimPlayed": {
+            "end_idx": 853057,
+            "property_type": "BoolProperty",
+            "start_idx": 852990,
+            "value": true
+        },
+        "mIconDatabaseSubsystem": {
+            "end_idx": 851050,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.IconDatabaseSubsystem",
+            "property_type": "ObjectProperty",
+            "start_idx": 850915
+        },
+        "mIsTradingPostBuilt": {
+            "end_idx": 852990,
+            "property_type": "BoolProperty",
+            "start_idx": 852939,
+            "value": true
+        },
+        "mMapManager": {
+            "end_idx": 850010,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.MapManager",
+            "property_type": "ObjectProperty",
+            "start_idx": 849897
+        },
+        "mPickedUpItems": {
+            "array_type": "ObjectProperty",
+            "elements": [
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Resource/RawResources/OreIron/Desc_OreIron.Desc_OreIron_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Resource/Environment/Nut/Desc_Nut.Desc_Nut_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Prototype/WAT/Desc_WAT2.Desc_WAT2_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Resource/Parts/GenericBiomass/Desc_Leaves.Desc_Leaves_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Resource/Parts/GenericBiomass/Desc_Wood.Desc_Wood_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Resource/Environment/CrashSites/Desc_HardDrive.Desc_HardDrive_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Resource/Environment/Crystal/Desc_Crystal.Desc_Crystal_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Resource/RawResources/RawQuartz/Desc_RawQuartz.Desc_RawQuartz_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Resource/RawResources/OreCopper/Desc_OreCopper.Desc_OreCopper_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Resource/RawResources/Stone/Desc_Stone.Desc_Stone_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Resource/Environment/DesertShroom/Desc_Shroom.Desc_Shroom_C"
+                }
+            ],
+            "end_idx": 852534,
+            "property_type": "ArrayProperty",
+            "start_idx": 851571
+        },
+        "mPipeSubsystem": {
+            "end_idx": 850268,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.PipeSubsystem",
+            "property_type": "ObjectProperty",
+            "start_idx": 850149
+        },
+        "mPlayDurationWhenLoaded": {
+            "end_idx": 852591,
+            "property_type": "IntProperty",
+            "start_idx": 852534,
+            "value": 8188
+        },
+        "mRailroadSubsystem": {
+            "end_idx": 849002,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.RailroadSubsystem",
+            "property_type": "ObjectProperty",
+            "start_idx": 848875
+        },
+        "mRecipeManager": {
+            "end_idx": 849246,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.recipeManager",
+            "property_type": "ObjectProperty",
+            "start_idx": 849127
+        },
+        "mReplicatedSessionName": {
+            "end_idx": 852657,
+            "property_type": "StrProperty",
+            "start_idx": 852591,
+            "value": "Assistory"
+        },
+        "mResearchManager": {
+            "end_idx": 849619,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.ResearchManager",
+            "property_type": "ObjectProperty",
+            "start_idx": 849496
+        },
+        "mResourceSinkSubsystem": {
+            "end_idx": 850526,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.ResourceSinkSubsystem",
+            "property_type": "ObjectProperty",
+            "start_idx": 850391
+        },
+        "mSchematicManager": {
+            "end_idx": 849371,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.schematicManager",
+            "property_type": "ObjectProperty",
+            "start_idx": 849246
+        },
+        "mStatisticsSubsystem": {
+            "end_idx": 850657,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.StatisticsSubsystem",
+            "property_type": "ObjectProperty",
+            "start_idx": 850526
+        },
+        "mStorySubsystem": {
+            "end_idx": 848875,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.StorySubsystem",
+            "property_type": "ObjectProperty",
+            "start_idx": 848754
+        },
+        "mTutorialIntroManager": {
+            "end_idx": 849752,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.TutorialIntroManager",
+            "property_type": "ObjectProperty",
+            "start_idx": 849619
+        },
+        "mUnlockSubsystem": {
+            "end_idx": 850391,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.unlockSubsystem",
+            "property_type": "ObjectProperty",
+            "start_idx": 850268
+        },
+        "mVisitedMapAreas": {
+            "array_type": "ObjectProperty",
+            "elements": [
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Interface/UI/Minimap/MapAreaPersistenLevel/Area_RockyDesert_2.Area_RockyDesert_2_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Interface/UI/Minimap/MapAreaPersistenLevel/Area_Savanna_2.Area_Savanna_2_C"
+                },
+                {
+                    "level_name": "",
+                    "path_name": "/Game/FactoryGame/Interface/UI/Minimap/MapAreaPersistenLevel/Area_RockyDesert_1.Area_RockyDesert_1_C"
+                }
+            ],
+            "end_idx": 851571,
+            "property_type": "ArrayProperty",
+            "start_idx": 851181
+        },
+        "mWorldEventSubsystem": {
+            "end_idx": 851181,
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.WorldEventSubsystem",
+            "property_type": "ObjectProperty",
+            "start_idx": 851050
+        }
+    },
+    "root_object": "Persistent_Level",
+    "rot_w": 1.0,
+    "rot_x": 0.0,
+    "rot_y": 0.0,
+    "rot_z": 0.0,
+    "save_version": 46,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "scale_z": 1.0,
+    "start_idx": 848726,
+    "type_path": "/Game/FactoryGame/-Shared/Blueprint/BP_GameState.BP_GameState_C"
+}

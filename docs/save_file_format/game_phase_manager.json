@@ -4,25 +4,52 @@
     "level_name": "Persistent_Level",
     "needs_transform": 0,
     "object_type": 1,
-    "path_name": "Persistent_Level:PersistentLevel.BP_GameState_C_2147479081",
+    "path_name": "Persistent_Level:PersistentLevel.BP_GameState_C_2147479134",
     "placed": 0,
     "pos_x": 0.0,
     "pos_y": 0.0,
     "pos_z": 0.0,
     "properties": {
         "mCurrentGamePhase": {
-            "end_idx": 789193,
+            "end_idx": 874462,
             "level_name": "",
             "path_name": "/Game/FactoryGame/GamePhases/GP_Project_Assembly_Phase_0.GP_Project_Assembly_Phase_0",
             "property_type": "ObjectProperty",
-            "start_idx": 789050
+            "start_idx": 874319
         },
         "mTargetGamePhase": {
-            "end_idx": 789335,
+            "end_idx": 874604,
             "level_name": "",
             "path_name": "/Game/FactoryGame/GamePhases/GP_Project_Assembly_Phase_1.GP_Project_Assembly_Phase_1",
             "property_type": "ObjectProperty",
-            "start_idx": 789193
+            "start_idx": 874462
+        },
+        "mTargetGamePhasePaidOffCosts": {
+            "array_type": "StructProperty",
+            "element_type": "ItemAmount",
+            "elements": [
+                {
+                    "name": "ItemClass",
+                    "prop": {
+                        "end_idx": 874933,
+                        "level_name": "",
+                        "path_name": "/Game/FactoryGame/Resource/Parts/SpaceElevatorParts/Desc_SpaceElevatorPart_1.Desc_SpaceElevatorPart_1_C",
+                        "property_type": "ObjectProperty",
+                        "start_idx": 874779
+                    },
+                    "properties": {
+                        "Amount": {
+                            "end_idx": 874973,
+                            "property_type": "IntProperty",
+                            "start_idx": 874933,
+                            "value": 1
+                        }
+                    }
+                }
+            ],
+            "end_idx": 874982,
+            "property_type": "ArrayProperty",
+            "start_idx": 874604
         }
     },
     "root_object": "Persistent_Level",
@@ -34,6 +61,6 @@
     "scale_x": 1.0,
     "scale_y": 1.0,
     "scale_z": 1.0,
-    "start_idx": 788946,
+    "start_idx": 874215,
     "type_path": "/Game/FactoryGame/Schematics/Progression/BP_GamePhaseManager.BP_GamePhaseManager_C"
 }

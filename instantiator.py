@@ -189,32 +189,35 @@ def create_fracking_building(obj: dict, components: Dict[str,dict]
 ############################## Game Progression ###############################
 
 
-def extract_schematics_payoff(schematic_cost: dict) -> Tuple[str, dict]:
-    schematic_name = schematic_cost['prop']['path_name'].split('.')[-1]
+def extract_item_amounts(item_amount_elems: List[dict]) -> Dict[str, int]:
     item_amounts = dict()
-    for item in schematic_cost['properties']['ItemCost']['elements']:
+    for item in item_amount_elems:
         item_name = item['prop']['path_name'].split('.')[-1]
         amount = item['properties']['Amount']['value']
         item_amounts[item_name] = amount
-    return schematic_name, item_amounts
+    return item_amounts
+
+
+def extract_paid_off_schematics(paid_offs: List[dict]) -> Dict[str, Dict[str, int]]:
+    payoffs = dict()
+    for elem in paid_offs:
+        schematic_name = elem['prop']['path_name'].split('.')[-1]
+        item_amounts = extract_item_amounts(elem['properties']['ItemCost']['elements'])
+        payoffs[schematic_name] = item_amounts
 
 
 def get_args_for_schematic_manager(obj: dict, components: Dict[str,dict]
                                    ) -> dict:
     kwargs = get_args_for_actor(obj, components)
-    prop = obj['properties']
-    # print(prop.get('mPaidOffSchematic')) # DEBUG 
+    prop = obj['properties'] 
     if 'mPurchasedSchematics' in prop:
         kwargs['purchased_schematics'] = [
             elem['path_name'].split('.')[-1]
             for elem in prop['mPurchasedSchematics']['elements']
         ]
     if 'mPaidOffSchematic' in prop:
-        payoffs = dict()
-        for elem in prop['mPaidOffSchematic']['elements']:
-            schematic_name, item_amounts = extract_schematics_payoff(elem)
-            payoffs[schematic_name] = item_amounts
-        kwargs['schematic_paid_off'] = payoffs
+        paid_offs = prop['mPaidOffSchematic']['elements']
+        kwargs['costs_paid_off'] = extract_paid_off_schematics(paid_offs)
     if 'mActiveSchematic' in prop:
         kwargs['active_schematic'] = prop['mActiveSchematic']['path_name'].split('.')[-1]
     return kwargs
@@ -224,6 +227,28 @@ def create_schematic_manager(obj: dict, components: Dict[str,dict]
                              ) -> SchematicManager:
     kwargs = get_args_for_schematic_manager(obj, components)
     return SchematicManager(**kwargs)
+
+
+def get_args_for_game_phase_manager(obj: dict, components: Dict[str,dict]
+                                    ) -> dict:
+    kwargs = get_args_for_actor(obj, components)
+    prop = obj['properties']
+    if 'mTargetGamePhase' in prop:
+        active_phase_name = prop['mTargetGamePhase']['path_name'].split('.')[-1]
+        if not active_phase_name.endswith('_C'):
+            active_phase_name = active_phase_name + '_C'
+        kwargs['active_phase'] = active_phase_name
+    if 'mTargetGamePhasePaidOffCosts' in prop:
+        item_amount_elems = prop['mTargetGamePhasePaidOffCosts']['elements']
+        item_amounts = extract_item_amounts(item_amount_elems)
+        kwargs['costs_paid_off'] = {kwargs['active_phase']: item_amounts}
+    return kwargs
+
+
+def create_game_phase_manager(obj: dict, components: Dict[str,dict]
+                              ) -> GamePhaseManager:
+    kwargs = get_args_for_game_phase_manager(obj, components)
+    return GamePhaseManager(**kwargs)
 
 
 ############################### main ##########################################
@@ -266,6 +291,8 @@ INSTANTIATION_FUNCTION = {
 
     '/Game/FactoryGame/Schematics/Progression/BP_SchematicManager.BP_SchematicManager_C':
         create_schematic_manager,
+    '/Game/FactoryGame/Schematics/Progression/BP_GamePhaseManager.BP_GamePhaseManager_C':
+        create_game_phase_manager,
 }
 
 

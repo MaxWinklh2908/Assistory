@@ -70,26 +70,45 @@ def print_factory_status(factories: Iterable[Factory]):
 
 
 def print_milestone_progress(factories: Iterable[Factory],
-                                 schematic_manager: SchematicManager):
-    if not schematic_manager.active_schematic:
-        return
+                             schematic_manager: SchematicManager):
     print('--------------------Milestone Progress --------------------------------')
     milestone_name = schematic_manager.active_schematic
-    milestone_cost = game.data['schematics'][milestone_name]['cost']
-    payoff = schematic_manager.schematic_paid_off.get(milestone_name, {})
+    milestone_cost = game.SCHEMATICS[milestone_name]['cost']
+    payoff = schematic_manager.costs_paid_off.get(milestone_name, {})
     recipe_amount = extract_existing_recipes(factories)
     item_rates = calculate_item_production(recipe_amount)
     max_time = 0
-    for item_costs in milestone_cost:
-        item_name = item_costs["item"]
-        target_amount = item_costs["amount"]
+    for item_name, target_amount in milestone_cost.items():
         payoff_amount = payoff.get(item_name, 0)
         item_rate = item_rates.get(item_name, 0)
         if item_rate > 0:
             estimated_time = (target_amount - payoff_amount) / item_rate
         else:
             estimated_time = float('inf')
-        print(f'{item_name}: {payoff_amount}/{target_amount} +{item_rate:.2f}/min => {estimated_time:.2f} min')
+        print(f'{item_name}: {payoff_amount}/{target_amount}',
+              f'+{item_rate:.2f}/min => {estimated_time:.2f} min')
+        max_time = max(max_time, estimated_time)
+    print(f'Time to finish: {max_time:.2f} min')
+
+
+def print_game_phase_progress(factories: Iterable[Factory],
+                              game_phase_manager: GamePhaseManager):
+    print('--------------------Game Phase Progress --------------------------------')
+    game_phase_name = game_phase_manager.active_phase
+    game_phase_cost = game.SCHEMATICS[game_phase_name]['cost']
+    payoff = game_phase_manager.costs_paid_off
+    recipe_amount = extract_existing_recipes(factories)
+    item_rates = calculate_item_production(recipe_amount)
+    max_time = 0
+    for item_name, target_amount in game_phase_cost.items():
+        payoff_amount = payoff.get(item_name, 0)
+        item_rate = item_rates.get(item_name, 0)
+        if item_rate > 0:
+            estimated_time = (target_amount - payoff_amount) / item_rate
+        else:
+            estimated_time = float('inf')
+        print(f'{item_name}: {payoff_amount}/{target_amount}',
+              f'+{item_rate:.2f}/min => {estimated_time:.2f} min')
         max_time = max(max_time, estimated_time)
     print(f'Time to finish: {max_time:.2f} min')
     
@@ -111,7 +130,10 @@ def main(compressed_save_file: str):
     # print_actors(actors)
     # print_production_rates(world.get_factories())
     print_factory_status(world.get_factories())
-    print_milestone_progress(world.get_factories(), world.get_schematic_manager())
+    if world.get_schematic_manager().has_active_schematic():
+        print_milestone_progress(world.get_factories(), world.get_schematic_manager())
+    if world.get_game_phase_manager().has_active_phase():
+        print_game_phase_progress(world.get_factories(), world.get_game_phase_manager())
 
 
 if __name__ == '__main__':

@@ -130,12 +130,16 @@ for level in (1, 2):
     ]:
         NODES_AVAILABLE[f'Recipe_MinerMk{level}{get_bare_item_name(item_name)}_C'] = 0
 
-def define_recipes():
-    def transform_to_dict(items: list):
+
+def transform_to_dict(items: list):
         return {
             d['item']: d['amount']
             for d in items
         }
+
+
+def define_recipes():
+    
     recipes = dict()
     for recipe_name, v in data['recipes'].items():
         
@@ -280,3 +284,55 @@ def define_item_to_recipe_mappings():
             produced_by[item_name].append(recipe_name)
     return consumed_by, produced_by
 consumed_by, produced_by = define_item_to_recipe_mappings()
+
+def define_schematics():
+    schematics = dict()
+    for schematic_name, v in data['schematics'].items():
+        cost = {
+            item_name: amount
+            for item_name, amount in transform_to_dict(v['cost']).items()
+            if item_name in ITEMS
+        }
+        schematics[schematic_name] = {
+            'className': v['className'],
+            'name': v['name'],
+            'cost': cost,
+        }
+    schematics['GP_Project_Assembly_Phase_1_C'] = {
+        'className': 'GP_Project_Assembly_Phase_1_C',
+        'name': 'Project Assembly Phase 1',
+        'cost': {
+            'Desc_SpaceElevatorPart_1_C': 50
+        },
+    }
+    schematics['GP_Project_Assembly_Phase_2_C'] = {
+        'className': 'GP_Project_Assembly_Phase_2_C',
+        'name': 'Project Assembly Phase 2',
+        'cost': {
+            'Desc_SpaceElevatorPart_1_C': 1000,
+            'Desc_SpaceElevatorPart_2_C': 1000,
+            'Recipe_SpaceElevatorPart_3_C': 500
+        },
+    }
+    schematics['GP_Project_Assembly_Phase_3_C'] = {
+        'className': 'GP_Project_Assembly_Phase_3_C',
+        'name': 'Project Assembly Phase 3',
+        'cost': {
+            'Desc_SpaceElevatorPart_2_C': 2500,
+            'Recipe_SpaceElevatorPart_4_C': 500,
+            'Recipe_SpaceElevatorPart_5_C': 100
+
+        },
+    }
+    schematics['GP_Project_Assembly_Phase_4_C'] = {
+        'className': 'GP_Project_Assembly_Phase_4_C',
+        'name': 'Project Assembly Phase 4',
+        'cost': {
+            'Desc_SpaceElevatorPart_6_C': 500,
+            'Desc_SpaceElevatorPart_7_C': 500,
+            'Desc_SpaceElevatorPart_8_C': 250,
+            'Desc_SpaceElevatorPart_9_C': 100
+        },
+    }
+    return schematics
+SCHEMATICS = define_schematics()

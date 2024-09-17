@@ -241,7 +241,7 @@ class SchematicManager(Actor):
 
     def __init__(self, *, purchased_schematics: List[str]=[],
                  active_schematic: Union[str, None]=None,
-                 schematic_paid_off: Dict[str, Dict[str, int]]=dict(),
+                 costs_paid_off: Dict[str, Dict[str, int]]=dict(),
                  **kwargs) -> None:
         """
         Create a SchematicManager object
@@ -249,16 +249,36 @@ class SchematicManager(Actor):
         Args:
             purchased_schematics (List[str]): All purchased schematics. Defaults to [].
             active_schematic (Union[str, None]): If specified this is the current goal. Defaults to None.
-            schematic_paid_off (Dict[str, Dict[str, int]]): Mapping from schematic name to 
+            costs_paid_off (Dict[str, Dict[str, int]]): Mapping from schematic name to 
                 payoff state as item amount dict. Defaults to dict().
         """
         super().__init__(**kwargs)
         self.purchased_schematics = purchased_schematics
         self.active_schematic = active_schematic
-        self.schematic_paid_off = schematic_paid_off
+        self.costs_paid_off = costs_paid_off
 
     def has_active_schematic(self) -> bool:
-        return self.active_schematic is None
+        return not self.active_schematic is None
+
+
+class GamePhaseManager(Actor):
+
+    def __init__(self, *, active_phase: Union[str, None],
+                 costs_paid_off: Dict[str, int]=dict(),
+                 **kwargs) -> None:
+        """
+        Create a SchematicManager object
+
+        Args:
+            active_phase (Union[str, None]):
+            costs_paid_off (Dict[str, int]): Item amount. Defaults to dict().
+        """
+        super().__init__(**kwargs)
+        self.active_phase = active_phase
+        self.costs_paid_off = costs_paid_off
+
+    def has_active_phase(self) -> bool:
+        return not self.active_phase is None
 
 
 # TODO: GeneratorBuilding (see bio_generator_object.json)
@@ -275,6 +295,12 @@ class World:
     
     def get_schematic_manager(self) -> SchematicManager:
         selection = [actor for actor in self.actors if isinstance(actor, SchematicManager)]
+        if len(selection) != 1:
+            raise ValueError('Expect one schematic manager instance')
+        return selection[0]
+    
+    def get_game_phase_manager(self) -> GamePhaseManager:
+        selection = [actor for actor in self.actors if isinstance(actor, GamePhaseManager)]
         if len(selection) != 1:
             raise ValueError('Expect one schematic manager instance')
         return selection[0]

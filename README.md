@@ -25,7 +25,7 @@ Filesystem watchdog on windows files is not possible from within WSL. Therefore,
 
 In windows:
 ```
-python \\wsl.localhost\Ubuntu_18_04\home\max\satisfactory-optim\scripts\windows_to_wsl_game_observer.py C:\Users\max\AppData\Local\FactoryGame\Saved\SaveGames\76561198973325836 \\wsl.localhost\Ubuntu_18_04\home\max\satisfactory_save_games
+python \\wsl.localhost\Ubuntu_20_04\home\max\satisfactory-optim\scripts\windows_to_wsl_game_observer.py C:\Users\max\AppData\Local\FactoryGame\Saved\SaveGames\76561198973325836 \\wsl.localhost\Ubuntu_20_04\home\max\satisfactory_save_games
 ```
 
 ## Related Software

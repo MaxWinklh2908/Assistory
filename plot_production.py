@@ -21,7 +21,7 @@ EXCLUDED_RECIPES = [
     # 'Recipe_Alternate_Beacon_1_C'
 ]
 ONLY_ITEMS = [
-    'Desc_PressureConversionCube_C'
+    # 'Desc_PressureConversionCube_C'
 ]
 
 

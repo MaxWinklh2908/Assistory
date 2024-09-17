@@ -259,6 +259,12 @@ def print_solution_dict(N, x, z, y, v, p):
             for t in range(N+1)],
     }
     print(pd.DataFrame(data))
+    print('\nState')
+    for i, val in enumerate(data['State']):
+        print(i, val)
+    print('\nRecipe Plan')
+    for i, val in enumerate(data['Recipes']):
+        print(i, val)
 
 
 def main():

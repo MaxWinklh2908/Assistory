@@ -18,6 +18,15 @@ import game
 import utils
 
 
+RETURN_CODES = {
+ 2: 'INFEASIBLE',
+ 5: 'MODEL_INVALID',
+ 6: 'NOT_SOLVED',
+ 0: 'OPTIMAL',
+ 3: 'UNBOUNDED',
+}
+
+
 class SatisfactoryLP:
 
     def __init__(self, recipes: dict,
@@ -399,7 +408,7 @@ def get_producable_items(
         lp.set_objective_max_item_rate(item_name)
         status = lp.optimize()
         if status != pywraplp.Solver.OPTIMAL:
-            raise RuntimeError
+            raise RuntimeError('Unexpected status: ' + RETURN_CODES[status])
         rate = lp.solver.Objective().Value()
         if rate > 0:
             producable_item_names.add(item_name)

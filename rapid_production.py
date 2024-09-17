@@ -129,7 +129,7 @@ class StartConfiguration:
 class OptimizationConfiguration:
 
     def __init__(self, n: int):
-        if n < 1:
+        if n < 0:
             raise ValueError('Number of steps must be at least 1')
         self.N = n
         self.T = set(range(n + 1))
@@ -196,16 +196,16 @@ def define_problem(data_conf: DataConfiguration,
 
 
 def solve(data_conf: DataConfiguration, start_conf: StartConfiguration, n_max: int=N_MAX):
-    for N in range(1, n_max):
-        print('Iteration: ', N)
-        optim_conf = OptimizationConfiguration(N)
+    for n in range(0, n_max):
+        print('Iteration: ', n)
+        optim_conf = OptimizationConfiguration(n)
         solver, values = define_problem(data_conf, start_conf, optim_conf)
         print("Number of variables =", solver.NumVariables())
         print("Number of constraints =", solver.NumConstraints())
         status = solver.Solve()
         print(f"Problem processed in {solver.wall_time():d} milliseconds")
         if status == pywraplp.Solver.OPTIMAL:
-            minimal_steps = N
+            minimal_steps = n
             return solver, values, minimal_steps
         if status != pywraplp.Solver.INFEASIBLE:
             raise RuntimeError('Unexpected status: ' + RETURN_CODES[status])

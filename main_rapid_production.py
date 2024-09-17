@@ -49,7 +49,7 @@ def load_target_items(target_item_file: str) -> dict:
 def extract_existing_recipes(factories: List[Factory]) -> dict:
     recipes = dict()
     for factory in factories:
-        if isinstance(factory, ManufacturingBuilding):
+        if isinstance(factory, (ManufacturingBuilding, FrackingBuilding)):
             recipe_name = factory.current_recipe_name
             if not recipe_name in game.RECIPES:
                 print('WARNING Skip unknown recipe:', recipe_name)
@@ -69,7 +69,8 @@ def main(compressed_save_file: str, target_item_file: str):
     S_items = extract_player_inventory(world.get_player())
     G_items = load_target_items(target_item_file)
     E_recipes = extract_existing_recipes(world.get_factories())
-    
+    # ignore production with handcrafted input TODO: find other solution
+    E_recipes['Recipe_Biofuel_C'] = 0
     start_conf = rapid_production.StartConfiguration(
         data_conf,
         S = np.array(utils.vectorize(S_items, game.ITEMS)),

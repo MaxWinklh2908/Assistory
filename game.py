@@ -147,7 +147,6 @@ def transform_to_dict(items: list):
 
 
 def define_recipes():
-    
     recipes = dict()
     for recipe_name, v in data['recipes'].items():
         

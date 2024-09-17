@@ -240,8 +240,7 @@ def get_args_for_game_phase_manager(obj: dict, components: Dict[str,dict]
         kwargs['active_phase'] = active_phase_name
     if 'mTargetGamePhasePaidOffCosts' in prop:
         item_amount_elems = prop['mTargetGamePhasePaidOffCosts']['elements']
-        item_amounts = extract_item_amounts(item_amount_elems)
-        kwargs['costs_paid_off'] = {kwargs['active_phase']: item_amounts}
+        kwargs['costs_paid_off'] = extract_item_amounts(item_amount_elems)
     return kwargs
 
 

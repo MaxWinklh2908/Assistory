@@ -51,6 +51,7 @@ MINING_FACILITIES = [
 FREE_POWER = 3*100 + 9*200 + 6*400
 
 
+# TODO: stack size of water?
 def define_items() -> dict:
     return {
         item_name:v for item_name,v in data['items'].items()
@@ -311,7 +312,7 @@ def define_schematics():
         'cost': {
             'Desc_SpaceElevatorPart_1_C': 1000,
             'Desc_SpaceElevatorPart_2_C': 1000,
-            'Recipe_SpaceElevatorPart_3_C': 500
+            'Recipe_SpaceElevatorPart_3_C': 100
         },
     }
     schematics['GP_Project_Assembly_Phase_3_C'] = {

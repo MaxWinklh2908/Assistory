@@ -135,7 +135,7 @@ class ItemStack:
         if len(item_name) == 0 and amount != 0:
             raise ValueError('0 amount only possible with empty string')
         if amount > capacity:
-            raise ValueError
+            raise ValueError(f'Amount {amount} larger than capacity {capacity}')
         self.item_name = item_name
         self.amount = amount
         self.capacity = capacity

@@ -99,8 +99,14 @@ def create_inventory_stack(item_desc: dict, stack: dict) -> ItemStack:
     if item_desc['path_name'] == '': # when 
         return ItemStack('', 0, 0)
     item_name = item_desc['path_name'].split('.')[-1]
+    if not item_name in game.ITEMS:
+        print('WARNING Skip unknown item:',  item_name)
+        return ItemStack('', 0, 0)
     amount = stack['properties']['NumItems']['value']
-    capacity = game.ITEMS[item_name]['stackSize']
+    if item_name == 'Desc_Water_C':
+        capacity = max(game.ITEMS[item_name]['stackSize'], amount)
+    else:
+        capacity = game.ITEMS[item_name]['stackSize']
     return ItemStack(item_name=item_name, amount=amount, capacity=capacity)
 
 

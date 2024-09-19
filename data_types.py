@@ -84,10 +84,6 @@ class Factory(Buildable):
         self.power_consumption = power_consumption
         self.current_manufacturing_porgress = current_manufacturing_progress
 
-        # might be used by inventory mixins
-        self._input_inventory_stacks = []
-        self._output_inventory_stacks = []
-
     def get_productivity(self) -> float:
         """
         If the productivity is monitored get the ratio of the actual
@@ -185,19 +181,19 @@ class ManufacturingBuilding(Factory, InputInventoryMixin, OutputInventoryMixin):
                  output_inventory_stacks: List[ItemStack],
                  current_recipe_name: Union[str, None]=None, **kwargs) -> None:
         super().__init__(**kwargs)
+        InputInventoryMixin.__init__(self, input_inventory_stacks)
+        OutputInventoryMixin.__init__(self, output_inventory_stacks)
         self.current_recipe_name = current_recipe_name
-        self._input_inventory_stacks = input_inventory_stacks
-        self._output_inventory_stacks = output_inventory_stacks
 
     def get_problems(self) -> List[str]:
         probems = super().get_problems()
         if self.current_recipe_name is None:
             probems.append('No recipe selected')
         else:
-            for stack in self._input_inventory_stacks:
+            for stack in self.input_inventory_stacks:
                 if stack.is_empty():
                     probems.append(f'Input stack is empty')
-            for stack in self._output_inventory_stacks:
+            for stack in self.output_inventory_stacks:
                 if stack.is_full():
                     probems.append(f'Output stack of {stack.item_name} is full: {stack.amount}/{stack.amount}')
         return probems
@@ -220,13 +216,13 @@ class FrackingBuilding(Factory, OutputInventoryMixin):
             output_inventory_stacks (List[ItemStack]): Stack of items to output
         """
         super().__init__(**kwargs)
+        OutputInventoryMixin.__init__(self, output_inventory_stacks)
         self.resource_name = resource_name
         self.current_recipe_name = current_recipe_name
-        self._output_inventory_stacks = output_inventory_stacks
 
     def get_problems(self) -> List[str]:
         probems = super().get_problems()
-        for stack in self._output_inventory_stacks:
+        for stack in self.output_inventory_stacks:
             if stack.is_full():
                 probems.append(f'Output stack of {stack.item_name} is full: {stack.amount}/{stack.amount}')
         return probems

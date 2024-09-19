@@ -204,6 +204,7 @@ def extract_paid_off_schematics(paid_offs: List[dict]) -> Dict[str, Dict[str, in
         schematic_name = elem['prop']['path_name'].split('.')[-1]
         item_amounts = extract_item_amounts(elem['properties']['ItemCost']['elements'])
         payoffs[schematic_name] = item_amounts
+    return payoffs
 
 
 def get_args_for_schematic_manager(obj: dict, components: Dict[str,dict]

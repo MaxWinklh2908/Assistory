@@ -103,10 +103,7 @@ def create_inventory_stack(item_desc: dict, stack: dict) -> ItemStack:
         print('WARNING Skip unknown item:',  item_name)
         return ItemStack('', 0, 0)
     amount = stack['properties']['NumItems']['value']
-    if item_name == 'Desc_Water_C':
-        capacity = max(game.ITEMS[item_name]['stackSize'], amount)
-    else:
-        capacity = game.ITEMS[item_name]['stackSize']
+    capacity = game.ITEMS[item_name]['stackSize']
     return ItemStack(item_name=item_name, amount=amount, capacity=capacity)
 
 

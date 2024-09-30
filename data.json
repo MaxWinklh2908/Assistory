@@ -19957,7 +19957,7 @@
 			"name": "Water",
 			"sinkPoints": 5,
 			"description": "It's water.",
-			"stackSize": 50000,
+			"stackSize": 200000,
 			"energyValue": 0,
 			"radioactiveDecay": 0,
 			"liquid": true,

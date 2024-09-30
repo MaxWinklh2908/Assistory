@@ -294,16 +294,26 @@ class GamePhaseManager(Actor):
 
 class Player(Actor, InventoryMixin):
 
-    def __init__(self, *, inventory_stacks: List[ItemStack], **kwargs) -> None:
+    def __init__(self, *, transform: tuple,
+                 inventory_stacks: List[ItemStack], **kwargs) -> None:
         """
         Create a player.
 
         Args:
+            transform (tuple): position (x,y,z) and orientation (x,y,z,w)
             inventory_stacks (List[ItemStack]): Items the player is possessing
             in its inventory. This is not including the body slots.
         """
         super().__init__(**kwargs)
         InventoryMixin.__init__(self, inventory_stacks)
+        self.transform = transform
+
+    def get_map_position(self) -> Tuple[float]:
+        return (
+            self.transform[0] / 100.0,
+            self.transform[1] / 100.0,
+            self.transform[2] / 100.0
+        )
 
 
 # TODO: GeneratorBuilding (see bio_generator_object.json)

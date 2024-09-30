@@ -268,6 +268,16 @@ def create_game_phase_manager(obj: dict, components: Dict[str,dict]
 def get_args_for_player(obj: dict, components: Dict[str,dict]
                                     ) -> dict:
     kwargs = get_args_for_actor(obj, components)
+    transform = (
+        obj["pos_x"],
+        obj["pos_y"],
+        obj["pos_z"],
+        obj["rot_x"],
+        obj["rot_y"],
+        obj["rot_z"],
+        obj["rot_w"],
+    )
+    kwargs['transform'] = transform
     prop = obj['properties']
     inventory_component = components[prop['mInventory']['path_name']]
     kwargs['inventory_stacks'] = create_inventory_stacks(inventory_component)

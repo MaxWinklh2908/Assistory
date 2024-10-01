@@ -164,16 +164,41 @@ class SatisfactoryLP:
             self.solver.Add(self.var_item_sold[item_name] == 0,
                             f'Non-sellable_{item_name}')
             
-    def define_sell_rate_ratio(self, item_rate_ratio: dict):
+    def define_sell_rate_ratio(self, item_rate_ratios: dict):
         """Specify the fraction of each item to the overall item rate.
 
         Args:
-            item_rate_ratio (dict): Mapping of item names to a fraction
-            of 1. all values must sum up to 1.
+            item_rate_ratios (dict): Mapping of item names to a sell rate.
+            The ratio is the fractio of this sell rate over the sell rate sum
+            of all items.
         """
         # TODO: Together with maxi. item rate is alternative to iterative fastest production
-        raise NotImplementedError
+        if any(k < 0 for k in item_rate_ratios.values()):
+            raise ValueError('Expect nonnegative ratios')
+        item_rate_ratios = {item_name: ratio
+                           for item_name, ratio in item_rate_ratios.items()
+                           if ratio > 0}
 
+        producable_items = self.get_producable_items()
+        for item_name, ratio in item_rate_ratios.items():
+            if ratio == 0:
+                continue
+            if item_name in game.NON_SELLABLE_ITEMS:
+                raise ValueError('Can not require selling of: ' + item_name)
+
+            if not item_name in producable_items:
+                raise ValueError('Can not require production of: ' + item_name)
+
+        sell_ratio_factor = self.solver.NumVar(0, self.solver.infinity(), 'Sell_ratio_factor')
+        for item_name, ratio in item_rate_ratios.items():
+            sell_rate = (
+                self.items_available.get(item_name, 0)
+                + self.produced_in_all_recipes[item_name]
+                - self.consumed_in_all_recipes[item_name]
+            )
+            ratio = item_rate_ratios[item_name]
+            self.solver.Add(sell_rate / ratio == sell_ratio_factor, f'Sell_ratio_{item_name}')
+    
     def define_sell_rates(self, production_rate: dict):
         """
         Achieve a certain minimum production rate of items. The rates are
@@ -251,10 +276,11 @@ class SatisfactoryLP:
             
         sum_resource_nodes = 0
         
-        for node_name in game.NODES_AVAILABLE:
+        for node_name in self.resource_nodes_available:
             weight = 1
-            if weighted:
-                weight = 1/game.NODES_AVAILABLE[node_name]
+            amount = self.resource_nodes_available[node_name]
+            if weighted and amount > 0:
+                weight = 1/amount
             sum_resource_nodes += weight * self.var_recipes_used[node_name] 
 
         self.solver.Minimize(sum_resource_nodes)
@@ -284,6 +310,7 @@ class SatisfactoryLP:
         """
         self.solver.Maximize(self.var_item_sold[item_name])
         self._objective_specific_report = self.report_items_produced_to_sell
+
 
     ################################### report ###############################
 

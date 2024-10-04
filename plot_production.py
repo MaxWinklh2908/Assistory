@@ -175,10 +175,12 @@ def main(recipes: dict, items_sold: dict, items_available: dict):
         for (u, v, data) in G.edges.data()
     }
 
-    for item_name, amount in item_amount.items():
+    print('Items in cycle:')
+    for item_name, amount in sorted(item_amount.items()):
         print(item_name, amount)
 
     # pos = nx.kamada_kawai_layout(G)
+    # TODO: Use clusters to plot manual assingment of recipes to sites
     pos = nx.spring_layout(G, iterations=50, weight='weight')
     # pos = nx.shell_layout(G)
     nx.draw_networkx_nodes(G, nodelist=manufacturing_nodes, pos=pos, 
@@ -196,7 +198,6 @@ def main(recipes: dict, items_sold: dict, items_available: dict):
     nx.draw_networkx_edge_labels(G, pos, labels, font_size=6)
     plt.legend()
     plt.tight_layout()
-    plt.show()
 
 
 if __name__ == '__main__':
@@ -207,3 +208,5 @@ if __name__ == '__main__':
     recipes, items_sold, items_available = utils.read_result(args.plan_file)
     
     main(recipes, items_sold, items_available)
+    plt.title(args.plan_file)
+    plt.show()

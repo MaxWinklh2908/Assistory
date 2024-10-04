@@ -189,7 +189,7 @@ class ManufacturingBuilding(Factory, InputInventoryMixin, OutputInventoryMixin):
         probems = super().get_problems()
         if self.current_recipe_name is None:
             probems.append('No recipe selected')
-        else:
+        elif not self.is_production_paused and probems:
             for stack in self.input_inventory_stacks:
                 if stack.is_empty():
                     probems.append(f'Input stack is empty')
@@ -221,11 +221,12 @@ class FrackingBuilding(Factory, OutputInventoryMixin):
         self.current_recipe_name = current_recipe_name
 
     def get_problems(self) -> List[str]:
-        probems = super().get_problems()
-        for stack in self.output_inventory_stacks:
-            if stack.is_full():
-                probems.append(f'Output stack of {stack.item_name} is full: {stack.amount}/{stack.amount}')
-        return probems
+        problems = super().get_problems()
+        if not self.is_production_paused and problems:
+            for stack in self.output_inventory_stacks:
+                if stack.is_full():
+                    problems.append(f'Output stack of {stack.item_name} is full: {stack.amount}/{stack.amount}')
+        return problems
     
     # TODO: overwrite get_effective_rate based on purity of node
     

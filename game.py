@@ -317,6 +317,26 @@ def define_schematics():
             'name': v['name'],
             'cost': cost,
         }
+
+    schematics['Schematic_4-3_C'] = {
+        'className': 'Schematic_4-3_C',
+        'name': 'Expanded Power Infrastructure',
+        'cost': {
+                'Desc_SteelPlateReinforced_C': 50,
+                'Desc_SteelBeam_C': 100,
+                'Desc_ModularFrame_C': 200,
+                'Desc_Wire_C': 2000,
+        }
+    }
+    schematics['Schematic_4-4_C'] = {
+        'className': 'Schematic_4-4_C',
+        'name': 'Hypertubes',
+        'cost': {
+                'Desc_SteelPlateReinforced_C': 50,
+                'Desc_SteelPipes_C': 300,
+                'Desc_CopperSheet_C': 500,
+        }
+    }
     schematics['GP_Project_Assembly_Phase_1_C'] = {
         'className': 'GP_Project_Assembly_Phase_1_C',
         'name': 'Project Assembly Phase 1',

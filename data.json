@@ -20035,6 +20035,57 @@
 			"sinkPoints": 0,
 			"slug": "sink-point",
 			"stackSize": 500
+		},
+		"Desc_SAM_C": {
+			"slug": "sam",
+			"className": "Desc_SAM_C",
+			"name": "SAM",
+			"sinkPoints": 20,
+			"description": "Strange Alien Matter, commonly referred to as SAM, doesn't seem to follow the known laws of physics. It whispers of new possibilities.",
+			"stackSize": 100,
+			"energyValue": 0,
+			"radioactiveDecay": 0,
+			"liquid": false,
+			"fluidColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			}
+		},
+    	"Desc_SAMIngot_C": {
+			"slug": "reanimated-sam",
+			"className": "Desc_SAMIngot_C",
+			"name": "Reanimated SAM",
+			"sinkPoints": 160,
+			"description": "The active and contained form of the Strange Alien Matter.\nProper electromagnetic containment is required, as it appears to be able to manipulate the atomic bonds of any matter it comes into contact with.",
+			"stackSize": 100,
+			"energyValue": 0,
+			"radioactiveDecay": 0,
+			"liquid": false,
+			"fluidColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			}
+		},
+    	"Desc_SAMFluctuator_C": {
+			"slug": "sam-fluctuator",
+			"className": "Desc_SAMFluctuator_C",
+			"name": "SAM Fluctuator",
+			"sinkPoints": 1968,
+			"description": "The SAM Fluctuator is able to regulate and direct the behaviour of Reanimated SAM through the application of electric charges with varying frequencies.\nThis control facilitates technologies such as matter-to-energy conversion and spatiotemporal matter manipulation.",
+			"stackSize": 100,
+			"energyValue": 0,
+			"radioactiveDecay": 0,
+			"liquid": false,
+			"fluidColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			}
 		}
 	},
 	"schematics": {

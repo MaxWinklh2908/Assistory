@@ -100,9 +100,11 @@ ITEMS_FROM_MINING = [
     'Desc_RawQuartz_C',
     'Desc_OreUranium_C',
     'Desc_NitrogenGas_C',
+    'Desc_SAM_C',
 ]
 
 # pure nodes have double rate, impure nodes have half rate
+# TODO: Update resources
 NODES_AVAILABLE = dict()
 NODES_AVAILABLE['Recipe_MinerMk3Stone_C'] =                       (2 * 27 + 47 + 0.5 * 12)
 NODES_AVAILABLE['Recipe_MinerMk3OreIron_C'] =                     (2 * 46 + 41 + 0.5 * 33)
@@ -113,6 +115,7 @@ NODES_AVAILABLE['Recipe_MinerMk3Sulfur_C'] =                      (2 * 3 + 7 + 0
 NODES_AVAILABLE['Recipe_MinerMk3OreBauxite_C'] =                  (2 * 6 + 6 + 0.5 * 5)
 NODES_AVAILABLE['Recipe_MinerMk3RawQuartz_C'] =                   (2 * 5 + 11 + 0.5 * 0)
 NODES_AVAILABLE['Recipe_MinerMk3OreUranium_C'] =                  (2 * 0 + 3 + 0.5 * 1)
+NODES_AVAILABLE['Recipe_MinerMk3SAM_C'] =                         (2 * 3 + 6 + 0.5 * 10)
 NODES_AVAILABLE['Recipe_OilPumpLiquidOil_C'] =                    (2 * 8 + 12 + 0.5 * 10)
 NODES_AVAILABLE['Recipe_ResourceWellPressurizerNitrogenGas_C'] =  (2 * 36 + 7 + 0.5 * 2)
 NODES_AVAILABLE['Recipe_ResourceWellPressurizerLiquidOil_C'] =    (2 * 3 + 3 + 0.5 * 6)
@@ -128,6 +131,7 @@ for level in (1, 2):
         'Desc_OreBauxite_C',
         'Desc_RawQuartz_C',
         'Desc_OreUranium_C',
+        'Desc_SAM_C'
     ]:
         NODES_AVAILABLE[f'Recipe_MinerMk{level}{get_bare_item_name(item_name)}_C'] = 0
 
@@ -252,6 +256,7 @@ def define_recipes():
             'Desc_OreBauxite_C',
             'Desc_RawQuartz_C',
             'Desc_OreUranium_C',
+            'Desc_SAM_C',
         ]:
             recipes[f'Recipe_MinerMk{level}{get_bare_item_name(item_name)}_C'] = {
                 'ingredients': {},
@@ -270,6 +275,19 @@ def define_recipes():
             'producedIn': 'Desc_ResourceWellPressurizer_C',
             'time': 60,
         }
+    # SAM
+    recipes['Recipe_IngotSAM_C'] = {
+        'ingredients': {'Desc_SAM_C': 4},
+        'products': {'Desc_SAMIngot_C': 1},
+        'producedIn': 'Desc_Constructor_C',
+        'time': 2,
+    }
+    recipes['Recipe_SAMFluctuator_C'] = {
+        'ingredients': {'Desc_SAMIngot_C': 6, 'Desc_Wire_C': 5, 'Desc_SteelPipe_C': 3},
+        'products': {'Desc_SAMFluctuator_C': 1},
+        'producedIn': 'Desc_Constructor_C',
+        'time': 6,
+    }
     return recipes
 # recipies define ingredients, products, production facility and production time
 RECIPES = define_recipes()

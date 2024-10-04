@@ -260,7 +260,7 @@ def define_recipes():
         ]:
             recipes[f'Recipe_MinerMk{level}{get_bare_item_name(item_name)}_C'] = {
                 'ingredients': {},
-                'products': {item_name: 60 * 2**level},
+                'products': {item_name: 60 * 2**(level-1)},
                 'producedIn': f'Desc_MinerMk{level}_C',
                 'time': 60,
             }
@@ -330,7 +330,7 @@ def define_schematics():
         'cost': {
             'Desc_SpaceElevatorPart_1_C': 1000,
             'Desc_SpaceElevatorPart_2_C': 1000,
-            'Recipe_SpaceElevatorPart_3_C': 100
+            'Desc_SpaceElevatorPart_3_C': 100
         },
     }
     schematics['GP_Project_Assembly_Phase_3_C'] = {
@@ -338,8 +338,8 @@ def define_schematics():
         'name': 'Project Assembly Phase 3',
         'cost': {
             'Desc_SpaceElevatorPart_2_C': 2500,
-            'Recipe_SpaceElevatorPart_4_C': 500,
-            'Recipe_SpaceElevatorPart_5_C': 100
+            'Desc_SpaceElevatorPart_4_C': 500,
+            'Desc_SpaceElevatorPart_5_C': 100
 
         },
     }

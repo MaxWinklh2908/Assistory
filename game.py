@@ -11,33 +11,57 @@ def get_bare_item_name(name: str) -> str:
     return name
 
 
+def transform_to_dict(items: list):
+        return {
+            d['item']: d['amount']
+            for d in items
+        }
+
+
 def define_production_facilities():
+    single_product2recipe_name = {
+        recipe['products'][0]['item']: recipe
+        for recipe in data['recipes'].values()
+        if len(recipe['products']) == 1
+    }
+
     facilities = {
-        building_name: -values['metadata']['powerConsumption']
+        building_name: {
+            'power_production': -values['metadata']['powerConsumption'],
+            'costs': transform_to_dict(single_product2recipe_name[building_name]['ingredients'])
+        }
         for building_name, values in data['buildings'].items()
         if 'SC_Smelters_C' in values['categories'] or
-        'SC_Manufacturers_C' in values['categories']
+        'SC_Manufacturers_C' in values['categories'] or
+        'SC_Miners_C' in values['categories'] or
+        ('SC_OilProduction_C' in values['categories'] and not 'Fracking' in building_name)
     }
 
     # Biomass burner is not automatable
-    facilities['Desc_GeneratorCoal_C'] = 75
-    facilities['Desc_GeneratorFuel_C'] = 150
+    facilities['Desc_GeneratorCoal_C'] = {
+        'power_production': 75,
+        'costs': transform_to_dict(data['recipes']['Recipe_GeneratorCoal_C']['ingredients'])
+    }
+    facilities['Desc_GeneratorFuel_C'] = {
+        'power_production': 150,
+        'costs': transform_to_dict(data['recipes']['Recipe_GeneratorFuel_C']['ingredients'])
+    }
     # Geisirs are implemented as free energy
-    facilities['Desc_GeneratorNuclear_C'] = 2500
-
-    facilities['Desc_MinerMk1_C'] = -5
-    facilities['Desc_MinerMk2_C'] = -12
-    facilities['Desc_MinerMk3_C'] = -30
-    facilities['Desc_WaterPump_C'] = -20
-    facilities['Desc_OilPump_C'] = -40
-
+    facilities['Desc_GeneratorNuclear_C'] = {
+        'power_production': 2500,
+        'costs': transform_to_dict(data['recipes']['Recipe_GeneratorNuclear_C']['ingredients'])
+    }
     # Simplification: required energy for smasher is integrated into extractors
     # to make smasher obsolete in modelling
+    # TODO: Additional resources for smasher
     average_satellites_per_smasher = 6.941
-    facilities['Desc_FrackingExtractor_C'] = -150/average_satellites_per_smasher
+    facilities['Desc_FrackingExtractor_C'] = {
+        'power_production': -150/average_satellites_per_smasher,
+        'costs': transform_to_dict(data['recipes']['Recipe_FrackingExtractor_C']['ingredients'])
+    }
     
     return facilities
-# Mapping of production facility to power production/consumption
+# Mapping of production facility to power production/consumption and costs
 PRODUCTION_FACILITIES = define_production_facilities()
 # Note: over/underclocking would make the problem non-linear
 
@@ -139,20 +163,12 @@ for level in (1, 2):
         NODES_AVAILABLE[f'Recipe_MinerMk{level}{get_bare_item_name(item_name)}_C'] = 0
 
 
-def transform_to_dict(items: list):
-        return {
-            d['item']: d['amount']
-            for d in items
-        }
-
-
 def define_recipes():
     recipes = dict()
+    facility_names = set(PRODUCTION_FACILITIES)
     for recipe_name, v in data['recipes'].items():
         
-        if not set(v['producedIn']).intersection(set(PRODUCTION_FACILITIES)):
-            if v['inWorkshop'] or v['inHand']:
-                print('WARNING Skip handcrafted:', recipe_name)
+        if not set(v['producedIn']).intersection(facility_names):
             continue
         if len(v['producedIn']) != 1:
             raise ValueError('Invalid number of production facilities: ' + recipe_name)
@@ -293,6 +309,91 @@ def define_recipes():
     return recipes
 # recipies define ingredients, products, production facility and production time
 RECIPES = define_recipes()
+
+def define_recipes_handcraft():
+    recipes = dict()
+    for recipe_name, v in data['recipes'].items():
+        if not v['inWorkshop'] and not v['inHand']:
+            continue
+        ingredients = {
+            item_name: amount
+            for item_name, amount in transform_to_dict(v['ingredients']).items()
+            if item_name in ITEMS
+        }
+        products = {
+            item_name: amount
+            for item_name, amount in transform_to_dict(v['products']).items()
+            if item_name in ITEMS
+        }
+        if not ingredients or not products:
+            print('WARNING Skip unavailable:', recipe_name)
+            continue
+        if len(ingredients) != len(v['ingredients']) or len(products) != len(v['products']):
+            print('WARNING Reduced:', recipe_name)
+        recipes[recipe_name] = {
+            'ingredients': ingredients,
+            'products': products,
+            'time': v['time'],
+        }
+    # SAM
+    recipes['Recipe_IngotSAM_C'] = {
+        'ingredients': {'Desc_SAM_C': 4},
+        'products': {'Desc_SAMIngot_C': 1},
+        'time': 2,
+    }
+    recipes['Recipe_SAMFluctuator_C'] = {
+        'ingredients': {'Desc_SAMIngot_C': 6, 'Desc_Wire_C': 5, 'Desc_SteelPipe_C': 3},
+        'products': {'Desc_SAMFluctuator_C': 1},
+        'time': 6,
+    }
+    # Add miners
+    for item_name in [
+        'Desc_Stone_C',
+        'Desc_OreIron_C',
+        'Desc_OreCopper_C',
+        'Desc_OreGold_C',
+        'Desc_Coal_C',
+        'Desc_Sulfur_C',
+        'Desc_OreBauxite_C',
+        'Desc_RawQuartz_C',
+        'Desc_OreUranium_C',
+        'Desc_SAM_C',
+    ]:
+        recipes[f'Recipe_Handcraft{get_bare_item_name(item_name)}_C'] = {
+            'ingredients': {},
+            'products': {item_name: 60},
+            'time': 60,
+        }
+    # TODO: recipes for collectable items
+    # Desc_Berry_C
+    # Desc_CrystalShard_C
+    recipes['Recipe_CollectFlowerPetals_C'] = {
+        'ingredients': {},
+        'products': {'Desc_FlowerPetals_C': 1},
+        'time': 1,
+    }
+    # Desc_HogParts_C
+    recipes['Recipe_CollectLeaves_C'] = {
+        'ingredients': {},
+        'products': {'Desc_Leaves_C': 1},
+        'time': 1,
+    }
+    recipes['Recipe_CollectMycelia_C'] = {
+        'ingredients': {},
+        'products': {'Desc_Mycelia_C': 1},
+        'time': 1,
+    }
+    # Desc_Nut_C
+    # Desc_Shroom_C
+    # Desc_SpitterParts_C
+    recipes['Recipe_CollectWood_C'] = {
+        'ingredients': {},
+        'products': {'Desc_Wood_C': 1},
+        'time': 1,
+    }
+    return recipes
+# recipies define ingredients, products, production facility and production time
+RECIPES_HANDCRAFT = define_recipes_handcraft()
 
 # helper structure to find recipes
 def define_item_to_recipe_mappings():

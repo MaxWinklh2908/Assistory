@@ -367,7 +367,8 @@ def instantiate_world(objects: List[dict]) -> World:
 
     # guide implementation
     missed_facilities = {t.split('.')[-1]: t for t in missed_types}
-    for facility_name in set(missed_facilities).intersection(set(game.PRODUCTION_FACILITIES)):
+    facility_names = set(game.PRODUCTION_FACILITIES)
+    for facility_name in set(missed_facilities).intersection(facility_names):
         print('WARNING Missed types:', missed_facilities[facility_name])
 
     return World(actors=actors)

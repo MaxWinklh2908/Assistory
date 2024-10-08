@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-import rapid_production, utils, game
+import rapid_production, utils
 
 # Define the function to be tested
 def f(x):
@@ -18,9 +18,9 @@ class TestRapidProduction(unittest.TestCase):
         E_recipes = {}
         start_conf = rapid_production.StartConfiguration(
             data_conf,
-            S = np.array(utils.vectorize(S_items, game.ITEMS)),
-            G = np.array(utils.vectorize(G_items, game.ITEMS)),
-            E = np.array(utils.vectorize(E_recipes, game.RECIPES)))
+            S = np.array(utils.vectorize(S_items, data_conf.ITEMS)),
+            G = np.array(utils.vectorize(G_items, data_conf.ITEMS)),
+            E = np.array(utils.vectorize(E_recipes, data_conf.RECIPES)))
         optim_conf = rapid_production.OptimizationConfiguration(n=1)
         solver, values, minimal_steps = rapid_production.solve_with_binary_search(
             data_conf, start_conf, optim_conf)
@@ -33,9 +33,9 @@ class TestRapidProduction(unittest.TestCase):
         E_recipes = {}
         start_conf = rapid_production.StartConfiguration(
             data_conf,
-            S = np.array(utils.vectorize(S_items, game.ITEMS)),
-            G = np.array(utils.vectorize(G_items, game.ITEMS)),
-            E = np.array(utils.vectorize(E_recipes, game.RECIPES)))
+            S = np.array(utils.vectorize(S_items, data_conf.ITEMS)),
+            G = np.array(utils.vectorize(G_items, data_conf.ITEMS)),
+            E = np.array(utils.vectorize(E_recipes, data_conf.RECIPES)))
         optim_conf = rapid_production.OptimizationConfiguration(n=1)
         solver, values, minimal_steps = rapid_production.solve_with_binary_search(
             data_conf, start_conf, optim_conf)
@@ -52,14 +52,16 @@ class TestRapidProduction(unittest.TestCase):
         E_recipes = {'Recipe_Concrete_C': 1.0}
         start_conf = rapid_production.StartConfiguration(
             data_conf,
-            S = np.array(utils.vectorize(S_items, game.ITEMS)),
-            G = np.array(utils.vectorize(G_items, game.ITEMS)),
-            E = np.array(utils.vectorize(E_recipes, game.RECIPES)))
+            S = np.array(utils.vectorize(S_items, data_conf.ITEMS)),
+            G = np.array(utils.vectorize(G_items, data_conf.ITEMS)),
+            E = np.array(utils.vectorize(E_recipes, data_conf.RECIPES)))
         start_conf.validate() # assert no exception
-        optim_conf = rapid_production.OptimizationConfiguration(n=1)
+        optim_conf = rapid_production.OptimizationConfiguration(n=5)
         solver, values, minimal_steps = rapid_production.solve_with_binary_search(
             data_conf, start_conf, optim_conf)
-        self.assertEqual(minimal_steps, 1)
+        self.assertEqual(minimal_steps, 4)
+
+    # TODO: From zero test with (optional: with automated miner equipement)
 
 
 class TestStartConfiguration(unittest.TestCase):
@@ -71,10 +73,10 @@ class TestStartConfiguration(unittest.TestCase):
         E_recipes = {}
         start_conf = rapid_production.StartConfiguration(
             data_conf,
-            S = np.array(utils.vectorize(S_items, game.ITEMS)),
-            G = np.array(utils.vectorize(G_items, game.ITEMS)),
-            E = np.array(utils.vectorize(E_recipes, game.RECIPES)))
-        self.assertRaises(RuntimeError, start_conf.validate)
+            S = np.array(utils.vectorize(S_items, data_conf.ITEMS)),
+            G = np.array(utils.vectorize(G_items, data_conf.ITEMS)),
+            E = np.array(utils.vectorize(E_recipes, data_conf.RECIPES)))
+        start_conf.validate() # assert no exception as handcrafted items supported
 
         data_conf = rapid_production.GameDataConfiguration()
         S_items = {'Desc_OreIron_C': 10, 'Desc_IronRod_C': 5, 'Desc_Wire_C': 8}
@@ -82,9 +84,9 @@ class TestStartConfiguration(unittest.TestCase):
         E_recipes = {}
         start_conf = rapid_production.StartConfiguration(
             data_conf,
-            S = np.array(utils.vectorize(S_items, game.ITEMS)),
-            G = np.array(utils.vectorize(G_items, game.ITEMS)),
-            E = np.array(utils.vectorize(E_recipes, game.RECIPES)))
+            S = np.array(utils.vectorize(S_items, data_conf.ITEMS)),
+            G = np.array(utils.vectorize(G_items, data_conf.ITEMS)),
+            E = np.array(utils.vectorize(E_recipes, data_conf.RECIPES)))
         start_conf.validate() # assert no exception
 
     def test_validation_recipes(self):
@@ -94,10 +96,10 @@ class TestStartConfiguration(unittest.TestCase):
         E_recipes = {'Recipe_Biofuel_C': 1}
         start_conf = rapid_production.StartConfiguration(
             data_conf,
-            S = np.array(utils.vectorize(S_items, game.ITEMS)),
-            G = np.array(utils.vectorize(G_items, game.ITEMS)),
-            E = np.array(utils.vectorize(E_recipes, game.RECIPES)))
-        self.assertRaises(RuntimeError, start_conf.validate)
+            S = np.array(utils.vectorize(S_items, data_conf.ITEMS)),
+            G = np.array(utils.vectorize(G_items, data_conf.ITEMS)),
+            E = np.array(utils.vectorize(E_recipes, data_conf.RECIPES)))
+        start_conf.validate() # assert no exception as handcrafted items supported
 
 
 # Run the tests

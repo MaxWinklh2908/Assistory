@@ -1,0 +1,1 @@
+If there are already some production facilities, the equivalent item value should be used as start items. If the buildings remain as existing recipes the flow should only be positive or sufficient items must be in the inventory to bridge to time for the optimizer to rebuild the missing production 

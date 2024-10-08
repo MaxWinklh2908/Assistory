@@ -238,8 +238,8 @@ class SatisfactoryLP:
         }
         
         power_balance = sum(
-            amount_facility[facility_name] * power_consumption
-            for facility_name, power_consumption in game.PRODUCTION_FACILITIES.items()
+            amount_facility[facility_name] * facility['power_production']
+            for facility_name, facility in game.PRODUCTION_FACILITIES.items()
         )
         self.solver.Add(
             power_balance + self.free_power >= 0,
@@ -346,7 +346,8 @@ class SatisfactoryLP:
         
         sum_consumption = 0
         print(f'Free power: {self.free_power} MW')
-        for facility_name, power_consumption in game.PRODUCTION_FACILITIES.items():
+        for facility_name, facility in game.PRODUCTION_FACILITIES.items():
+            power_consumption = facility['power_production']
             sum_power_of_type = amount_facility[facility_name] * power_consumption
             if round(sum_power_of_type, 3) != 0:
                 print(f'{game.get_bare_item_name(facility_name)}'

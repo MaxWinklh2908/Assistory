@@ -10,7 +10,6 @@ import pandas as pd
 
 import game
 import utils
-import sink_point_optim
 
 
 RETURN_CODES = {
@@ -23,67 +22,86 @@ RETURN_CODES = {
 
 DEFAULT_STEP_DURATION = 1.0 # minutes
 DEFAULT_MAX_STEPS = 20 # steps
-
-
-def define_facility_recipes():
-    facility_recipes = {
-        recipe['products'][0]['item']: recipe
-        for recipe in game.data['recipes'].values()
-        if len(recipe['products'])  == 1
-            and recipe['products'][0]['item'] in game.PRODUCTION_FACILITIES
-    }
-    facility_recipes['Desc_GeneratorCoal_C'] = {'ingredients': []}
-    facility_recipes['Desc_GeneratorFuel_C'] = {'ingredients': []}
-    facility_recipes['Desc_GeneratorNuclear_C'] = {'ingredients': []}
-    facility_recipes['Desc_MinerMk1_C'] = {'ingredients': []}
-    facility_recipes['Desc_MinerMk2_C'] = {'ingredients': []}
-    facility_recipes['Desc_MinerMk3_C'] = {'ingredients': []}
-    facility_recipes['Desc_WaterPump_C'] = {'ingredients': []}
-    facility_recipes['Desc_OilPump_C'] = {'ingredients': []}
-    facility_recipes['Desc_FrackingExtractor_C'] = {'ingredients': []}
-    return facility_recipes
-FACILITY_NAME2RECIPE = define_facility_recipes()
-
-
+DEBUG = False
 
 class DataConfiguration:
+    # TODO: Use methods to access variables to enforce interface
     pass
 
 
 class GameDataConfiguration(DataConfiguration):
 
     def __init__(self):
-        self.K = len(game.RECIPES) # number of recipes
+        self.RECIPES = sorted(game.RECIPES)
+        self.K = len(self.RECIPES) # number of recipes
         self.R = list(range(self.K))
-        self.M = len(game.ITEMS) # number of items
+
+        self.RECIPES_HANDCRAFT = sorted(game.RECIPES_HANDCRAFT)
+        self.L = len(self.RECIPES_HANDCRAFT) # number of handcraft recipes
+        self.R_handcraft = list(range(self.L))
+
+        self.ITEMS = sorted(game.ITEMS)
+        self.M = len(self.ITEMS) # number of items
         self.I = list(range(self.M))
 
         # production matrix A_i,r: production rate of item i by recipe r
         self.A = np.zeros((self.M, self.K), dtype=float)
         # cost matrix A_i,r: costs of item i for recipe j
         self.B = np.zeros((self.M, self.K), dtype=float)
+        # handcrafting production matrix A^H_i,r: production rate of item i by recipe r
+        self.A_handcraft = np.zeros((self.M, self.L), dtype=float)
 
-        for r, recipe_name in enumerate(sorted(game.RECIPES)):
+        for r, recipe_name in enumerate(self.RECIPES):
             recipe = game.RECIPES[recipe_name]
 
             ingredients = recipe['ingredients']
             products = recipe['products']
-            self.A[:, r] = ((- np.array(utils.vectorize(ingredients, game.ITEMS))
-                            + np.array(utils.vectorize(products, game.ITEMS))) 
-                            / (recipe['time'] / 60))
+            self.A[:, r] = (
+                (- np.array(utils.vectorize(ingredients, self.ITEMS))
+                 + np.array(utils.vectorize(products, self.ITEMS))) 
+                / (recipe['time'] / 60))
 
             facility_name = recipe['producedIn']
-            facility_recipe = FACILITY_NAME2RECIPE[facility_name]
-            build_costs = utils.transform_to_dict(facility_recipe['ingredients'])
-            self.B[:, r] = np.array(utils.vectorize(build_costs, game.ITEMS))
+            build_costs = game.PRODUCTION_FACILITIES[facility_name]['costs']
+            self.B[:, r] = np.array(utils.vectorize(build_costs, self.ITEMS))
+
+        for r, recipe_name in enumerate(self.RECIPES_HANDCRAFT):
+            recipe = game.RECIPES_HANDCRAFT[recipe_name]
+
+            ingredients = recipe['ingredients']
+            products = recipe['products']
+            self.A_handcraft[:, r] = (
+                (- np.array(utils.vectorize(ingredients, self.ITEMS))
+                 + np.array(utils.vectorize(products, self.ITEMS)))
+                / (recipe['time'] / 60))
 
 
 class CustomDataConfiguration(DataConfiguration):
 
     def __init__(self) -> None:
-        self.K = 3 # number of recipes
+        self.RECIPES = [
+            'Recipe_IronIngot_C',
+            'Recipe_IronPlate_C',
+            'Recipe_IronRod_C',
+        ]
+        self.K = len(self.RECIPES) # number of recipes
         self.R = list(range(self.K))
-        self.M = 4 # number of items
+
+        self.RECIPES_HANDCRAFT = [
+            'Recipe_IronOre_C',
+            'Recipe_IronIngot_C',
+            'Recipe_IronRod_C',
+        ]
+        self.L = len(self.RECIPES_HANDCRAFT) # number of handcrafting recipes
+        self.R_handcraft = list(range(self.L))
+        
+        self.ITEMS = [
+            'Desc_OreIron_C',
+            'Desc_IronIngot_C',
+            'Desc_IronPlate_C',
+            'Desc_IronRod_C',
+        ]
+        self.M = len(self.ITEMS) # number of items
         self.I = list(range(self.M))
 
         # production matrix A_i,r: production rate of item i by recipe r
@@ -102,6 +120,15 @@ class CustomDataConfiguration(DataConfiguration):
             [  0,    0,    0], # iron ingot
             [  0,  12,   12], # iron plate
             [   5,   0,    0], # iron rod
+        ], dtype=float)
+
+        # production matrix A_i,r: production rate of item i by recipe r
+        # h_t = A^H * z_t
+        self.A_handcraft = np.array([
+            [  30, -30,   0], # iron ore
+            [   0,  30, -1], # iron ingot
+            [   0,   0,   1], # iron plate
+            [   0,   0,  0], # iron rod
         ], dtype=float)
 
 
@@ -126,40 +153,22 @@ class StartConfiguration:
         self.S = S
         self.G = G
         self.E = E
+        self.data_conf = data_conf
 
 
     def validate(self):
-        """Test whether the current configuration of recipes is valid, by checking
-        - absence of handcrafted items in goal items and recipe ingredients
-        - consistency of existing recipes (no manual item supply needed)
+        """Test whether the current configuration of recipes is valid, by
+        checking manual item supply needed for existing recipes configuration.
         """
-        # TODO: Instead of excluding handcrafted items, add handcrafting recipes
-        # with overall maximum rate per minute. This enables production
-        # of everything!
-        all_recipes = {recipe_name: 1 for recipe_name in game.RECIPES}
-        all_resource_node_levels = {
-            recipe_name: 1
-            for recipe_name in game.NODES_AVAILABLE
-        }
-        producable_items = sink_point_optim.get_producable_items(all_recipes,
-                                                                 dict(),
-                                                                 all_resource_node_levels)
-        existing_recipes = utils.unvectorize(self.E, game.RECIPES)
-        for recipe_name, amount in existing_recipes.items():
-            if amount == 0:
-                continue
-            required_items = set(game.RECIPES[recipe_name]['ingredients'])
-            unprod_items = required_items - producable_items
-            if unprod_items:
-                raise RuntimeError(f'Recipe {recipe_name} relies on '
-                                   f'unproducable items: {unprod_items}')
-        goal_items = utils.unvectorize(self.G, game.ITEMS)
-        for item_name, amount in goal_items.items():
-            if amount == 0:
-                continue
-            if not item_name in producable_items:
-                raise RuntimeError(f'Goal item {item_name} is not producable')
-        
+        existing_recipes = utils.unvectorize(self.E, self.data_conf.RECIPES)
+        existing_items = utils.unvectorize(self.S, self.data_conf.ITEMS)
+        if DEBUG:
+            print('\nExisting recipes:')
+            for recipe_name, amount in existing_recipes.items():
+                print(recipe_name, amount)
+            print('\nExisting items:')
+            for item_name, amount in existing_items.items():
+                print(item_name, amount)
         item_balance = dict()
         for recipe_name, recipe_amount in existing_recipes.items():
             recipe = game.RECIPES[recipe_name]
@@ -169,13 +178,16 @@ class StartConfiguration:
             for item_name, item_amount in recipe['products'].items():
                 flow = recipe_amount * item_amount / (recipe['time'] / 60)
                 item_balance[item_name] = item_balance.get(item_name, 0) + flow
-        existing_items = utils.unvectorize(self.S, game.ITEMS)
+        if DEBUG:
+            print('\nItem balance:')
         for item_name, balance in item_balance.items():
-            if balance < 0 and existing_items.get(item_name, 0) <= 0:
-                # TODO: Why?
-                print(f'WARNING: Negative balance of item not in stock: {item_name}.'
-                      ' This might cause optimization failure. Put at least one'
-                      ' item into the inventory.')
+            if DEBUG:
+                print(item_name, ':', balance)
+            if balance < 0:
+                print(f'WARNING: Negative balance of item {item_name}: {balance}.'
+                      ' This might cause optimization failure if it can not'
+                      ' build up production fast enough. Put a sufficient amount'
+                      ' of the item into the inventory.')
 
 class OptimizationConfiguration:
 
@@ -213,20 +225,31 @@ def define_problem(data_conf: DataConfiguration,
     z = np.zeros((data_conf.K, len(optim_conf.T)), dtype=object)
     for r, t in itertools.product(data_conf.R, optim_conf.T):
         z[r,t] = solver.IntVar(0, solver.infinity(), f'z_{r}_{t}')
+
+    
+    # variable: add handcraft recipe r at t
+    z_H = np.zeros((data_conf.L, len(optim_conf.T)), dtype=object)
+    for r, t in itertools.product(data_conf.R_handcraft, optim_conf.T):
+        z_H[r,t] = solver.IntVar(0, 1, f'z^H_{r}_{t}')
     
     # variable: production active indicator
     # y = np.zeros(len(optim_conf.T), dtype=object)
     # for t in optim_conf.T:
     #     y[t] = solver.BoolVar(f'y_{t}')
 
-    # helper term: investment
+    # helper term investment
     v = data_conf.B @ z
     
-    # helper term: investment TODO: consider ingredients and products(=revenue) of the recipes
+    # helper term production: ingredients and products(=revenue) of the recipes
     p = np.zeros((data_conf.M, len(optim_conf.T)), dtype=object)
     p[:,0] = data_conf.A @ (start_conf.E + z[:,0])
     for t in optim_conf.T - {0}:
         p[:,t] = p[:,t-1] + data_conf.A @ (z[:,t])
+
+    # helper term handcrafted production
+    h = np.zeros((data_conf.M, len(optim_conf.T)), dtype=object)
+    for t in optim_conf.T:
+        h[:,t] = data_conf.A_handcraft @ (z_H[:,t])
 
     # objective: minimize steps to reach goal
     # solver.Minimize(y.sum())
@@ -241,8 +264,7 @@ def define_problem(data_conf: DataConfiguration,
     for i in data_conf.I:
         solver.Add(x[i,0] == start_conf.S[i])
         for t in optim_conf.T - {0}:
-            solver.Add(x[i,t] == x[i,t-1] + (-v[i,t-1] + optim_conf.step_duration * p[i,t-1]))
-            # solver.Add(x[i,t] == x[i,t-1] + y[t] * (-v[i,t] + p[i,t])) # TODO: reformulate
+            solver.Add(x[i,t] == x[i,t-1] + (-v[i,t-1] + optim_conf.step_duration * (p[i,t-1] + h[i,t-1])))
 
     # constraint: target capital
     for i in data_conf.I:
@@ -252,7 +274,11 @@ def define_problem(data_conf: DataConfiguration,
     for i, t in itertools.product(data_conf.I, optim_conf.T):
         solver.Add(x[i,t] - v[i,t] >= 0)
 
-    return solver, [x, z, None, v, p]
+    # constraint: one handcrafted recipe at a time
+    for t in optim_conf.T:
+        solver.Add(sum(z_H[:,t]) <= 1)
+
+    return solver, [x, z, z_H, None, v, p]
 
 
 def solve_with_increasing_steps(data_conf: DataConfiguration,
@@ -287,7 +313,10 @@ def solve_with_binary_search(data_conf: DataConfiguration,
     _optim_conf = OptimizationConfiguration(right, optim_conf.step_duration)
     best_solver, best_values = define_problem(
         data_conf, start_conf, _optim_conf)
+    print("Number of variables =", best_solver.NumVariables())
+    print("Number of constraints =", best_solver.NumConstraints())
     status = best_solver.Solve()
+    print(f"Problem processed in {best_solver.wall_time():d} milliseconds")
     if status == pywraplp.Solver.INFEASIBLE:
         # If no feasible solution was found
         raise RuntimeError('Could not reach target in time. Status=' + RETURN_CODES[status])
@@ -297,7 +326,7 @@ def solve_with_binary_search(data_conf: DataConfiguration,
     while left <= right:
 
         mid = (left + right) // 2
-        print('Search step cound: ', mid)
+        print('Search value: ', mid)
         _optim_conf = OptimizationConfiguration(mid, optim_conf.step_duration)
         solver, values = define_problem(data_conf, start_conf, _optim_conf)
         status = solver.Solve()
@@ -342,37 +371,49 @@ def print_solution(N, x, z, y, v, p):
     print(pd.DataFrame(data))
 
 
-def print_solution_dict(N, x, z, y, v, p):
+def print_solution_dict(N, x, z, z_H, y, v, p, data_conf: DataConfiguration):
     # N is number of steps + 1
     if x.shape[1] != N + 1:
         raise ValueError(f'Expect {N+1} columns in state values. Got {x.shape}')
     if z.shape[1] != N + 1:
         raise ValueError(f'Expect {N+1} columns in recipe values. Got {z.shape}')
+    if z_H.shape[1] != N + 1:
+        raise ValueError(f'Expect {N+1} columns in handcraft recipe values. Got {z_H.shape}')
     if v.shape[1] != N + 1:
         raise ValueError(f'Expect {N+1} columns in investment values. Got {v.shape}')
     if p.shape[1] != N + 1:
         raise ValueError(f'Expect {N+1} columns in revenue values. Got {p.shape}')
     data = {
         'State': [
-            str(utils.unvectorize([round(val.solution_value(), 2) for val in x[:,t]], game.ITEMS))
+            str(utils.unvectorize([round(val.solution_value(), 2) for val in x[:,t]],
+                                  data_conf.ITEMS))
             for t in range(N+1)],
         'Recipes': [
-            str(utils.unvectorize([round(val.solution_value(), 2) for val in z[:,t]], game.RECIPES))
+            str(utils.unvectorize([round(val.solution_value(), 2) for val in z[:,t]],
+                                  data_conf.RECIPES))
+            for t in range(N+1)],
+        'Handcraft recipes': [
+            str(utils.unvectorize([round(val.solution_value(), 2) for val in z_H[:,t]],
+                                  data_conf.RECIPES_HANDCRAFT))
             for t in range(N+1)],
         'Investment Cost': [
-            str(utils.unvectorize([round(val.solution_value(), 2) for val in v[:,t]], game.ITEMS))
+            str(utils.unvectorize([round(val.solution_value(), 2) for val in v[:,t]],
+                                  data_conf.ITEMS))
             for t in range(N+1)],
         'Revenue': [
-            str(utils.unvectorize([round(val.solution_value(), 2) for val in p[:,t]], game.ITEMS))
+            str(utils.unvectorize([round(val.solution_value(), 2) for val in p[:,t]],
+                                  data_conf.ITEMS))
             for t in range(N+1)],
     }
-    print(pd.DataFrame(data))
+    if DEBUG:
+        print(pd.DataFrame(data))
     print('\nState')
     for i, val in enumerate(data['State']):
         print(i, val)
-    print('\nRecipe Plan')
-    for i, val in enumerate(data['Recipes']):
-        print(i, val)
+    print('\nRecipe Plan (step, recipes, handcrafted)')
+    for i, vals in enumerate(zip(data['Recipes'], data['Handcraft recipes'])):
+        val, val_H = vals
+        print(i, val, val_H)
 
 
 def main():
@@ -382,19 +423,19 @@ def main():
                                         'Desc_OreIron_C': 1000,
                                         'Desc_IronRod_C': 10,
                                         'Desc_Wire_C': 16,
-                                        }, game.ITEMS)),
+                                        }, data_conf.ITEMS)),
                                     G = np.array(utils.vectorize({
                                         'Desc_IronIngot_C': 100,
-                                        }, game.ITEMS)),
+                                        }, data_conf.ITEMS)),
                                     E = np.array(utils.vectorize({
                                         # 'Recipe_IngotIron_C': 1,
-                                        }, game.RECIPES)))
+                                        }, data_conf.RECIPES)))
     start_conf.validate()
     optim_conf = OptimizationConfiguration()
     solver, values, minimal_steps = solve_with_binary_search(
         data_conf, start_conf, optim_conf)
     print(f'Minimal number of steps: {minimal_steps}')
-    print_solution_dict(minimal_steps, *values)
+    print_solution_dict(minimal_steps, *values, data_conf)
 
 
 if __name__ == '__main__':

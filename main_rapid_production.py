@@ -49,7 +49,7 @@ def extract_existing_recipes(factories: List[Factory]) -> dict:
                 print('WARNING Skip unknown recipe:', recipe_name)
                 continue
             if factory.is_production_paused:
-                print('WARNING Production paused:', recipe_name)
+                print('WARNING Skip paused production:', recipe_name)
                 continue
             rate = factory.get_effective_rate()
             recipes[recipe_name] = recipes.get(recipe_name, 0) + rate
@@ -61,23 +61,22 @@ def main(compressed_save_file: str, target_item_file: str):
     
     world = load_world(compressed_save_file)
     S_items = extract_player_inventory(world.get_player())
-    print('Existing items:', S_items)
     G_items = load_target_items(target_item_file)
     E_recipes = extract_existing_recipes(world.get_factories())
-    print('Existing recipes:', E_recipes)
     start_conf = rapid_production.StartConfiguration(
         data_conf,
-        S = np.array(utils.vectorize(S_items, game.ITEMS)),
-        G = np.array(utils.vectorize(G_items, game.ITEMS)),
-        E = np.array(utils.vectorize(E_recipes, game.RECIPES)),
+        S = np.array(utils.vectorize(S_items, data_conf.ITEMS)),
+        G = np.array(utils.vectorize(G_items, data_conf.ITEMS)),
+        E = np.array(utils.vectorize(E_recipes, data_conf.RECIPES)),
     )
     start_conf.validate()
 
     optim_conf = rapid_production.OptimizationConfiguration()
+    optim_conf = rapid_production.OptimizationConfiguration()
     solver, values, minimal_steps = rapid_production.solve_with_binary_search(
         data_conf, start_conf, optim_conf)
     print(f'Minimal number of steps: {minimal_steps}')
-    rapid_production.print_solution_dict(minimal_steps, *values)
+    rapid_production.print_solution_dict(minimal_steps, *values, data_conf)
 
 
 if __name__ == '__main__':

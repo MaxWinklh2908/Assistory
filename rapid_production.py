@@ -21,7 +21,8 @@ RETURN_CODES = {
  3: 'UNBOUNDED',
 }
 
-STEP_DURATION = 1.0 # minutes
+DEFAULT_STEP_DURATION = 1.0 # minutes
+DEFAULT_MAX_STEPS = 40 # steps
 
 
 def define_facility_recipes():
@@ -178,14 +179,14 @@ class StartConfiguration:
 
 class OptimizationConfiguration:
 
-    def __init__(self, n: int):
+    def __init__(self, n: int=DEFAULT_MAX_STEPS,
+                 step_duration: float=DEFAULT_STEP_DURATION):
         if n < 0:
             raise ValueError('Number of steps must be at least 1')
         self.N = n
         self.T = set(range(n + 1))
+        self.step_duration = step_duration
 
-
-N_MAX = 40 # steps
 
 def define_problem(data_conf: DataConfiguration,
                    start_conf: StartConfiguration,
@@ -231,7 +232,7 @@ def define_problem(data_conf: DataConfiguration,
     for i in data_conf.I:
         solver.Add(x[i,0] == start_conf.S[i])
         for t in optim_conf.T - {0}:
-            solver.Add(x[i,t] == x[i,t-1] + (-v[i,t-1] + STEP_DURATION * p[i,t-1]))
+            solver.Add(x[i,t] == x[i,t-1] + (-v[i,t-1] + optim_conf.step_duration * p[i,t-1]))
             # solver.Add(x[i,t] == x[i,t-1] + y[t] * (-v[i,t] + p[i,t])) # TODO: reformulate
 
     # constraint: target capital
@@ -245,11 +246,13 @@ def define_problem(data_conf: DataConfiguration,
     return solver, [x, z, None, v, p]
 
 
-def solve(data_conf: DataConfiguration, start_conf: StartConfiguration, n_max: int=N_MAX):
-    for n in range(0, n_max):
+def solve_with_increasing_steps(data_conf: DataConfiguration,
+                                start_conf: StartConfiguration,
+                                optim_conf: OptimizationConfiguration):
+    for n in range(0, optim_conf.N):
         print('Iteration: ', n)
-        optim_conf = OptimizationConfiguration(n)
-        solver, values = define_problem(data_conf, start_conf, optim_conf)
+        _optim_conf = OptimizationConfiguration(n, optim_conf.step_duration)
+        solver, values = define_problem(data_conf, start_conf, _optim_conf)
         print("Number of variables =", solver.NumVariables())
         print("Number of constraints =", solver.NumConstraints())
         status = solver.Solve()
@@ -332,7 +335,9 @@ def main():
                                         # 'Recipe_IngotIron_C': 1,
                                         }, game.RECIPES)))
     start_conf.validate()
-    solver, values, minimal_steps = solve(data_conf, start_conf)
+    optim_conf = OptimizationConfiguration()
+    solver, values, minimal_steps = solve_with_increasing_steps(
+        data_conf, start_conf, optim_conf)
     print(f'Minimal number of steps: {minimal_steps}')
     print_solution_dict(minimal_steps, *values)
 

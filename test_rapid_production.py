@@ -21,7 +21,9 @@ class TestRapidProduction(unittest.TestCase):
             S = np.array(utils.vectorize(S_items, game.ITEMS)),
             G = np.array(utils.vectorize(G_items, game.ITEMS)),
             E = np.array(utils.vectorize(E_recipes, game.RECIPES)))
-        solver, values, minimal_steps = rapid_production.solve(data_conf, start_conf)
+        optim_conf = rapid_production.OptimizationConfiguration()
+        solver, values, minimal_steps = rapid_production.solve_with_increasing_steps(
+            data_conf, start_conf, optim_conf)
         self.assertEqual(minimal_steps, 0)
 
     def test_grow_production(self):
@@ -34,7 +36,9 @@ class TestRapidProduction(unittest.TestCase):
             S = np.array(utils.vectorize(S_items, game.ITEMS)),
             G = np.array(utils.vectorize(G_items, game.ITEMS)),
             E = np.array(utils.vectorize(E_recipes, game.RECIPES)))
-        solver, values, minimal_steps = rapid_production.solve(data_conf, start_conf)
+        optim_conf = rapid_production.OptimizationConfiguration()
+        solver, values, minimal_steps = rapid_production.solve_with_increasing_steps(
+            data_conf, start_conf, optim_conf)
         self.assertEqual(minimal_steps, 1)
 
     def test_fix_balance(self):
@@ -52,7 +56,9 @@ class TestRapidProduction(unittest.TestCase):
             G = np.array(utils.vectorize(G_items, game.ITEMS)),
             E = np.array(utils.vectorize(E_recipes, game.RECIPES)))
         start_conf.validate() # assert no exception
-        solver, values, minimal_steps = rapid_production.solve(data_conf, start_conf)
+        optim_conf = rapid_production.OptimizationConfiguration()
+        solver, values, minimal_steps = rapid_production.solve_with_increasing_steps(
+            data_conf, start_conf, optim_conf)
         self.assertEqual(minimal_steps, 1)
 
 

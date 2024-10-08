@@ -10,6 +10,7 @@ import pandas as pd
 
 import game
 import utils
+import sink_point_optim
 
 
 RETURN_CODES = {
@@ -57,9 +58,9 @@ class GameDataConfiguration(DataConfiguration):
         self.I = list(range(self.M))
 
         # production matrix A_i,r: production rate of item i by recipe r
-        self.A = np.zeros((self.M, self.K))
+        self.A = np.zeros((self.M, self.K), dtype=float)
         # cost matrix A_i,r: costs of item i for recipe j
-        self.B = np.zeros((self.M, self.K))
+        self.B = np.zeros((self.M, self.K), dtype=float)
 
         for r, recipe_name in enumerate(sorted(game.RECIPES)):
             recipe = game.RECIPES[recipe_name]
@@ -91,7 +92,7 @@ class CustomDataConfiguration(DataConfiguration):
             [ 30, -30, -15], # iron ingot
             [  0,  20,   0], # iron plate
             [  0,   0,  15], # iron rod
-        ])
+        ], dtype=float)
 
         # cost matrix A_i,r: costs of item i for recipe j
         # v_t = B * z_t
@@ -100,7 +101,7 @@ class CustomDataConfiguration(DataConfiguration):
             [  0,    0,    0], # iron ingot
             [  0,  12,   12], # iron plate
             [   5,   0,    0], # iron rod
-        ])
+        ], dtype=float)
 
 
 class StartConfiguration:
@@ -121,10 +122,59 @@ class StartConfiguration:
             raise ValueError(f'Expect goal amount of shape {(data_conf.M,)}. Got {G.shape}')
         if E.shape != (data_conf.K,):
             raise ValueError(f'Expect existing recipes of shape {(data_conf.K,)}. Got {E.shape}')
-        # TODO: Check feasibility of E
         self.S = S
         self.G = G
         self.E = E
+
+
+    def validate(self):
+        """Test whether the current configuration of recipes is valid, by checking
+        - absence of handcrafted items in goal items and recipe ingredients
+        - consistency of existing recipes (no manual item supply needed)
+        """
+        # TODO: Instead of excluding handcrafted items, add handcrafting recipes
+        # with overall maximum rate per minute. This enables production
+        # of everything!
+        all_recipes = {recipe_name: 1 for recipe_name in game.RECIPES}
+        all_resource_node_levels = {
+            recipe_name: 1
+            for recipe_name in game.NODES_AVAILABLE
+        }
+        producable_items = sink_point_optim.get_producable_items(all_recipes,
+                                                                 dict(),
+                                                                 all_resource_node_levels)
+        existing_recipes = utils.unvectorize(self.E, game.RECIPES)
+        for recipe_name, amount in existing_recipes.items():
+            if amount == 0:
+                continue
+            required_items = set(game.RECIPES[recipe_name]['ingredients'])
+            unprod_items = required_items - producable_items
+            if unprod_items:
+                raise RuntimeError(f'Recipe {recipe_name} relies on '
+                                   f'unproducable items: {unprod_items}')
+        goal_items = utils.unvectorize(self.G, game.ITEMS)
+        for item_name, amount in goal_items.items():
+            if amount == 0:
+                continue
+            if not item_name in producable_items:
+                raise RuntimeError(f'Goal item {item_name} is not producable')
+        
+        item_balance = dict()
+        for recipe_name, recipe_amount in existing_recipes.items():
+            recipe = game.RECIPES[recipe_name]
+            for item_name, item_amount in recipe['ingredients'].items():
+                flow = recipe_amount * item_amount / (recipe['time'] / 60)
+                item_balance[item_name] = item_balance.get(item_name, 0) - flow
+            for item_name, item_amount in recipe['products'].items():
+                flow = recipe_amount * item_amount / (recipe['time'] / 60)
+                item_balance[item_name] = item_balance.get(item_name, 0) + flow
+        existing_items = utils.unvectorize(self.S, game.ITEMS)
+        for item_name, balance in item_balance.items():
+            if balance < 0 and existing_items.get(item_name, 0) <= 0:
+                # TODO: Why?
+                print(f'WARNING: Negative balance of item not in stock: {item_name}.'
+                      ' This might cause optimization failure. Put at least one'
+                      ' item into the inventory.')
 
 class OptimizationConfiguration:
 
@@ -281,6 +331,7 @@ def main():
                                     E = np.array(utils.vectorize({
                                         # 'Recipe_IngotIron_C': 1,
                                         }, game.RECIPES)))
+    start_conf.validate()
     solver, values, minimal_steps = solve(data_conf, start_conf)
     print(f'Minimal number of steps: {minimal_steps}')
     print_solution_dict(minimal_steps, *values)

@@ -74,8 +74,7 @@ def main(compressed_save_file: str, target_item_file: str):
     start_conf.validate()
 
     optim_conf = rapid_production.OptimizationConfiguration()
-
-    solver, values, minimal_steps = rapid_production.solve_with_increasing_steps(
+    solver, values, minimal_steps = rapid_production.solve_with_binary_search(
         data_conf, start_conf, optim_conf)
     print(f'Minimal number of steps: {minimal_steps}')
     rapid_production.print_solution_dict(minimal_steps, *values)

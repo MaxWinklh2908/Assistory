@@ -22,7 +22,7 @@ RETURN_CODES = {
 }
 
 DEFAULT_STEP_DURATION = 1.0 # minutes
-DEFAULT_MAX_STEPS = 40 # steps
+DEFAULT_MAX_STEPS = 20 # steps
 
 
 def define_facility_recipes():
@@ -274,6 +274,52 @@ def solve_with_increasing_steps(data_conf: DataConfiguration,
     raise RuntimeError('Could not reach target in time. Status=' + RETURN_CODES[status])
 
 
+def solve_with_binary_search(data_conf: DataConfiguration,
+                             start_conf: StartConfiguration,
+                             optim_conf: OptimizationConfiguration):
+    
+    left = 0
+    right = optim_conf.N
+    minimal_steps = None
+
+    # test feasibility first
+    print('Test most relaxed conditions first...')
+    _optim_conf = OptimizationConfiguration(right, optim_conf.step_duration)
+    best_solver, best_values = define_problem(
+        data_conf, start_conf, _optim_conf)
+    status = best_solver.Solve()
+    if status == pywraplp.Solver.INFEASIBLE:
+        # If no feasible solution was found
+        raise RuntimeError('Could not reach target in time. Status=' + RETURN_CODES[status])
+    elif status != pywraplp.Solver.OPTIMAL:
+        raise RuntimeError('Unexpected status: ' + RETURN_CODES[status])
+
+    while left <= right:
+
+        mid = (left + right) // 2
+        print('Search step cound: ', mid)
+        _optim_conf = OptimizationConfiguration(mid, optim_conf.step_duration)
+        solver, values = define_problem(data_conf, start_conf, _optim_conf)
+        status = solver.Solve()
+        print(f"Problem processed in {solver.wall_time():d} milliseconds")
+
+        if status == pywraplp.Solver.OPTIMAL:
+            # If an optimal solution is found, store the current mid as the best solution
+            minimal_steps = mid
+            # Try to find a smaller solution, search the lower half
+            right = mid - 1
+            best_solver = solver
+            best_values = values
+        elif status == pywraplp.Solver.INFEASIBLE:
+            # If the problem is infeasible, search the upper half
+            left = mid + 1
+        else:
+            raise RuntimeError('Unexpected status: ' + RETURN_CODES[status])
+
+    # Return the solver, values, and the minimal steps found
+    return best_solver, best_values, minimal_steps
+
+
 def print_solution(N, x, z, y, v, p):
     # N is number of steps + 1
     if x.shape[1] != N + 1:
@@ -345,7 +391,7 @@ def main():
                                         }, game.RECIPES)))
     start_conf.validate()
     optim_conf = OptimizationConfiguration()
-    solver, values, minimal_steps = solve_with_increasing_steps(
+    solver, values, minimal_steps = solve_with_binary_search(
         data_conf, start_conf, optim_conf)
     print(f'Minimal number of steps: {minimal_steps}')
     print_solution_dict(minimal_steps, *values)

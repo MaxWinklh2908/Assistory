@@ -8,7 +8,7 @@ import instantiator
 import rapid_production
 import game
 import utils
-import save_reader, save_uncompressor, save_parser
+import save_uncompressor, save_parser
 from data_types import *
 
 
@@ -21,12 +21,6 @@ def load_world(compressed_save_file: str) -> World:
     objects = reader.read()
     world = instantiator.instantiate_world(objects)
     return world
-
-
-def read_stack_item(payload: bytes) -> str:
-    reader = save_reader.SaveReader(payload)
-    reader.idx += 4
-    return reader.read_string()
 
 
 def extract_player_inventory(player: Player) -> dict:

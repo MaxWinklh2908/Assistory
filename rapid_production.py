@@ -181,6 +181,15 @@ class OptimizationConfiguration:
 
     def __init__(self, n: int=DEFAULT_MAX_STEPS,
                  step_duration: float=DEFAULT_STEP_DURATION):
+        """
+        Configuration for the optimization
+
+        Args:
+            n (int, optional): Maximal number of iterations. Must be al least 0.
+                Defaults to DEFAULT_MAX_STEPS.
+            step_duration (float, optional): Amount of minutes an iteration takes.
+                Defaults to DEFAULT_STEP_DURATION.
+        """
         if n < 0:
             raise ValueError('Number of steps must be at least 1')
         self.N = n
@@ -249,7 +258,7 @@ def define_problem(data_conf: DataConfiguration,
 def solve_with_increasing_steps(data_conf: DataConfiguration,
                                 start_conf: StartConfiguration,
                                 optim_conf: OptimizationConfiguration):
-    for n in range(0, optim_conf.N):
+    for n in range(0, optim_conf.N+1):
         print('Iteration: ', n)
         _optim_conf = OptimizationConfiguration(n, optim_conf.step_duration)
         solver, values = define_problem(data_conf, start_conf, _optim_conf)

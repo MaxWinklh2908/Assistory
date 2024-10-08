@@ -21,7 +21,7 @@ class TestRapidProduction(unittest.TestCase):
             S = np.array(utils.vectorize(S_items, game.ITEMS)),
             G = np.array(utils.vectorize(G_items, game.ITEMS)),
             E = np.array(utils.vectorize(E_recipes, game.RECIPES)))
-        optim_conf = rapid_production.OptimizationConfiguration()
+        optim_conf = rapid_production.OptimizationConfiguration(n=1)
         solver, values, minimal_steps = rapid_production.solve_with_increasing_steps(
             data_conf, start_conf, optim_conf)
         self.assertEqual(minimal_steps, 0)
@@ -36,7 +36,7 @@ class TestRapidProduction(unittest.TestCase):
             S = np.array(utils.vectorize(S_items, game.ITEMS)),
             G = np.array(utils.vectorize(G_items, game.ITEMS)),
             E = np.array(utils.vectorize(E_recipes, game.RECIPES)))
-        optim_conf = rapid_production.OptimizationConfiguration()
+        optim_conf = rapid_production.OptimizationConfiguration(n=1)
         solver, values, minimal_steps = rapid_production.solve_with_increasing_steps(
             data_conf, start_conf, optim_conf)
         self.assertEqual(minimal_steps, 1)
@@ -56,7 +56,7 @@ class TestRapidProduction(unittest.TestCase):
             G = np.array(utils.vectorize(G_items, game.ITEMS)),
             E = np.array(utils.vectorize(E_recipes, game.RECIPES)))
         start_conf.validate() # assert no exception
-        optim_conf = rapid_production.OptimizationConfiguration()
+        optim_conf = rapid_production.OptimizationConfiguration(n=1)
         solver, values, minimal_steps = rapid_production.solve_with_increasing_steps(
             data_conf, start_conf, optim_conf)
         self.assertEqual(minimal_steps, 1)

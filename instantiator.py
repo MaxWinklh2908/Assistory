@@ -269,7 +269,7 @@ INSTANTIATION_FUNCTION = {
         create_fracking_building,
     '/Game/FactoryGame/Buildable/Factory/WaterPump/Build_WaterPump.Build_WaterPump_C':
         create_fracking_building,
-    # TODO: ResourceWellPressurizer
+    # TODO: FrackingExtractor
 
     # Manufacturing
     '/Game/FactoryGame/Buildable/Factory/SmelterMk1/Build_SmelterMk1.Build_SmelterMk1_C':

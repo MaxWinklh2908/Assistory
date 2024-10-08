@@ -20,9 +20,7 @@ RETURN_CODES = {
  3: 'UNBOUNDED',
 }
 
-# TODO:
-# x 'Desc_ResourceWellPressurizer_C' Desc_FrackingSmasher_C
-# x Not available Desc_FrackingExtractor_C
+
 def define_facility_recipes():
     facility_recipes = {
         recipe['products'][0]['item']: recipe
@@ -38,7 +36,7 @@ def define_facility_recipes():
     facility_recipes['Desc_MinerMk3_C'] = {'ingredients': []}
     facility_recipes['Desc_WaterPump_C'] = {'ingredients': []}
     facility_recipes['Desc_OilPump_C'] = {'ingredients': []}
-    facility_recipes['Desc_ResourceWellPressurizer_C'] = {'ingredients': []}
+    facility_recipes['Desc_FrackingExtractor_C'] = {'ingredients': []}
     return facility_recipes
 FACILITY_NAME2RECIPE = define_facility_recipes()
 
@@ -195,8 +193,8 @@ def define_problem(data_conf: DataConfiguration,
     return solver, [x, z, None, v, p]
 
 
-def solve(data_conf: DataConfiguration, start_conf: StartConfiguration):
-    for N in range(1, N_MAX):
+def solve(data_conf: DataConfiguration, start_conf: StartConfiguration, n_max: int=N_MAX):
+    for N in range(1, n_max):
         print('Iteration: ', N)
         optim_conf = OptimizationConfiguration(N)
         solver, values = define_problem(data_conf, start_conf, optim_conf)

@@ -30,8 +30,11 @@ def define_production_facilities():
     facilities['Desc_MinerMk3_C'] = -30
     facilities['Desc_WaterPump_C'] = -20
     facilities['Desc_OilPump_C'] = -40
-    # TODO: correctly estimate pressurizer power
-    facilities['Desc_ResourceWellPressurizer_C'] = -10
+
+    # Simplification: required energy for smasher is integrated into extractors
+    # to make smasher obsolete in modelling
+    average_satellites_per_smasher = 6.941
+    facilities['Desc_FrackingExtractor_C'] = -150/average_satellites_per_smasher
     
     return facilities
 # Mapping of production facility to power production/consumption
@@ -44,7 +47,7 @@ MINING_FACILITIES = [
     'Desc_MinerMk3_C',
     'Desc_WaterPump_C',
     'Desc_OilPump_C',
-    'Desc_ResourceWellPressurizer_C'
+    'Desc_FrackingExtractor_C'
 ]
 
 # Geothermal power production is not consuming resources, therefore free
@@ -117,8 +120,8 @@ NODES_AVAILABLE['Recipe_MinerMk3RawQuartz_C'] =                   (2 * 5 + 11 + 
 NODES_AVAILABLE['Recipe_MinerMk3OreUranium_C'] =                  (2 * 0 + 3 + 0.5 * 1)
 NODES_AVAILABLE['Recipe_MinerMk3SAM_C'] =                         (2 * 3 + 6 + 0.5 * 10)
 NODES_AVAILABLE['Recipe_OilPumpLiquidOil_C'] =                    (2 * 8 + 12 + 0.5 * 10)
-NODES_AVAILABLE['Recipe_ResourceWellPressurizerNitrogenGas_C'] =  (2 * 36 + 7 + 0.5 * 2)
-NODES_AVAILABLE['Recipe_ResourceWellPressurizerLiquidOil_C'] =    (2 * 3 + 3 + 0.5 * 6)
+NODES_AVAILABLE['Recipe_FrackingExtractorNitrogenGas_C'] =  (2 * 36 + 7 + 0.5 * 2)
+NODES_AVAILABLE['Recipe_FrackingExtractorLiquidOil_C'] =    (2 * 4 + 6 + 0.5 * 8)
 # By default use only MinerMk3
 for level in (1, 2):
     for item_name in [
@@ -269,10 +272,10 @@ def define_recipes():
         'Desc_NitrogenGas_C',
         'Desc_LiquidOil_C',
     ]:
-        recipes[f'Recipe_ResourceWellPressurizer{get_bare_item_name(item_name)}_C'] = {
+        recipes[f'Recipe_FrackingExtractor{get_bare_item_name(item_name)}_C'] = {
             'ingredients': {},
             'products': {item_name: 60},
-            'producedIn': 'Desc_ResourceWellPressurizer_C',
+            'producedIn': 'Desc_FrackingExtractor_C',
             'time': 60,
         }
     # SAM

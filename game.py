@@ -279,13 +279,13 @@ def define_recipes():
     recipes['Recipe_IngotSAM_C'] = {
         'ingredients': {'Desc_SAM_C': 4},
         'products': {'Desc_SAMIngot_C': 1},
-        'producedIn': 'Desc_Constructor_C',
+        'producedIn': 'Desc_ConstructorMk1_C',
         'time': 2,
     }
     recipes['Recipe_SAMFluctuator_C'] = {
         'ingredients': {'Desc_SAMIngot_C': 6, 'Desc_Wire_C': 5, 'Desc_SteelPipe_C': 3},
         'products': {'Desc_SAMFluctuator_C': 1},
-        'producedIn': 'Desc_Constructor_C',
+        'producedIn': 'Desc_ConstructorMk1_C',
         'time': 6,
     }
     return recipes

@@ -1,7 +1,8 @@
-ortools
-networkx
-matplotlib
-scipy
+# for tools: rapid and optimal production
+ortools==9.11.4210
+networkx==3.1
+matplotlib==3.7.5
+scipy==1.10.1
 
-# stats tool
-watchdog
+# for tools: game monitor
+watchdog==4.0.2

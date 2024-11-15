@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 import zlib
 
-import save_reader
+from assistory.save_parser import save_reader
 
 
 SUPPORTED_SAVE_HEADER_VERSIONS = [13]
@@ -9,7 +9,6 @@ SUPPORTED_SAVE_VERSIONS = [42, 46]
 
 
 class CompressedReader(save_reader.SaveReader):
-
 
     def __init__(self, data: bytes, idx: int=0):
         super().__init__(data, idx)
@@ -55,20 +54,27 @@ class CompressedReader(save_reader.SaveReader):
             compressed_body_chunks.append(self.data[self.idx: self.idx + compressed_size])
             self.idx += compressed_size
         return compressed_body_chunks
+    
+    def read(self) -> bytes:
+        self.read_header()
+        data_uncompressed = bytes()
+        for chunk in self.read_compressed_chunks():
+            data_uncompressed += zlib.decompress(chunk)
+        return data_uncompressed
+
+    @classmethod
+    def open_reader(cls, file: str) -> 'CompressedReader':
+        with open(file, 'rb') as fp:
+            data = fp.read()
+        return cls(data)
 
 
 def uncompress_save_file(compressed_save: str, uncompressed_save: str):
-    with open(compressed_save, 'rb') as fp:
-        data = fp.read()
-
-    reader = CompressedReader(data)
-    reader.read_header()
-    compressed_body_chunks = reader.read_compressed_chunks()
+    reader = CompressedReader.open_reader(compressed_save)
+    data_uncompressed = reader.read()
 
     with open(uncompressed_save, 'wb') as fp:
-        for chunk in compressed_body_chunks:
-            uncompressed_chunk = zlib.decompress(chunk)
-            fp.write(uncompressed_chunk)
+        fp.write(data_uncompressed)
 
 
 if __name__ == '__main__':

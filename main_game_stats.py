@@ -1,12 +1,21 @@
 from argparse import ArgumentParser
-import os
 from pprint import pprint
 
-import game
-import save_uncompressor
-import save_parser
-import instantiator
-from data_types import *
+from assistory.game import game
+from assistory.save_parser import save_uncompressor, save_parser
+from assistory.save_parser.actor import *
+
+
+def load_world(save_file_compressed: str) -> World:
+    reader = save_uncompressor.CompressedReader.open_reader(save_file_compressed)
+    data_uncompressed = reader.read()
+    
+    # parse file
+    reader = save_parser.UncompressedReader(data_uncompressed)
+    objects = reader.read()
+    world = instantiate_world(objects)
+
+    return world
 
 
 def print_actors(actors: Iterable[Actor]):
@@ -21,7 +30,8 @@ def extract_existing_recipes(factories: Iterable[Factory]) -> dict:
         if isinstance(factory, (ManufacturingBuilding, FrackingBuilding)):
             recipe_name = factory.current_recipe_name
             if not recipe_name in game.RECIPES:
-                print('WARNING Skip unknown recipe:', recipe_name)
+                if recipe_name:
+                    print('WARNING Skip unknown recipe:', recipe_name)
                 continue
             if factory.is_production_paused:
                 print('WARNING Production paused:', recipe_name)
@@ -51,7 +61,7 @@ def print_production_rates(factories: Iterable[Factory]):
     pprint({
         recipe_name: amount
         for recipe_name, amount in recipe_amount.items()
-        # if amount != 0
+        if amount != 0
     })
     item_amount = calculate_item_production(recipe_amount)
     print('--------------------Item Rates --------------------------------')
@@ -114,17 +124,7 @@ def print_game_phase_progress(factories: Iterable[Factory],
     
 
 def main(compressed_save_file: str):
-    # read file
-    save_file_name = os.path.basename(compressed_save_file)
-    uncompressed_save_file = os.path.join('/tmp', save_file_name[:-4] + '.bin')
-    save_uncompressor.uncompress_save_file(compressed_save_file, uncompressed_save_file)
-    with open(uncompressed_save_file, 'rb') as fp:
-        data = fp.read()
-    
-    # parse file
-    reader = save_parser.UncompressedReader(data)
-    objects = reader.read()
-    world = instantiator.instantiate_world(objects)
+    world = load_world(compressed_save_file)
 
     # print stats
     # print_actors(actors)
@@ -138,7 +138,7 @@ def main(compressed_save_file: str):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument('compressed_save_file')
+    parser.add_argument('compressed_save_file', help='Path to a save file to read stats from')
     args = parser.parse_args()
 
     main(args.compressed_save_file)

@@ -1,9 +1,7 @@
+import csv
 
-from ortools.linear_solver import pywraplp
-
-import sink_point_optim
-import game
-import parse_items_from_csv
+import assistory.optim.sink_point_optim as sink_point_optim
+from assistory.game import game
 
 RESOURCE_NODES = {    
         'Desc_Stone_C': 480,
@@ -18,6 +16,34 @@ RESOURCE_NODES = {
         'Desc_OreUranium_C': 240,
     }
 
+
+def parse_items(file_path: str):
+    with open(file_path, 'r') as fp:
+        data = fp.readlines()
+
+    # Skip total row and header row
+    data = data[2:]
+
+    item_name2class_name = {
+        item['name']: item['className']
+        for item in game.data['items'].values()
+    }
+
+    resources_available = {
+        item_name:0 for item_name in game.ITEMS
+    }
+
+    for row in csv.reader(data, delimiter=';'):
+        item_name = row[0]
+        if not item_name in item_name2class_name:
+            print('Warning: Skip unknown item:', item_name)
+            continue
+        balance = float(row[3].replace(',', '.'))
+        if balance <= 0:
+            continue
+        resources_available[item_name2class_name[item_name]] = balance
+
+    return resources_available
 
 
 def find_best_new_resource_node(recipes: dict, resources_available: dict):
@@ -58,7 +84,7 @@ if __name__ == '__main__':
     # resources_available['Desc_OreCopper_C'] = 120
     
     # # current overhead
-    resources_available = parse_items_from_csv.parse_items('data/Autonation4.0.csv')
+    resources_available = parse_items('data/Autonation4.0.csv')
     resources_available = {
         item_name: amount
         for item_name, amount in resources_available.items()

@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from typing import List
 
-import save_reader
+from assistory.save_parser import save_reader
 
 
 SUPPORTED_SAVE_VERSIONS = [42, 46]
@@ -9,8 +9,18 @@ SUPPORTED_SAVE_VERSIONS = [42, 46]
 
 class UncompressedReader(save_reader.SaveReader):
 
-    def __init__(self, data: bytes, idx: int=0):
+    def __init__(self, data: bytes, idx: int=0, fail_on_error: bool=False):
+        """
+        Create a reader for uncompressed save file body
+
+        Args:
+            data (bytes): content of the uncompressed save file body
+            idx (int, optional): Start index. Defaults to 0.
+            fail_on_error (bool, optional): Whether to stop on parsing error.
+                If false warn and continue parsing. Defaults to False.
+        """
         super().__init__(data, idx)
+        self.fail_on_error = fail_on_error
 
     def read_component(self) -> dict:
         level_name = self.read_string()
@@ -102,10 +112,14 @@ class UncompressedReader(save_reader.SaveReader):
         val = dict()
         original_idx = self.idx
         n_bytes = self.read_int() # including trailing bytes
-        val['level_name'] = self.read_string()
-        val['path_name'] = self.read_string()
-        val['components'] = self.read_object_references()
-        val['properties'] = self.read_properties()
+        try:
+            val['level_name'] = self.read_string()
+            val['path_name'] = self.read_string()
+            val['components'] = self.read_object_references()
+            val['properties'] = self.read_properties()
+        except Exception as e:
+            self.idx = original_idx + n_bytes
+            raise e
         # apply trailing bytes
         if original_idx + n_bytes > self.idx:
             self.idx = original_idx + n_bytes
@@ -115,7 +129,12 @@ class UncompressedReader(save_reader.SaveReader):
         val = dict()
         original_idx = self.idx
         n_bytes = self.read_int()
-        val['properties'] = self.read_properties()
+        try:
+            val['properties'] = self.read_properties()
+        except Exception as e:
+            self.idx = original_idx + n_bytes
+            raise e
+
         # apply trailing bytes
         if original_idx + n_bytes > self.idx:
             self.idx = original_idx + n_bytes
@@ -138,6 +157,38 @@ class UncompressedReader(save_reader.SaveReader):
         else:
             raise ValueError('Invalid object type: {object_type}')
         return val
+    
+    def read_objects(self) -> List[dict]:
+        print(f'[{self.idx}] Read object headers...')
+        n_bytes_headers = self.read_int()
+        self.idx += 4 # padding?
+        original_idx = self.idx
+        objects = self.read_object_headers()
+        self.idx += 4 # padding?
+        if original_idx + n_bytes_headers != self.idx:
+            raise ValueError(f'{original_idx} + {n_bytes_headers} != {self.idx}')
+
+        print(f'[{self.idx}] Read objects...')
+        n_bytes_objects = self.read_int() # after padding
+        self.idx += 4 # padding?
+        original_idx = self.idx
+        complete_objects = []
+        for obj_header in objects:
+            object_type = obj_header['object_type']
+            try:
+                obj_header.update(self.read_object(object_type))
+            except Exception as e:
+                print('Failed to read object', obj_header['instance_name'], '...skip')
+                if self.fail_on_error:
+                    raise e
+                else:
+                    continue
+            complete_objects.append(obj_header)
+        self.idx += 4 # padding?
+        if original_idx + n_bytes_objects != self.idx:
+            raise ValueError(f'{original_idx} + {n_bytes_objects} != {self.idx}')
+        
+        return complete_objects
 
     def read_level(self) -> dict:
         val = dict()
@@ -195,25 +246,7 @@ class UncompressedReader(save_reader.SaveReader):
         print(f'[{self.idx}] Read levels')
         self.read_levels()
         
-        print(f'[{self.idx}] Read object headers...')
-        n_bytes_headers = self.read_int()
-        self.idx += 4 # padding?
-        original_idx = self.idx
-        objects = self.read_object_headers()
-        self.idx += 4 # padding?
-        if original_idx + n_bytes_headers != self.idx:
-            raise ValueError(f'{original_idx} + {n_bytes_headers} != {self.idx}')
-
-        print(f'[{self.idx}] Read objects...')
-        n_bytes_objects = self.read_int() # after padding
-        self.idx += 4 # padding?
-        original_idx = self.idx
-        for obj_header in objects:
-            object_type = obj_header['object_type']
-            obj_header.update(self.read_object(object_type))
-        self.idx += 4 # padding?
-        if original_idx + n_bytes_objects != self.idx:
-            raise ValueError(f'{original_idx} + {n_bytes_objects} != {self.idx}')
+        objects = self.read_objects()
 
         self.idx = original_idx_body + n_bytes_body # apply final padding
 
@@ -221,19 +254,3 @@ class UncompressedReader(save_reader.SaveReader):
             raise ValueError('Did not reach the end successfully')
 
         return objects
-
-
-def open_reader(file: str) -> UncompressedReader:
-    with open(file, 'rb') as fp:
-        data = fp.read()
-    return UncompressedReader(data)
-
-
-if __name__ == '__main__':
-    parser = ArgumentParser()
-    parser.add_argument('uncompressed_save_file')
-    args = parser.parse_args()
-    save_file = args.uncompressed_save_file
-
-    reader = open_reader(save_file)
-    reader.read()

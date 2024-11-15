@@ -1,0 +1,268 @@
+{
+	"schematics": {
+		"GP_Project_Assembly_Phase_1_C": {
+			"className": "GP_Project_Assembly_Phase_1_C",
+			"name": "Project Assembly Phase 1",
+			"slug": "project-assembly-phase-1",
+			"tier": 2,
+			"cost": [
+				{
+					"item": "Desc_SpaceElevatorPart_1_C",
+					"amount": 50
+				}
+			],
+			"unlock": {
+				"inventorySlots": 0,
+				"recipes": [],
+				"scannerResources": [],
+				"giveItems": []
+			},
+			"requiredSchematics": [
+				"Schematic_Tutorial5_C"
+			],
+			"type": "EST_Gamephase",
+			"time": 0,
+			"alternate": false,
+			"mam": false
+		},
+		"GP_Project_Assembly_Phase_2_C": {
+			"className": "GP_Project_Assembly_Phase_2_C",
+			"name": "Project Assembly Phase 2",
+			"slug": "project-assembly-phase-2",
+			"tier": 2,
+			"cost": [
+				{
+					"item": "Desc_SpaceElevatorPart_1_C",
+					"amount": 1000
+				},
+				{
+					"item": "Desc_SpaceElevatorPart_2_C",
+					"amount": 1000
+				},
+				{
+					"item": "Desc_SpaceElevatorPart_3_C",
+					"amount": 100
+				}
+			],
+			"unlock": {
+				"inventorySlots": 0,
+				"recipes": [],
+				"scannerResources": [],
+				"giveItems": []
+			},
+			"requiredSchematics": [
+				"GP_Project_Assembly_Phase_1_C"
+			],
+			"type": "EST_Gamephase",
+			"time": 0,
+			"alternate": false,
+			"mam": false
+		},
+		"GP_Project_Assembly_Phase_3_C": {
+			"className": "GP_Project_Assembly_Phase_3_C",
+			"name": "Project Assembly Phase 3",
+			"slug": "project-assembly-phase-3",
+			"tier": 2,
+			"cost": [
+				{
+					"item": "Desc_SpaceElevatorPart_2_C",
+					"amount": 2500
+				},
+				{
+					"item": "Desc_SpaceElevatorPart_4_C",
+					"amount": 500
+				},
+				{
+					"item": "Desc_SpaceElevatorPart_5_C",
+					"amount": 100
+				}
+			],
+			"unlock": {
+				"inventorySlots": 0,
+				"recipes": [],
+				"scannerResources": [],
+				"giveItems": []
+			},
+			"requiredSchematics": [
+				"GP_Project_Assembly_Phase_2_C"
+			],
+			"type": "EST_Gamephase",
+			"time": 0,
+			"alternate": false,
+			"mam": false
+		},
+		"GP_Project_Assembly_Phase_4_C": {
+			"className": "GP_Project_Assembly_Phase_4_C",
+			"name": "Project Assembly Phase 4",
+			"slug": "project-assembly-phase-4",
+			"tier": 2,
+			"cost": [
+				{
+					"item": "Desc_SpaceElevatorPart_6_C",
+					"amount": 500
+				},
+				{
+					"item": "Desc_SpaceElevatorPart_7_C",
+					"amount": 500
+				},
+				{
+					"item": "Desc_SpaceElevatorPart_8_C",
+					"amount": 250
+				},
+				{
+					"item": "Desc_SpaceElevatorPart_9_C",
+					"amount": 100
+				}
+			],
+			"unlock": {
+				"inventorySlots": 0,
+				"recipes": [],
+				"scannerResources": [],
+				"giveItems": []
+			},
+			"requiredSchematics": [
+				"GP_Project_Assembly_Phase_3_C"
+			],
+			"type": "EST_Gamephase",
+			"time": 0,
+			"alternate": false,
+			"mam": false
+		}
+	},
+	"generators": {
+		"Desc_GeneratorGeoThermal_C": {
+			"className": "Desc_GeneratorGeoThermal_C",
+			"fuel": [],
+			"fuels": [],
+			"powerProduction": 200,
+			"powerProductionExponent": null,
+			"waterToPowerRatio": 0
+		}
+	},
+	"resources": {
+		"Desc_Berry_C": {
+			"item": "Desc_Berry_C",
+			"pingColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"speed": 60
+		},
+		"Desc_Nut_C": {
+			"item": "Desc_Nut_C",
+			"pingColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"speed": 60
+		},
+		"Desc_Shroom_C": {
+			"item": "Desc_Shroom_C",
+			"pingColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"speed": 60
+		},
+		"Desc_Leaves_C": {
+			"item": "Desc_Leaves_C",
+			"pingColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"speed": 5
+		},
+		"Desc_Wood_C": {
+			"item": "Desc_Wood_C",
+			"pingColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"speed": 5
+		},
+		"Desc_Mycelia_C": {
+			"item": "Desc_Mycelia_C",
+			"pingColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"speed": 10
+		},
+		"Desc_HogParts_C": {
+			"item": "Desc_HogParts_C",
+			"pingColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"speed": 120
+		},
+		"Desc_SpitterParts_C": {
+			"item": "Desc_SpitterParts_C",
+			"pingColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"speed": 120
+		},
+		"Desc_StingerParts_C": {
+			"item": "Desc_StingerParts_C",
+			"pingColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"speed": 120
+		},
+		"Desc_HatcherParts_C": {
+			"item": "Desc_HatcherParts_C",
+			"pingColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"speed": 120
+		}
+	},
+	"miners": {
+		"Build_WaterPump_C": {
+			"className": "Build_WaterPump_C",
+			"allowedResources": [
+				"Desc_Water_C"
+			],
+			"itemsPerCycle": 2000,
+			"extractCycleTime": 1,
+			"allowLiquids": true,
+			"allowSolids": false
+		},
+		"Build_FrackingExtractor_C": {
+			"className": "Build_FrackingExtractor_C",
+			"allowedResources": [
+				"Desc_NitrogenGas_C",
+				"Desc_LiquidOil_C",
+				"Desc_Water_C"
+			],
+			"itemsPerCycle": 1000,
+			"extractCycleTime": 1,
+			"allowLiquids": true,
+			"allowSolids": false
+		}
+	}
+}

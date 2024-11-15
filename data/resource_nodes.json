@@ -1,0 +1,2558 @@
+{
+    "BP_MockResourceNode000": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode001": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode002": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode003": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode004": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode005": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode006": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode007": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode008": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode009": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode010": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode011": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode012": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode013": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode014": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode015": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode016": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode017": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode018": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode019": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode020": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode021": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode022": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode023": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode024": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode025": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode026": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode027": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode028": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode029": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode030": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode031": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode032": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode033": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode034": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode035": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode036": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode037": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode038": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode039": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode040": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode041": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode042": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode043": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode044": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode045": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode046": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode047": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode048": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode049": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode050": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode051": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode052": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode053": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode054": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode055": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode056": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode057": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode058": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode059": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode060": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode061": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode062": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode063": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode064": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode065": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode066": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode067": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode068": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode069": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode070": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode071": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode072": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode073": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode074": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode075": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode076": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode077": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode078": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode079": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode080": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode081": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode082": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode083": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode084": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode085": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode086": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode087": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode088": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode089": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode090": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode091": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode092": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode093": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode094": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode095": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode096": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode097": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode098": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode099": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode100": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode101": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode102": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode103": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode104": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode105": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode106": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode107": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode108": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode109": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode110": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode111": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode112": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode113": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode114": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode115": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode116": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode117": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode118": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode119": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode120": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode121": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode122": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode123": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode124": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode125": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode126": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode127": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode128": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode129": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode130": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode131": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode132": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode133": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode134": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode135": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode136": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode137": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode138": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode139": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode140": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode141": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode142": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode143": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode144": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode145": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode146": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode147": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode148": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode149": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode150": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode151": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode152": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode153": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode154": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode155": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode156": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode157": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode158": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode159": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode160": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode161": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode162": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode163": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode164": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode165": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode166": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode167": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode168": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode169": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode170": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode171": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode172": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode173": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode174": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode175": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode176": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode177": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode178": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode179": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode180": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode181": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode182": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode183": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode184": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode185": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode186": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode187": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode188": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode189": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode190": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode191": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode192": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode193": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode194": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode195": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode196": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode197": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode198": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode199": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode200": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode201": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode202": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode203": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode204": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode205": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode206": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode207": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode208": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode209": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode210": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode211": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode212": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode213": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode214": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode215": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode216": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode217": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode218": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode219": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode220": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode221": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode222": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode223": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode224": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode225": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode226": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode227": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode228": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode229": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode230": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode231": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode232": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode233": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode234": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode235": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode236": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode237": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode238": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode239": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode240": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode241": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode242": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode243": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode244": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode245": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode246": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode247": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode248": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode249": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode250": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode251": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode252": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode253": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode254": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode255": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode256": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode257": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode258": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode259": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode260": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode261": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode262": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode263": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode264": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode265": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode266": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode267": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode268": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode269": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode270": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode271": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode272": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode273": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode274": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode275": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode276": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode277": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode278": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode279": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode280": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode281": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode282": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode283": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode284": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode285": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode286": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode287": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode288": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode289": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode290": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode291": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode292": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode293": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode294": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode295": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode296": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode297": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode298": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode299": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode300": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode301": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode302": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode303": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode304": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode305": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode306": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode307": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode308": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode309": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode310": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode311": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode312": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode313": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode314": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode315": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode316": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode317": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode318": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode319": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode320": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode321": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode322": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode323": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode324": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode325": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode326": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode327": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode328": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode329": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode330": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode331": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode332": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode333": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode334": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode335": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode336": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode337": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode338": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode339": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode340": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode341": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode342": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode343": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode344": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode345": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode346": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode347": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode348": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode349": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode350": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode351": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode352": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode353": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode354": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode355": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode356": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode357": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode358": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode359": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode360": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode361": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode362": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode363": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode364": {
+        "resource": "Desc_OreUranium_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode365": {
+        "resource": "Desc_OreUranium_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode366": {
+        "resource": "Desc_OreUranium_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode367": {
+        "resource": "Desc_OreUranium_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode368": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode369": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode370": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode371": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode372": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode373": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode374": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode375": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode376": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode377": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode378": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode379": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode380": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode381": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode382": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode383": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode384": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode385": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode386": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode387": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode388": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode389": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode390": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode391": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode392": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode393": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode394": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode395": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode396": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode397": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode398": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode399": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode400": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode401": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode402": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode403": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode404": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode405": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode406": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode407": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode408": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode409": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode410": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode411": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode412": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode413": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode414": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode415": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode416": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode417": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode418": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode419": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode420": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode421": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode422": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode423": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode424": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode425": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode426": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode427": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode428": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode429": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode430": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode431": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode432": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode433": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode434": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode435": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode436": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode437": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode438": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode439": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode440": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode441": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode442": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode443": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode444": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode445": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode446": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode447": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode448": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode449": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode450": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode451": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode452": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode453": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode454": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode455": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode456": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode457": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode458": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode459": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode460": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode461": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode462": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode463": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode464": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode465": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode466": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode467": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode468": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode469": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode470": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode471": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode472": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode473": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode474": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode475": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode476": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode477": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode478": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode479": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode480": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode481": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode482": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode483": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode484": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode485": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode486": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode487": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode488": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_MockResourceNode489": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode490": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode491": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode492": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode493": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode494": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode495": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode496": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode497": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode498": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode499": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode500": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode501": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_MockResourceNode502": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode503": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode504": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode505": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode506": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode507": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode508": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode509": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_MockResourceNode510": {
+        "resource": "special__power",
+        "fracking": false,
+        "purity": "pure"
+    }
+
+}

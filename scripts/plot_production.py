@@ -4,8 +4,8 @@ import math
 import networkx as nx
 import matplotlib.pyplot as plt
 
-import game
-import utils
+from assistory.game import game
+from assistory.utils import utils
 
 
 EXCLUDED_ITEMS = [
@@ -114,7 +114,7 @@ def main(recipes: dict, items_sold: dict, items_available: dict):
                 weight=max(1, math.log(flow))
             )
 
-        if game.RECIPES[recipe_name]['producedIn'] in game.MINING_FACILITIES:
+        if game.RECIPES[recipe_name]['producedIn'] in game.BUILDINGS_EXTRACTION:
             resource_node_names.append(recipe_node_name)
         else:
             manufacturing_node_names.append(recipe_node_name)

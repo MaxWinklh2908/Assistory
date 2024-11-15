@@ -12,7 +12,7 @@ Value concept of items:
 """
 from ortools.linear_solver import pywraplp
 
-import game
+from assistory.game import game
 
 
 RETURN_CODES = {
@@ -23,22 +23,24 @@ RETURN_CODES = {
  3: 'UNBOUNDED',
 }
 
-
+# TODO: Make neutralization of non-sellable item production optional
 class SatisfactoryLP:
 
     def __init__(self, recipes: dict,
                  items_available: dict=dict(),
-                 resource_nodes_available: dict=game.NODES_AVAILABLE,
-                 free_power: float=game.FREE_POWER):
+                 resource_nodes_available: dict=game.NODE_RECIPES_AVAILABLE,
+                 free_power: float=0):
         """Create a Satisfactory Linear Program
 
         Args:
             recipes (dict): Available recipes
             items_available (dict, optional): Available existing item
                 production (in items/minute). Defaults to dict().
-            resource_nodes_available (dict, optional): Available resource nodes
-                where mining recipes can be applied. Defaults to game.NODES_AVAILABLE.
-            free_power (float, optional): Existing power capacity. Defaults to game.FREE_POWER.
+            resource_nodes_available (dict, optional): Available mining recipes
+                where items (by miners) and power (by geotermal generator) can
+                be generated. Defaults to game.NODE_RECIPES_AVAILABLE.
+            free_power (float, optional): Additionally extend power constraint.
+                Defaults to 0.
 
         Raises:
             RuntimeError: Invalid parameters given
@@ -110,7 +112,7 @@ class SatisfactoryLP:
             if resources_available[item_name] < 0:
                 raise ValueError('Resource node availability can not be negative')
         for node_name in resource_nodes_available:
-            if node_name not in game.NODES_AVAILABLE:
+            if node_name not in game.NODE_RECIPES_AVAILABLE:
                 print('ERROR Unknown resource node:', node_name)
                 result = False
             if resource_nodes_available[node_name] < 0:
@@ -160,7 +162,7 @@ class SatisfactoryLP:
                             f'Flow_{item_name}')
 
     def _define_non_sellable_items(self):
-        for item_name in game.NON_SELLABLE_ITEMS:
+        for item_name in game.ITEMS_NON_SELLABLE:
             self.solver.Add(self.var_item_sold[item_name] == 0,
                             f'Non-sellable_{item_name}')
             
@@ -183,7 +185,7 @@ class SatisfactoryLP:
         for item_name, ratio in item_rate_ratios.items():
             if ratio == 0:
                 continue
-            if item_name in game.NON_SELLABLE_ITEMS:
+            if item_name in game.ITEMS_NON_SELLABLE:
                 raise ValueError('Can not require selling of: ' + item_name)
 
             if not item_name in producable_items:
@@ -210,7 +212,7 @@ class SatisfactoryLP:
         """
         producable_items = self.get_producable_items()
         for item_name, rate in production_rate.items():
-            if rate > 0 and item_name in game.NON_SELLABLE_ITEMS:
+            if rate > 0 and item_name in game.ITEMS_NON_SELLABLE:
                 raise ValueError('Can not require selling of: ' + item_name)
 
             if (rate - self.items_available.get(item_name, 0) > 0
@@ -234,20 +236,20 @@ class SatisfactoryLP:
                 for recipe_name, var_recipe in self.var_recipes_used.items()
                 if game.RECIPES[recipe_name]['producedIn'] == facility_name
             )
-            for facility_name in game.PRODUCTION_FACILITIES
+            for facility_name in game.BUILDINGS
         }
         
-        power_balance = sum(
-            amount_facility[facility_name] * facility['power_production']
-            for facility_name, facility in game.PRODUCTION_FACILITIES.items()
+        power_consumption = sum(
+            amount_facility[facility_name] * facility['power_consumption']
+            for facility_name, facility in game.BUILDINGS.items()
         )
         self.solver.Add(
-            power_balance + self.free_power >= 0,
+            power_consumption - self.free_power <= 0,
             'Power_balance'
         )
 
     def _define_resource_node_constraints(self):
-        for resource_node_name in game.NODES_AVAILABLE:
+        for resource_node_name in game.NODE_RECIPES_AVAILABLE:
             amount = self.resource_nodes_available.get(resource_node_name, 0)
             self.solver.Add(self.var_recipes_used[resource_node_name] <= amount,
                             'Nodes_' + resource_node_name)
@@ -296,7 +298,7 @@ class SatisfactoryLP:
             
         cnt_recipes = 0
         for recipe_name in game.RECIPES:
-            weight = 1
+            weight = 1 # TODO: parametrize weight
             cnt_recipes += weight * self.var_recipes_used[recipe_name] 
 
         self.solver.Minimize(cnt_recipes)
@@ -327,7 +329,7 @@ class SatisfactoryLP:
 
     def _report_resource_nodes_required(self):
         print("\nRequired resource nodes:")
-        for resource_node_name in game.NODES_AVAILABLE:
+        for resource_node_name in game.NODE_RECIPES_AVAILABLE:
             amount_required = self.var_recipes_used[resource_node_name].solution_value()
             if round(amount_required, 3) != 0:
                 print(game.get_bare_item_name(resource_node_name),
@@ -341,20 +343,20 @@ class SatisfactoryLP:
                 for recipe_name, var_recipe in self.var_recipes_used.items()
                 if game.RECIPES[recipe_name]['producedIn'] == facility_name
             )
-            for facility_name in game.PRODUCTION_FACILITIES
+            for facility_name in game.BUILDINGS
         }
         
         sum_consumption = 0
-        print(f'Free power: {self.free_power} MW')
-        for facility_name, facility in game.PRODUCTION_FACILITIES.items():
-            power_consumption = facility['power_production']
+        print(f'Free power: {-self.free_power} MW')
+        for facility_name, facility in game.BUILDINGS.items():
+            power_consumption = facility['power_consumption']
             sum_power_of_type = amount_facility[facility_name] * power_consumption
             if round(sum_power_of_type, 3) != 0:
                 print(f'{game.get_bare_item_name(facility_name)}'
                       f'({round(amount_facility[facility_name], 1)}) = '
                       f' {round(sum_power_of_type, 3)} MW')
-            if sum_power_of_type < 0:
-                sum_consumption += abs(sum_power_of_type)
+            if sum_power_of_type > 0:
+                sum_consumption += sum_power_of_type
         print(f'Total consumption: {round(sum_consumption, 3)} MW')
 
     def _report_debug(self):
@@ -412,7 +414,7 @@ class SatisfactoryLP:
 def get_producable_items(
         recipes: dict=game.RECIPES,
         items_available: dict=dict(),
-        resource_nodes_available: dict=game.NODES_AVAILABLE) -> set:
+        resource_nodes_available: dict=game.NODE_RECIPES_AVAILABLE) -> set:
     """Return a all items that can theoretically be produced with the given
     recipes and available items and resource nodes.
 
@@ -421,7 +423,7 @@ def get_producable_items(
             items_available (dict, optional): Available existing item
                 production (in items/minute). Defaults to game.RECIPES.
             resource_nodes_available (dict, optional): Available resource nodes
-                where mining recipes can be applied. Defaults to game.NODES_AVAILABLE.NODES_AVAILABLE.
+                where mining recipes can be applied. Defaults to game.NODE_RECIPES_AVAILABLE.NODE_RECIPES_AVAILABLE.
 
     Returns:
         set: set of item names

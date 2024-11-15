@@ -1,8 +1,9 @@
 from argparse import ArgumentParser
 
 
-import game, utils
-from sink_point_optim import SatisfactoryLP
+from assistory.game import game
+from assistory.utils import utils
+from assistory.optim.sink_point_optim import SatisfactoryLP
 
 def main(recipe_export_path: str):
 
@@ -12,8 +13,7 @@ def main(recipe_export_path: str):
     recipes = {
         recipe_name: recipe for
         recipe_name, recipe in game.RECIPES.items()
-        if (not recipe_name in game.data['recipes']
-            or not game.data['recipes'][recipe_name]['alternate'])
+        if not recipe_name in game.RECIPES_ALTERNATE
     }
 
     # recipes=dict()
@@ -39,24 +39,31 @@ def main(recipe_export_path: str):
     # }
 
     ################# resource nodes available ######################
-    resource_nodes_available = {item_name: 0 for item_name in game.NODES_AVAILABLE}
+    resource_nodes_available = {item_name: 0 for item_name in game.NODE_RECIPES_AVAILABLE}
     resource_nodes_available['Recipe_MinerMk1OreIron_C'] = 4
     resource_nodes_available['Recipe_MinerMk1OreCopper_C'] = 2
     resource_nodes_available['Recipe_MinerMk1Stone_C'] = 2
+    resource_nodes_available['Recipe_GeneratorGeoThermalPower_C'] = 2
 
-    # resource_nodes_available = game.NODES_AVAILABLE
+    # resource_nodes_available = game.NODE_RECIPES_AVAILABLE
     
     # Current coverage (state: CO2-Neutral)
-    # resource_nodes_available = utils.read_resource_nodes('data/available_nodes_autonation.json')
     # resource_nodes_available = utils.read_resource_nodes(
-    #     'data/available_nodes_black_lake_oil.json')
+    #   'data/available_nodes_autonation.json',
+    #   set(game.NODE_RECIPES_AVAILABLE))
+    # resource_nodes_available = utils.read_resource_nodes(
+    #   'data/available_nodes_black_lake_oil.json',
+    #   set(game.NODE_RECIPES_AVAILABLE))
+
+    # TODO: read resource nodes available (including geotermal (former free power))
+    # from safe file
 
     ################# define problem ######################
 
     problem = SatisfactoryLP(recipes=recipes,
                              items_available=items_available,
                              resource_nodes_available=resource_nodes_available,
-                             free_power=90)
+                             free_power=0)
 
     ################# constraints ######################
     # sell_rates = dict()
@@ -64,9 +71,9 @@ def main(recipe_export_path: str):
     # Goal: Produce at least 1 item of every kind (except impractical items)
     # sell_rates = {
     #     item_name: 1 for item_name in problem.get_producable_items()
-    #     if not item_name in game.NON_SELLABLE_ITEMS
-    #     and not item_name in game.RADIOACTIVE_ITEMS
-    #     and not item_name in game.ITEMS_FROM_MINING
+    #     if not item_name in game.ITEMS_NON_SELLABLE
+    #     and not item_name in game.ITEMS_RADIOACTIVE
+    #     and not item_name in game.ITEMS_EXTRACTION
     #     and not 'Ingot' in item_name
     # }
 
@@ -110,7 +117,8 @@ def main(recipe_export_path: str):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument('recipe_export_path', help='')
+    parser.add_argument('recipe_export_path', help='Output path to the production plan'
+                        ', i.e. recipe amounts by recipe name')
     args = parser.parse_args()
 
     main(args.recipe_export_path)

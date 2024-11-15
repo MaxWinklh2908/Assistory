@@ -381,9 +381,3 @@ class SaveReader:
         print('<----', self.idx)
         print(self.data[self.idx:self.idx+c])
         print('------------')
-
-
-def open_reader(file: str) -> SaveReader:
-    with open(file, 'rb') as fp:
-        data = fp.read()
-    return SaveReader(data)

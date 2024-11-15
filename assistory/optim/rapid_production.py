@@ -8,8 +8,8 @@ import numpy as np
 from ortools.linear_solver import pywraplp
 import pandas as pd
 
-import game
-import utils
+from assistory.game import game
+from assistory.utils import utils
 
 
 RETURN_CODES = {
@@ -62,7 +62,7 @@ class GameDataConfiguration(DataConfiguration):
                 / (recipe['time'] / 60))
 
             facility_name = recipe['producedIn']
-            build_costs = game.PRODUCTION_FACILITIES[facility_name]['costs']
+            build_costs = game.BUILDINGS[facility_name]['costs']
             self.B[:, r] = np.array(utils.vectorize(build_costs, self.ITEMS))
 
         for r, recipe_name in enumerate(self.RECIPES_HANDCRAFT):

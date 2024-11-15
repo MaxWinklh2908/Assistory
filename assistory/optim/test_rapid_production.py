@@ -1,8 +1,12 @@
 import unittest
+import sys, os
 
 import numpy as np
 
-import rapid_production, utils
+print('Add', os.getcwd(), 'to path')
+sys.path.append(os.getcwd())
+from assistory.optim import rapid_production
+from assistory.utils import utils
 
 # Define the function to be tested
 def f(x):

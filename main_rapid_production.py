@@ -1,25 +1,24 @@
 from argparse import ArgumentParser
 import json
-import os
 
 import numpy as np
 
-import instantiator
-import rapid_production
-import game
-import utils
-import save_uncompressor, save_parser
-from data_types import *
+from assistory.optim import rapid_production
+from assistory.game import game
+from assistory.utils import utils
+from assistory.save_parser import save_uncompressor, save_parser
+from assistory.save_parser.actor import *
 
 
-def load_world(compressed_save_file: str) -> World:
-    save_file_name = os.path.basename(compressed_save_file)
-    uncompressed_save_file = os.path.join('/tmp', save_file_name[:-4] + '.bin')
-    save_uncompressor.uncompress_save_file(compressed_save_file, uncompressed_save_file)
-
-    reader = save_parser.open_reader(uncompressed_save_file)
+def load_world(save_file_compressed: str) -> World:
+    reader = save_uncompressor.CompressedReader.open_reader(save_file_compressed)
+    data_uncompressed = reader.read()
+    
+    # parse file
+    reader = save_parser.UncompressedReader(data_uncompressed)
     objects = reader.read()
-    world = instantiator.instantiate_world(objects)
+    world = instantiate_world(objects)
+
     return world
 
 
@@ -46,7 +45,8 @@ def extract_existing_recipes(factories: List[Factory]) -> dict:
         if isinstance(factory, (ManufacturingBuilding, FrackingBuilding)):
             recipe_name = factory.current_recipe_name
             if not recipe_name in game.RECIPES:
-                print('WARNING Skip unknown recipe:', recipe_name)
+                if recipe_name:
+                    print('WARNING Skip unknown recipe:', recipe_name)
                 continue
             if factory.is_production_paused:
                 print('WARNING Skip paused production:', recipe_name)
@@ -63,6 +63,11 @@ def main(compressed_save_file: str, target_item_file: str):
     S_items = extract_player_inventory(world.get_player())
     G_items = load_target_items(target_item_file)
     E_recipes = extract_existing_recipes(world.get_factories())
+    
+    print('Extracted existing production:')
+    for recipe_name, amount in E_recipes.items():
+        print(recipe_name, amount)
+
     start_conf = rapid_production.StartConfiguration(
         data_conf,
         S = np.array(utils.vectorize(S_items, data_conf.ITEMS)),
@@ -81,7 +86,9 @@ def main(compressed_save_file: str, target_item_file: str):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument('compressed_save_file')
-    parser.add_argument('target_item_file')
+    parser.add_argument('compressed_save_file', help='Save file from the game save directory.'
+                        ' Used to extract existing production and items from player inventory.')
+    parser.add_argument('target_item_file', help='Path to the file defining the goal item'
+                        ' amounts. A JSON dict containing of item amount by item name.')
     args = parser.parse_args()
     main(args.compressed_save_file, args.target_item_file)

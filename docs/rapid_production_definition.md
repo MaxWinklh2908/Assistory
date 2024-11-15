@@ -1,4 +1,4 @@
-# Rapid production
+# Rapid Production - Mathmatical Definition
 
 Goal: What is the fastest way to produce an amount of items, given the existing items $S$, goal items $G$ amount and the existing production $E$.
 

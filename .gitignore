@@ -1,0 +1,8 @@
+*.pyc
+.vscode
+
+# Exclude data folder except from manual definitions
+!data/
+data/*
+!data/extension_data.json
+!data/resource_nodes.json

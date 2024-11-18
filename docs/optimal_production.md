@@ -8,7 +8,7 @@ Calculate the number of each recipe to optimize the production with respect to a
 The class `SatisfactoryLP` manages the optimization configuration.
 
 Optimized variables:
-- Aggregated productivity rate for each recipe (e.g. 5.3x **Recipe_IngotCopper_C**, 0.0x **Recipe_AILimiter_C**, etc.)
+- Aggregated productivity rate for each recipe (e.g. 5.3x **Recipe_IngotCopper_C**, 0.8x **Recipe_AILimiter_C**, etc.)
 
 Default constraint parameterization:
 - Existing item production which can be consumed (use constructor parameter `items_available`)
@@ -44,5 +44,12 @@ python3 main_optimal_production.py [-h] recipe_export_path
 ```
 Use option `-h` for help.
 
-## Simplications
-See [Theory](./theory.md).
+## Visualize
+
+The exported recipes can be visualized with
+
+```
+python3 scripts/plot_production.py [-h] recipe_path
+```
+
+![production plan plot](production_plan_plot.png)

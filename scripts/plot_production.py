@@ -4,6 +4,10 @@ import math
 import networkx as nx
 import matplotlib.pyplot as plt
 
+# add assistory to path
+import os, sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
 from assistory.game import game
 from assistory.utils import utils
 

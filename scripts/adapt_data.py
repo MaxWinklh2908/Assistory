@@ -127,7 +127,8 @@ for generator_name, generator in data['generators'].items():
         data['recipes'][recipe_name] = create_machine_recipe(recipe_name, [], [],
                                                              60, generator_name)
         continue
-    water_consumption = generator['waterToPowerRatio'] * generator['powerProduction']
+    # consumption over 1 minute
+    water_consumption = 60 * generator['waterToPowerRatio'] * generator['powerProduction']
     for fuel in generator['fuels']:
         fuel_name = fuel['item']
         input_rate = calc_input_rate(generator, fuel_name)

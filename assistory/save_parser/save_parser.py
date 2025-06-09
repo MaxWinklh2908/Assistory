@@ -1,13 +1,12 @@
-from argparse import ArgumentParser
 from typing import List
 
-from assistory.save_parser import save_reader
+from assistory.save_parser import component_parser
 
 
 SUPPORTED_SAVE_VERSIONS = [42, 46]
 
 
-class UncompressedReader(save_reader.SaveReader):
+class UncompressedReader(component_parser.SaveReader):
 
     def __init__(self, data: bytes, idx: int=0, fail_on_error: bool=False):
         """
@@ -158,8 +157,9 @@ class UncompressedReader(save_reader.SaveReader):
             raise ValueError('Invalid object type: {object_type}')
         return val
     
-    def read_objects(self) -> List[dict]:
-        print(f'[{self.idx}] Read object headers...')
+    def read_objects(self, verbose: bool=False) -> List[dict]:
+        if verbose:
+            print(f'[{self.idx}] Read object headers...')
         n_bytes_headers = self.read_int()
         self.idx += 4 # padding?
         original_idx = self.idx
@@ -168,17 +168,21 @@ class UncompressedReader(save_reader.SaveReader):
         if original_idx + n_bytes_headers != self.idx:
             raise ValueError(f'{original_idx} + {n_bytes_headers} != {self.idx}')
 
-        print(f'[{self.idx}] Read objects...')
+    
+        if verbose:
+            print(f'[{self.idx}] Read objects...')
         n_bytes_objects = self.read_int() # after padding
         self.idx += 4 # padding?
         original_idx = self.idx
         complete_objects = []
         for obj_header in objects:
+            original_object_idx = self.idx
             object_type = obj_header['object_type']
             try:
                 obj_header.update(self.read_object(object_type))
             except Exception as e:
-                print('Failed to read object', obj_header['instance_name'], '...skip')
+                print(e.args[0])
+                print(f'[{original_object_idx}] WARNING Error reading Object {obj_header["instance_name"]}')
                 if self.fail_on_error:
                     raise e
                 else:
@@ -227,13 +231,16 @@ class UncompressedReader(save_reader.SaveReader):
             # print(f'Level {i} at {self.idx}')
         return levels
 
-    def read(self):
+    def read(self, verbose: bool=False):
         n_bytes_body = self.read_int() # after padding
         self.idx += 4 # padding?
         original_idx_body = self.idx
 
-        print(f'[{self.idx}] Read levels...')
-        level_count = self.read_int(); print('sublevel_count:', level_count)
+        if verbose:
+            print(f'[{self.idx}] Read levels...')
+        level_count = self.read_int()
+        if verbose:
+            print('sublevel_count:', level_count)
         if level_count != 6:
             raise ValueError('Unexpected number of levels')
         non_level = self.read_sublevels()
@@ -243,7 +250,8 @@ class UncompressedReader(save_reader.SaveReader):
         foliage_grid = self.read_sublevels()
         HLOD_grid = self.read_sublevels()
 
-        print(f'[{self.idx}] Read levels')
+        if verbose:
+            print(f'[{self.idx}] Read levels')
         self.read_levels()
         
         objects = self.read_objects()

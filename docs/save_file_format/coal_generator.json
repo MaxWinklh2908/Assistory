@@ -1,0 +1,162 @@
+{
+    "object_type": 1,
+    "type_path": "/Game/FactoryGame/Buildable/Factory/GeneratorCoal/Build_GeneratorCoal.Build_GeneratorCoal_C",
+    "root_object": "Persistent_Level",
+    "instance_name": "Persistent_Level:PersistentLevel.Build_GeneratorCoal_C_2147250697",
+    "needs_transform": 1,
+    "rot_x": 0.0,
+    "rot_y": -0.0,
+    "rot_z": 0.08715574443340302,
+    "rot_w": 0.9961947202682495,
+    "pos_x": -107186.90625,
+    "pos_y": -41568.1484375,
+    "pos_z": 15412.6484375,
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "scale_z": 1.0,
+    "placed": 0,
+    "start_idx": 3405839,
+    "save_version": 46,
+    "level_name": "Persistent_Level",
+    "path_name": "Persistent_Level:PersistentLevel.BuildableSubsystem",
+    "components": [
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorCoal_C_2147250697.FGPipeConnectionFactory"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorCoal_C_2147250697.InventoryPotential"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorCoal_C_2147250697.powerInfo"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorCoal_C_2147250697.FuelInventory"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorCoal_C_2147250697.Input0"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorCoal_C_2147250697.PowerConnection"
+        },
+        {
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorCoal_C_2147250697.FGFactoryLegs"
+        }
+    ],
+    "properties": {
+        "mFuelInventory": {
+            "start_idx": 3406677,
+            "property_type": "ObjectProperty",
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorCoal_C_2147250697.FuelInventory",
+            "end_idx": 3406829
+        },
+        "mCurrentFuelAmount": {
+            "start_idx": 3406829,
+            "property_type": "FloatProperty",
+            "value": 283.7120666503906,
+            "end_idx": 3406883
+        },
+        "mCurrentSupplementalAmount": {
+            "start_idx": 3406883,
+            "property_type": "FloatProperty",
+            "value": 837.0382690429688,
+            "end_idx": 3406945
+        },
+        "mHasFuelCached": {
+            "start_idx": 3406945,
+            "property_type": "BoolProperty",
+            "value": true,
+            "end_idx": 3406991
+        },
+        "mHasSupplementalCached": {
+            "start_idx": 3406991,
+            "property_type": "BoolProperty",
+            "value": true,
+            "end_idx": 3407045
+        },
+        "mCurrentFuelClass": {
+            "start_idx": 3407045,
+            "property_type": "ObjectProperty",
+            "level_name": "",
+            "path_name": "/Game/FactoryGame/Resource/RawResources/Coal/Desc_Coal.Desc_Coal_C",
+            "end_idx": 3407170
+        },
+        "mPowerInfo": {
+            "start_idx": 3407170,
+            "property_type": "ObjectProperty",
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorCoal_C_2147250697.powerInfo",
+            "end_idx": 3407314
+        },
+        "mTimeSinceStartStopProducing": {
+            "start_idx": 3407314,
+            "property_type": "FloatProperty",
+            "value": 3.3999999521443642e+38,
+            "end_idx": 3407378
+        },
+        "mInventoryPotential": {
+            "start_idx": 3407378,
+            "property_type": "ObjectProperty",
+            "level_name": "Persistent_Level",
+            "path_name": "Persistent_Level:PersistentLevel.Build_GeneratorCoal_C_2147250697.InventoryPotential",
+            "end_idx": 3407540
+        },
+        "mLastProductivityMeasurementProduceDuration": {
+            "start_idx": 3407540,
+            "property_type": "FloatProperty",
+            "value": 300.0082702636719,
+            "end_idx": 3407619
+        },
+        "mLastProductivityMeasurementDuration": {
+            "start_idx": 3407619,
+            "property_type": "FloatProperty",
+            "value": 300.0082702636719,
+            "end_idx": 3407691
+        },
+        "mCurrentProductivityMeasurementProduceDuration": {
+            "start_idx": 3407691,
+            "property_type": "FloatProperty",
+            "value": 217.469482421875,
+            "end_idx": 3407773
+        },
+        "mCurrentProductivityMeasurementDuration": {
+            "start_idx": 3407773,
+            "property_type": "FloatProperty",
+            "value": 217.469482421875,
+            "end_idx": 3407848
+        },
+        "mProductivityMonitorEnabled": {
+            "start_idx": 3407848,
+            "property_type": "BoolProperty",
+            "value": true,
+            "end_idx": 3407907
+        },
+        "mIsProducing": {
+            "start_idx": 3407907,
+            "property_type": "BoolProperty",
+            "value": true,
+            "end_idx": 3407951
+        },
+        "mCustomizationData": {
+            "start_idx": 3407951,
+            "property_type": "StructProperty",
+            "struct_type": "FactoryCustomizationData",
+            "payload": "\\x0b\\x00\\x00\\x00SwatchDesc\\x00\\x0f\\x00\\x00\\x00ObjectProperty\\x00g\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00_\\x00\\x00\\x00/Game/FactoryGame/Buildable/-Shared/Customization/Swatches/SwatchDesc_Slot0.SwatchDesc_Slot0_C\\x00\\x05\\x00\\x00\\x00None\\x00",
+            "end_idx": 3408202
+        },
+        "mBuiltWithRecipe": {
+            "start_idx": 3408202,
+            "property_type": "ObjectProperty",
+            "level_name": "",
+            "path_name": "/Game/FactoryGame/Recipes/Buildings/Recipe_GeneratorCoal.Recipe_GeneratorCoal_C",
+            "end_idx": 3408339
+        }
+    }
+}

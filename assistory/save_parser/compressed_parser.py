@@ -1,19 +1,19 @@
 from argparse import ArgumentParser
 import zlib
 
-from assistory.save_parser import save_reader
+from assistory.save_parser import component_parser
 
 
 SUPPORTED_SAVE_HEADER_VERSIONS = [13]
 SUPPORTED_SAVE_VERSIONS = [42, 46]
 
 
-class CompressedReader(save_reader.SaveReader):
+class CompressedReader(component_parser.SaveReader):
 
     def __init__(self, data: bytes, idx: int=0):
         super().__init__(data, idx)
 
-    def read_header(self):
+    def read_header(self, verbose: bool=False):
         save_header_version = self.read_int()
         if not save_header_version in SUPPORTED_SAVE_HEADER_VERSIONS:
             print('WARNING: Save header version not supported: '
@@ -22,7 +22,9 @@ class CompressedReader(save_reader.SaveReader):
         if not save_version in SUPPORTED_SAVE_VERSIONS:
             print('WARNING: Save version not supported: '
                                       + str(save_version))
-        build_version = self.read_int(); print('build_version:', build_version)
+        build_version = self.read_int()
+        if verbose:
+            print('build_version:', build_version)
         map_name = self.read_string()
         map_options = self.read_string()
         session_name = self.read_string()
@@ -55,8 +57,8 @@ class CompressedReader(save_reader.SaveReader):
             self.idx += compressed_size
         return compressed_body_chunks
     
-    def read(self) -> bytes:
-        self.read_header()
+    def read(self, verbose: bool=False) -> bytes:
+        self.read_header(verbose)
         data_uncompressed = bytes()
         for chunk in self.read_compressed_chunks():
             data_uncompressed += zlib.decompress(chunk)

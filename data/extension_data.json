@@ -1,4 +1,28 @@
 {
+	"recipes": {
+		"Recipe_AlienPowerBuildingAlienPowerFuel_C": {
+			"name": "AlienPowerBuildingPower",
+			"className": "Recipe_AlienPowerBuildingAlienPowerFuel_C",
+			"alternate": false,
+			"time": 60,
+			"manualTimeMultiplier": 1,
+			"ingredients": [
+				{
+					"item": "Desc_AlienPowerFuel_C",
+					"amount": 5.0
+				}
+			],
+			"forBuilding": false,
+			"inMachine": true,
+			"inHand": false,
+			"inWorkshop": false,
+			"products": [],
+			"producedIn": [
+				"Desc_AlienPowerBuilding_C"
+			],
+			"isVariablePower": false
+		}
+	},
 	"schematics": {
 		"GP_Project_Assembly_Phase_1_C": {
 			"className": "GP_Project_Assembly_Phase_1_C",
@@ -127,6 +151,83 @@
 			"time": 0,
 			"alternate": false,
 			"mam": false
+		},
+		"GP_Project_Assembly_Phase_5_C": {
+			"className": "GP_Project_Assembly_Phase_5_C",
+			"name": "Project Assembly Phase 5",
+			"slug": "project-assembly-phase-5",
+			"tier": 2,
+			"cost": [
+				{
+					"item": "Desc_SpaceElevatorPart_9_C",
+					"amount": 1000
+				},
+				{
+					"item": "Desc_SpaceElevatorPart_10_C",
+					"amount": 1000
+				},
+				{
+					"item": "Desc_SpaceElevatorPart_12_C",
+					"amount": 256
+				},
+				{
+					"item": "Desc_SpaceElevatorPart_11_C",
+					"amount": 250
+				}
+			],
+			"unlock": {
+				"inventorySlots": 0,
+				"recipes": [],
+				"scannerResources": [],
+				"giveItems": []
+			},
+			"requiredSchematics": [
+				"GP_Project_Assembly_Phase_4_C"
+			],
+			"type": "EST_Gamephase",
+			"time": 0,
+			"alternate": false,
+			"mam": false
+		},
+		"GP_Project_Assembly_Phase_6_C": {
+			"className": "GP_Project_Assembly_Phase_6_C",
+			"name": "Project Assembly Phase 6",
+			"slug": "project-assembly-phase-6",
+			"tier": 2,
+			"cost": [],
+			"unlock": {
+				"inventorySlots": 0,
+				"recipes": [],
+				"scannerResources": [],
+				"giveItems": []
+			},
+			"requiredSchematics": [
+				"GP_Project_Assembly_Phase_5_C"
+			],
+			"type": "EST_Gamephase",
+			"time": 0,
+			"alternate": false,
+			"mam": false
+		},
+		"GP_Project_Assembly_Phase_7_C": {
+			"className": "GP_Project_Assembly_Phase_7_C",
+			"name": "Project Assembly Phase 7",
+			"slug": "project-assembly-phase-7",
+			"tier": 2,
+			"cost": [],
+			"unlock": {
+				"inventorySlots": 0,
+				"recipes": [],
+				"scannerResources": [],
+				"giveItems": []
+			},
+			"requiredSchematics": [
+				"GP_Project_Assembly_Phase_6_C"
+			],
+			"type": "EST_Gamephase",
+			"time": 0,
+			"alternate": false,
+			"mam": false
 		}
 	},
 	"generators": {
@@ -140,6 +241,106 @@
 		}
 	},
 	"resources": {
+		"Desc_Coal_C": {
+			"item": "Desc_Coal_C",
+			"pingColor": {
+				"r": 12,
+				"g": 12,
+				"b": 12,
+				"a": 1
+			},
+			"speed": 0.75
+		},
+		"Desc_OreBauxite_C": {
+			"item": "Desc_OreBauxite_C",
+			"pingColor": {
+				"r": 255,
+				"g": 0,
+				"b": 0,
+				"a": 1
+			},
+			"speed":  0.75
+		},
+		"Desc_OreCopper_C": {
+			"item": "Desc_OreCopper_C",
+			"pingColor": {
+				"r": 12,
+				"g": 127,
+				"b": 38,
+				"a": 1
+			},
+			"speed":  0.75
+		},
+		"Desc_OreGold_C": {
+			"item": "Desc_OreGold_C",
+			"pingColor": {
+				"r": 255,
+				"g": 158,
+				"b": 0,
+				"a": 1
+			},
+			"speed":  0.75
+		},
+		"Desc_OreIron_C": {
+			"item": "Desc_OreIron_C",
+			"pingColor": {
+				"r": 117,
+				"g": 74,
+				"b": 61,
+				"a": 1
+			},
+			"speed":  0.75
+		},
+		"Desc_OreUranium_C": {
+			"item": "Desc_OreUranium_C",
+			"pingColor": {
+				"r": 0,
+				"g": 255,
+				"b": 10,
+				"a": 1
+			},
+			"speed":  0.75
+		},
+		"Desc_RawQuartz_C": {
+			"item": "Desc_RawQuartz_C",
+			"pingColor": {
+				"r": 250,
+				"g": 255,
+				"b": 195,
+				"a": 1
+			},
+			"speed":  0.75
+		},
+		"Desc_SAM_C": {
+			"item": "Desc_SAM_C",
+			"pingColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			},
+			"speed":  0.75
+		},
+		"Desc_Stone_C": {
+			"item": "Desc_Stone_C",
+			"pingColor": {
+				"r": 61,
+				"g": 81,
+				"b": 105,
+				"a": 1
+			},
+			"speed":  0.75
+		},
+		"Desc_Sulfur_C": {
+			"item": "Desc_Sulfur_C",
+			"pingColor": {
+				"r": 255,
+				"g": 243,
+				"b": 66,
+				"a": 1
+			},
+			"speed":  0.75
+		},
 		"Desc_Berry_C": {
 			"item": "Desc_Berry_C",
 			"pingColor": {
@@ -148,7 +349,7 @@
 				"b": 0,
 				"a": 0
 			},
-			"speed": 60
+			"speed":  7.5
 		},
 		"Desc_Nut_C": {
 			"item": "Desc_Nut_C",
@@ -158,7 +359,7 @@
 				"b": 0,
 				"a": 0
 			},
-			"speed": 60
+			"speed": 3
 		},
 		"Desc_Shroom_C": {
 			"item": "Desc_Shroom_C",
@@ -168,7 +369,7 @@
 				"b": 0,
 				"a": 0
 			},
-			"speed": 60
+			"speed": 15
 		},
 		"Desc_Leaves_C": {
 			"item": "Desc_Leaves_C",
@@ -178,7 +379,7 @@
 				"b": 0,
 				"a": 0
 			},
-			"speed": 5
+			"speed": 0.2
 		},
 		"Desc_Wood_C": {
 			"item": "Desc_Wood_C",
@@ -188,7 +389,7 @@
 				"b": 0,
 				"a": 0
 			},
-			"speed": 5
+			"speed":  0.75
 		},
 		"Desc_Mycelia_C": {
 			"item": "Desc_Mycelia_C",
@@ -198,7 +399,7 @@
 				"b": 0,
 				"a": 0
 			},
-			"speed": 10
+			"speed":  7.5
 		},
 		"Desc_HogParts_C": {
 			"item": "Desc_HogParts_C",
@@ -208,7 +409,7 @@
 				"b": 0,
 				"a": 0
 			},
-			"speed": 120
+			"speed": 30
 		},
 		"Desc_SpitterParts_C": {
 			"item": "Desc_SpitterParts_C",
@@ -218,7 +419,7 @@
 				"b": 0,
 				"a": 0
 			},
-			"speed": 120
+			"speed": 30
 		},
 		"Desc_StingerParts_C": {
 			"item": "Desc_StingerParts_C",
@@ -228,7 +429,7 @@
 				"b": 0,
 				"a": 0
 			},
-			"speed": 120
+			"speed": 30
 		},
 		"Desc_HatcherParts_C": {
 			"item": "Desc_HatcherParts_C",
@@ -238,7 +439,7 @@
 				"b": 0,
 				"a": 0
 			},
-			"speed": 120
+			"speed": 30
 		}
 	},
 	"miners": {

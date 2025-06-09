@@ -1,2558 +1,3042 @@
 {
-    "BP_MockResourceNode000": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode001": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode002": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode003": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode004": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode005": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode006": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode007": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode008": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode009": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode010": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode011": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode012": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode013": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode014": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode015": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode016": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode017": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode018": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode019": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode020": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode021": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode022": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode023": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode024": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode025": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode026": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode027": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode028": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode029": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode030": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode031": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode032": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode033": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode034": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode035": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode036": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode037": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode038": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode039": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode040": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode041": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode042": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode043": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode044": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode045": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode046": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode047": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode048": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode049": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode050": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode051": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode052": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode053": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode054": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode055": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode056": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode057": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode058": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode059": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode060": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode061": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode062": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode063": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode064": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode065": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode066": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode067": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode068": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode069": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode070": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode071": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode072": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode073": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode074": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode075": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode076": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode077": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode078": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode079": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode080": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode081": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode082": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode083": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode084": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode085": {
-        "resource": "Desc_Stone_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode086": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode087": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode088": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode089": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode090": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode091": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode092": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode093": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode094": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode095": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode096": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode097": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode098": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode099": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode100": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode101": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode102": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode103": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode104": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode105": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode106": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode107": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode108": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode109": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode110": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode111": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode112": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode113": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode114": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode115": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode116": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode117": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode118": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode119": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode120": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode121": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode122": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode123": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode124": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode125": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode126": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode127": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode128": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode129": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode130": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode131": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode132": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode133": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode134": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode135": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode136": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode137": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode138": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode139": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode140": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode141": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode142": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode143": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode144": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode145": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode146": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode147": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode148": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode149": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode150": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode151": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode152": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode153": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode154": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode155": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode156": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode157": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode158": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode159": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode160": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode161": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode162": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode163": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode164": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode165": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode166": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode167": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode168": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode169": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode170": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode171": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode172": {
-        "resource": "Desc_OreIron_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode173": {
+    "BP_ResourceNode462_UAID_40B076DF2F7907E201_1624182051": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode174": {
+    "BP_ResourceNode462_UAID_40B076DF2F790CE201_2008279933": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode175": {
+    "BP_ResourceNode462_UAID_40B076DF2F7902E201_1630060169": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode462": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode454": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode453": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode55_1215": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode123_5084": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode167": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode128_5242": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode168": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode174": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode175": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode161": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode160": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode108": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode153": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode109": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode107": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode106": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode105_2463": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode115": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode116": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode114": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode542": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode176": {
+    "BP_ResourceNode536": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode177": {
+    "BP_ResourceNode541": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode178": {
+    "BP_ResourceNode569": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode179": {
+    "BP_ResourceNode537": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode180": {
+    "BP_ResourceNode535": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode181": {
+    "BP_ResourceNode126_6409": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode81": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode80": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode82": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode579": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode182": {
+    "BP_ResourceNode578": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode183": {
+    "BP_ResourceNode580": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode184": {
+    "BP_ResourceNode577": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode185": {
+    "BP_ResourceNode538": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode186": {
+    "BP_ResourceNode539": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode187": {
+    "BP_ResourceNode496": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode497_1": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode551": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode494": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode188": {
+    "BP_ResourceNode495": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode189": {
+    "BP_ResourceNode491": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode190": {
+    "BP_ResourceNode531": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode191": {
+    "BP_ResourceNode533": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode192": {
+    "BP_ResourceNode490": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode193": {
+    "BP_ResourceNode489": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode194": {
+    "BP_ResourceNode532": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode195": {
+    "BP_ResourceNode488": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode196": {
+    "BP_ResourceNode530": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode197": {
+    "BP_ResourceNode592": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode198": {
+    "BP_ResourceNode591": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode199": {
+    "BP_ResourceNode545": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode546": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode558": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode544": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode543": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode585": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode149": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode147": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode146": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode148": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode74": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode73_6071": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode76": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode95_579": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode563_UAID_40B076DF2F79B8E101_1620414156": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode200": {
+    "BP_ResourceNode563_UAID_40B076DF2F79B9E101_1570060334": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode201": {
+    "BP_ResourceNode563_UAID_40B076DF2F79BBE101_1434258671": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode202": {
+    "BP_ResourceNode563_UAID_40B076DF2F79B7E101_1869159978": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode203": {
+    "BP_ResourceNode90_482": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode65_1865": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode565_8": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode563": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode66": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode518": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode457": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode517": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode567": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode523_UAID_40B076DF2F7987DF01_1117795413": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode583_1": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode524_UAID_40B076DF2F798ADF01_1172524943": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode528": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode427": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode435_26": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode426": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode431": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode430": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode437_30": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode201": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode39": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode40": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode198": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode196": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode199": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode180": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode200": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode204": {
+    "BP_ResourceNode12_91": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode205": {
+    "BP_ResourceNode13": {
         "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode206": {
-        "resource": "Desc_OreCopper_C",
+    "BP_ResourceNode207": {
+        "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode207": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode208": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode209": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode210": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode211": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode212": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode213": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode214": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode215": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode216": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode217": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode218": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode219": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode220": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode221": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode222": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode223": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode224": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode225": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode226": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode227": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode228": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode229": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode230": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode231": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode232": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode233": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode234": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode235": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode236": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode237": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode238": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode239": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode240": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode241": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode242": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode243": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode244": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode245": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode246": {
-        "resource": "Desc_OreCopper_C",
+    "BP_ResourceNode204_0": {
+        "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode247": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode248": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode249": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode250": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode251": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode252": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode253": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode254": {
-        "resource": "Desc_OreCopper_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode255": {
-        "resource": "Desc_OreGold_C",
+    "BP_ResourceNode210": {
+        "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode256": {
-        "resource": "Desc_OreGold_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode257": {
-        "resource": "Desc_OreGold_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode258": {
-        "resource": "Desc_OreGold_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode259": {
-        "resource": "Desc_OreGold_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode260": {
-        "resource": "Desc_OreGold_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode261": {
-        "resource": "Desc_OreGold_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode262": {
-        "resource": "Desc_OreGold_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode263": {
-        "resource": "Desc_OreGold_C",
+    "BP_ResourceNode205": {
+        "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode264": {
-        "resource": "Desc_OreGold_C",
+    "BP_ResourceNode184": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode239": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode173": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode49": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode238": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode203": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode209": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode219": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode35": {
+        "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode265": {
-        "resource": "Desc_OreGold_C",
+    "BP_ResourceNode217": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode220": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode222": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode218": {
+        "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode266": {
-        "resource": "Desc_OreGold_C",
+    "BP_ResourceNode223": {
+        "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode267": {
-        "resource": "Desc_OreGold_C",
+    "BP_ResourceNode221": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode36": {
+        "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode268": {
-        "resource": "Desc_OreGold_C",
+    "BP_ResourceNode206": {
+        "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode269": {
-        "resource": "Desc_OreGold_C",
+    "BP_ResourceNode208": {
+        "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode270": {
-        "resource": "Desc_OreGold_C",
+    "BP_ResourceNode230": {
+        "resource": "Desc_OreIron_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode271": {
-        "resource": "Desc_Coal_C",
+    "BP_ResourceNode233": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode236": {
+        "resource": "Desc_OreIron_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode154": {
+        "resource": "Desc_LiquidOil_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode272": {
-        "resource": "Desc_Coal_C",
+    "BP_ResourceNode155": {
+        "resource": "Desc_LiquidOil_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode273": {
-        "resource": "Desc_Coal_C",
+    "BP_ResourceNode98": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode151": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode100": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode152_995": {
+        "resource": "Desc_LiquidOil_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode274": {
-        "resource": "Desc_Coal_C",
+    "BP_ResourceNode88": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode89": {
+        "resource": "Desc_LiquidOil_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode275": {
-        "resource": "Desc_Coal_C",
+    "BP_ResourceNode87": {
+        "resource": "Desc_LiquidOil_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode276": {
-        "resource": "Desc_Coal_C",
+    "BP_ResourceNode15": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode28_101": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode16": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode27_100": {
+        "resource": "Desc_LiquidOil_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode277": {
-        "resource": "Desc_Coal_C",
+    "BP_ResourceNode26_99": {
+        "resource": "Desc_LiquidOil_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode278": {
-        "resource": "Desc_Coal_C",
+    "BP_ResourceNode29_102": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode14_609": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode24_97": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode25_98": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode23_96": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode460": {
+        "resource": "Desc_LiquidOil_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode279": {
-        "resource": "Desc_Coal_C",
+    "BP_ResourceNode458": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode459": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode447": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode444_0": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode448": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode446_1": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode30_103": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode32_105": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode31_104": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode86": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode11": {
+        "resource": "Desc_Stone_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode280": {
-        "resource": "Desc_Coal_C",
+    "BP_ResourceNode20_3137": {
+        "resource": "Desc_Stone_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode281": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode282": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode283": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode284": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode285": {
+    "BP_ResourceNode573_UAID_40B076DF2F7974E101_1674467201": {
         "resource": "Desc_Coal_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode286": {
+    "BP_ResourceNode573_UAID_40B076DF2F79ACE101_1257410031": {
         "resource": "Desc_Coal_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode287": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode288": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode289": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode290": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode291": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode292": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode293": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode294": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode295": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode296": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode297": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode298": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode299": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode300": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode301": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode302": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode303": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode304": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode305": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode306": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode307": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode308": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode309": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode310": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode311": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode312": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode313": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode314": {
+    "BP_ResourceNode573_UAID_40B076DF2F7974E101_1439035199": {
         "resource": "Desc_Coal_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode315": {
+    "BP_ResourceNode131": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode573_UAID_40B076DF2F7973E101_1125437021": {
         "resource": "Desc_Coal_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode316": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode317": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode318": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode319": {
-        "resource": "Desc_Coal_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode320": {
-        "resource": "Desc_Sulfur_C",
+    "BP_ResourceNode165": {
+        "resource": "Desc_Stone_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode321": {
-        "resource": "Desc_Sulfur_C",
+    "BP_ResourceNode164": {
+        "resource": "Desc_Stone_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode322": {
-        "resource": "Desc_Sulfur_C",
+    "BP_ResourceNode144_1644": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode62": {
+        "resource": "Desc_Stone_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode323": {
+    "BP_ResourceNode71_UAID_40B076DF2F79B9DB01_1490254983": {
         "resource": "Desc_Sulfur_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode324": {
-        "resource": "Desc_Sulfur_C",
+    "BP_ResourceNode162_5199": {
+        "resource": "Desc_OreCopper_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode325": {
-        "resource": "Desc_Sulfur_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode326": {
-        "resource": "Desc_Sulfur_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode327": {
-        "resource": "Desc_Sulfur_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode328": {
-        "resource": "Desc_Sulfur_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode329": {
-        "resource": "Desc_Sulfur_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode330": {
-        "resource": "Desc_Sulfur_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode331": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode332": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode333": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode334": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode335": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode336": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode337": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode338": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode339": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode340": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode341": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode342": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode343": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode344": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode345": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode346": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode347": {
-        "resource": "Desc_OreBauxite_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode348": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode349": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode350": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode351": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode352": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode353": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode354": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode355": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode356": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode357": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode358": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode359": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode360": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode361": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode362": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode363": {
-        "resource": "Desc_RawQuartz_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode364": {
-        "resource": "Desc_OreUranium_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode365": {
-        "resource": "Desc_OreUranium_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode366": {
-        "resource": "Desc_OreUranium_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode367": {
+    "BP_ResourceNode632": {
         "resource": "Desc_OreUranium_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode368": {
-        "resource": "Desc_SAM_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode369": {
-        "resource": "Desc_SAM_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode370": {
-        "resource": "Desc_SAM_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode371": {
-        "resource": "Desc_SAM_C",
+    "BP_ResourceNode121_UAID_40B076DF2F7938DF01_2097772508": {
+        "resource": "Desc_OreGold_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode372": {
-        "resource": "Desc_SAM_C",
+    "BP_ResourceNode110": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode166": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode552": {
+        "resource": "Desc_RawQuartz_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode373": {
+    "BP_ResourceNode135": {
         "resource": "Desc_SAM_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode374": {
+    "BP_ResourceNode588": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode588_UAID_40B076DF2F79CEDF01_1910960903": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode113": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode159": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode132_5908": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode121_4877": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode163": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode157": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode156": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode111_3367": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode112": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode102_2068": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode103": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode104": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode124_5785": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode122": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode7_380": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode125_5930": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode5_381": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode6_379": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode143_1543": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode130": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode129": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode_700": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode158": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode118_4340": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode117": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode119": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode145_1749": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode595": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode597": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode607": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode606": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode596": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode573_UAID_40B076DF2F7972E101_1083579843": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode573_UAID_40B076DF2F7971E101_2069219665": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode521_UAID_40B076DF2F79C3E101_1735462083": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode521_UAID_40B076DF2F79C3E101_1100698081": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode176_UAID_40B076DF2F793BDF01_1694110039": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode519_UAID_40B076DF2F79D3D901_1586151453": {
         "resource": "Desc_SAM_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode375": {
-        "resource": "Desc_SAM_C",
+    "BP_ResourceNode83_UAID_40B076DF2F79FBE101_1618730935": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode83_UAID_40B076DF2F79FFE101_1122581639": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode71_UAID_40B076DF2F797CDB01_1695622247": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode605": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode521": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode522": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode520": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode71_736": {
+        "resource": "Desc_Sulfur_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode376": {
-        "resource": "Desc_SAM_C",
+    "BP_ResourceNode601": {
+        "resource": "Desc_Coal_C",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode377": {
-        "resource": "Desc_SAM_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode378": {
-        "resource": "Desc_SAM_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode379": {
-        "resource": "Desc_SAM_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode380": {
-        "resource": "Desc_SAM_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode381": {
-        "resource": "Desc_SAM_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode382": {
-        "resource": "Desc_SAM_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode383": {
-        "resource": "Desc_SAM_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode384": {
-        "resource": "Desc_SAM_C",
-        "fracking": false,
-        "purity": "impure"
-    },
-    "BP_MockResourceNode385": {
+    "BP_ResourceNode43_UAID_40B076DF2F7936D401_1733397541": {
         "resource": "Desc_SAM_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode386": {
+    "BP_ResourceNode485": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode609": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode598_0": {
+        "resource": "Desc_OreUranium_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode599": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode560": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode503": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode170_363": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode600": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode566": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode604": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode562": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode561": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode519": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode559": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode504": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode512": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode127": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode85": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode83": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode568": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode571": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode575": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode84": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode70_3132": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode557": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode556": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode509": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode72_998": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode492": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode587": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode493": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode511": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode534": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode553": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode555": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode540": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode593": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode554": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode586": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode172": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode550": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode584": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode548": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode549": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode547": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode68_2514": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode177": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode590": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode71_UAID_40B076DF2F7925DB01_1453678949": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode507": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode589": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode505": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode506": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode137_2248": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode602": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode529": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode603": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode43_UAID_40B076DF2F7941D901_1404601764": {
         "resource": "Desc_SAM_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode387": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode514": {
+        "resource": "Desc_OreCopper_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode388": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode449": {
+        "resource": "Desc_Coal_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode389": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode452": {
+        "resource": "Desc_Coal_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode390": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode467": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode508": {
+        "resource": "Desc_Stone_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode391": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode487_UAID_40B076DF2F7934DF01_1597642799": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode138_590": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode60_984": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode515": {
+        "resource": "Desc_OreCopper_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode392": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode136_UAID_40B076DF2F7975DF01_1622351243": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode547_UAID_40B076DF2F79ADE101_1836911209": {
+        "resource": "Desc_OreCopper_C",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode393": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode394": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode395": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode396": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode397": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode398": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode399": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode400": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode401": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode402": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode403": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode404": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode405": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode406": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": false,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode407": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode172_UAID_40B076DF2F79DFD901_1471130569": {
+        "resource": "Desc_SAM_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode408": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode71_UAID_40B076DF2F7924DB01_1576108771": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode136_UAID_40B076DF2F7975DF01_1587576239": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode71_UAID_40B076DF2F7929DB01_1177072656": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode136_UAID_40B076DF2F7975DF01_1617269241": {
+        "resource": "Desc_RawQuartz_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode409": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode99": {
+        "resource": "Desc_SAM_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode410": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode96_886": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode499": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode500": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode501": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode502": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode94_406": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode133_6963": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode75_6425": {
+        "resource": "Desc_OreCopper_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode411": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode573_UAID_40B076DF2F796BE101_1963012602": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode134_8590": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode150": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode573_UAID_40B076DF2F796FE101_1569477308": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode71_UAID_40B076DF2F7923DB01_2085455593": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode573_UAID_40B076DF2F7984E001_1664435967": {
+        "resource": "Desc_Coal_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode412": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode573_UAID_40B076DF2F7983E001_1840982787": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode136": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode576": {
+        "resource": "Desc_OreUranium_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode547_UAID_40B076DF2F79AEE101_1979010387": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode574": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode635": {
+        "resource": "Desc_OreBauxite_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode413": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode101_UAID_40B076DF2F79E6D901_1551800812": {
+        "resource": "Desc_SAM_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode414": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode636": {
+        "resource": "Desc_OreBauxite_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode415": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode634": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode633": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode573_UAID_40B076DF2F7980E001_1705275252": {
+        "resource": "Desc_Coal_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode416": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_ResourceNode101_1893": {
+        "resource": "Desc_SAM_C",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode417": {
+    "BP_ResourceNode589_UAID_40B076DF2F79B1E101_1767545917": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode589_UAID_40B076DF2F79B2E101_1298360096": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode573_UAID_40B076DF2F7981E001_1464253430": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode573_UAID_40B076DF2F7984E001_1384492965": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode573_UAID_40B076DF2F7983E001_1088885785": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode78_1097": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode570": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode564": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode481": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode573_UAID_40B076DF2F795EE801_1339162695": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode573_UAID_40B076DF2F797DE001_1807610722": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode101_UAID_40B076DF2F79E7D901_2125168992": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode178": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode484": {
+        "resource": "Desc_OreUranium_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode42_1294": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode480": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode47_3066": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode486": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode179": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode93_5": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode91_785": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode479": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode477": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode67_2193": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode476": {
+        "resource": "Desc_OreBauxite_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode516": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode513": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode582": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode92": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode69_UAID_A036BCACDEB0A7A601_1261875850": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode474_UAID_40B076DF2F798DDF01_1645035472": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode474_UAID_40B076DF2F7983DF01_2128950703": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode142_UAID_40B076DF2F79E9DD01_1872254547": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode142_UAID_40B076DF2F79E8DD01_2087440367": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode142_UAID_40B076DF2F79E9DD01_1434900545": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode474_UAID_40B076DF2F798EDF01_2134364650": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode43_UAID_40B076DF2F793ED901_1532454233": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode469": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode451": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode169_UAID_40B076DF2F7939DE01_2083925623": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode41_1099": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode439_1": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode445": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode510": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode463": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode54_833": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode43_UAID_40B076DF2F7932D901_1711042113": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode464_UAID_40B076DF2F7915E201_1334543513": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode_C_UAID_40B076DF2F794DE201_1841969367": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode53_510": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode_C_UAID_A036BCACDEB0A6A601_2086848673": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode443": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode59_755": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode464_UAID_40B076DF2F790EE201_1850696287": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode464": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode487": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode442": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode139_909": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode461": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode465": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode440": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode441": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode57_UAID_40B076DF2F7991DF01_1459615180": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode464_UAID_40B076DF2F790FE201_1577140465": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode57_UAID_40B076DF2F7935DF01_1413169977": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode464_UAID_40B076DF2F7914E201_2026233335": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode_C_UAID_40B076DF2F794FE201_2126930721": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode43": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode37_178": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode38_902": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode466": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode195": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode142": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode484_UAID_40B076DF2F79E0DF01_2091429101": {
+        "resource": "Desc_OreUranium_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode71_UAID_40B076DF2F7912DC01_2042985647": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode241": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode190": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode189": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode46_2284": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode191": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode197": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode194": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode611": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode141": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode612": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode193": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode613": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode594": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode619": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode618": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode227": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode226": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode216": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode610": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode617": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode213": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode234": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode185": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode181": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode188": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode182": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode77": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode192_0": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode97_1": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode187_0": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode140": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode621": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode202": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode622": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode624": {
+        "resource": "Desc_Sulfur_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode581": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode615": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode186": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode241_UAID_40B076DF2F7947D301_1723440520": {
+        "resource": "Desc_SAM_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode215": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode232": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode231": {
+        "resource": "Desc_RawQuartz_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode614": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode623": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode212": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode214": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode211": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode235": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode224": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode228": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode225": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode240": {
+        "resource": "Desc_OreGold_C",
+        "fracking": false,
+        "purity": "pure"
+    },
+    "BP_ResourceNode229": {
+        "resource": "Desc_Stone_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode616": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode620": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_ResourceNode498": {
+        "resource": "Desc_Coal_C",
+        "fracking": false,
+        "purity": "normal"
+    },
+    "BP_ResourceNode237": {
+        "resource": "Desc_OreCopper_C",
+        "fracking": false,
+        "purity": "impure"
+    },
+    "BP_FrackingSatellite_2": {
         "resource": "Desc_NitrogenGas_C",
         "fracking": true,
         "purity": "pure"
     },
-    "BP_MockResourceNode418": {
+    "BP_FrackingSatellite5": {
         "resource": "Desc_NitrogenGas_C",
         "fracking": true,
         "purity": "pure"
     },
-    "BP_MockResourceNode419": {
+    "BP_FrackingSatellite2": {
         "resource": "Desc_NitrogenGas_C",
         "fracking": true,
         "purity": "pure"
     },
-    "BP_MockResourceNode420": {
+    "BP_FrackingSatellite3": {
         "resource": "Desc_NitrogenGas_C",
         "fracking": true,
         "purity": "pure"
     },
-    "BP_MockResourceNode421": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode422": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode423": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode424": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode425": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode426": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode427": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode428": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode429": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode430": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode431": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode432": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode433": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode434": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode435": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode436": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode437": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode438": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode439": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode440": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode441": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode442": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode443": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode444": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode445": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode446": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode447": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode448": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode449": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode450": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode451": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode452": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "pure"
-    },
-    "BP_MockResourceNode453": {
+    "BP_FrackingSatellite18_3": {
         "resource": "Desc_NitrogenGas_C",
         "fracking": true,
         "purity": "normal"
     },
-    "BP_MockResourceNode454": {
+    "BP_FrackingSatellite4": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite40": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite42": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite35": {
         "resource": "Desc_NitrogenGas_C",
         "fracking": true,
         "purity": "normal"
     },
-    "BP_MockResourceNode455": {
+    "BP_FrackingSatellite39": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite38": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite36": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite43": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite41": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite44": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite37": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite9": {
         "resource": "Desc_NitrogenGas_C",
         "fracking": true,
         "purity": "normal"
     },
-    "BP_MockResourceNode456": {
+    "BP_FrackingSatellite8": {
         "resource": "Desc_NitrogenGas_C",
         "fracking": true,
         "purity": "normal"
     },
-    "BP_MockResourceNode457": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode458": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode459": {
-        "resource": "Desc_NitrogenGas_C",
-        "fracking": true,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode460": {
+    "BP_FrackingSatellite7": {
         "resource": "Desc_NitrogenGas_C",
         "fracking": true,
         "purity": "impure"
     },
-    "BP_MockResourceNode461": {
+    "BP_FrackingSatellite13": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite12": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite11": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite6": {
         "resource": "Desc_NitrogenGas_C",
         "fracking": true,
         "purity": "impure"
     },
-    "BP_MockResourceNode462": {
+    "BP_FrackingSatellite10": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite29": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite34": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite28": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite30": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite31": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite33": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite32": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite27": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite26": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite21": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite51_1": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite22": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite24": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite25": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite15": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite14": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite23_5": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite17": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite20": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite19": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite16": {
+        "resource": "Desc_NitrogenGas_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite47": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_FrackingSatellite46": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_FrackingSatellite45": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_FrackingSatellite49": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_FrackingSatellite48": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_FrackingSatellite50": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_FrackingSatellite57": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite63": {
         "resource": "Desc_LiquidOil_C",
         "fracking": true,
         "purity": "pure"
     },
-    "BP_MockResourceNode463": {
+    "BP_FrackingSatellite59": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite60": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite61": {
         "resource": "Desc_LiquidOil_C",
         "fracking": true,
         "purity": "pure"
     },
-    "BP_MockResourceNode464": {
+    "BP_FrackingSatellite62": {
         "resource": "Desc_LiquidOil_C",
         "fracking": true,
         "purity": "pure"
     },
-    "BP_MockResourceNode465": {
+    "BP_FrackingSatellite61_UAID_40B076DF2F79D8DF01_1587984689": {
+        "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite61_UAID_40B076DF2F79D8DF01_1704280690": {
         "resource": "Desc_LiquidOil_C",
         "fracking": true,
         "purity": "pure"
     },
-    "BP_MockResourceNode466": {
+    "BP_FrackingSatellite61_UAID_40B076DF2F79D9DF01_1230935868": {
         "resource": "Desc_LiquidOil_C",
         "fracking": true,
         "purity": "normal"
     },
-    "BP_MockResourceNode467": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": true,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode468": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": true,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode469": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": true,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode470": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": true,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode471": {
-        "resource": "Desc_LiquidOil_C",
-        "fracking": true,
-        "purity": "normal"
-    },
-    "BP_MockResourceNode472": {
+    "BP_FrackingSatellite61_UAID_40B076DF2F79D8DF01_1999134691": {
         "resource": "Desc_LiquidOil_C",
         "fracking": true,
         "purity": "impure"
     },
-    "BP_MockResourceNode473": {
+    "BP_FrackingSatellite61_UAID_40B076DF2F79D7DF01_2053713511": {
         "resource": "Desc_LiquidOil_C",
         "fracking": true,
         "purity": "impure"
     },
-    "BP_MockResourceNode474": {
+    "BP_FrackingSatellite61_UAID_40B076DF2F79D7DF01_1933830510": {
         "resource": "Desc_LiquidOil_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite109": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite111": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite110": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite121": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite108": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite112": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite113": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite101": {
+        "resource": "Desc_Water_C",
         "fracking": true,
         "purity": "impure"
     },
-    "BP_MockResourceNode475": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_FrackingSatellite95": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite96": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite98": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite99": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite100": {
+        "resource": "Desc_Water_C",
         "fracking": true,
         "purity": "impure"
     },
-    "BP_MockResourceNode476": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_FrackingSatellite97": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite93": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite87": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite94": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite92": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite90": {
+        "resource": "Desc_Water_C",
         "fracking": true,
         "purity": "impure"
     },
-    "BP_MockResourceNode477": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_FrackingSatellite91": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite88": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite89": {
+        "resource": "Desc_Water_C",
         "fracking": true,
         "purity": "impure"
     },
-    "BP_MockResourceNode478": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_FrackingSatellite83": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite82": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite86": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite85": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite84": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite81": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite77": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite79": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite80": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite78": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite75": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite76": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite73": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite102": {
+        "resource": "Desc_Water_C",
         "fracking": true,
         "purity": "impure"
     },
-    "BP_MockResourceNode479": {
-        "resource": "Desc_LiquidOil_C",
+    "BP_FrackingSatellite71": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_FrackingSatellite70": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite72": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite74": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite69": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite116": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite115": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite114_7": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite118": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite117": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite120": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite119": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite64": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite58": {
+        "resource": "Desc_Water_C",
         "fracking": true,
         "purity": "impure"
     },
-    "BP_MockResourceNode480": {
+    "BP_FrackingSatellite68": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite65": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite66": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "impure"
+    },
+    "BP_FrackingSatellite67": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "pure"
+    },
+    "BP_FrackingSatellite103_8": {
+        "resource": "Desc_Water_C",
+        "fracking": true,
+        "purity": "normal"
+    },
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F79C7DB01_1750096454": {
         "resource": "special__power",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode481": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F792DE001_1228687627": {
         "resource": "special__power",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode482": {
+    "BP_ResourceNodeGeyser9_3239": {
         "resource": "special__power",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode483": {
+    "BP_ResourceNodeGeyser_76": {
         "resource": "special__power",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode484": {
+    "BP_ResourceNodeGeyser10_3650": {
         "resource": "special__power",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode485": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F796FE001_1768243264": {
         "resource": "special__power",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode486": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F797AE001_1940806190": {
         "resource": "special__power",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode487": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F797AE001_2137062191": {
         "resource": "special__power",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode488": {
+    "BP_ResourceNodeGeyser7_2873": {
         "resource": "special__power",
         "fracking": false,
         "purity": "impure"
     },
-    "BP_MockResourceNode489": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F792EE001_1257671809": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode490": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F792FE001_1083532997": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode491": {
+    "BP_ResourceNodeGeyser18": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode492": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F7967E001_1786196831": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode493": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F796AE001_1928280369": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode494": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F796AE001_1661824368": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode495": {
+    "BP_ResourceNodeGeyser12_3894": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode496": {
+    "BP_ResourceNodeGeyser2_581": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode497": {
+    "BP_ResourceNodeGeyser8": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode498": {
+    "BP_ResourceNodeGeyser11_3803": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode499": {
+    "BP_ResourceNodeGeyser19": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode500": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F7974E001_1257931119": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode501": {
+    "BP_ResourceNodeGeyser4_1615": {
         "resource": "special__power",
         "fracking": false,
         "purity": "normal"
     },
-    "BP_MockResourceNode502": {
+    "BP_ResourceNodeGeyser13_3999": {
         "resource": "special__power",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode503": {
+    "BP_ResourceNodeGeyser15": {
         "resource": "special__power",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode504": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F796DE001_2106907903": {
         "resource": "special__power",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode505": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F796CE001_1156904726": {
         "resource": "special__power",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode506": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F796EE001_1440606080": {
         "resource": "special__power",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode507": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F79ADDD01_1602669012": {
         "resource": "special__power",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode508": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F79ADDD01_1447318011": {
         "resource": "special__power",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode509": {
+    "BP_ResourceNodeGeyser_C_UAID_40B076DF2F7975E001_2124245305": {
         "resource": "special__power",
         "fracking": false,
         "purity": "pure"
     },
-    "BP_MockResourceNode510": {
+    "BP_ResourceNodeGeyser14": {
         "resource": "special__power",
         "fracking": false,
         "purity": "pure"
     }
-
 }

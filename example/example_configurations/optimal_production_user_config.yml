@@ -1,0 +1,2 @@
+base_item_rate_file: example/example_data/base_item_rate.yml
+static_production_config_file: example/example_configurations/static_production_config.yml

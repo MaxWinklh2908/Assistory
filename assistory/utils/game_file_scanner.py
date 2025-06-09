@@ -1,17 +1,28 @@
 import time
 import os
+import time
 from typing import Callable
 
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, FileSystemEvent
 
 
+COOLDOWN = 10 # seconds
+
+
 class FileChangeHandler(FileSystemEventHandler):
-    def __init__(self, callback) -> None:
+    def __init__(self, callback: Callable) -> None:
         self.callback = callback
+        self.cooldown_finish: float = 0
         super().__init__()
 
     def on_modified(self, event: FileSystemEvent):
+        if self.cooldown_finish > time.time():
+            print('Ignore update trigger (cooldown)')
+            return
+        
+        self.cooldown_finish = time.time() + COOLDOWN
+
         if not event.is_directory:
             time.sleep(1) # to avoid Zlib error 5
             os.system('clear')

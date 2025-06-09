@@ -1,0 +1,3 @@
+# for tools: game monitor
+watchdog==4.0.2
+pyyaml

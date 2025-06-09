@@ -1,0 +1,5 @@
+target_item_file: example/example_configurations/costs_schematic-5-1.yml
+unlocked_recipes_file: example/example_data/unlocked_recipes.yml
+inventory_items_file: example/example_data/base_items.yml
+steps: 4
+step_duration: 5.0

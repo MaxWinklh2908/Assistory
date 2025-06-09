@@ -4,80 +4,101 @@ Goal: What is the fastest way to produce an amount of items, given the existing 
 
 Idea: Discritize the time into N timesteps. Every step, add produced items to the current items and invest into new production facilities using the current items availble.
 
-## Constants
-- recipes $ \mathbf{R} = \{1, ..., K\}\\ $
+## Iterative Production
+First the problem of iterative steps is explained. Later, the number of steps is optimized.
+
+![](./rapid_states_and_steps.png)
+
+Each step consists of the following actions:
+1. Build factories used in step -> subtract investment costs from state
+2. Execute recipes over the step duration -> add production balance to state
+3. Dismantle factories used in step -> add investment costs to state
+
+Effectively, only the production balance is added to the state but the investment must be affordable without making the state negative.
+
+### Constants
+- steps $ \mathbf{F} = \{0, ..., N-1\}\\ $
+- states $ \mathbf{T} = \{0, 1, ..., N\}\\ $
+- automated recipes $ \mathbf{R}^A = \{1, ..., K\}\\ $
 - handcrafted recipes $ \mathbf{R}^H = \{1, ..., L\} \\ $
 - items $ \mathbf{I} = \{1, ..., M\}\\ $
-- timesteps $ \mathbf{T} = \{0, 1, ..., N\}\\ $
 - start amount $ \mathbf{S} \\ $
 - goal amount $ \mathbf{G} \\ $
-- existing recipes $ \mathbf{E} \\ $
-- Production Matrix of recipes $ A \\ $
-- Cost matrix of recipes $ B \\ $
+- existing item rate $ \mathbf{E} \\ $
+- Production matrix of automated and handcraft recipes $ A^A, A^H $ (in items/minute)
+- Cost matrix of automated recipes $ B^A \\ $
+- Step duration $ \Delta_{step} $ (in minutes)
+- Handcraft efficiency ratio $ \alpha^H $
 
-## Variables
-
-- item i in stock at time t
-$$x_{i,t} \in \mathbb{R}^+ \space \forall i \in \mathbf{I}, \space \forall t \in \mathbf{T} $$
-
-- Add/Reduce recipe r at time t
-$$z_{r,t} \in \mathbb{Z} \space \forall r \in \mathbf{R},  \space \forall t \in \mathbf{T} $$
-
-- Use handcrafted recipe r at time t
-$$z^H_{r,t} \in \{0,1\} \space \forall r \in \mathbf{R}^H,  \space \forall t \in \mathbf{T} $$
-
-Note: The N-th step can be used to dismantle recipes (negative invest) to get items back. However, this could lead to a plan that always includes dismantling the whole facility in the end. TODO
-
-# Helper terms
-- Investment costs (items) in recipes at time t (negative for dismantle)
+### Variables
+- automated recipe r potentially suitably clocked down at step f
 $$
-v_{i,t} = \sum_{r \in \mathbf{R}} B_{i,r} z_{r, t}  \space \forall i \in \mathbf{I}, \forall t \in \mathbf{T}
+z^A_{r,f} \in \mathbb{R} \space \forall r \in \mathbf{R}^A,  \space \forall f \in \mathbf{F}
 $$
 
-- Production rate at time t (after investment has been applied)
+- Upper limit of automated recipes at step f
+$$
+u^A_{r,f} \in \mathbb{Z} \space \forall r \in \mathbf{R}^A,  \space \forall f \in \mathbf{F}
+$$
+
+- Handcraft recipe r at step f
+$$
+z^H_{r,f} \in [0,1] \space \forall r \in \mathbf{R}^H,  \space \forall f \in \mathbf{F}
+$$
+
+### Helper terms
+- Investment costs (items) for step f
+$$
+v_{i,f} = \sum_{r \in \mathbf{R}^A} B^A_{i,r} u^A_{r,f}  \space \forall i \in \mathbf{I}, \forall f \in \mathbf{F}\\
+$$
+
+- Production rate of automated recipes at step f
 $$ 
-p_{i,0} = \sum_{r \in \mathbf{R}} A_{i,r} (E_r + z_{r,0}) \space \forall i \in \mathbf{I}\\
-\space \\
-p_{i,t} = p_{i,t-1} + \sum_{r \in \mathbf{R}} A_{i,r} z_{r,t} \space \forall i \in \mathbf{I}, \forall t \in \mathbf{T} \setminus \{0, N\} $$
-
-- Handcrafted production rate at time t
-$$
-h_{i,0} = \sum_{r \in \mathbf{R^H}} A^H_{i,r} z^H_{r,i} \space \forall i \in \mathbf{I}\\
+p^A_{i,f} = E_i + \sum_{r \in \mathbf{R}^A} A^A_{i,r} z^A_{r,f} \space \forall i \in \mathbf{I}, \forall f \in \mathbf{F}
 $$
 
-Note: Investment cost is defined for time 0 and N for direct investment and final dismantle. Production rate at time N is not needed as time ends there.
-
-## Objective
-Minimize the steps needed to achieve the goal items amount:
-
+- Production rate of handcraft recipes at step f
 $$
-\space\\
-y_t \in \{0,1\} \space \forall t \in \mathbf{T}\\
-\space\\
-min \sum_{t \in \mathbf{T}} y_t\\
+p^H_{i,f} = \sum_{r \in \mathbf{R^H}} A^H_{i,r} z^H_{r,f} \space \forall i \in \mathbf{I}, \forall f \in \mathbf{F}
 $$
 
-## Constraints
-- Produce until stop. No restart
-$$ y_{t} > y_{t-1} \space \forall t \in \mathbf{T} \setminus \{0\} $$
-
-- Update items until not stopped (production rate after investment)
+- State is items in stock: new state is old state plus production of past step (updated as long as allowed). Suffient investment costs are checked in constraints.
 $$
 x_{i,0} = S_i \space \forall i \in \mathbf{I}\\
 \space\\
-x_{i,t} = x_{i,t-1} + y_{t} (-v_{i,t-1} + p_{i,t-1} + h_{i,t-1})
-    \space \forall i \in \mathbf{I}, \space \forall t \in \mathbf{T} \setminus \{0\}
+x_{i,t} = x_{i,t-1} + \Delta_{step} * (p^A_{i,t-1} + p^H_{i,t-1})
+    \space \forall i \in \mathbf{I}, \space \forall t \in \mathbf{T} \setminus \{0\} 
+$$
+
+### Objective
+Minimize the recipes needed to achieve the goal items amount:
+
+$$
+min \sum_{f \in \mathbf{F}} \{ \sum_{r \in \mathbf{R}^A} z^A_{r,f} + \sum_{r \in \mathbf{R}^H} z^H_{r,f} \}\\
+$$
+
+### Constraints
+- Item amounts in stock (=states) including next investment costs are nonnegative. Investment costs are always positive, therefore, the production of the previous step applies can not cause a negative item amount.
+$$
+x_{i,f} - v_{i,f} \ge 0 \space \forall i \in \mathbf{I}, \space \forall f \in \mathbf{F}  
+\space\\
+x_{i,N} \ge 0 \space \forall i \in \mathbf{I}
 $$
 
 - Goal items reached at end
 $$ x_{i,N} \ge G_i \space \forall i \in \mathbf{I} $$
 
-- Can not invest more than available
+- Handcraft efficiency reduced by item logistics and recipe change
 $$
-x_{i,t} - v_{i,t} \ge 0  \space \forall i \in \mathbf{I}, \forall t \in \mathbf{T}
+\sum_{r \in \mathbf{R^H}} z^H_{r,f} \le \alpha^H \space \forall f \in \mathbf{F}
 $$
 
-- Only allow one handcrafted
+- Rounded up amounts of automated recipes is upper limit for clocked recipes
 $$
-\sum_{r \in \mathbf{R^H}} z^H_{r,i} \le 1 \space \forall i \in \mathbf{I}
+z^A_{r,f} \le u^A_{r,f} \space \forall r \in \mathbf{R}^A, \space \forall f \in \mathbf{F}
 $$
+
+![](./rapid_states_and_steps.png)
+
+## Optimal number of steps
+Jointly optimizing the number of steps is not possible with the above formulation as linear problem. Therefore the optimal number of steps is calculated by binary search.

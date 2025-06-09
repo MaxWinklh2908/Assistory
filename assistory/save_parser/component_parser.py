@@ -28,18 +28,23 @@ class SaveReader:
             'Int8Property': self._read_int8_property,
             'TextProperty': self._read_text_property,
             'SetProperty': self._read_set_property,
+            'SoftObjectProperty': self._read_soft_object_property,
         }
         
         self._array_property_parsers = {
             'ObjectProperty': self._read_array_object_property,
             'IntProperty': self._read_array_int_property,
+            'Int64Property': self._read_array_int64_property,
             'StructProperty': self._read_array_struct_property,
             'ByteProperty': self._read_array_byte_property,
             'StrProperty': self._read_array_string_property,
             'SoftObjectProperty': self._read_array_soft_object_property,
+            'InterfaceProperty': self._read_array_object_property,
         }
 
-        self._set_property_parsers = {} # TODO: StructProperty
+        self._set_property_parsers = {
+            'StructProperty': self._read_set_struct_property,
+        }
 
     def read_string(self) -> str:
         length = self.read_int() # Including terminating character
@@ -83,19 +88,20 @@ class SaveReader:
         val['start_idx'] = original_idx
         val['property_type'] = self.read_string()
         if not val['property_type'] in self._property_parsers:
-            raise ValueError('Unknown property type: ' + val['property_type'])
-        
+            raise ValueError(f'[{original_idx}] Unknown property type: ' + val['property_type'])
+            
         try:
-            val.update(self._property_parsers[val['property_type']]())
+            read_func = self._property_parsers[val['property_type']]
+            val.update(read_func())
         except Exception as e:
-            print('Reading', val['property_type'], 'failed at original_idx:', original_idx)
+            print(f'[{original_idx}] Reading {val["property_type"]} failed: {e.args[0]}')
             raise e
         
         val['end_idx'] = self.idx
         return name, val
 
     def _read_float_property(self) -> dict:
-        n_bytes = self.read_int()
+        n_bytes = self.read_int() # padding
         if n_bytes != 4:
             raise ValueError
         index = self.read_int()
@@ -104,7 +110,7 @@ class SaveReader:
         return {'value': val}
 
     def _read_object_property(self) -> dict:
-        n_bytes = self.read_int()
+        n_bytes = self.read_int() # after padding
         index = self.read_int()
         self.idx += 1 # padding
         original_idx = self.idx
@@ -138,6 +144,15 @@ class SaveReader:
         else: # TODO: other types
             val['payload'] = self.read_bytes(n_bytes) # InventoryItem: int, string, int
         return val
+    
+    def _read_set_struct_property(self) -> dict:
+        padding = self.read_int()
+        length = self.read_int()
+        val = dict()
+        val['elements'] = list()
+        for i in range(length):
+            val['elements'].append(self.read_bytes(16)) # TODO: Meaning?
+        return val
 
     def _read_set_property(self) -> dict:
         n_bytes = self.read_int() # after padding
@@ -148,20 +163,34 @@ class SaveReader:
         original_idx = self.idx
 
         if not val['set_type'] in self._set_property_parsers:
-            print(f'[{self.idx}] WARNING: Unknown set type: {val["set_type"]}')
+            print(f'[{original_idx}] WARNING Unknown set type: {val["set_type"]} ...read as payload')
             val['payload'] = self.read_bytes(n_bytes)
             return val
 
         try:
-            val.update(self._set_property_parsers[val['array_type']]())
+            read_func = self._set_property_parsers[val['set_type']]
+            val.update(read_func())
         except Exception as e:
-            print(f'[{original_idx}] WARNING Error reading SetProperty:', e.args)
+            print(f'[{original_idx}] WARNING Error reading SetProperty:', e.args[0])
             self.idx = original_idx + n_bytes  # skipping this property
 
         if original_idx + n_bytes != self.idx:
             raise ValueError(f'{original_idx} + {n_bytes} != {self.idx}')
         
         return val
+    
+    def _read_soft_object_property(self) -> dict:
+        n_bytes = self.read_int() # after padding
+        index = self.read_int()
+        self.idx += 1 # padding
+        original_idx = self.idx
+        val = dict()
+        val['a'] = self.read_string() # TODO: meaning
+        val['b'] = self.read_string() # TODO: meaning
+        val['c'] = self.read_int() # TODO: meaning
+        if original_idx + n_bytes != self.idx:
+            raise ValueError(f'{original_idx} + {n_bytes} != {self.idx}')
+        return  val
     
     def _read_array_object_property(self) -> dict:
         val = dict()
@@ -172,6 +201,14 @@ class SaveReader:
             elem['level_name'] = self.read_string()
             elem['path_name'] = self.read_string()
             val['elements'].append(elem)
+        return val
+    
+    def _read_array_int64_property(self) -> dict:
+        val = dict()
+        length = self.read_int()
+        val['elements'] = []
+        for _ in range(length):
+            val['elements'].append(self.read_int(size=8))
         return val
     
     def _read_array_int_property(self) -> dict:
@@ -201,11 +238,9 @@ class SaveReader:
         length = self.read_int()
         name = self.read_string() # duplicate
         array_property_type = self.read_string() # duplicate
-        # if not array_property_type == 'StructProperty':
-        #     raise ValueError('Expected StructProperty. Got ' + array_property_type)
         n_bytes = self.read_int() # after the byte padding (after UUID)
         padding = self.read_int()
-        val['element_type'] = self.read_string() # SpawnData, LinearColor, InventoryStacks, ScannableResourcePair
+        val['element_type'] = self.read_string()
         uuid = [self.read_int(), self.read_int(), self.read_int(), self.read_int()]
         self.idx += 1 # padding
         
@@ -225,7 +260,11 @@ class SaveReader:
                 elem_name, elem_prop = self.read_property()
                 elem['prop'] = elem_prop
                 elem['name'] = elem_name
-            else:
+            elif val['element_type'] == 'Vector':
+                elem = {
+                    'vector_data': [self.read_float() for i in range(6)]
+                }
+            else: # SpawnData, LinearColor, InventoryStacks
                 elem = dict()
                 elem_name, elem_prop = self.read_property()
                 elem['prop'] = elem_prop
@@ -248,7 +287,6 @@ class SaveReader:
             elem['c'] = self.read_string()
             val['elements'].append(elem)
         return val
-
     
     def _read_array_property(self) -> dict:
         val = dict()
@@ -259,14 +297,15 @@ class SaveReader:
         original_idx = self.idx
         
         if not val['array_type'] in self._array_property_parsers:
-            print(f'[{self.idx}] WARNING: Unknown array type: {val["array_type"]}')
+            print(f'[{original_idx}] WARNING Unknown array type: {val["array_type"]} ...skip property')
             self.idx = original_idx + n_bytes  # skipping this property
             return val
         
         try:
-            val.update(self._array_property_parsers[val['array_type']]())
+            read_func = self._array_property_parsers[val['array_type']]
+            val.update(read_func())
         except Exception as e:
-            print(f'[{original_idx}] WARNING Error reading ArrayProperty:', e.args)
+            print(f'[{original_idx}] WARNING Error reading ArrayProperty:', e.args[0])
             self.idx = original_idx + n_bytes  # skipping this property
 
         if original_idx + n_bytes != self.idx:

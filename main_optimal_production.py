@@ -1,124 +1,176 @@
 from argparse import ArgumentParser
+from dataclasses import dataclass
+from pathlib import Path
+import yaml
+
+from assistory import game
+from assistory.game import RecipeFlags
+from assistory.optim.static_production_problem import StaticProductionLP, StaticProductionLPConfig
+from assistory.optim.static_flow_problem import ReturnCode
+from assistory.optim import feasibility_hints
+from assistory.save_parser.actor import *
 
 
-from assistory.game import game
-from assistory.utils import utils
-from assistory.optim.sink_point_optim import SatisfactoryLP
+ROUND_NDIGITS = 4
 
-def main(recipe_export_path: str):
 
-    ################# recipes ######################
-    # recipes=game.RECIPES
+@dataclass
+class OptimalProductionProblemUserConfig():
 
-    recipes = {
-        recipe_name: recipe for
-        recipe_name, recipe in game.RECIPES.items()
-        if not recipe_name in game.RECIPES_ALTERNATE
-    }
+    # File containing a StaticProductionLPConfig
+    static_production_config_file: str
 
-    # recipes=dict()
-    # recipes['Recipe_IngotIron_C'] = game.RECIPES['Recipe_IngotIron_C']
-    # recipes['Recipe_IngotCopper_C'] = game.RECIPES['Recipe_IngotCopper_C']
-    # recipes['Recipe_WaterExtractorWater_C'] = game.RECIPES['Recipe_WaterExtractorWater_C']
-    # recipes['Recipe_Alternate_SteamedCopperSheet_C'] = game.RECIPES['Recipe_Alternate_SteamedCopperSheet_C']
-
-    ################# items available ######################
-    items_available = dict()
-
-    # # custom
-    # items_available['Desc_OreIron_C'] = 240
-    # items_available['Desc_OreCopper_C'] = 120
-    # # items_available['Desc_Coal_C'] = 240
-    # items_available['Desc_Stone_C'] = 120
+    # File containing unlocked recipes
+    unlocked_recipes_file: str = ''
     
-    # current production (state: rework black lake oil)
-    # items_available = {
-    #     item_name: amount
-    #     for item_name, amount
-    #     in utils.parse_items('data/Autonation4.0_production_state.csv').items()
-    # }
+    # file containing the base item rate
+    base_item_rate_file: str = ''
 
-    ################# resource nodes available ######################
-    resource_nodes_available = {item_name: 0 for item_name in game.NODE_RECIPES_AVAILABLE}
-    resource_nodes_available['Recipe_MinerMk1OreIron_C'] = 4
-    resource_nodes_available['Recipe_MinerMk1OreCopper_C'] = 2
-    resource_nodes_available['Recipe_MinerMk1Stone_C'] = 2
-    resource_nodes_available['Recipe_GeneratorGeoThermalPower_C'] = 2
+    # File containing numbers of available resource nodes. Use game.Resource_nodes_available if ''.
+    available_resource_nodes_file: str = ''
 
-    # resource_nodes_available = game.NODE_RECIPES_AVAILABLE
+    # file containing occupied resource nodes
+    occupied_resource_nodes_file: str = ''
+
+    @staticmethod
+    def load_from_file(file_path: str) -> 'OptimalProductionProblemUserConfig':
+        with open(file_path, 'r') as fp:
+            config_data = yaml.safe_load(fp)
+        return OptimalProductionProblemUserConfig(**config_data)
     
-    # Current coverage (state: CO2-Neutral)
-    # resource_nodes_available = utils.read_resource_nodes(
-    #   'data/available_nodes_autonation.json',
-    #   set(game.NODE_RECIPES_AVAILABLE))
-    # resource_nodes_available = utils.read_resource_nodes(
-    #   'data/available_nodes_black_lake_oil.json',
-    #   set(game.NODE_RECIPES_AVAILABLE))
+    def load_unlocked_automated_recipes(self) -> RecipeFlags:
+        """
+        Return unlocked recipes filtered by automated recipes only.
 
-    # TODO: read resource nodes available (including geotermal (former free power))
-    # from safe file
+        Returns:
+            RecipeFlags: Names of unlocked recipes
+        """
+        if len(self.unlocked_recipes_file) == 0:
+            raise RuntimeError(f'unlocked_recipes_file not defined')
+        unlocked_reciepes = RecipeFlags.load(self.unlocked_recipes_file)
+        return RecipeFlags(
+            set(unlocked_reciepes) & set(game.RECIPE_NAMES_AUTOMATED),
+            omega=game.RECIPE_NAMES_AUTOMATED
+        )
 
-    ################# define problem ######################
+    def load_base_item_rate(self) -> ItemValues:
+        if len(self.base_item_rate_file) == 0:
+            raise RuntimeError(f'base_item_rate_file not defined')
+        return ItemValues.load(self.base_item_rate_file)
 
-    problem = SatisfactoryLP(recipes=recipes,
-                             items_available=items_available,
-                             resource_nodes_available=resource_nodes_available,
-                             free_power=0)
+    def load_available_resource_nodes(self) -> ResourceNodeValues:
+        if len(self.available_resource_nodes_file) == 0:
+            raise RuntimeError(f'available_resource_nodes_file not defined')
+        return ResourceNodeValues.load(self.available_resource_nodes_file)
 
-    ################# constraints ######################
-    # sell_rates = dict()
+    def load_occupied_resource_nodes(self) -> ResourceNodeValues:
+        if len(self.occupied_resource_nodes_file) == 0:
+            raise RuntimeError(f'occupied_resource_nodes_file not defined')
+        return ResourceNodeValues.load(self.occupied_resource_nodes_file)
 
-    # Goal: Produce at least 1 item of every kind (except impractical items)
-    # sell_rates = {
-    #     item_name: 1 for item_name in problem.get_producable_items()
-    #     if not item_name in game.ITEMS_NON_SELLABLE
-    #     and not item_name in game.ITEMS_RADIOACTIVE
-    #     and not item_name in game.ITEMS_EXTRACTION
-    #     and not 'Ingot' in item_name
-    # }
 
-    # Goal: Make black lake oil more efficient
-    # sell_rates['Desc_CircuitBoard_C'] = 68 # 50 + 4 + 5 + 3.4643
-    # sell_rates['Desc_Fabric_C'] = 1.85 + 3.15
-    # sell_rates['Desc_Fuel_C'] = 1
-    # sell_rates['Desc_Plastic_C'] = 210 - 18 + 4 + 25.46
-    # sell_rates['Desc_PolymerResin_C'] = 2.5 + 48.9
-    # sell_rates['Desc_Rubber_C'] = 160 + 50 # 48.17
+def load_and_update_production_config(
+        optimal_production_config: OptimalProductionProblemUserConfig
+    ) -> StaticProductionLPConfig:
+
+    production_lp_config = StaticProductionLPConfig.load_from_file(
+        optimal_production_config.static_production_config_file
+    )
+
+    if (optimal_production_config.unlocked_recipes_file and
+        set(production_lp_config.unlocked_recipes) != set(game.RECIPES)):
+        raise ValueError('Either specify locked recipes in production lp config or load it from file')
+    if (optimal_production_config.base_item_rate_file and
+        production_lp_config.base_item_rate != ItemValues()):
+        raise ValueError('Either specify base item rate in production lp config or load it from file')
+    if (optimal_production_config.available_resource_nodes_file and
+        production_lp_config.available_resource_nodes != ResourceNodeValues(game.NODE_RECIPES_AVAILABLE)):
+        raise ValueError('Either specify available nodes in production lp config or load it from file')
+
+
+    if optimal_production_config.unlocked_recipes_file:
+        production_lp_config.unlocked_recipes = optimal_production_config.load_unlocked_automated_recipes()
     
-    # problem.define_sell_rates(sell_rates)
+    if optimal_production_config.base_item_rate_file:
+        production_lp_config.base_item_rate = optimal_production_config.load_base_item_rate()
 
-    problem._define_non_sellable_items()
+    if optimal_production_config.available_resource_nodes_file:
+        production_lp_config.available_resource_nodes = optimal_production_config.load_available_resource_nodes()
 
-    ################# objective ######################
+    if optimal_production_config.occupied_resource_nodes_file:
+        occupied_resource_nodes = optimal_production_config.load_occupied_resource_nodes()
+        production_lp_config.available_resource_nodes = (
+            production_lp_config.available_resource_nodes
+            - occupied_resource_nodes
+        )
+        print('\nUpdated available resources:')
+        production_lp_config.available_resource_nodes.round(ROUND_NDIGITS).pprint()
 
-    # problem.set_objective_max_sink_points()
-    # problem.set_objective_min_resources_spent(weighted=True)
-    # problem.set_objective_min_recipes()
-    problem.set_objective_max_item_rate('Desc_SpaceElevatorPart_1_C')
-    
-    ################# Solve ######################
+    production_lp_config.check()
+    return production_lp_config
 
-    print("Number of variables =", problem.solver.NumVariables())
-    print("Number of constraints =", problem.solver.NumConstraints())
 
+def main(
+        optimal_production_config: OptimalProductionProblemUserConfig,
+        recipes_out_file: Path=None,
+        debug: bool=False,
+        store_rounded: bool=False,
+):
+    production_lp_config = load_and_update_production_config(optimal_production_config)
+
+    problem = StaticProductionLP(production_lp_config)
     status = problem.optimize()
-    if status != 0: # pywraplp.Solver.OPTIMAL
-        print("The problem does not have an optimal solution:", status)
+    if status != ReturnCode.OPTIMAL:
+        print(f"The problem does not have an optimal solution: {status}")
+        if debug:
+            print('\nChecking production config...')
+            feasibility_hints.get_feasibility_hints(production_lp_config)
+        else:
+            print('Run again with --debug to get hints why this is the case')
         exit(1)
 
-    problem.report()
-    # problem.report_shadow_prices()
+    problem.report(debug)
 
-    utils.write_result(problem.get_recipes_used(),
-                       problem.get_items_sold(),
-                       items_available,
-                       recipe_export_path)
-    
+    if not recipes_out_file is None:
+        recipes_used = problem.get_recipes_used()
+        recipes_used.save(recipes_out_file, ignore_value=0)
+        if store_rounded:
+            recipes_used_rounded = recipes_used.round(ROUND_NDIGITS)
+            recipes_out_rounded_file = (
+                recipes_out_file.parent
+                / (recipes_out_file.stem + '_rounded' + recipes_out_file.suffix)
+            )
+            recipes_used_rounded.save(recipes_out_rounded_file, ignore_value=0)
+
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument('recipe_export_path', help='Output path to the production plan'
-                        ', i.e. recipe amounts by recipe name')
+    parser.add_argument(
+        'optimal_production_config',
+        help='Path to an OptimalProductionConfig'
+    )
+    parser.add_argument(
+        '--out',
+        required=False,
+        default=None,
+        help='Output path to the production plan, i.e. recipe amounts by recipe name',
+    )
+    parser.add_argument(
+        '--debug',
+        required=False,
+        action='store_true',
+        help='If the optimization fails with status infeasible, run checks on the problem configuration',
+    )
+    parser.add_argument(
+        '--store-rounded',
+        required=False,
+        action='store_true',
+        help='Additionally, store the production plan rounded to ROUND_NDIGITS digits'
+    )
     args = parser.parse_args()
 
-    main(args.recipe_export_path)
+    optimal_production_config = OptimalProductionProblemUserConfig.load_from_file(
+        args.optimal_production_config
+    )
+    out_file = None if args.out is None else Path(args.out)
+    main(optimal_production_config, out_file, args.debug, args.store_rounded)

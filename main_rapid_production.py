@@ -1,94 +1,193 @@
 from argparse import ArgumentParser
-import json
+from dataclasses import dataclass
+from pathlib import Path
+from pprint import pprint
+import yaml
 
-import numpy as np
-
-from assistory.optim import rapid_production
-from assistory.game import game
-from assistory.utils import utils
-from assistory.save_parser import save_uncompressor, save_parser
-from assistory.save_parser.actor import *
+from assistory.game import RecipeFlags, ItemValues
+from assistory import game
+from assistory.optim import rapid_production_problem
+from assistory.optim.static_flow_problem import ReturnCode
+from assistory.optim.rapid_production_problem_config import RapidProductionProblemConfig
 
 
-def load_world(save_file_compressed: str) -> World:
-    reader = save_uncompressor.CompressedReader.open_reader(save_file_compressed)
-    data_uncompressed = reader.read()
+ROUND_NDIGITS = 4
+
+
+@dataclass
+class RapidProductionProblemUserConfig():
+
+    # File containing an amount of items to reach
+    target_item_file: str
+
+    # File containing item amounts of the inventory
+    inventory_items_file: str = ''
+
+    # File containing unlocked recipes
+    unlocked_recipes_file: str = ''
     
-    # parse file
-    reader = save_parser.UncompressedReader(data_uncompressed)
-    objects = reader.read()
-    world = instantiate_world(objects)
+    # file containing the amounts of existing production as item rates
+    base_item_rate_file: str = ''
 
-    return world
+    # # File containing numbers of available resource nodes. Use game.Resource_nodes_available if ''.
+    # available_resource_nodes_file: str = ''
 
+    # # file containing occupied resource nodes
+    # occupied_resource_nodes_file: str = ''
 
-def extract_player_inventory(player: Player) -> dict:
-    player_items_all = player.get_inventory_items()
-    player_items = dict()
-    for item_name, amount in player_items_all.items():
-        if not item_name in game.ITEMS:
-            print('WARNING Skip unknown item:', item_name)
-            continue
-        player_items[item_name] = amount
-    return player_items
+    # maximal steps in the plan. The higher the number of steps, the closer the
+    # result will approach optimality.
+    steps: int = 10
 
+    # duration of each step in minutes
+    step_duration: float = 1.0
 
-def load_target_items(target_item_file: str) -> dict:
-    with open(target_item_file, 'r') as fp:
-        target_items = json.load(fp)
-    return target_items
+    # handcraft efficiency reduced by item logistics and recipe change.
+    # Value of 0 disables handcrafting
+    handcraft_efficiency: float = 0.75
 
-
-def extract_existing_recipes(factories: List[Factory]) -> dict:
-    recipes = dict()
-    for factory in factories:
-        if isinstance(factory, (ManufacturingBuilding, FrackingBuilding)):
-            recipe_name = factory.current_recipe_name
-            if not recipe_name in game.RECIPES:
-                if recipe_name:
-                    print('WARNING Skip unknown recipe:', recipe_name)
-                continue
-            if factory.is_production_paused:
-                print('WARNING Skip paused production:', recipe_name)
-                continue
-            rate = factory.get_effective_rate()
-            recipes[recipe_name] = recipes.get(recipe_name, 0) + rate
-    return recipes
-
-
-def main(compressed_save_file: str, target_item_file: str):
-    data_conf = rapid_production.GameDataConfiguration()
+    @staticmethod
+    def load_from_file(file_path: str) -> 'RapidProductionProblemUserConfig':
+        with open(file_path, 'r') as fp:
+            config_data = yaml.safe_load(fp)
+        return RapidProductionProblemUserConfig(**config_data)
     
-    world = load_world(compressed_save_file)
-    S_items = extract_player_inventory(world.get_player())
-    G_items = load_target_items(target_item_file)
-    E_recipes = extract_existing_recipes(world.get_factories())
+    def load_unlocked_recipes(self) -> RecipeFlags:
+        if len(self.unlocked_recipes_file) == 0:
+            raise RuntimeError(f'unlocked_recipes_file not defined')
+        return RecipeFlags.load(self.unlocked_recipes_file)
+
+    def load_target_items(self) -> ItemValues:
+        if len(self.target_item_file) == 0:
+            raise RuntimeError(f'target_item_file not defined')
+        target_items = ItemValues.load(self.target_item_file)
+        for item_name, amount in target_items.items():
+            if amount < 0:
+                raise ValueError('Negative target amount:', item_name, amount)
+        return target_items
     
-    print('Extracted existing production:')
-    for recipe_name, amount in E_recipes.items():
-        print(recipe_name, amount)
+    def load_inventory_items(self) -> ItemValues:
+        if len(self.inventory_items_file) == 0:
+            raise RuntimeError(f'inventory_items_file not defined')
+        inventory_items = ItemValues.load(self.inventory_items_file)
+        for item_name, amount in inventory_items.items():
+            if amount < 0:
+                raise ValueError('Negative inventory:', item_name, amount)
+        return inventory_items
 
-    start_conf = rapid_production.StartConfiguration(
-        data_conf,
-        S = np.array(utils.vectorize(S_items, data_conf.ITEMS)),
-        G = np.array(utils.vectorize(G_items, data_conf.ITEMS)),
-        E = np.array(utils.vectorize(E_recipes, data_conf.RECIPES)),
-    )
-    start_conf.validate()
+    def load_base_item_rate(self) -> ItemValues:
+        if len(self.base_item_rate_file) == 0:
+            raise RuntimeError(f'base_item_rate_file not defined')
+        return ItemValues.load(self.base_item_rate_file)
 
-    optim_conf = rapid_production.OptimizationConfiguration()
-    optim_conf = rapid_production.OptimizationConfiguration()
-    solver, values, minimal_steps = rapid_production.solve_with_binary_search(
-        data_conf, start_conf, optim_conf)
-    print(f'Minimal number of steps: {minimal_steps}')
-    rapid_production.print_solution_dict(minimal_steps, *values, data_conf)
+    # def load_available_resource_nodes(self) -> ResourceNodeValues:
+    #     if len(self.available_resource_nodes_file) == 0:
+    #         raise RuntimeError(f'available_resource_nodes_file not defined')
+    #     return ResourceNodeValues.load(self.available_resource_nodes_file)
+
+    # def load_occupied_resource_nodes(self) -> ResourceNodeValues:
+    #     if len(self.occupied_resource_nodes_file) == 0:
+    #         raise RuntimeError(f'occupied_resource_nodes_file not defined')
+    #     return ResourceNodeValues.load(self.occupied_resource_nodes_file)
+    
+    def get_problem_configuration(self) -> RapidProductionProblemConfig:
+        G_items = self.load_target_items()
+
+        if self.inventory_items_file:
+            S_items = self.load_inventory_items()
+        else:
+            S_items = ItemValues()
+
+        if self.base_item_rate_file:
+            E_item_rates = self.load_base_item_rate()
+        else:
+            E_item_rates = ItemValues(omega=game.RECIPE_NAMES_AUTOMATED)
+
+        if self.unlocked_recipes_file:
+            unlocked_recipes = self.load_unlocked_recipes()
+        else:
+            unlocked_recipes = RecipeFlags(game.RECIPES)
+
+        problem_config = RapidProductionProblemConfig(
+            S=S_items,
+            G=G_items,
+            E=E_item_rates,
+            unlocked_recipes=unlocked_recipes,
+            maximal_step_count=self.steps,
+            step_duration=self.step_duration,
+            handcraft_efficiency=self.handcraft_efficiency,
+        )
+        return problem_config
+
+
+def main(
+        rapid_production_config: RapidProductionProblemUserConfig,
+        plan_out_file: Path=None, 
+        debug: bool=False,
+        store_rounded: bool=False
+):
+    problem_conf = rapid_production_config.get_problem_configuration()
+    
+    problem = rapid_production_problem.RapidProductionProblem(problem_conf)
+    status = problem.optimize(verbose=True)
+    
+    if status == ReturnCode.INFEASIBLE_OR_UNBOUNDED:
+        print('Problem infeasible')
+        return
+    elif status == ReturnCode.OPTIMAL:
+        print(f'Minimal number of steps: {problem.objective_value}')
+    else:
+        raise RuntimeError('Unexpected return code:' + str(status))
+
+    plan = problem.get_rapid_plan()
+
+    if debug:
+        plan.print_debug()
+
+    if not plan_out_file is None:
+        with plan_out_file.open('w') as fp:
+            yaml.dump(plan.to_dict(), fp, indent=4)
+        if store_rounded:
+            plan_rounded = plan.round(ROUND_NDIGITS)
+            plan_out_rounded_file = (
+                plan_out_file.parent
+                / (plan_out_file.stem + '_rounded' + plan_out_file.suffix)
+            )
+            with plan_out_rounded_file.open('w') as fp:
+                yaml.dump(plan_rounded.to_dict(), fp, indent=4)
+        
+    else:
+        pprint(plan.round(ROUND_NDIGITS).to_dict())
 
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument('compressed_save_file', help='Save file from the game save directory.'
-                        ' Used to extract existing production and items from player inventory.')
-    parser.add_argument('target_item_file', help='Path to the file defining the goal item'
-                        ' amounts. A JSON dict containing of item amount by item name.')
+    parser.add_argument(
+        'rapid_production_config',
+        help='Path to an RapidProductionConfig'
+    )
+    parser.add_argument(
+        '--out',
+        required=False,
+        default=None,
+        help='A JSON file to store the results',
+    )
+    parser.add_argument(
+        '--debug',
+        required=False,
+        action='store_true',
+        help='Print additional details',
+    )
+    parser.add_argument(
+        '--store-rounded',
+        required=False,
+        action='store_true',
+        help='Additionally, store the production plan rounded to ROUND_NDIGITS digits'
+    )
     args = parser.parse_args()
-    main(args.compressed_save_file, args.target_item_file)
+
+    rapid_production_config = RapidProductionProblemUserConfig.load_from_file(
+        args.rapid_production_config
+    )
+    out_file = None if args.out is None else Path(args.out)
+    main(rapid_production_config, out_file, args.debug, args.store_rounded)
